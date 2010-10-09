@@ -1,4 +1,5 @@
-﻿using Kallivayalil.Common;
+﻿using System;
+using Kallivayalil.Common;
 using Kallivayalil.Domain;
 using NHibernate;
 
@@ -20,6 +21,34 @@ namespace Kallivayalil.DataAccess.Repositories
                 txn.Commit();
                 return savedConstituent;
             }
+        }
+
+        public Constituent Update(Constituent constituent)
+        {
+            using (var txn = session.BeginTransaction())
+            {
+                var savedConstituent = SaveOrUpdate(constituent, txn);
+                txn.Commit();
+                return savedConstituent;
+            }
+        }
+
+        public void Delete(int constituentId)
+        {
+            using (var txn = session.BeginTransaction())
+            {
+                var constituent = session.Load<Constituent>(constituentId);
+                if(constituent != null)
+                {
+                    session.Delete(constituent);
+                }
+                txn.Commit();
+            }
+        }
+
+        public Constituent Load(int constituentId)
+        {
+               return session.Load<Constituent>(constituentId);
         }
     }
 }
