@@ -43,13 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConstituentRepositoryTest.cs" />
+    <Compile Include="RepositoryTests\ConstituentRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceTests\ConstituentTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Src\Services\DataAccess\DataAccess.csproj">
       <Project>{7A2E87B1-DD9F-4B07-A7F6-40D0FB9A9720}</Project>
       <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Src\Services\KallivayalilService\Client\Client.csproj">
+      <Project>{0077F6B0-48F1-4C90-A9B8-9B9E472BDE2E}</Project>
+      <Name>Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Src\Services\KallivayalilService\Common\Common.csproj">
       <Project>{357DEC60-B18A-40AE-8AAF-FDBA6C1C02F2}</Project>
@@ -63,6 +68,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

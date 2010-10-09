@@ -31,8 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\..\..\Lib\Castle Windsor 2.0\bin\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\..\..\Lib\Castle Windsor 2.0\bin\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\..\..\Lib\NHibernate\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ServiceModel.Web">
+      <HintPath>..\..\..\..\Lib\MSServiceModel\Microsoft.ServiceModel.Web.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\..\..\Lib\NHibernate\NHibernate.dll</HintPath>
@@ -43,6 +52,11 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.ServiceModel.Channels" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,11 +66,23 @@
   <ItemGroup>
     <Compile Include="AbstractPersistenceListener.cs" />
     <Compile Include="Attributes\AuditedAttribute.cs" />
+    <Compile Include="AutoDataContractMapper.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="KallivayalilRestServiceHost.cs" />
+    <Compile Include="ReferenceDataEntity.cs" />
+    <Compile Include="RestServiceFactory.cs" />
     <Compile Include="ObjectCopier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestInterceptor.cs" />
+    <Compile Include="KallivayalilRestServiceInterceptorProvider.cs" />
     <Compile Include="TimeStampListener.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Client\Client.csproj">
+      <Project>{0077F6B0-48F1-4C90-A9B8-9B9E472BDE2E}</Project>
+      <Name>Client</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -48,7 +48,7 @@ namespace Kallivayalil.DataAccess.Repositories
 
         public Constituent Load(int constituentId)
         {
-               return session.Load<Constituent>(constituentId);
+               return session.Get<Constituent>(constituentId);
         }
     }
 }

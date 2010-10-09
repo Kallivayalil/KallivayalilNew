@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Kallivayalil.KallivayalilService, Kallivayalil" Factory="Kallivayalil.Common.RestServiceFactory" %>
