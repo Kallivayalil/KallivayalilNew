@@ -7,7 +7,6 @@ namespace Kallivayalil.DataAccess.Repositories
 {
     public class ConstituentRepository : Repository
     {
-        protected static readonly ISessionFactory SessionFactory = ConfigurationFactory.SessionFactory;
 
         public ConstituentRepository(ISession session) : base(session) {}
 

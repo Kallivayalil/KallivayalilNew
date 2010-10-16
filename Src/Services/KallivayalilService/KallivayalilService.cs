@@ -19,7 +19,6 @@ namespace Kallivayalil
             mapper = new AutoDataContractMapper();
         }
 
-
         public virtual ConstituentData GetConstituent(string id)
         {
             var constituent = constituentServiceImpl.FindConstituent(id);

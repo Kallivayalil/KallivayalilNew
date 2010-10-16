@@ -1,10 +1,8 @@
-using FluentNHibernate.Mapping;
 using Kallivayalil.Domain;
 
 namespace Kallivayalil.DataAccess.Mappings {
     
-    
-    public class ConstituentMap : ClassMap<Constituent> {
+    public class ConstituentMap : AbstractEntityMap<Constituent> {
         
         public ConstituentMap() {
 			Table("Constituents");
@@ -18,10 +16,7 @@ namespace Kallivayalil.DataAccess.Mappings {
 			Map(x => x.HasExpired).Column("HasExpired");
 			Map(x => x.MaritialStatus).Not.Nullable().Column("MaritialStatus");
 			Map(x => x.IsRegistered).Not.Nullable().Column("IsRegistered");
-			Map(x => x.CreatedDateTime).Column("CreatedDateTime");
-			Map(x => x.CreatedBy).Column("CreatedBy");
-			Map(x => x.UpdatedDateTime).Column("UpdatedDateTime");
-			Map(x => x.UpdatedBy).Column("UpdatedBy");
+			MapTimeStampColumns();
         }
     }
 }

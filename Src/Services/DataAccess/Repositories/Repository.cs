@@ -6,25 +6,40 @@ using NHibernate.Criterion;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
-   public abstract class Repository : IRepository, IDisposable
+    public abstract class Repository : IRepository, IDisposable
     {
-       protected readonly ISession session;
+        protected static readonly ISessionFactory SessionFactory = ConfigurationFactory.SessionFactory;
+        protected readonly ISession session;
 
-       protected Repository(ISession session)
-       {
-           this.session = session;
-       }
+
+        protected Repository(ISession session)
+        {
+            this.session = session;
+        }
+
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            if (session.IsOpen)
+                session.Close();
+        }
+
+        #endregion
+
+        #region IRepository Members
+
         public virtual T SaveOrUpdateAndFlush<T>(T entity, ITransaction transaction = null) where T : IEntity
         {
-            var savedEntity = session.SaveOrUpdateCopy(entity);
+            object savedEntity = session.SaveOrUpdateCopy(entity);
             session.Flush();
-            return (T)savedEntity;
+            return (T) savedEntity;
         }
 
         public virtual T SaveOrUpdate<T>(T entity, ITransaction transaction = null) where T : IEntity
         {
-            var savedCopy = session.SaveOrUpdateCopy(entity);
-            return (T)savedCopy;
+            object savedCopy = session.SaveOrUpdateCopy(entity);
+            return (T) savedCopy;
         }
 
         public T Load<T>(int entityId) where T : IEntity
@@ -39,7 +54,7 @@ namespace Kallivayalil.DataAccess.Repositories
 
         public IList<T> LoadAll<T>() where T : IEntity
         {
-            return session.CreateCriteria(typeof(T)).List<T>();
+            return session.CreateCriteria(typeof (T)).List<T>();
         }
 
         public bool Exists(IEntity entity)
@@ -59,7 +74,7 @@ namespace Kallivayalil.DataAccess.Repositories
             if (entityId <= 0)
                 return false;
 
-            var savedEntity = session.Get(entityType, entityId);
+            object savedEntity = session.Get(entityType, entityId);
             if (savedEntity != null)
             {
                 session.Evict(savedEntity);
@@ -70,18 +85,12 @@ namespace Kallivayalil.DataAccess.Repositories
 
         public bool Exists<T>(int entityId) where T : IEntity
         {
-            return Exists(typeof(T), entityId);
+            return Exists(typeof (T), entityId);
         }
 
         public IEntity Load(IEntity entity)
         {
             return session.CreateCriteria(entity.GetType()).Add(Restrictions.Eq("Id", entity.Id)).UniqueResult<IEntity>();
-        }
-
-        public void Dispose()
-        {
-            if (session.IsOpen)
-                session.Close();
         }
 
         public void Flush()
@@ -100,5 +109,7 @@ namespace Kallivayalil.DataAccess.Repositories
             session.Flush();
             return entity;
         }
+
+        #endregion
     }
 }

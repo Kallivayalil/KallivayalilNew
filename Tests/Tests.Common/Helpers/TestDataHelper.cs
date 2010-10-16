@@ -21,9 +21,16 @@ namespace Tests.Common.Helpers
             return constituentRepository.Save(constituent);
         }
 
-        public void HardDelete()
+        public void HardDeleteConstituents()
         {
             var sqlQuery = session.CreateSQLQuery("delete from constituents");
+            sqlQuery.ExecuteUpdate();
+            session.Flush();
+        }
+
+        public void HardDeleteConstituentNames()
+        {
+            var sqlQuery = session.CreateSQLQuery("delete from constituentNames");
             sqlQuery.ExecuteUpdate();
             session.Flush();
         }

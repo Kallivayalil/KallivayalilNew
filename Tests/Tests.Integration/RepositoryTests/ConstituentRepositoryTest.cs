@@ -3,7 +3,7 @@ using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
 using NUnit.Framework;
 
-namespace Tests.Integration
+namespace Tests.Integration.RepositoryTests
 {
     [TestFixture]
     public class ConstituentRepositoryTest
