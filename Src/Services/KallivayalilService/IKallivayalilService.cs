@@ -23,6 +23,10 @@ namespace Kallivayalil
         [OperationContract]
         [WebInvoke(UriTemplate = "/Constituents/{id}", Method = "PUT")]
         ConstituentData UpdateConstituent(string id, ConstituentData constituentData);
+        
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/ConstituentNames/{id}", Method = "PUT")]
+        ConstituentNameData UpdateConstituentName(string id, ConstituentNameData nameData);
 
     }
 }

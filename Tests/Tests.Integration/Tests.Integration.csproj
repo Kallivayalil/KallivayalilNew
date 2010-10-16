@@ -46,6 +46,7 @@
     <Compile Include="RepositoryTests\ConstituentNameRepositoryTest.cs" />
     <Compile Include="RepositoryTests\ConstituentRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceTests\ConstituentNameTest.cs" />
     <Compile Include="ServiceTests\ConstituentTest.cs" />
   </ItemGroup>
   <ItemGroup>

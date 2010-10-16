@@ -20,7 +20,7 @@ namespace Tests.Integration.ServiceTests
         public void SetUp()
         {
             testDataHelper = new TestDataHelper();
-            constituent = testDataHelper.CreateConstituent(ConstituentMother.Constituent());
+            constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName());
             constituentData = new ConstituentData { Gender = "F", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false };
             constituentData.Name = new ConstituentNameData() { FirstName = "James", LastName = "Franklin", Salutation = 1 };
 
@@ -86,5 +86,6 @@ namespace Tests.Integration.ServiceTests
             Assert.That(savedConstituent.Id,Is.GreaterThan(0));
             Assert.That(savedConstituent.Name.Id,Is.GreaterThan(0));
         }
+
     }
 }

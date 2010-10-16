@@ -46,6 +46,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConstituentNameServiceImpl.cs" />
     <Compile Include="ConstituentServiceImpl.cs" />
     <Compile Include="IKallivayalilService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

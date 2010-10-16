@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 using System.ServiceModel.Activation;
 using Kallivayalil.Client;
 using Kallivayalil.Common;
@@ -11,11 +12,13 @@ namespace Kallivayalil
     public class KallivayalilService : IKallivayalilService
     {
         private readonly ConstituentServiceImpl constituentServiceImpl;
+        private readonly ConstituentNameServiceImpl nameServiceImpl;
         private readonly AutoDataContractMapper mapper;
 
         public KallivayalilService()
         {
             constituentServiceImpl = new ConstituentServiceImpl();
+            nameServiceImpl = new ConstituentNameServiceImpl();
             mapper = new AutoDataContractMapper();
         }
 
@@ -54,6 +57,18 @@ namespace Kallivayalil
             var updateConstiuentData = new ConstituentData();
             mapper.Map(updatedConstituent,updateConstiuentData);
             return updateConstiuentData;
+        }
+
+        public virtual ConstituentNameData UpdateConstituentName(string id, ConstituentNameData nameData)
+        {
+            var constituentName = new ConstituentName();
+            mapper.Map(nameData, constituentName);
+            var updatedName = nameServiceImpl.UpdateConstituentName(id,constituentName);
+
+            var updatedNameData = new ConstituentNameData();
+            mapper.Map(updatedName,updatedNameData);
+
+            return updatedNameData;
         }
     }
 }

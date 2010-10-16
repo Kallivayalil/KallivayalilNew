@@ -1,7 +1,9 @@
+using System;
 using Kallivayalil.Common;
 
 namespace Kallivayalil.Domain
 {
+    [Serializable]
     public class ConstituentName : Entity
     {
         public virtual string FirstName { get; set; }
