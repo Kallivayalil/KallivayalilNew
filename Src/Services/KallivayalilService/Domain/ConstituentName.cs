@@ -4,7 +4,7 @@ namespace Kallivayalil.Domain
 {
     public class ConstituentName : Entity
     {
-        public virtual int ConstituentId { get; set; }
+        public virtual Constituent Constituent { get; set; }
         public virtual string FirstName { get; set; }
         public virtual string MiddleName { get; set; }
         public virtual string LastName { get; set; }

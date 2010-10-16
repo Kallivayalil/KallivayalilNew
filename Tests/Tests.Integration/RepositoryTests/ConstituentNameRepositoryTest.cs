@@ -11,18 +11,21 @@ namespace Tests.Integration.RepositoryTests
     {
         private ConstituentName jamesFranklin;
         private TestDataHelper testDataHelper;
+        private Constituent constituent;
 
         [SetUp]
         public void SetUp()
         {
             testDataHelper = new TestDataHelper();
-            jamesFranklin = ConstituentNameMother.JamesFranklin();
+            constituent = testDataHelper.CreateConstituent(ConstituentMother.Constituent());
+            jamesFranklin = ConstituentNameMother.JamesFranklin(constituent);
         }
 
         [TearDown]
         public void TearDown()
         {
             testDataHelper.HardDeleteConstituentNames();
+            testDataHelper.HardDeleteConstituents();
         }
 
         [Test]
