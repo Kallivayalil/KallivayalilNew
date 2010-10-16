@@ -1,7 +1,7 @@
 USE [Kallivayalil]
 GO
 
-/****** Object:  Table [dbo].[ConstituentNames]    Script Date: 10/16/2010 14:52:47 ******/
+/****** Object:  Table [dbo].[ConstituentNames]    Script Date: 10/16/2010 16:27:15 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,7 +13,6 @@ GO
 
 CREATE TABLE [dbo].[ConstituentNames](
 	[Id] [int] NOT NULL,
-	[ConstituentId] [int] NOT NULL,
 	[FirstName] [varchar](50) NOT NULL,
 	[MiddleName] [varchar](50) NULL,
 	[LastName] [varchar](50) NOT NULL,
@@ -32,13 +31,6 @@ CREATE TABLE [dbo].[ConstituentNames](
 GO
 
 SET ANSI_PADDING OFF
-GO
-
-ALTER TABLE [dbo].[ConstituentNames]  WITH CHECK ADD  CONSTRAINT [FK_ConstituentNames_Constituents] FOREIGN KEY([ConstituentId])
-REFERENCES [dbo].[Constituents] ([Id])
-GO
-
-ALTER TABLE [dbo].[ConstituentNames] CHECK CONSTRAINT [FK_ConstituentNames_Constituents]
 GO
 
 

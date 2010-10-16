@@ -16,6 +16,7 @@ namespace Kallivayalil.DataAccess.Mappings {
 			Map(x => x.HasExpired).Column("HasExpired");
 			Map(x => x.MaritialStatus).Not.Nullable().Column("MaritialStatus");
 			Map(x => x.IsRegistered).Not.Nullable().Column("IsRegistered");
+            References(x => x.Name).Column("NameId").Cascade.All();
 			MapTimeStampColumns();
         }
     }

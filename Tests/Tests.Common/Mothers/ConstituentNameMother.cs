@@ -3,7 +3,7 @@
 namespace Tests.Common.Mothers
 {
     public static class ConstituentNameMother {
-        public static ConstituentName JamesFranklin(Constituent constituent)
+        public static ConstituentName JamesFranklin()
         {
             return new ConstituentName
                        {
@@ -12,7 +12,6 @@ namespace Tests.Common.Mothers
                            MiddleName = "H",
                            Salutation = 1,
                            PreferedName = "James",
-                           Constituent = constituent,
                        };
         }
     }

@@ -7,16 +7,15 @@ namespace Kallivayalil.DataAccess.Repositories
 {
     public class ConstituentRepository : Repository
     {
+        public ConstituentRepository(ISession session) : base(session){}
 
-        public ConstituentRepository(ISession session) : base(session) {}
-
-        public ConstituentRepository() : base(SessionFactory.OpenSession()){}
+        public ConstituentRepository() : this(SessionFactory.OpenSession()){}
 
         public Constituent Save(Constituent constituent)
         {
             using (var txn =session.BeginTransaction())
             {
-                var savedConstituent = SaveOrUpdate(constituent,txn);
+                var savedConstituent = SaveOrUpdate(constituent,txn);                
                 txn.Commit();
                 return savedConstituent;
             }

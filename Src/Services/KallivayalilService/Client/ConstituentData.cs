@@ -44,5 +44,8 @@ namespace Kallivayalil.Client {
 
         [DataMember]
         public string UpdatedBy { get; set; }
+        
+        [DataMember]
+        public ConstituentNameData Name { get; set; }
     }
 }

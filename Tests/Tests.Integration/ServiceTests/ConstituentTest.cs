@@ -14,12 +14,16 @@ namespace Tests.Integration.ServiceTests
         private string baseUri = "http://localhost/kallivayalilService/KallivayalilService.svc/Constituents";
         private TestDataHelper testDataHelper;
         private Constituent constituent;
+        private ConstituentData constituentData;
 
         [SetUp]
         public void SetUp()
         {
             testDataHelper = new TestDataHelper();
             constituent = testDataHelper.CreateConstituent(ConstituentMother.Constituent());
+            constituentData = new ConstituentData { Gender = "F", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false };
+            constituentData.Name = new ConstituentNameData() { FirstName = "James", LastName = "Franklin", Salutation = 1 };
+
         }
 
         [TearDown]
@@ -31,24 +35,23 @@ namespace Tests.Integration.ServiceTests
         [Test]
         public void ShouldLoadConstituent()
         {
-            var constituentData = HttpHelper.Get<ConstituentData>(string.Format("{0}/{1}",baseUri,constituent.Id));
-            Assert.IsNotNull(constituentData);
+            var result = HttpHelper.Get<ConstituentData>(string.Format("{0}/{1}",baseUri,constituent.Id));
+            Assert.IsNotNull(result);
         }
 
         [Test]
         public void ShouldCreateConstituent()
         {
-            var constituentData = new ConstituentData {Gender = "F", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false};
             var savedConstituent = HttpHelper.Post(baseUri,constituentData);
 
             Assert.IsNotNull(savedConstituent);
             Assert.That(savedConstituent.Id,Is.GreaterThan(0));
+            Assert.That(savedConstituent.Name.Id,Is.GreaterThan(0));
         }
 
         [Test]
         public void ShouldUpdateConstituent()
         {
-            var constituentData = new ConstituentData { Gender = "F", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false };
             var savedConstituent = HttpHelper.Post(baseUri, constituentData);
 
             savedConstituent.Gender = "M";
@@ -75,5 +78,13 @@ namespace Tests.Integration.ServiceTests
 
         }
 
+        [Test]
+        public void ShouldCreateConstituentWithName()
+        {
+            var savedConstituent = HttpHelper.Post(baseUri, constituentData);
+
+            Assert.That(savedConstituent.Id,Is.GreaterThan(0));
+            Assert.That(savedConstituent.Name.Id,Is.GreaterThan(0));
+        }
     }
 }

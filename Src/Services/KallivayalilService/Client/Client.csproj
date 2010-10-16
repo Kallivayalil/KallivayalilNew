@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConstituentData.cs" />
+    <Compile Include="ConstituentNameData.cs" />
     <Compile Include="DataContractHelper.cs" />
     <Compile Include="HttpHelper.cs" />
     <Compile Include="LinkData.cs" />
