@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Net;
 using Kallivayalil.Client;
+using Kallivayalil.Domain;
 using NUnit.Framework;
+using Tests.Common.Helpers;
+using Tests.Common.Mothers;
 
 namespace Tests.Integration.ServiceTests
 {
@@ -9,11 +12,26 @@ namespace Tests.Integration.ServiceTests
     public class ConstituentTest
     {
         private string baseUri = "http://localhost/kallivayalilService/KallivayalilService.svc/Constituents";
+        private TestDataHelper testDataHelper;
+        private Constituent constituent;
+
+        [SetUp]
+        public void SetUp()
+        {
+            testDataHelper = new TestDataHelper();
+            constituent = testDataHelper.CreateConstituent(ConstituentMother.Constituent());
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            testDataHelper.HardDelete();
+        }
 
         [Test]
         public void ShouldLoadConstituent()
         {
-            var constituentData = HttpHelper.Get<ConstituentData>(string.Format("{0}/3",baseUri));
+            var constituentData = HttpHelper.Get<ConstituentData>(string.Format("{0}/{1}",baseUri,constituent.Id));
             Assert.IsNotNull(constituentData);
         }
 
@@ -48,15 +66,12 @@ namespace Tests.Integration.ServiceTests
         [Test]
         public void ShouldDeleteExistingConstituent()
         {
-            var constituentData = new ConstituentData { Gender = "F", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false };
-            var savedConstituent = HttpHelper.Post(baseUri, constituentData);
-
-            var response = HttpHelper.DoHttpDelete(string.Format("{0}/{1}", baseUri, savedConstituent.Id));
-            
+            var response = HttpHelper.DoHttpDelete(string.Format("{0}/{1}", baseUri, constituent.Id));
             Assert.That(response.StatusCode,Is.EqualTo(HttpStatusCode.OK));
 
-//            var deletedData = HttpHelper.Get<ConstituentData>(string.Format("{0}/{1}", baseUri, savedConstituent.Id));
-//            Assert.IsNull(deletedData);
+            var getResponse = HttpHelper.DoHttpGet(string.Format("{0}/{1}", baseUri, constituent.Id));
+            Assert.IsNotNull(getResponse);
+            Assert.That(getResponse.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
 
         }
 

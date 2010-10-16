@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3F44B59F-C4A6-496A-B954-763251E15CA1}</ProjectGuid>
+    <ProjectGuid>{54B5ABAC-EF45-44C9-907A-071EC3F3370A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tests.Integration</RootNamespace>
-    <AssemblyName>Tests.Integration</AssemblyName>
+    <RootNamespace>Tests.Common</RootNamespace>
+    <AssemblyName>Tests.Common</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\Lib\Nunit\nunit.framework.dll</HintPath>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\Lib\NHibernate\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -43,18 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RepositoryTests\ConstituentRepositoryTest.cs" />
+    <Compile Include="Helpers\TestDataHelper.cs" />
+    <Compile Include="Mothers\ConstituentMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceTests\ConstituentTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Src\Services\DataAccess\DataAccess.csproj">
       <Project>{7A2E87B1-DD9F-4B07-A7F6-40D0FB9A9720}</Project>
       <Name>DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Src\Services\KallivayalilService\Client\Client.csproj">
-      <Project>{0077F6B0-48F1-4C90-A9B8-9B9E472BDE2E}</Project>
-      <Name>Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Src\Services\KallivayalilService\Common\Common.csproj">
       <Project>{357DEC60-B18A-40AE-8AAF-FDBA6C1C02F2}</Project>
@@ -64,15 +60,7 @@
       <Project>{3134AEAD-2CA2-4D6D-BB6D-9EE071CE4BE5}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tests.Common\Tests.Common.csproj">
-      <Project>{54B5ABAC-EF45-44C9-907A-071EC3F3370A}</Project>
-      <Name>Tests.Common</Name>
-    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

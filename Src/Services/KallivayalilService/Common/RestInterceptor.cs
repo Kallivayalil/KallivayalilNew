@@ -15,11 +15,15 @@ namespace Kallivayalil.Common
                 AddCacheControlHeader();
                 invocation.Proceed();
             }
-           
+            catch (NotFoundException e)
+            {
+                HandleException(e, HttpStatusCode.NotFound);
+            }
             catch (Exception e)
             {
                 HandleException(e, HttpStatusCode.InternalServerError);
-            }
+            } 
+            
         }
 
         private void HandleException(Exception ex, HttpStatusCode responseStatusCode)

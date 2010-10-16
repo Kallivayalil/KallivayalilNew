@@ -1,5 +1,4 @@
-﻿using System;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceModel.Activation;
 using Kallivayalil.Client;
 using Kallivayalil.Common;
@@ -21,22 +20,24 @@ namespace Kallivayalil
         }
 
 
-        public ConstituentData GetConstituent(string id)
+        public virtual ConstituentData GetConstituent(string id)
         {
             var constituent = constituentServiceImpl.FindConstituent(id);
             var constituentData = new ConstituentData();
             if (constituent == null)
-                return null;
+            {
+                throw new NotFoundException(string.Format("Constituent with Id:{0} not found.", id));
+            }
             mapper.Map(constituent, constituentData);
             return constituentData;
         }
 
-        public void DeleteConstituent(string id)
+        public virtual void DeleteConstituent(string id)
         {
             constituentServiceImpl.DeleteConstituent(id);
         }
 
-        public ConstituentData CreateConstituent(ConstituentData constituentData)
+        public virtual ConstituentData CreateConstituent(ConstituentData constituentData)
         {
             var constituent = new Constituent();
             mapper.Map(constituentData, constituent);
@@ -46,7 +47,7 @@ namespace Kallivayalil
             return savedConstituentData;
         }
 
-        public ConstituentData UpdateConstituent(string id, ConstituentData constituentData)
+        public virtual ConstituentData UpdateConstituent(string id, ConstituentData constituentData)
         {
             var constituent=new Constituent();
             mapper.Map(constituentData,constituent);

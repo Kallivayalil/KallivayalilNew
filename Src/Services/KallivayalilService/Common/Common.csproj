@@ -70,6 +70,7 @@
     <Compile Include="Entity.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="KallivayalilRestServiceHost.cs" />
+    <Compile Include="NotFoundException.cs" />
     <Compile Include="ReferenceDataEntity.cs" />
     <Compile Include="RestServiceFactory.cs" />
     <Compile Include="ObjectCopier.cs" />
