@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressData.cs" />
     <Compile Include="ConstituentData.cs" />
     <Compile Include="ConstituentNameData.cs" />
     <Compile Include="DataContractHelper.cs" />

@@ -29,7 +29,9 @@ namespace Tests.Integration.ServiceTests
         [TearDown]
         public void TearDown()
         {
+            testDataHelper.HardDeleteAddress();
             testDataHelper.HardDeleteConstituents();
+            testDataHelper.HardDeleteConstituentNames();
         }
 
         [Test]

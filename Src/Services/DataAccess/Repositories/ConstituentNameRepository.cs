@@ -13,7 +13,7 @@ namespace Kallivayalil.DataAccess.Repositories
         {
             using (var txn = session.BeginTransaction())
             {
-                var savedConstituentName = SaveOrUpdate(constituentName);
+                var savedConstituentName = SaveOrUpdate(constituentName,txn);
                 txn.Commit();
                 return savedConstituentName;
             }
@@ -23,7 +23,7 @@ namespace Kallivayalil.DataAccess.Repositories
         {
             using (var txn = session.BeginTransaction())
             {
-                var savedConstituentName = SaveOrUpdate(constituentName);
+                var savedConstituentName = SaveOrUpdate(constituentName,txn);
                 txn.Commit();
                 return savedConstituentName;
             }

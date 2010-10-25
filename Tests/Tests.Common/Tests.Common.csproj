@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\TestDataHelper.cs" />
+    <Compile Include="Mothers\AddressMother.cs" />
     <Compile Include="Mothers\ConstituentMother.cs" />
     <Compile Include="Mothers\ConstituentNameMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

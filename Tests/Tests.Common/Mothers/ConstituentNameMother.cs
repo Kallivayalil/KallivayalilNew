@@ -2,7 +2,8 @@
 
 namespace Tests.Common.Mothers
 {
-    public static class ConstituentNameMother {
+    public static class ConstituentNameMother
+    {
         public static ConstituentName JamesFranklin()
         {
             return new ConstituentName

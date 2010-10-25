@@ -14,11 +14,13 @@ namespace Kallivayalil
         private readonly ConstituentServiceImpl constituentServiceImpl;
         private readonly ConstituentNameServiceImpl nameServiceImpl;
         private readonly AutoDataContractMapper mapper;
+        private readonly AddressServiceImpl addressServiceImpl;
 
         public KallivayalilService()
         {
             constituentServiceImpl = new ConstituentServiceImpl();
             nameServiceImpl = new ConstituentNameServiceImpl();
+            addressServiceImpl = new AddressServiceImpl();
             mapper = new AutoDataContractMapper();
         }
 
@@ -69,6 +71,56 @@ namespace Kallivayalil
             mapper.Map(updatedName,updatedNameData);
 
             return updatedNameData;
+        }
+
+        public virtual AddressData CreateAddress(string constituentId, AddressData addressData)
+        {
+            Address address = new Address();
+            mapper.Map(addressData,address);
+
+            var savedAddress = addressServiceImpl.CreateAddress(address);
+            AddressData savedAddressData = new AddressData();
+            mapper.Map(savedAddress,savedAddressData);
+            return savedAddressData;
+        }
+
+        public virtual AddressData UpdateAddress(string id, AddressData addressData)
+        {
+            Address address = new Address();
+            mapper.Map(addressData, address);
+
+            var savedAddress = addressServiceImpl.UpdateAddress(address);
+            AddressData savedAddressData = new AddressData();
+            mapper.Map(savedAddress, savedAddressData);
+            return savedAddressData;
+        }
+
+        public virtual void DeleteAddress(string id)
+        {
+            addressServiceImpl.DeleteAddress(id);
+        }
+
+        public virtual AddressData GetAddress(string id)
+        {
+            var address = addressServiceImpl.FindAddress(id);
+            var addressData = new AddressData();
+            if (address == null)
+            {
+                throw new NotFoundException(string.Format("Address with Id:{0} not found.", id));
+            }
+            mapper.Map(address, addressData);
+            return addressData;
+            
+        }
+
+        public virtual AddressesData GetAddresses(string constituentId)
+        {
+            var addresses = addressServiceImpl.FindAddresses(constituentId);
+
+            var addressesData = new AddressesData();
+            mapper.MapList(addresses, addressesData, typeof (AddressData));
+
+            return addressesData;
         }
     }
 }

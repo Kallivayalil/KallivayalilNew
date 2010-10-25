@@ -11,36 +11,41 @@ namespace Tests.Integration.RepositoryTests
     {
         private ConstituentName jamesFranklin;
         private TestDataHelper testDataHelper;
+        private ConstituentNameRepository repository;
+        private ConstituentName savedConstituentName;
 
         [SetUp]
         public void SetUp()
         {
+
             testDataHelper = new TestDataHelper();
+            repository = new ConstituentNameRepository(testDataHelper.session);
+
             jamesFranklin = ConstituentNameMother.JamesFranklin();
+            savedConstituentName = testDataHelper.CreateConstituentName(jamesFranklin);
         }
 
         [TearDown]
         public void TearDown()
         {
+            testDataHelper.HardDeleteConstituents();
             testDataHelper.HardDeleteConstituentNames();
         }
 
         [Test]
         public void ShouldSaveConstituentName()
         {            
-            var savedConstituentName = new ConstituentNameRepository().Save(jamesFranklin);
+            var savedName = new ConstituentNameRepository().Save(jamesFranklin);
 
-            Assert.That(savedConstituentName.Id,Is.GreaterThan(0));
+            Assert.That(savedName.Id,Is.GreaterThan(0));
         }
 
         [Test]
         public void ShouldUpdateConstituentName()
         {
-            var repository = new ConstituentNameRepository();
-            var constituentName = repository.Save(jamesFranklin);
 
-            constituentName.FirstName = "John";
-            var johnFranklin = repository.Update(constituentName);
+            savedConstituentName.FirstName = "John";
+            var johnFranklin = repository.Update(savedConstituentName);
 
             Assert.That(johnFranklin.FirstName,Is.EqualTo("John"));
         }
@@ -48,24 +53,18 @@ namespace Tests.Integration.RepositoryTests
         [Test]
         public void ShouldDeleteConstituentName()
         {
-            var repository = new ConstituentNameRepository();
-            var savedJames = repository.Save(jamesFranklin);
+            repository.Delete(savedConstituentName.Id);
 
-            repository.Delete(savedJames.Id);
-
-            var constituentName = repository.Get<ConstituentName>(savedJames.Id);
+            var constituentName = repository.Get<ConstituentName>(savedConstituentName.Id);
             Assert.IsNull(constituentName);
         }
 
         [Test]
         public void ShouldLoadConstituentName()
         {
-            var repository = new ConstituentNameRepository();
-            var savedJames = repository.Save(jamesFranklin);
+            var james = repository.Load(savedConstituentName.Id);
 
-            var james = repository.Load(savedJames.Id);
-
-            Assert.That(james.Id,Is.EqualTo(savedJames.Id));
+            Assert.That(james.Id,Is.EqualTo(savedConstituentName.Id));
 
         }
     }

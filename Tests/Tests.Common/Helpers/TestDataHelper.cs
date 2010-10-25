@@ -1,38 +1,61 @@
 ﻿using System;
 using Kallivayalil.DataAccess;
-using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
 using NHibernate;
 
 namespace Tests.Common.Helpers
 {
     public class TestDataHelper {
-        private ConstituentRepository constituentRepository;
-        private ISession session;
+        public readonly ISession session;
 
         public TestDataHelper()
         {
             session = ConfigurationFactory.SessionFactory.OpenSession();
-            constituentRepository = new ConstituentRepository(session);
         }
 
         public Constituent CreateConstituent(Constituent constituent)
         {
-            return constituentRepository.Save(constituent);
+            var savedConstituent = session.SaveOrUpdateCopy(constituent);
+            session.Flush();
+            return (Constituent) savedConstituent;
         }
 
         public void HardDeleteConstituents()
         {
-            var sqlQuery = session.CreateSQLQuery("delete from constituents");
-            sqlQuery.ExecuteUpdate();
+            var sqlCommand = session.Connection.CreateCommand();
+            sqlCommand.CommandText = "delete from constituents";
+            sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
 
         public void HardDeleteConstituentNames()
         {
-            var sqlQuery = session.CreateSQLQuery("delete from constituentNames");
-            sqlQuery.ExecuteUpdate();
+            var sqlCommand = session.Connection.CreateCommand();
+            sqlCommand.CommandText = "delete from constituentNames";
+            sqlCommand.ExecuteNonQuery();
             session.Flush();
+        }
+
+        public void HardDeleteAddress()
+        {
+            var sqlCommand = session.Connection.CreateCommand();
+            sqlCommand.CommandText = "delete from addresses";
+            sqlCommand.ExecuteNonQuery();
+            session.Flush();
+        }
+
+        public Address CreateAddress(Address address)
+        {
+            var savedAddress = session.SaveOrUpdateCopy(address);
+            session.Flush();
+            return (Address)savedAddress;
+        }
+
+        public ConstituentName CreateConstituentName(ConstituentName constituentName)
+        {
+            var savedConstituentName = session.SaveOrUpdateCopy(constituentName);
+            session.Flush();
+            return (ConstituentName)savedConstituentName;            
         }
     }
 }

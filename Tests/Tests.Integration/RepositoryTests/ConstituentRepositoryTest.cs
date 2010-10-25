@@ -29,9 +29,6 @@ namespace Tests.Integration.RepositoryTests
 
             Assert.That(savedConstituent.Id,Is.GreaterThan(0));
             Assert.That(savedConstituent.Name.Id,Is.GreaterThan(0));
-            Assert.That(savedConstituent.Name.UpdatedDateTime, Is.EqualTo(savedConstituent.UpdatedDateTime));
-            Assert.That(savedConstituent.Name.CreatedDateTime, Is.EqualTo(savedConstituent.CreatedDateTime));
-
             constituentRepository.Delete(savedConstituent);
         }
         
@@ -84,6 +81,7 @@ namespace Tests.Integration.RepositoryTests
             Assert.That(result,Is.TypeOf(typeof(Constituent)));
             Assert.That(result.Id,Is.EqualTo(savedConstituent.Id));
         }
+
 
     }
 }
