@@ -16,6 +16,7 @@ namespace Kallivayalil
         private readonly AutoDataContractMapper mapper;
         private readonly AddressServiceImpl addressServiceImpl;
         private readonly PhoneServiceImpl phoneServiceImpl;
+        private readonly EmailServiceImpl emailServiceImpl;
 
         public KallivayalilService()
         {
@@ -23,6 +24,7 @@ namespace Kallivayalil
             nameServiceImpl = new ConstituentNameServiceImpl();
             addressServiceImpl = new AddressServiceImpl();
             phoneServiceImpl = new PhoneServiceImpl();
+            emailServiceImpl = new EmailServiceImpl();
             mapper = new AutoDataContractMapper();
         }
 
@@ -178,6 +180,62 @@ namespace Kallivayalil
             var phonesData = new PhonesData();
             mapper.MapList(phones, phonesData, typeof (PhoneData));
             return phonesData;
+        }
+
+        public virtual EmailData CreateEmail(string constituentId, EmailData emailData)
+        {
+            var email = new Email();
+            mapper.Map(emailData, email);
+            var savedEmail = emailServiceImpl.CreateEmail(email);
+
+            var savedEmailData = new EmailData();
+
+            mapper.Map(savedEmail, savedEmailData);
+
+            return savedEmailData;
+        }
+
+        public virtual EmailData UpdateEmail(string constituentId, EmailData emailData)
+        {
+            var email = new Email();
+            mapper.Map(emailData, email);
+
+            var updatedEmail = emailServiceImpl.UpdateEmail(email);
+
+            var updatedEmailData = new EmailData();
+
+            mapper.Map(updatedEmail, updatedEmailData);
+
+            return updatedEmailData;
+        }
+
+        public virtual EmailData GetEmail(string id)
+        {
+            var email = emailServiceImpl.FindEmail(id);
+            var emailData = new EmailData();
+
+            if (email == null)
+            {
+                throw new NotFoundException(string.Format("Email with Id:{0} not found.", id));
+            }
+
+            mapper.Map(email, emailData);
+
+            return emailData;
+        }
+
+        public virtual void DeleteEmail(string id)
+        {
+            emailServiceImpl.DeleteEmail(id);
+        }
+
+        public virtual EmailsData GetEmails(string constituentId)
+        {
+            var emails = emailServiceImpl.FindEmails(constituentId);
+
+            var emailData = new EmailsData();
+            mapper.MapList(emails, emailData, typeof(EmailData));
+            return emailData;
         }
     }
 }

@@ -49,6 +49,7 @@
     <Compile Include="AddressServiceImpl.cs" />
     <Compile Include="ConstituentNameServiceImpl.cs" />
     <Compile Include="ConstituentServiceImpl.cs" />
+    <Compile Include="EmailServiceImpl.cs" />
     <Compile Include="IKallivayalilService.cs" />
     <Compile Include="PhoneServiceImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

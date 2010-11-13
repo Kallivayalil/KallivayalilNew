@@ -68,5 +68,25 @@ namespace Kallivayalil
         [WebGet(UriTemplate = "/Phones?constituentId={constituentId}")]
         PhonesData GetPhones(string constituentId);
 
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Emails?constituentId={constituentId}", Method = "POST")]
+        EmailData CreateEmail(string constituentId, EmailData emailData);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Emails?constituentId={constituentId}", Method = "PUT")]
+        EmailData UpdateEmail(string constituentId, EmailData emailData);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Emails/{id}")]
+        EmailData GetEmail(string id);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Emails/{id}", Method = "DELETE")]
+        void DeleteEmail(string id);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Emails?constituentId={constituentId}")]
+        EmailsData GetEmails(string constituentId);
+
     }
 }
