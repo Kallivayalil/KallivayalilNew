@@ -1,7 +1,7 @@
 USE [Kallivayalil]
 GO
 
-/****** Object:  Table [dbo].[Phones]    Script Date: 11/13/2010 12:38:37 ******/
+/****** Object:  Table [dbo].[Phones]    Script Date: 11/13/2010 17:13:27 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -32,4 +32,17 @@ GO
 SET ANSI_PADDING OFF
 GO
 
+ALTER TABLE [dbo].[Phones]  WITH CHECK ADD  CONSTRAINT [FK_Phones_Addresses] FOREIGN KEY([AddressId])
+REFERENCES [dbo].[Addresses] ([Id])
+GO
+
+ALTER TABLE [dbo].[Phones] CHECK CONSTRAINT [FK_Phones_Addresses]
+GO
+
+ALTER TABLE [dbo].[Phones]  WITH CHECK ADD  CONSTRAINT [FK_Phones_Constituents] FOREIGN KEY([ConstituentId])
+REFERENCES [dbo].[Constituents] ([Id])
+GO
+
+ALTER TABLE [dbo].[Phones] CHECK CONSTRAINT [FK_Phones_Constituents]
+GO
 

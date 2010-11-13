@@ -1,7 +1,7 @@
 USE [Kallivayalil]
 GO
 
-/****** Object:  Table [dbo].[Emails]    Script Date: 11/13/2010 13:39:34 ******/
+/****** Object:  Table [dbo].[Emails]    Script Date: 11/13/2010 17:14:10 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -31,4 +31,10 @@ GO
 SET ANSI_PADDING OFF
 GO
 
+ALTER TABLE [dbo].[Emails]  WITH CHECK ADD  CONSTRAINT [FK_Emails_Constituents] FOREIGN KEY([ConstituentId])
+REFERENCES [dbo].[Constituents] ([Id])
+GO
+
+ALTER TABLE [dbo].[Emails] CHECK CONSTRAINT [FK_Emails_Constituents]
+GO
 
