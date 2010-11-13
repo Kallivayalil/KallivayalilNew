@@ -47,6 +47,8 @@
     <Compile Include="Mothers\AddressMother.cs" />
     <Compile Include="Mothers\ConstituentMother.cs" />
     <Compile Include="Mothers\ConstituentNameMother.cs" />
+    <Compile Include="Mothers\EmailMother.cs" />
+    <Compile Include="Mothers\PhoneMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

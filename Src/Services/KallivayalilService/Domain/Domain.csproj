@@ -43,6 +43,8 @@
     <Compile Include="Address.cs" />
     <Compile Include="Constituent.cs" />
     <Compile Include="ConstituentName.cs" />
+    <Compile Include="Email.cs" />
+    <Compile Include="Phone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

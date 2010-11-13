@@ -58,11 +58,15 @@
     <Compile Include="Mappings\AddressMap.cs" />
     <Compile Include="Mappings\ConstituentMap.cs" />
     <Compile Include="Mappings\ConstituentNameMap.cs" />
+    <Compile Include="Mappings\EmailMap.cs" />
+    <Compile Include="Mappings\PhoneMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\ConstituentNameRepository.cs" />
     <Compile Include="Repositories\ConstituentRepository.cs" />
+    <Compile Include="Repositories\EmailRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\PhoneRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>

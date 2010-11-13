@@ -55,5 +55,7 @@ namespace Kallivayalil.DataAccess.Repositories
             criteria.Add(Restrictions.Eq("Constituent.Id", constituentId));
             return criteria.List<Address>();
         }
+
+
     }
 }

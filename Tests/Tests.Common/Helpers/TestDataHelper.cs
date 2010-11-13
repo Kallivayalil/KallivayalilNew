@@ -57,5 +57,35 @@ namespace Tests.Common.Helpers
             session.Flush();
             return (ConstituentName)savedConstituentName;            
         }
+
+        public void HardDeletePhones()
+        {
+            var sqlCommand = session.Connection.CreateCommand();
+            sqlCommand.CommandText = "delete from phones";
+            sqlCommand.ExecuteNonQuery();
+            session.Flush();
+        }
+
+        public Phone CreatePhone(Phone phone)
+        {
+            var savedPhone = session.SaveOrUpdateCopy(phone);
+            session.Flush();
+            return (Phone)savedPhone;
+        }
+
+        public void HardDeleteEmails()
+        {
+            var sqlCommand = session.Connection.CreateCommand();
+            sqlCommand.CommandText = "delete from Emails";
+            sqlCommand.ExecuteNonQuery();
+            session.Flush();
+        }
+
+        public Email CreateEmail(Email email)
+        {
+            var savedEmail = session.SaveOrUpdateCopy(email);
+            session.Flush();
+            return (Email)savedEmail;
+        }
     }
 }
