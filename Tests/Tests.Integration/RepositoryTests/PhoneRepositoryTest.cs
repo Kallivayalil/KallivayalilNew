@@ -30,10 +30,10 @@ namespace Tests.Integration.RepositoryTests
         [TearDown]
         public void TearDown()
         {
+            testDataHelper.HardDeletePhones();
             testDataHelper.HardDeleteAddress();
             testDataHelper.HardDeleteConstituents();
             testDataHelper.HardDeleteConstituentNames();
-            testDataHelper.HardDeletePhones();
         }
 
         [Test]

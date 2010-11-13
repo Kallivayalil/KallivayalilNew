@@ -27,9 +27,9 @@ namespace Tests.Integration.RepositoryTests
         [TearDown]
         public void TearDown()
         {
+            testDataHelper.HardDeleteEmails();
             testDataHelper.HardDeleteConstituents();
             testDataHelper.HardDeleteConstituentNames();
-            testDataHelper.HardDeleteEmails();
         }
 
         [Test]

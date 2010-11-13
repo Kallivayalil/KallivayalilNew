@@ -49,21 +49,16 @@ namespace Tests.Integration.ServiceTests
         public void ShouldUpdateExistingConstituentAddress()
         {
             var london = AddressDataMother.London(constituent);
-            savedAddress.City = london.City;
-            savedAddress.Country = london.Country;
-            savedAddress.State = london.State;
-            savedAddress.Type = london.Type;
-            savedAddress.Line1 = london.Line1;
-            savedAddress.PostCode = london.PostCode;
 
-            var londonAddress = new AddressData();
-            var mapper = new AutoDataContractMapper();
-            mapper.Map(savedAddress,londonAddress);
+            var addressData = HttpHelper.Get<AddressData>(string.Format("{0}/{1}", baseUri, savedAddress.Id));
+            addressData.Line1 = london.Line1;
+            addressData.Line2 = london.Line2;
+            addressData.City = london.City;
 
-            var updatedAddress = HttpHelper.Put(string.Format("{0}/{1}",baseUri,londonAddress.Id), londonAddress);
+            var updatedAddress = HttpHelper.Put(string.Format("{0}/{1}",baseUri,addressData.Id), addressData);
 
-            Assert.That(updatedAddress.City,Is.EqualTo(savedAddress.City));
-            Assert.That(updatedAddress.Id,Is.EqualTo(savedAddress.Id));
+            Assert.That(updatedAddress.City,Is.EqualTo(london.City));
+            Assert.That(updatedAddress.Id,Is.EqualTo(addressData.Id));
         }
 
         [Test]

@@ -79,22 +79,22 @@ namespace Kallivayalil
 
         public virtual AddressData CreateAddress(string constituentId, AddressData addressData)
         {
-            Address address = new Address();
+            var address = new Address();
             mapper.Map(addressData, address);
 
             var savedAddress = addressServiceImpl.CreateAddress(address);
-            AddressData savedAddressData = new AddressData();
+            var savedAddressData = new AddressData();
             mapper.Map(savedAddress, savedAddressData);
             return savedAddressData;
         }
 
         public virtual AddressData UpdateAddress(string id, AddressData addressData)
         {
-            Address address = new Address();
+            var address = new Address();
             mapper.Map(addressData, address);
 
             var savedAddress = addressServiceImpl.UpdateAddress(address);
-            AddressData savedAddressData = new AddressData();
+            var savedAddressData = new AddressData();
             mapper.Map(savedAddress, savedAddressData);
             return savedAddressData;
         }
