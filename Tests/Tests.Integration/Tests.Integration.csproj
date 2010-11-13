@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mothers\AddressDataMother.cs" />
+    <Compile Include="Mothers\PhoneDataMother.cs" />
     <Compile Include="RepositoryTests\AddressRepositoryTest.cs" />
     <Compile Include="RepositoryTests\ConstituentNameRepositoryTest.cs" />
     <Compile Include="RepositoryTests\ConstituentRepositoryTest.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="ServiceTests\AddressTest.cs" />
     <Compile Include="ServiceTests\ConstituentNameTest.cs" />
     <Compile Include="ServiceTests\ConstituentTest.cs" />
+    <Compile Include="ServiceTests\PhoneTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Src\Services\DataAccess\DataAccess.csproj">

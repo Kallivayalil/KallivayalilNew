@@ -26,6 +26,16 @@ namespace Tests.Integration.ServiceTests
             savedAddress = testDataHelper.CreateAddress(AddressMother.SanFrancisco(constituent));
         }
 
+
+        [TearDown]
+        public void TearDown()
+        {
+            testDataHelper.HardDeleteAddress();
+            testDataHelper.HardDeleteConstituents();
+            testDataHelper.HardDeleteConstituentNames();
+        }
+
+
         [Test]
         public void ShouldSaveConstituentAddress()
         {

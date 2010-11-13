@@ -15,12 +15,14 @@ namespace Kallivayalil
         private readonly ConstituentNameServiceImpl nameServiceImpl;
         private readonly AutoDataContractMapper mapper;
         private readonly AddressServiceImpl addressServiceImpl;
+        private readonly PhoneServiceImpl phoneServiceImpl;
 
         public KallivayalilService()
         {
             constituentServiceImpl = new ConstituentServiceImpl();
             nameServiceImpl = new ConstituentNameServiceImpl();
             addressServiceImpl = new AddressServiceImpl();
+            phoneServiceImpl = new PhoneServiceImpl();
             mapper = new AutoDataContractMapper();
         }
 
@@ -47,17 +49,17 @@ namespace Kallivayalil
             mapper.Map(constituentData, constituent);
             Constituent savedConstituent = constituentServiceImpl.CreateConstituent(constituent);
             var savedConstituentData = new ConstituentData();
-            mapper.Map(savedConstituent,savedConstituentData);
+            mapper.Map(savedConstituent, savedConstituentData);
             return savedConstituentData;
         }
 
         public virtual ConstituentData UpdateConstituent(string id, ConstituentData constituentData)
         {
-            var constituent=new Constituent();
-            mapper.Map(constituentData,constituent);
+            var constituent = new Constituent();
+            mapper.Map(constituentData, constituent);
             Constituent updatedConstituent = constituentServiceImpl.UpdateConstituent(id, constituent);
             var updateConstiuentData = new ConstituentData();
-            mapper.Map(updatedConstituent,updateConstiuentData);
+            mapper.Map(updatedConstituent, updateConstiuentData);
             return updateConstiuentData;
         }
 
@@ -65,10 +67,10 @@ namespace Kallivayalil
         {
             var constituentName = new ConstituentName();
             mapper.Map(nameData, constituentName);
-            var updatedName = nameServiceImpl.UpdateConstituentName(id,constituentName);
+            var updatedName = nameServiceImpl.UpdateConstituentName(id, constituentName);
 
             var updatedNameData = new ConstituentNameData();
-            mapper.Map(updatedName,updatedNameData);
+            mapper.Map(updatedName, updatedNameData);
 
             return updatedNameData;
         }
@@ -76,11 +78,11 @@ namespace Kallivayalil
         public virtual AddressData CreateAddress(string constituentId, AddressData addressData)
         {
             Address address = new Address();
-            mapper.Map(addressData,address);
+            mapper.Map(addressData, address);
 
             var savedAddress = addressServiceImpl.CreateAddress(address);
             AddressData savedAddressData = new AddressData();
-            mapper.Map(savedAddress,savedAddressData);
+            mapper.Map(savedAddress, savedAddressData);
             return savedAddressData;
         }
 
@@ -110,7 +112,6 @@ namespace Kallivayalil
             }
             mapper.Map(address, addressData);
             return addressData;
-            
         }
 
         public virtual AddressesData GetAddresses(string constituentId)
@@ -121,6 +122,62 @@ namespace Kallivayalil
             mapper.MapList(addresses, addressesData, typeof (AddressData));
 
             return addressesData;
+        }
+
+        public virtual PhoneData CreatePhone(string constituentId, PhoneData phoneData)
+        {
+            var phone = new Phone();
+            mapper.Map(phoneData, phone);
+            var savedPhone = phoneServiceImpl.CreatePhone(phone);
+
+            var savedPhoneData = new PhoneData();
+
+            mapper.Map(savedPhone, savedPhoneData);
+
+            return savedPhoneData;
+        }
+
+        public virtual PhoneData UpdatePhone(string constituentId, PhoneData phoneData)
+        {
+            var phone = new Phone();
+            mapper.Map(phoneData,phone);
+
+            var updatedPhone = phoneServiceImpl.UpdatePhone(phone);
+
+            var updatedPhoneData = new PhoneData();
+
+            mapper.Map(updatedPhone,updatedPhoneData);
+
+            return updatedPhoneData;
+        }
+
+        public virtual PhoneData GetPhone(string id)
+        {
+            var phone = phoneServiceImpl.FindPhone(id);
+            var phoneData = new PhoneData();
+
+            if (phone == null)
+            {
+                throw new NotFoundException(string.Format("Phone with Id:{0} not found.", id));
+            }
+
+            mapper.Map(phone,phoneData);
+
+            return phoneData;
+        }
+
+        public virtual void DeletePhone(string id)
+        {
+            phoneServiceImpl.DeletePhone(id);
+        }
+
+        public virtual PhonesData GetPhones(string constituentId)
+        {
+            var phones = phoneServiceImpl.FindPhones(constituentId);
+
+            var phonesData = new PhonesData();
+            mapper.MapList(phones, phonesData, typeof (PhoneData));
+            return phonesData;
         }
     }
 }

@@ -50,6 +50,7 @@
     <Compile Include="ConstituentNameServiceImpl.cs" />
     <Compile Include="ConstituentServiceImpl.cs" />
     <Compile Include="IKallivayalilService.cs" />
+    <Compile Include="PhoneServiceImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KallivayalilService.cs" />
   </ItemGroup>

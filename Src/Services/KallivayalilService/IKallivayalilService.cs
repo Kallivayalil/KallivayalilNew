@@ -31,7 +31,7 @@ namespace Kallivayalil
         [OperationContract]
         [WebInvoke(UriTemplate = "/Addresses?constituentId={constituentId}", Method = "POST")]
         AddressData CreateAddress(string constituentId, AddressData addressData);
-
+       
         [OperationContract]
         [WebInvoke(UriTemplate = "/Addresses/{id}", Method = "PUT")]
         AddressData UpdateAddress(string id, AddressData addressData);
@@ -46,8 +46,27 @@ namespace Kallivayalil
         
         [OperationContract]
         [WebGet(UriTemplate = "/Addresses?constituentId={constituentId}")]
-        AddressesData GetAddresses(string constituentId);  
+        AddressesData GetAddresses(string constituentId);
 
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Phones?constituentId={constituentId}", Method = "POST")]
+        PhoneData CreatePhone(string constituentId, PhoneData phoneData);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Phones?constituentId={constituentId}", Method = "PUT")]
+        PhoneData UpdatePhone(string constituentId, PhoneData phoneData);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Phones/{id}")]
+        PhoneData GetPhone(string id);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Phones/{id}", Method = "DELETE")]
+        void DeletePhone(string id);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Phones?constituentId={constituentId}")]
+        PhonesData GetPhones(string constituentId);
 
     }
 }
