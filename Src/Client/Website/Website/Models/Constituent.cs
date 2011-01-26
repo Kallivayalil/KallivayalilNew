@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
 
 namespace Website.Models
 {
+
+    public class Constituents : List<Constituent>{}
+
     public class Constituent : Entity
     {
         public virtual string Gender { get; set; }

@@ -115,6 +115,14 @@ page width. Or, you can specify an exact pixel width. */
     _height: 1px; /* only IE6 applies CSS properties starting with an underscore */
 }
 
+#homeMenu
+{
+    padding: 30px 30px 15px 30px;
+    background-color: #fff;
+    margin-bottom: 30px;
+    _height: 1px; /* only IE6 applies CSS properties starting with an underscore */
+}
+
 #footer
 {
     color: #999;
@@ -215,16 +223,10 @@ input[type="password"]
 /* TABLE
 ----------------------------------------------------------*/
 
-table 
-{
-  border: solid 1px #e8eef4;
-  border-collapse: collapse;
-}
-
 table td 
 {
   padding: 5px;   
-  border: solid 1px #e8eef4;
+  width :auto;
 }
 
 table th
@@ -232,7 +234,6 @@ table th
   padding: 6px 5px;
   text-align: left;
   background-color: #e8eef4; 
-  border: solid 1px #e8eef4;   
 }
 
 /* MISC  
