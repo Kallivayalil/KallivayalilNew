@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
 
@@ -33,6 +34,11 @@ namespace Kallivayalil
         public void DeleteConstituent(string id)
         {
             repository.Delete(Convert.ToInt32(id));
+        }
+
+        public IEnumerable GetAllConstituents()
+        {
+            return repository.LoadAll<Constituent>();
         }
     }
 }

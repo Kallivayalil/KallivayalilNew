@@ -10,7 +10,11 @@ namespace Kallivayalil
     {
         [OperationContract]
         [WebGet(UriTemplate = "/Constituents/{id}")]
-        ConstituentData GetConstituent(string id);  
+        ConstituentData GetConstituent(string id);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Constituents")]
+        ConstituentsData GetConstituents(); 
         
         [OperationContract]
         [WebInvoke(UriTemplate = "/Constituents/{id}", Method = "DELETE")]

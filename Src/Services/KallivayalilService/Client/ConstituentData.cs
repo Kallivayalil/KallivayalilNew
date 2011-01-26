@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Kallivayalil.Client {
@@ -48,4 +49,7 @@ namespace Kallivayalil.Client {
         [DataMember]
         public ConstituentNameData Name { get; set; }
     }
+
+    [CollectionDataContract(Namespace = "")]
+    public class ConstituentsData : List<ConstituentData> { }
 }

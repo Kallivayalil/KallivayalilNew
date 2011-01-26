@@ -40,6 +40,16 @@ namespace Kallivayalil
             return constituentData;
         }
 
+        public virtual ConstituentsData GetConstituents()
+        {
+            var constituents = constituentServiceImpl.GetAllConstituents();
+
+            var constituentsData = new ConstituentsData();
+            mapper.MapList(constituents, constituentsData, typeof(ConstituentData));
+
+            return constituentsData;
+        }
+
         public virtual void DeleteConstituent(string id)
         {
             constituentServiceImpl.DeleteConstituent(id);
