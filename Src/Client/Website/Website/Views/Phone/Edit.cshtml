@@ -27,24 +27,24 @@
 
         @Html.HiddenFor(model => model.Id)
 
-        <div class="editor-label">
+        <div class="editor-field">
             @Html.LabelFor(model => model.CreatedDateTime):
-            @Html.DisplayFor(model => model.CreatedDateTime)
+            @Html.TextBoxFor(model => model.CreatedDateTime, new { @readonly = "readonly" })
         </div>
 
-        <div class="editor-label">
+        <div class="editor-field">
             @Html.LabelFor(model => model.UpdatedDateTime):
-            @Html.DisplayFor(model => model.UpdatedDateTime)
+            @Html.TextBoxFor(model => model.UpdatedDateTime, new { @readonly = "readonly" })
         </div>
 
-        <div class="editor-label">
+        <div class="editor-field">
             @Html.LabelFor(model => model.CreatedBy):
-            @Html.DisplayFor(model => model.CreatedBy)
+            @Html.TextBoxFor(model => model.CreatedBy, new { @readonly = "readonly" })
         </div>
 
-        <div class="editor-label">
+        <div class="editor-field">
             @Html.LabelFor(model => model.UpdatedBy):
-            @Html.DisplayFor(model => model.UpdatedBy)
+            @Html.TextBoxFor(model => model.UpdatedBy, new { @readonly = "readonly" })
         </div>
 
         <p>
