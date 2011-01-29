@@ -2,6 +2,14 @@
 <p>
  Welcome @Model.Name.PreferedName
 </p>
+
+@section SideBar
+{
+<div>
+  @Html.ActionLink("Phone", "Index", "Phone", new { }, new { }) <br>
+  @Html.ActionLink("Email", "Index", "Email", new { }, new { })
+  </div>
+}
      
 <fieldset>
     <legend>Constituent</legend>
@@ -33,10 +41,6 @@
     <div class="display-label">IsRegistered:@Model.IsRegistered</div>
 
 </fieldset>
-<p>
-    @Html.ActionLink("Phone", "Index", "Phone", new { }, new { }) |
-    @Html.ActionLink("Email", "Index", "Email", new { }, new { })
-</p>
 
 <p>
     @Html.ActionLink("Back to List", "Index")

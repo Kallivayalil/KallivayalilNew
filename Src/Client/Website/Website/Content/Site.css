@@ -96,6 +96,14 @@ page width. Or, you can specify an exact pixel width. */
     padding: 80px;
 }
 
+#sidebar
+{
+    float:left;
+    margin : 10px;
+    padding: 85px 25px 20px 10px;
+    width: 100px;
+}
+
 #header h1
 {
     font-weight: bold;
