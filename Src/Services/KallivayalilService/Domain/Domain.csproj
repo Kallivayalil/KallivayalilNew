@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation">
+      <HintPath>..\..\..\..\Lib\FluentValidation\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,12 +47,16 @@
     <Compile Include="Constituent.cs" />
     <Compile Include="ConstituentName.cs" />
     <Compile Include="Email.cs" />
+    <Compile Include="ErrorMessageEntity.cs" />
+    <Compile Include="ErrorMessagesEntity.cs" />
+    <Compile Include="Exception\ValidationException.cs" />
     <Compile Include="Phone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceData\AddressType.cs" />
     <Compile Include="ReferenceData\EmailType.cs" />
     <Compile Include="ReferenceData\PhoneType.cs" />
     <Compile Include="ReferenceData\SalutationType.cs" />
+    <Compile Include="Validators\AddressValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

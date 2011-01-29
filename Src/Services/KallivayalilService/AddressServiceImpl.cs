@@ -4,21 +4,25 @@ using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
 using Kallivayalil.Domain.ReferenceData;
+using Kallivayalil.Domain.Validators;
 
 namespace Kallivayalil
 {
     public class AddressServiceImpl
     {
         private readonly AddressRepository repository;
+        private AddressValidator validator;
 
         public AddressServiceImpl()
         {
             repository = new AddressRepository();
+            validator = new AddressValidator();
         }
 
         public Address CreateAddress(Address address)
         {
             LoadAddressType(address);
+            validator.Validate(address).ProcessValidationResults();
             return repository.Save(address);
         }
 
@@ -35,6 +39,7 @@ namespace Kallivayalil
         public Address UpdateAddress(Address address)
         {
             LoadAddressType(address);
+            validator.Validate(address).ProcessValidationResults();
             return repository.Update(address);
         }
 
