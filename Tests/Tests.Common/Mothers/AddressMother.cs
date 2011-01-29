@@ -13,7 +13,7 @@ namespace Tests.Common.Mothers
                            State = "California",
                            PostCode = "ABCD",
                            Country = "USA",
-                           Type = 1,
+                           Type = AddressTypeMother.Home(),
                            Constituent = constituent,
                        };
         }
@@ -27,7 +27,7 @@ namespace Tests.Common.Mothers
                            State = "London",
                            PostCode = "SE1 3TQ",
                            Country = "UK",
-                           Type = 1,
+                           Type = AddressTypeMother.Office(),
                            Constituent = constituent,
                        };
         }

@@ -67,6 +67,7 @@
     <Compile Include="AbstractPersistenceListener.cs" />
     <Compile Include="Attributes\AuditedAttribute.cs" />
     <Compile Include="AutoDataContractMapper.cs" />
+    <Compile Include="BadRequestException.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="KallivayalilRestServiceHost.cs" />

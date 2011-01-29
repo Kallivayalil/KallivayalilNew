@@ -1,5 +1,6 @@
 using Kallivayalil.Client;
 using Kallivayalil.Domain;
+using Kallivayalil.Domain.ReferenceData;
 
 namespace Tests.Integration.Mothers
 {
@@ -14,7 +15,7 @@ namespace Tests.Integration.Mothers
                            State = "California",
                            PostCode = "ABCD",
                            Country = "USA",
-                           Type = 1,
+                           Type = new AddressTypeData{ Id = 1,Description = "Home"},
                            Constituent = new LinkData {Id = constituent.Id},
                        };
         }
@@ -28,7 +29,7 @@ namespace Tests.Integration.Mothers
                            State = "London",
                            PostCode = "SE1 3TQ",
                            Country = "UK",
-                           Type = 1,
+                           Type = new AddressTypeData { Id = 1, Description = "Home" },
                            Constituent = new LinkData { Id = constituent.Id },
                        };
         }

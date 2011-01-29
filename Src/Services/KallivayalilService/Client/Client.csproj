@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressData.cs" />
+    <Compile Include="AddressTypeData.cs" />
     <Compile Include="ConstituentData.cs" />
     <Compile Include="ConstituentNameData.cs" />
     <Compile Include="DataContractHelper.cs" />
@@ -50,6 +51,9 @@
     <Compile Include="LinkData.cs" />
     <Compile Include="PhoneData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ReferenceData\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

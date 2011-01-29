@@ -1,4 +1,5 @@
 using Kallivayalil.Common;
+using Kallivayalil.Domain.ReferenceData;
 
 namespace Kallivayalil.Domain
 {
@@ -10,7 +11,7 @@ namespace Kallivayalil.Domain
         public virtual string State { get; set; }
         public virtual string PostCode { get; set; }
         public virtual string Country { get; set; }
-        public virtual int Type { get; set; }
+        public virtual AddressType Type { get; set; }
         public virtual Constituent Constituent { get; set; }
     }
 }

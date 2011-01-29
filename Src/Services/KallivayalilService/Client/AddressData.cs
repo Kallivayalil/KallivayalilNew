@@ -35,7 +35,7 @@ namespace Kallivayalil.Client
         public LinkData Constituent { get; set; }
         
         [DataMember]
-        public int Type{ get; set; }
+        public AddressTypeData Type{ get; set; }
 
         [DataMember]
         public DateTime? CreatedDateTime { get; set; }

@@ -16,8 +16,8 @@ namespace Kallivayalil.DataAccess.Mappings
             Map(x => x.State).Not.Nullable().Column("State");
             Map(x => x.PostCode).Not.Nullable().Column("Postcode");
             Map(x => x.Country).Not.Nullable().Column("Country");
-            Map(x => x.Type).Not.Nullable().Column("Type");
             References(x => x.Constituent).Column("ConstituentId");
+            References(x => x.Type).Column("Type");
             MapTimeStampColumns();
         }
     }
