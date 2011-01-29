@@ -10,7 +10,7 @@ namespace Tests.Integration.Mothers
         {
             return new EmailData()
                        {
-                           Type = 1,
+                           Type = new EmailTypeData{Id = 1,Description = "Official"},
                            Address = "james.franklin@kallivayalil.com",
                            Constituent = new LinkData {Id = constituent.Id},
                        };
@@ -20,7 +20,7 @@ namespace Tests.Integration.Mothers
         {
             return new EmailData()
             {
-                Type = email.Type,
+                Type = new EmailTypeData{Id = email.Type.Id,Description = email.Type.Description},
                 Address = email.Address,
                 Constituent = new LinkData{Id = email.Constituent.Id},
             };

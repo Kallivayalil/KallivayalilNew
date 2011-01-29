@@ -20,7 +20,7 @@ namespace Kallivayalil.Client
         public LinkData Constituent { get; set; }
         
         [DataMember]
-        public int Type{ get; set; }
+        public EmailTypeData Type{ get; set; }
 
         [DataMember]
         public DateTime? CreatedDateTime { get; set; }

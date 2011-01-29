@@ -1,4 +1,5 @@
 using Kallivayalil.Domain;
+using Kallivayalil.Domain.ReferenceData;
 
 namespace Tests.Common.Mothers
 {
@@ -6,7 +7,7 @@ namespace Tests.Common.Mothers
     {
         public static Email Official(Constituent constituent)
         {
-            return new Email {Constituent = constituent, Address = "james.franklin@kallivayalil.com", Type = 1};
+            return new Email {Constituent = constituent, Address = "james.franklin@kallivayalil.com", Type = new EmailType {Id = 1,Description = "Official"}};
         }
 
     }
