@@ -30,3 +30,10 @@
 /Src/Services/Tests.Unit/bin/Debug/*.*
 /Tests/Tests.Common/bin/Debug/*.*
 /Tests/Tests.Integration/bin/Debug/*.*
+
+/Src/Client/Website/Website.suo
+/Src/Client/Website/Website/Website.csproj.user
+/Src/Client/Website/Website.5.1.ReSharper.user
+/Src/Client/Website/Website/bin/*.*
+/Src/Client/Website/Website/obj/*.*
+/Src/Client/Website/Website/obj/Debug/*.*
