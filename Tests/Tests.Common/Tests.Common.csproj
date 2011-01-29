@@ -49,7 +49,10 @@
     <Compile Include="Mothers\ConstituentMother.cs" />
     <Compile Include="Mothers\ConstituentNameMother.cs" />
     <Compile Include="Mothers\EmailMother.cs" />
+    <Compile Include="Mothers\EmailTypeMother.cs" />
     <Compile Include="Mothers\PhoneMother.cs" />
+    <Compile Include="Mothers\PhoneTypeMother.cs" />
+    <Compile Include="Mothers\SalutationTypeMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

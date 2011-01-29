@@ -49,6 +49,7 @@
     <Compile Include="ReferenceData\AddressType.cs" />
     <Compile Include="ReferenceData\EmailType.cs" />
     <Compile Include="ReferenceData\PhoneType.cs" />
+    <Compile Include="ReferenceData\SalutationType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

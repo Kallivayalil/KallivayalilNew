@@ -14,7 +14,7 @@ namespace Kallivayalil.DataAccess.Mappings
             Map(x => x.MiddleName).Column("MiddleName");
             Map(x => x.LastName).Not.Nullable().Column("LastName");
             Map(x => x.PreferedName).Column("PreferedName");
-            Map(x => x.Salutation).Not.Nullable().Column("Salutation");
+            References(x => x.Salutation).Column("Salutation");
             MapTimeStampColumns();
         }
     }

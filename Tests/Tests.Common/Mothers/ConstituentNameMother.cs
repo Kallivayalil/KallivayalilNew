@@ -12,7 +12,7 @@ namespace Tests.Common.Mothers
                            FirstName = "James",
                            LastName = "Franklin",
                            MiddleName = "H",
-                           Salutation = 1,
+                           Salutation = SalutationTypeMother.Mr(),
                            PreferedName = "James",
                        };
         }
@@ -24,7 +24,7 @@ namespace Tests.Common.Mothers
                 FirstName = "Jessica",
                 LastName = "Alba",
                 MiddleName = "H",
-                Salutation = 1,
+                Salutation = SalutationTypeMother.Ms(),
                 PreferedName = "Jess",
             };
         }

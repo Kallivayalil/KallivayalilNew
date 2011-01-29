@@ -22,7 +22,7 @@ namespace Kallivayalil.Client
         public string PreferedName{ get; set; }
         
         [DataMember]
-        public int Salutation{ get; set; }
+        public SalutationTypeData Salutation{ get; set; }
 
         [DataMember]
         public DateTime? CreatedDateTime { get; set; }

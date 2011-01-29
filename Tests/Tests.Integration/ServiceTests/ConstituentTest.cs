@@ -24,7 +24,7 @@ namespace Tests.Integration.ServiceTests
             constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
             anotherConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JessicaAlba()));
             constituentData = new ConstituentData { Gender = "F", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false };
-            constituentData.Name = new ConstituentNameData { FirstName = "James", LastName = "Franklin", Salutation = 1 };
+            constituentData.Name = new ConstituentNameData { FirstName = "James", LastName = "Franklin", Salutation = new SalutationTypeData {Id = 1,Description = "Mr"} };
         }
 
         [TearDown]
