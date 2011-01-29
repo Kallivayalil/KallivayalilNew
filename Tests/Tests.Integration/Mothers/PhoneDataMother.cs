@@ -10,7 +10,7 @@ namespace Tests.Integration.Mothers
         {
             return new PhoneData
                        {
-                           Type = 1,
+                           Type = new PhoneTypeData{Description = "Mobile",Id = 1},
                            Number = "9900012345",
                            Constituent = new LinkData {Id = constituent.Id},
                            Address = new LinkData {Id = address.Id}
@@ -21,7 +21,7 @@ namespace Tests.Integration.Mothers
         {
             return new PhoneData
             {
-                Type = 1,
+                Type = new PhoneTypeData { Description = "Mobile", Id = 1 },
                 Number = "9900012345",
                 Constituent = new LinkData { Id = phone.Constituent.Id },
                 Address = new LinkData { Id = phone.Address.Id }

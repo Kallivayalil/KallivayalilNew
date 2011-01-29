@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
+using Kallivayalil.Domain.ReferenceData;
 
 namespace Kallivayalil
 {
@@ -9,6 +11,17 @@ namespace Kallivayalil
     {
         private readonly PhoneRepository repository;
         private readonly ConstituentRepository constituentRepository;
+
+        private void LoadPhoneType(Phone phone)
+        {
+            if (Entity.IsNull(phone.Type))
+            {
+                throw new BadRequestException("PhoneType can not be null");
+            }
+
+            phone.Type = repository.Load<PhoneType>(phone.Type.Id);
+        }
+
 
         public PhoneServiceImpl()
         {
@@ -18,12 +31,14 @@ namespace Kallivayalil
 
         public Phone CreatePhone(Phone phone)
         {
+            LoadPhoneType(phone);
             return repository.Save(phone);
         }
 
 
         public Phone UpdatePhone(Phone phone)
         {
+            LoadPhoneType(phone);
             return repository.Update(phone);
         }
 

@@ -50,6 +50,7 @@
     <Compile Include="HttpHelper.cs" />
     <Compile Include="LinkData.cs" />
     <Compile Include="PhoneData.cs" />
+    <Compile Include="PhoneTypeData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

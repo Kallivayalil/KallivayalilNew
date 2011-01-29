@@ -23,7 +23,7 @@ namespace Kallivayalil.Client
         public LinkData Constituent { get; set; }
         
         [DataMember]
-        public int Type{ get; set; }
+        public PhoneTypeData Type{ get; set; }
 
         [DataMember]
         public DateTime? CreatedDateTime { get; set; }

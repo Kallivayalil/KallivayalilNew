@@ -61,6 +61,7 @@
     <Compile Include="Mappings\EmailMap.cs" />
     <Compile Include="Mappings\PhoneMap.cs" />
     <Compile Include="Mappings\ReferenceData\AddressTypeMap.cs" />
+    <Compile Include="Mappings\ReferenceData\PhoneTypeMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\ConstituentNameRepository.cs" />
