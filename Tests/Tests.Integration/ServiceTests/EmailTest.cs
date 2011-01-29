@@ -20,7 +20,7 @@ namespace Tests.Integration.ServiceTests
         {
             testDataHelper = new TestDataHelper();
 
-            constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName());
+            constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
         }
 
         [TearDown]

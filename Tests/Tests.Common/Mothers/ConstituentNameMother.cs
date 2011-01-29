@@ -1,4 +1,5 @@
-﻿using Kallivayalil.Domain;
+﻿using System;
+using Kallivayalil.Domain;
 
 namespace Tests.Common.Mothers
 {
@@ -14,6 +15,18 @@ namespace Tests.Common.Mothers
                            Salutation = 1,
                            PreferedName = "James",
                        };
+        }
+
+        public static ConstituentName JessicaAlba()
+        {
+            return new ConstituentName()
+            {
+                FirstName = "Jessica",
+                LastName = "Alba",
+                MiddleName = "H",
+                Salutation = 1,
+                PreferedName = "Jess",
+            };
         }
     }
 }

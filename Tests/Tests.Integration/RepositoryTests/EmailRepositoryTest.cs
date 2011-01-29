@@ -19,7 +19,7 @@ namespace Tests.Integration.RepositoryTests
         {
             testDataHelper = new TestDataHelper();
             emailRepository = new EmailRepository(testDataHelper.session);
-            var constituent = ConstituentMother.ConstituentWithName();
+            var constituent = ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin());
             savedConstituent = testDataHelper.CreateConstituent(constituent);
             savedEmail = testDataHelper.CreateEmail(EmailMother.Official(savedConstituent));
         }

@@ -19,7 +19,7 @@ namespace Tests.Integration.RepositoryTests
         public void SetUp()
         {
             testDataHelper = new TestDataHelper();
-            var constituent = ConstituentMother.ConstituentWithName();
+            var constituent = ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin());
             savedConstituent = testDataHelper.CreateConstituent(constituent);
             savedAddress = testDataHelper.CreateAddress(AddressMother.SanFrancisco(savedConstituent));
             phoneRepository = new PhoneRepository(testDataHelper.session);

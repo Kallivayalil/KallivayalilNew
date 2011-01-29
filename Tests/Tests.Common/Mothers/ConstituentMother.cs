@@ -5,10 +5,10 @@ namespace Tests.Common.Mothers
 {
     public class ConstituentMother
     {
-        public static Constituent ConstituentWithName()
+        public static Constituent ConstituentWithName(ConstituentName constituentName)
         {
             var constituent = new Constituent {Gender = "F", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false};
-            constituent.Name = ConstituentNameMother.JamesFranklin();
+            constituent.Name = constituentName;
             return constituent;
         }
     }

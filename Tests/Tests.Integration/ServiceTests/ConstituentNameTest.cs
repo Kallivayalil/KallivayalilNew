@@ -17,7 +17,7 @@ namespace Tests.Integration.ServiceTests
         [Test]
         public void ShouldUpdateConstituentName()
         {
-            var constituent = new TestDataHelper().CreateConstituent(ConstituentMother.ConstituentWithName());
+            var constituent = new TestDataHelper().CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
 
             constituent.Name.FirstName = "John";
             constituent.Name.LastName = "Smith";

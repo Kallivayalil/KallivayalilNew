@@ -22,7 +22,7 @@ namespace Tests.Integration.RepositoryTests
         public void SetUp()
         {
             testDataHelper = new TestDataHelper();
-            var constituent = ConstituentMother.ConstituentWithName();
+            var constituent = ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin());
             savedConstituent = testDataHelper.CreateConstituent(constituent);
             savedAddress = testDataHelper.CreateAddress(AddressMother.SanFrancisco(savedConstituent)); 
             
@@ -86,7 +86,7 @@ namespace Tests.Integration.RepositoryTests
         public void ShouldGetAddressesForConstituent()
         {
             var london = testDataHelper.CreateAddress(AddressMother.London(savedConstituent));
-            var secondConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName());
+            var secondConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
             testDataHelper.CreateAddress(AddressMother.SanFrancisco(secondConstituent));
 
             var addresses = addressRepository.LoadAll(savedConstituent.Id).ToList();

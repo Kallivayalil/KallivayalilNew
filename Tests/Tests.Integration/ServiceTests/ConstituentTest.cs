@@ -15,20 +15,23 @@ namespace Tests.Integration.ServiceTests
         private TestDataHelper testDataHelper;
         private Constituent constituent;
         private ConstituentData constituentData;
+        private Constituent anotherConstituent;
 
         [SetUp]
         public void SetUp()
         {
             testDataHelper = new TestDataHelper();
-            constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName());
+            constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
+            anotherConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JessicaAlba()));
             constituentData = new ConstituentData { Gender = "F", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false };
-            constituentData.Name = new ConstituentNameData() { FirstName = "James", LastName = "Franklin", Salutation = 1 };
-
+            constituentData.Name = new ConstituentNameData { FirstName = "James", LastName = "Franklin", Salutation = 1 };
         }
 
         [TearDown]
         public void TearDown()
         {
+            testDataHelper.HardDeleteEmails();
+            testDataHelper.HardDeletePhones();
             testDataHelper.HardDeleteAddress();
             testDataHelper.HardDeleteConstituents();
             testDataHelper.HardDeleteConstituentNames();
@@ -77,7 +80,6 @@ namespace Tests.Integration.ServiceTests
             var getResponse = HttpHelper.DoHttpGet(string.Format("{0}/{1}", baseUri, constituent.Id));
             Assert.IsNotNull(getResponse);
             Assert.That(getResponse.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
-
         }
 
         [Test]
@@ -87,6 +89,14 @@ namespace Tests.Integration.ServiceTests
 
             Assert.That(savedConstituent.Id,Is.GreaterThan(0));
             Assert.That(savedConstituent.Name.Id,Is.GreaterThan(0));
+        }
+
+        [Test]
+        public void ShouldGetAllConstituents()
+        {
+            var result = HttpHelper.Get<ConstituentsData>(baseUri);
+
+            Assert.That(result.Count,Is.EqualTo(2));
         }
 
     }
