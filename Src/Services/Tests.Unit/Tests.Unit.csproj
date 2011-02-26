@@ -49,6 +49,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\AddressValidatorTest.cs" />
     <Compile Include="Validators\ConstituentNameValidatorTest.cs" />
+    <Compile Include="Validators\EmailValidatorTest.cs" />
+    <Compile Include="Validators\PhoneValidatorTest.cs" />
     <Compile Include="Validators\ValidatorTestBase.cs" />
   </ItemGroup>
   <ItemGroup>

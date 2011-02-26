@@ -58,6 +58,8 @@
     <Compile Include="ReferenceData\SalutationType.cs" />
     <Compile Include="Validators\AddressValidator.cs" />
     <Compile Include="Validators\ConstituentNameValidator.cs" />
+    <Compile Include="Validators\EmailValidator.cs" />
+    <Compile Include="Validators\PhoneValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
