@@ -57,6 +57,7 @@
     <Compile Include="ReferenceData\PhoneType.cs" />
     <Compile Include="ReferenceData\SalutationType.cs" />
     <Compile Include="Validators\AddressValidator.cs" />
+    <Compile Include="Validators\ConstituentNameValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

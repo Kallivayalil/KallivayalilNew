@@ -69,8 +69,10 @@
     <Compile Include="AutoDataContractMapper.cs" />
     <Compile Include="BadRequestException.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="KallivayalilRestServiceHost.cs" />
+    <Compile Include="MessageConstants.cs" />
     <Compile Include="NotFoundException.cs" />
     <Compile Include="ReferenceDataEntity.cs" />
     <Compile Include="RestServiceFactory.cs" />

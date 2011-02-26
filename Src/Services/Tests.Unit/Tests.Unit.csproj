@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation">
+      <HintPath>..\..\..\Lib\FluentValidation\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\Lib\Nunit\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,6 +47,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validators\AddressValidatorTest.cs" />
+    <Compile Include="Validators\ConstituentNameValidatorTest.cs" />
+    <Compile Include="Validators\ValidatorTestBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Tests\Tests.Common\Tests.Common.csproj">
+      <Project>{54B5ABAC-EF45-44C9-907A-071EC3F3370A}</Project>
+      <Name>Tests.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KallivayalilService\Common\Common.csproj">
+      <Project>{357DEC60-B18A-40AE-8AAF-FDBA6C1C02F2}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KallivayalilService\Domain\Domain.csproj">
+      <Project>{3134AEAD-2CA2-4D6D-BB6D-9EE071CE4BE5}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
