@@ -3,7 +3,7 @@
  Welcome @Model.Name.PreferedName
 </p>
 
-@section SideBar
+@section RightSideBar
 {
 <div>
   @Html.ActionLink("Phone", "Index", "Phone", new { }, new { }) <br>
@@ -22,7 +22,7 @@
 
     <div class="display-label">PreferedName:@Model.Name.PreferedName</div>
 
-    <div class="display-label">Salutation:@Model.Name.Salutation</div>
+    <div class="display-label">Salutation:@Model.Name.Salutation.Description</div>
 
     <div class="display-label">Gender:@Model.Gender</div>
 

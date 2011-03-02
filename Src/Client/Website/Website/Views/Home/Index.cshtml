@@ -1,5 +1,30 @@
 ﻿@model IEnumerable<Website.Models.Constituent>
 
+
+<div>
+ <div id="rightSideBar" class="demo-rightSideBar">
+         <div id="righttabs" >
+              <ul>
+	            <li><a href="#righttabs-1">Our Family</a></li>
+	            <li><a href="#righttabs-2">Products</a></li>
+	            <li><a href="#righttabs-3">Contact Us</a></li>
+             </ul>
+        
+
+         <div id="righttabs-1">
+              right tab 1           
+         </div>
+          
+         <div id="righttabs-2">
+            right tabs 2
+         </div> 
+         
+         <div id="righttabs-3">
+         right tabs  3
+         </div>
+       </div> 
+ </div>
+
 <p>
     @Html.ActionLink("Create New", "Create", "Home", new { }, new { })
 </p>
@@ -91,4 +116,6 @@
 }
 
 </table>
+
+</div>
 

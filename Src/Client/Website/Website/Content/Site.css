@@ -96,7 +96,7 @@ page width. Or, you can specify an exact pixel width. */
     padding: 80px;
 }
 
-#sidebar
+#rightSideBar
 {
     float:left;
     margin : 10px;
