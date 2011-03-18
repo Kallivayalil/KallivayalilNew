@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--EXTERNAL_PROPERTIES: tools.dir;common.dir;build.output.dir;lib.dir;-->
+<project name="KallivayalilService" basedir="." default="compile">
+
+  <property name="service.dir" value="WebService"/>
+  <property name="project.build.output.dir" value="${build.output.dir}\KallivayalilService"/>
+  <target name="build" depends = "compile" />
+  
+  <target name="compile" depends="clean,create.virtual.dir">
+    <msbuild project="KallivayalilService.sln">
+      <arg value="/p:Configuration=Debug"/>
+      <arg value="/clp:Summary"/>
+      <arg value="/verbosity:quiet"/>
+      <arg value="/t:Rebuild"/>
+    </msbuild>
+  </target>
+
+  <target name="clean">
+    <delete>
+      <fileset basedir=".">
+        <include name="**/*.sln.cache"/>
+        <include name="**/bin/*"/>
+        <include name="**/bin/debug/*"/>
+        <include name="**/obj/*"/>
+        <include name="**/obj/debug/*"/>
+      </fileset>
+    </delete>
+  </target>
+
+  <target name="create.virtual.dir">
+    <deliisvdir vdirname="${kallivayalilService}" failonerror="false"/>
+    <mkiisvdir path="${kall.service.dir}/${service.dir}" vdirname="${kallivayalilService}"  apppool="ASP.NET v4.0" />
+  </target>
+
+</project>

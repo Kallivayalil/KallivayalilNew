@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="JetBrains.dotCover.ConsoleRunner.BuildTasks.Cover" AssemblyFile="dotCover.exe"/>
+  <UsingTask TaskName="JetBrains.dotCover.ConsoleRunner.BuildTasks.Merge" AssemblyFile="dotCover.exe"/>
+  <UsingTask TaskName="JetBrains.dotCover.ConsoleRunner.BuildTasks.Report" AssemblyFile="dotCover.exe"/>
+  <UsingTask TaskName="JetBrains.dotCover.ConsoleRunner.BuildTasks.List" AssemblyFile="dotCover.exe"/>
+  <UsingTask TaskName="JetBrains.dotCover.ConsoleRunner.BuildTasks.Delete" AssemblyFile="dotCover.exe"/>
+  <UsingTask TaskName="JetBrains.dotCover.ConsoleRunner.BuildTasks.Analyse" AssemblyFile="dotCover.exe"/>
+</Project>

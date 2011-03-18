@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<project name="Master" basedir="." default="all">
+
+  <include buildfile="default.config"/>
+
+  <property name="machine.name" value="${environment::get-machine-name()}" />
+  <property name="user.config.file" value="Configs/${machine.name}.config"/>
+  <include buildfile="${user.config.file}" if="${file::exists(user.config.file)}"/>
+  <if test="${not file::exists(user.config.file)}">
+	<echo message="${machine.name}.config not found. Using defaults." level="Warning"/>
+  </if>
+  <property name="nant.settings.currentframework" value="net-4.0" />
+  <property name="dbscripts.dir" value="DB\Deltas\"/>
+  <property name="build.dir" value="${directory::get-current-directory()}"/>
+  <property name="tools.dir" value="${build.dir}\tools"/>
+  <property name="lib.dir" value="${build.dir}\lib"/>
+  <property name="src.dir" value="${build.dir}\src"/>
+  <property name="db.deltas.dir" value="${build.dir}\DB\Deltas"/>
+  <property name="services.dir" value="${build.dir}/src/services"/>
+  <property name="build.output.dir" value="${build.dir}\Build\BuildOutput"/>
+  <property name="kall.service.dir" value="${build.dir}/src/services/KallivayalilService"/>
+  
+  <target name="all">
+  	<call target="dbdeploy"/>
+  	<call target="KallivayalilService"/>
+  </target>
+
+  <target name="dbdeploy">
+    <echo message="Call Existing Build File: dbDeploy.build"/>
+    <nant buildfile="dbDeploy.build" target="dbdeploy" inheritall="true"/>
+  </target>
+
+   <target name="ks" depends="KallivayalilService"/>
+   <target name="KallivayalilService">
+    <echo message="Call Existing Build File: KallivayalilService.build"/>
+    <nant buildfile="${kall.service.dir}\KallivayalilService.build" target="${action}" inheritall="true"/>
+  </target>
+  
+</project>

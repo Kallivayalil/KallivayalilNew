@@ -1,0 +1,37 @@
+﻿<!--EXTERNAL_PROPERTIES: db.instance.name-->
+<project name="DBDeploy" basedir="." >
+  <property name="create.database.file" value="createDatabase.sql" />
+  <property name="dbdeploy.output.file" value="../DB/output.sql" />
+  <property name="dbdeploy.output.undo.file" value="../DB/output-undo.sql" />
+  <property name="connection.string" value="Server=${db.instance.name};database=${db.name};Integrated Security=SSPI;" />
+  <property name="deltas.dir" value="../DB/Deltas" />
+ 
+  <target name="generate-schema" description="Create DB">
+    <exec program="SQLCMD" workingdir="../DB">
+      <arg line="-E -S ${db.instance.name} -i ${create.database.file} -v database = &quot;${db.name}&quot;"/>
+    </exec>
+    <exec program="SQLCMD" workingdir="../DB">
+      <arg line="-E -S ${db.instance.name} -i createAspnetLogin.sql -v userName = &quot;${environment::get-machine-name()}\ASPNET&quot; database = &quot;${db.name}&quot;"/>
+    </exec>
+    <exec program="SQLCMD" workingdir="../DB">
+      <arg line="-E -S ${db.instance.name} -i createAspnetLogin.sql -v userName = &quot;NT AUTHORITY\NETWORK SERVICE&quot; database = &quot;${db.name}&quot;"/>
+    </exec>
+    <exec program="SQLCMD" workingdir="../DB">
+      <arg line="-E -S ${db.instance.name} -i createSchemaVersionTable.sql -v database = &quot;${db.name}&quot;"/>
+    </exec>
+  </target>
+
+  
+  <target name="dbdeploy" description="run db delta scripts" depends="generate-schema">
+    <loadtasks assembly="${tools.dir}/dbdeploy.net/bin/Net.Sf.Dbdeploy.dll" />
+    <dbdeploy dbType="mssql"
+        dbConnection="${connection.string}"
+        dir="${deltas.dir}"
+        outputFile="${dbdeploy.output.file}"
+        undoOutputFile="${dbdeploy.output.undo.file}" />
+    <exec program="SQLCMD" workingdir="../DB">
+      <arg line="-E -S ${db.instance.name} -d${db.name} -ioutput.sql"/>
+    </exec>
+  </target>
+  
+</project>
