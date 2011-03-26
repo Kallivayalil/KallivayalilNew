@@ -10,8 +10,8 @@
     <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Website</RootNamespace>
-    <AssemblyName>Website</AssemblyName>
+    <RootNamespace>Kallivayalil.Website</RootNamespace>
+    <AssemblyName>Kallivayalil.Website</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
   </PropertyGroup>
@@ -23,6 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DesktopBuildPackageLocation>obj\Debug\Package\Kallivayalil.Website.zip</DesktopBuildPackageLocation>
+    <DeployIisAppPath>Default Web Site/Kallivayalil</DeployIisAppPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -81,28 +83,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\images\img1.jpg" />
-    <Content Include="Content\images\img2.jpg" />
-    <Content Include="Content\images\img3.jpg" />
-    <Content Include="Content\images\img4.jpg" />
-    <Content Include="Content\images\img5.jpg" />
-    <Content Include="Content\images\img6.jpg" />
-    <Content Include="Content\mytheme\images\body-noheader.png" />
-    <Content Include="Content\mytheme\images\body-single.png" />
-    <Content Include="Content\mytheme\images\body.png" />
-    <Content Include="Content\mytheme\images\footer.jpg" />
-    <Content Include="Content\mytheme\images\frontpage-link.png" />
-    <Content Include="Content\mytheme\images\h4.png" />
-    <Content Include="Content\mytheme\images\list-item.gif" />
-    <Content Include="Content\mytheme\images\slide-next.gif" />
-    <Content Include="Content\mytheme\images\slide-prev.gif" />
-    <Content Include="Content\mytheme\images\submenu-item-hover.gif" />
-    <Content Include="Content\mytheme\images\submenu-item.gif" />
-    <Content Include="Content\mytheme\js\custom.js" />
-    <Content Include="Content\mytheme\js\jquery.js" />
-    <Content Include="Content\mytheme\js\slider.js" />
-    <Content Include="Content\mytheme\js\superfish.js" />
-    <Content Include="Content\mytheme\styles.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\demos.css" />
     <Content Include="Scripts\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -285,9 +265,7 @@
     <Content Include="Scripts\ui\minified\jquery.ui.sortable.min.js" />
     <Content Include="Scripts\ui\minified\jquery.ui.tabs.min.js" />
     <Content Include="Scripts\ui\minified\jquery.ui.widget.min.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -337,7 +315,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\List.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Phone\Index.cshtml" />
@@ -369,15 +347,6 @@
   <ItemGroup>
     <Content Include="Views\Shared\Copy of _Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\last copy of _Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\latest copy of _Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -395,10 +364,9 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2237</DevelopmentServerPort>
+          <DevelopmentServerPort>65143</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/Kallivayalil</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

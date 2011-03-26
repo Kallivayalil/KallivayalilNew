@@ -11,7 +11,9 @@ namespace Website.Controllers
 
         private AutoDataContractMapper mapper;
 
-        public ActionResult Index()
+
+
+        public ActionResult List()
         {
             var constituentsData = HttpHelper.Get<ConstituentsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents");
             var mapper = new AutoDataContractMapper();
@@ -20,6 +22,11 @@ namespace Website.Controllers
 
 
             return View(constituent);
+        }
+        
+        public ActionResult Index()
+        {
+            return View();
         }
 
         [HttpGet]
