@@ -9,8 +9,9 @@
 <script type="text/javascript" src="../../Content/mytheme/js/jquery.js"></script>
 <script type="text/javascript" src="../../Content/mytheme/js/slider.js"></script>
 <script type="text/javascript" src="../../Content/mytheme/js/superfish.js"></script>
-
-<script type="text/javascript" src="../../Content/mytheme/js/custom.js"></script>
+<script type="text/javascript" src="../../Scripts/galleria/galleria-1.2.2.js"></script>
+<script type="text/javascript" src="../../Scripts/galleria/galleria.classic.js"></script>
+<link rel="stylesheet" href="../../Scripts/galleria/galleria.classic.css" type="text/css"/>
 
 </head>
 
@@ -32,35 +33,36 @@
         </ul>
     </div>
     
-    <div id="slides-container" class="slides-container">
-        <div id="slides">
-            <div>
-                <div class="slide-image"><img src="../../Content/images/img1.jpg" alt="Slide #1 image" /></div>
-               
-            </div>
-            <div>
-                <div class="slide-image"><img src="../../Content/images/img2.jpg" alt="Slide #2 image" /></div>
-               
-            </div>
-            
-             <div>
-                <div class="slide-image"><img src="../../Content/images/img3.jpg" alt="Slide #3 image" /></div>
-               
-            </div>
-            
-            <div>
-                <div class="slide-image slide-image-right"><img src="../../Content/images/img4.jpg" alt="Slide #4 image" /></div>
-                <div class="slide-text">
-                    <h2>Slide #3</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque venenatis sagittis enim. Maecenas ligula erat, egestas congue, varius nec, sagittis nec, purus. In neque. Curabitur at metus tincidunt dui tristique molestie. Donec porta molestie tortor. Fusce euismod consectetuer sapien. Fusce ac velit.</p>
+       <div id="slides-container" class="slides-container"> 
+        <div id="galleria">
+            	<img title="Snail"
+            	     alt="Beautiful Snail.. (Any title for a picture)" 
+            	     src="../../Content/images/img1.jpg"/>
+                <img title="Flowers"
+                     alt="”White flowers in the green back ground.”"
+                     src="../../Content/images/img2.jpg"/>
+                <img title="Trees"
+                     src="../../Content/images/img3.jpg"/>
+                <img title="Beach"
+                     alt="Pacific Blue!!!"
+                     src="../../Content/images/img4.jpg"/>
+                <img title="Bright Sun"
+                     src="../../Content/images/img5.jpg"/>
+                <img title="Forest"
+                     alt="The definition of green."
+                     src="../../Content/images/img6.jpg"/>
+        </div>
+        </div>
 
-            
-                </div>
-            </div>
-		</div>
-        <div class="controls"><span class="jFlowNext"><span>Next</span></span><span class="jFlowPrev"><span>Prev</span></span></div>        
-        <div id="myController" class="hidden"><span class="jFlowControl">Slide 1</span><span class="jFlowControl">Slide 1</span><span class="jFlowControl">Slide 1</span></div>
-    </div>
+        <script type="text/javascript">
+
+            $('#galleria').galleria({
+                autoplay: 7000, // will move forward every 7 seconds
+                height: 265,
+                width: 620
+            });
+
+    </script>
       
     <div id="body">            
 	    <div id="content">
@@ -142,7 +144,7 @@
     </div>
     <div id="footer-links">
 
-            <p>&copy; Copyright 2011 Kallivayalil Family. All rights reserved. Website designed with help of<a href="http://www.spyka.net"> spyka</a> 
+            <p>&copy; Copyright 2011 Kallivayalil Family. All rights reserved. Website designed with help of <a href="http://www.spyka.net">spyka</a> 
     </div>  
 </div>
 

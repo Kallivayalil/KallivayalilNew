@@ -105,6 +105,13 @@
     <Content Include="Content\mytheme\styles.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\demos.css" />
+    <Content Include="Scripts\galleria\classic-loader.gif" />
+    <Content Include="Scripts\galleria\classic-map.png" />
+    <Content Include="Scripts\galleria\galleria-1.2.2.js" />
+    <Content Include="Scripts\galleria\galleria-1.2.2.min.js" />
+    <Content Include="Scripts\galleria\galleria.classic.css" />
+    <Content Include="Scripts\galleria\galleria.classic.js" />
+    <Content Include="Scripts\galleria\galleria.classic.min.js" />
     <Content Include="Scripts\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Scripts\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Scripts\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
