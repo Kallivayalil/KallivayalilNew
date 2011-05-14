@@ -1,0 +1,25 @@
+USE [Kallivayalil]
+GO
+/****** Object:  Table [dbo].[Login]    Script Date: 05/14/2011 10:07:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Logins](
+	[Email] [int] NOT NULL,
+	[Password] [varbinary](50) NOT NULL,
+ CONSTRAINT [PK_Logins] PRIMARY KEY CLUSTERED 
+(
+	[Email] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [dbo].[Logins]  WITH CHECK ADD  CONSTRAINT [FK_Logins_Emails] FOREIGN KEY([Email])
+REFERENCES [dbo].[Emails] ([Id])
+GO
+ALTER TABLE [dbo].[Logins] CHECK CONSTRAINT [FK_Logins_Emails]
