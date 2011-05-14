@@ -56,5 +56,12 @@ namespace Kallivayalil.DataAccess.Repositories
                 txn.Commit();
             }
         }
+
+        public Email Load(string address)
+        {
+            var criteria = session.CreateCriteria<Email>();
+            criteria.Add(Restrictions.Eq("Address", address));
+            return (Email) criteria.UniqueResult();
+        }
     }
 }

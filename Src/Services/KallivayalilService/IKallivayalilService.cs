@@ -92,5 +92,10 @@ namespace Kallivayalil
         [WebGet(UriTemplate = "/Emails?constituentId={constituentId}")]
         EmailsData GetEmails(string constituentId);
 
+        [OperationContract]
+        [WebGet(UriTemplate = "/Authenticate?username={username}&password={password}")]
+        bool Authenticate(string username,string password);  
+
+
     }
 }

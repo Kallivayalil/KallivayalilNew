@@ -61,6 +61,16 @@ namespace Tests.Integration.RepositoryTests
         }
 
         [Test]
+        public void ShouldLoadExistingEmailByAddress()
+        {
+            var email = emailRepository.Load(savedEmail.Address);
+
+            Assert.IsNotNull(email);
+            Assert.That(email.Address,Is.EqualTo(savedEmail.Address));
+
+        }
+
+        [Test]
         public void ShouldLoadAllExistingEmails()
         {
             testDataHelper.CreateEmail(EmailMother.Official(savedConstituent));

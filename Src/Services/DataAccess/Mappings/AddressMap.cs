@@ -1,4 +1,3 @@
-using FluentNHibernate.Mapping;
 using Kallivayalil.Domain;
 
 namespace Kallivayalil.DataAccess.Mappings

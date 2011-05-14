@@ -54,6 +54,7 @@
     <Compile Include="ConstituentServiceImpl.cs" />
     <Compile Include="EmailServiceImpl.cs" />
     <Compile Include="IKallivayalilService.cs" />
+    <Compile Include="LoginServiceImpl.cs" />
     <Compile Include="PhoneServiceImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KallivayalilService.cs" />

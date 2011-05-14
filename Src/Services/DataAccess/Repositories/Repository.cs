@@ -42,7 +42,7 @@ namespace Kallivayalil.DataAccess.Repositories
             return (T) savedCopy;
         }
 
-        public T Load<T>(int entityId) where T : IEntity
+        public T Load<T>(int entityId) where T : class
         {
             return session.Load<T>(entityId);
         }

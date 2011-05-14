@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
 using NUnit.Framework;
 using Tests.Common.Helpers;
 using Tests.Common.Mothers;
-using Tests.Integration.Mothers;
 using System.Linq;
 
 namespace Tests.Integration.RepositoryTests
