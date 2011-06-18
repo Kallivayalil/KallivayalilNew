@@ -59,12 +59,14 @@
     <Compile Include="RepositoryTests\EmailRepositoryTest.cs" />
     <Compile Include="RepositoryTests\LoginRepositoryTest.cs" />
     <Compile Include="RepositoryTests\PhoneRepositoryTest.cs" />
+    <Compile Include="RepositoryTests\ReferenceDataRepositoryTest.cs" />
     <Compile Include="ServiceTests\AddressTest.cs" />
     <Compile Include="ServiceTests\ConstituentNameTest.cs" />
     <Compile Include="ServiceTests\ConstituentTest.cs" />
     <Compile Include="ServiceTests\EmailTest.cs" />
     <Compile Include="ServiceTests\LoginTest.cs" />
     <Compile Include="ServiceTests\PhoneTest.cs" />
+    <Compile Include="ServiceTests\ReferenceDataTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Src\Services\DataAccess\DataAccess.csproj">

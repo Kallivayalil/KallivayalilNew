@@ -1,6 +1,5 @@
 using System.Net;
 using Kallivayalil.Client;
-using Kallivayalil.Common;
 using Kallivayalil.Domain;
 using NUnit.Framework;
 using Tests.Common.Helpers;

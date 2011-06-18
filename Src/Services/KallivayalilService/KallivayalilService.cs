@@ -17,6 +17,7 @@ namespace Kallivayalil
         private readonly AddressServiceImpl addressServiceImpl;
         private readonly PhoneServiceImpl phoneServiceImpl;
         private readonly EmailServiceImpl emailServiceImpl;
+        private readonly ReferenceDataServiceImpl referenceDataServiceImpl;
         private readonly LoginServiceImpl loginServiceImpl;
 
         public KallivayalilService()
@@ -28,6 +29,7 @@ namespace Kallivayalil
             emailServiceImpl = new EmailServiceImpl();
             loginServiceImpl = new LoginServiceImpl();
             mapper = new AutoDataContractMapper();
+            referenceDataServiceImpl = new ReferenceDataServiceImpl();
         }
 
         public virtual ConstituentData GetConstituent(string id)
@@ -248,6 +250,15 @@ namespace Kallivayalil
             var emailData = new EmailsData();
             mapper.MapList(emails, emailData, typeof(EmailData));
             return emailData;
+        }
+
+        public virtual PhoneTypesData GetPhoneTypes()
+        {
+            var phoneTypes = referenceDataServiceImpl.GetPhoneTypes();
+
+            var phoneTypesData = new PhoneTypesData();
+            mapper.MapList(phoneTypes, phoneTypesData, typeof (PhoneTypeData));
+            return phoneTypesData;
         }
 
         public bool Authenticate(string username, string password)

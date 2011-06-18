@@ -58,6 +58,7 @@
     <Compile Include="PhoneServiceImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KallivayalilService.cs" />
+    <Compile Include="ReferenceDataServiceImpl.cs" />
     <Compile Include="ValidationResultExtension.cs" />
   </ItemGroup>
   <ItemGroup>
