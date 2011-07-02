@@ -261,6 +261,15 @@ namespace Kallivayalil
             return phoneTypesData;
         }
 
+        public virtual EmailTypesData GetEmailTypes()
+        {
+            var emailTypes = referenceDataServiceImpl.GetEmailTypes();
+
+            var emailTypesData = new EmailTypesData();
+            mapper.MapList(emailTypes, emailTypesData, typeof (EmailTypeData));
+            return emailTypesData;
+        }
+
         public bool Authenticate(string username, string password)
         {
             return loginServiceImpl.Authenticate(username, password);

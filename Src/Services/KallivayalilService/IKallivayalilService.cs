@@ -94,7 +94,11 @@ namespace Kallivayalil
         
         [OperationContract]
         [WebGet(UriTemplate = "/PhoneTypes")]
-        PhoneTypesData GetPhoneTypes();
+        PhoneTypesData GetPhoneTypes(); 
+        
+        [OperationContract]
+        [WebGet(UriTemplate = "/EmailTypes")]
+        EmailTypesData GetEmailTypes();
 
         [OperationContract]
         [WebGet(UriTemplate = "/Authenticate?username={username}&password={password}")]
