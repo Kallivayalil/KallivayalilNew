@@ -152,15 +152,13 @@ namespace Kallivayalil
             return savedPhoneData;
         }
 
-        public virtual PhoneData UpdatePhone(string constituentId, PhoneData phoneData)
+        public virtual PhoneData UpdatePhone(string id, PhoneData phoneData)
         {
             var phone = new Phone();
             mapper.Map(phoneData, phone);
 
             var updatedPhone = phoneServiceImpl.UpdatePhone(phone);
-
             var updatedPhoneData = new PhoneData();
-
             mapper.Map(updatedPhone, updatedPhoneData);
 
             return updatedPhoneData;
@@ -208,15 +206,13 @@ namespace Kallivayalil
             return savedEmailData;
         }
 
-        public virtual EmailData UpdateEmail(string constituentId, EmailData emailData)
+        public virtual EmailData UpdateEmail(string id, EmailData emailData)
         {
             var email = new Email();
             mapper.Map(emailData, email);
 
             var updatedEmail = emailServiceImpl.UpdateEmail(email);
-
             var updatedEmailData = new EmailData();
-
             mapper.Map(updatedEmail, updatedEmailData);
 
             return updatedEmailData;
@@ -285,7 +281,7 @@ namespace Kallivayalil
             return salutationTypes;
         }
 
-        public bool Authenticate(string username, string password)
+        public virtual bool Authenticate(string username, string password)
         {
             return loginServiceImpl.Authenticate(username, password);
         }

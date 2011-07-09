@@ -57,8 +57,8 @@ namespace Kallivayalil
         PhoneData CreatePhone(string constituentId, PhoneData phoneData);
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "/Phones?constituentId={constituentId}", Method = "PUT")]
-        PhoneData UpdatePhone(string constituentId, PhoneData phoneData);
+        [WebInvoke(UriTemplate = "/Phones/{id}", Method = "PUT")]
+        PhoneData UpdatePhone(string id, PhoneData phoneData);
 
         [OperationContract]
         [WebGet(UriTemplate = "/Phones/{id}")]
@@ -77,8 +77,8 @@ namespace Kallivayalil
         EmailData CreateEmail(string constituentId, EmailData emailData);
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "/Emails?constituentId={constituentId}", Method = "PUT")]
-        EmailData UpdateEmail(string constituentId, EmailData emailData);
+        [WebInvoke(UriTemplate = "/Emails/{id}", Method = "PUT")]
+        EmailData UpdateEmail(string id, EmailData emailData);
 
         [OperationContract]
         [WebGet(UriTemplate = "/Emails/{id}")]
@@ -111,7 +111,6 @@ namespace Kallivayalil
         [OperationContract]
         [WebGet(UriTemplate = "/Authenticate?username={username}&password={password}")]
         bool Authenticate(string username,string password);  
-
 
     }
 }

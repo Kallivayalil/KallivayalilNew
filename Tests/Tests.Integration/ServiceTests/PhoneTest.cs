@@ -53,7 +53,7 @@ namespace Tests.Integration.ServiceTests
             var phoneData = PhoneDataMother.Mobile(phone);
             const string number = "12345-12345";
             phoneData.Number = number;
-            var updatedData = HttpHelper.Put(string.Format("{0}?constituentId={1}", baseUri, constituent.Id), phoneData);
+            var updatedData = HttpHelper.Put(string.Format("{0}/{1}", baseUri, phone.Id), phoneData);
 
             Assert.That(updatedData.Number,Is.EqualTo(number));
         }

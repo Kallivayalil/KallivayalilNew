@@ -48,7 +48,7 @@ namespace Tests.Integration.ServiceTests
             var emailData = EmailDataMother.Official(email);
             const string emailAddress = "james.f@k.com";
             emailData.Address = emailAddress;
-            var updatedData = HttpHelper.Put(string.Format("{0}?constituentId={1}", baseUri, constituent.Id), emailData);
+            var updatedData = HttpHelper.Put(string.Format("{0}/{1}", baseUri, email.Id), emailData);
 
             Assert.That(updatedData.Address,Is.EqualTo(emailAddress));
         }
