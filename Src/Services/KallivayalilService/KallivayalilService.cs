@@ -1,5 +1,4 @@
-﻿using System;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceModel.Activation;
 using Kallivayalil.Client;
 using Kallivayalil.Common;
@@ -49,7 +48,7 @@ namespace Kallivayalil
             var constituents = constituentServiceImpl.GetAllConstituents();
 
             var constituentsData = new ConstituentsData();
-            mapper.MapList(constituents, constituentsData, typeof(ConstituentData));
+            mapper.MapList(constituents, constituentsData, typeof (ConstituentData));
 
             return constituentsData;
         }
@@ -156,13 +155,13 @@ namespace Kallivayalil
         public virtual PhoneData UpdatePhone(string constituentId, PhoneData phoneData)
         {
             var phone = new Phone();
-            mapper.Map(phoneData,phone);
+            mapper.Map(phoneData, phone);
 
             var updatedPhone = phoneServiceImpl.UpdatePhone(phone);
 
             var updatedPhoneData = new PhoneData();
 
-            mapper.Map(updatedPhone,updatedPhoneData);
+            mapper.Map(updatedPhone, updatedPhoneData);
 
             return updatedPhoneData;
         }
@@ -177,7 +176,7 @@ namespace Kallivayalil
                 throw new NotFoundException(string.Format("Phone with Id:{0} not found.", id));
             }
 
-            mapper.Map(phone,phoneData);
+            mapper.Map(phone, phoneData);
 
             return phoneData;
         }
@@ -248,17 +247,17 @@ namespace Kallivayalil
             var emails = emailServiceImpl.FindEmails(constituentId);
 
             var emailData = new EmailsData();
-            mapper.MapList(emails, emailData, typeof(EmailData));
+            mapper.MapList(emails, emailData, typeof (EmailData));
             return emailData;
         }
 
         public virtual PhoneTypesData GetPhoneTypes()
         {
-            var phoneTypes = referenceDataServiceImpl.GetPhoneTypes();
+            var types = referenceDataServiceImpl.GetPhoneTypes();
 
-            var phoneTypesData = new PhoneTypesData();
-            mapper.MapList(phoneTypes, phoneTypesData, typeof (PhoneTypeData));
-            return phoneTypesData;
+            var phoneTypes = new PhoneTypesData();
+            mapper.MapList(types, phoneTypes, typeof (PhoneTypeData));
+            return phoneTypes;
         }
 
         public virtual EmailTypesData GetEmailTypes()
@@ -274,8 +273,16 @@ namespace Kallivayalil
         {
             var types = referenceDataServiceImpl.GetAddressTypes();
             var addressTypes = new AddressTypesData();
-            mapper.MapList(types, addressTypes, typeof(AddressTypeData));
+            mapper.MapList(types, addressTypes, typeof (AddressTypeData));
             return addressTypes;
+        }
+
+        public virtual SalutationTypesData GetSalutationTypes()
+        {
+            var types = referenceDataServiceImpl.GetSaluationTypes();
+            var salutationTypes = new SalutationTypesData();
+            mapper.MapList(types, salutationTypes, typeof (SalutationTypeData));
+            return salutationTypes;
         }
 
         public bool Authenticate(string username, string password)

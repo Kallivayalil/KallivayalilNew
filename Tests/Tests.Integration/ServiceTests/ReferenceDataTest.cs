@@ -11,25 +11,33 @@ namespace Tests.Integration.ServiceTests
         [Test]
         public void ShouldLoadAllPhoneTypes()
         {
-            var phonesData = HttpHelper.Get<PhoneTypesData>(string.Format("{0}/{1}", BaseUri, "PhoneTypes"));
+            var phoneTypes = HttpHelper.Get<PhoneTypesData>(string.Format("{0}/{1}", BaseUri, "PhoneTypes"));
 
-            Assert.That(phonesData.Count, Is.EqualTo(2));
+            Assert.That(phoneTypes.Count, Is.EqualTo(2));
         }
 
         [Test]
         public void ShouldLoadAllEmailTypes()
         {
-            var emailTypesData = HttpHelper.Get<EmailTypesData>(string.Format("{0}/{1}", BaseUri, "EmailTypes"));
+            var emailTypes = HttpHelper.Get<EmailTypesData>(string.Format("{0}/{1}", BaseUri, "EmailTypes"));
 
-            Assert.That(emailTypesData.Count, Is.EqualTo(2));
+            Assert.That(emailTypes.Count, Is.EqualTo(2));
         }
 
         [Test]
         public void ShouldLoadAllAddressTypes()
         {
-            var emailTypesData = HttpHelper.Get<AddressTypesData>(string.Format("{0}/{1}", BaseUri, "AddressTypes"));
+            var addressTypes = HttpHelper.Get<AddressTypesData>(string.Format("{0}/{1}", BaseUri, "AddressTypes"));
 
-            Assert.That(emailTypesData.Count, Is.EqualTo(2));
+            Assert.That(addressTypes.Count, Is.EqualTo(2));
+        }
+
+        [Test]
+        public void ShouldLoadAllSalutationTypes()
+        {
+            var salutationTypes = HttpHelper.Get<SalutationTypesData>(string.Format("{0}/{1}", BaseUri, "SalutationTypes"));
+
+            Assert.That(salutationTypes.Count, Is.EqualTo(3));
         }
     }
 }

@@ -1,8 +1,5 @@
-using System;
-using System.Net;
 using Kallivayalil.Client;
 using Kallivayalil.Common;
-using Kallivayalil.Domain;
 using NUnit.Framework;
 using Tests.Common.Helpers;
 using Tests.Common.Mothers;
@@ -21,7 +18,7 @@ namespace Tests.Integration.ServiceTests
 
             constituent.Name.FirstName = "John";
             constituent.Name.LastName = "Smith";
-            AutoDataContractMapper mapper = new AutoDataContractMapper();
+            var mapper = new AutoDataContractMapper();
             var nameData = new ConstituentNameData();
             mapper.Map(constituent.Name,nameData);
             var constituentName = HttpHelper.Put(string.Format("{0}/{1}",baseUri,nameData.Id),nameData);
@@ -30,7 +27,6 @@ namespace Tests.Integration.ServiceTests
             Assert.That(constituentName.FirstName,Is.EqualTo("John"));
             Assert.That(constituentName.LastName,Is.EqualTo("Smith"));
         }
-
 
     }
 }

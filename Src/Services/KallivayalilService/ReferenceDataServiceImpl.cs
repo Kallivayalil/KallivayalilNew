@@ -27,5 +27,10 @@ namespace Kallivayalil
         {
             return repository.LoadAll<AddressType>();
         }
+
+        public IList<SalutationType> GetSaluationTypes()
+        {
+            return repository.LoadAll<SalutationType>();
+        }
     }
 }
