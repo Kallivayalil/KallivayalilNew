@@ -270,6 +270,14 @@ namespace Kallivayalil
             return emailTypesData;
         }
 
+        public virtual AddressTypesData GetAddressTypes()
+        {
+            var types = referenceDataServiceImpl.GetAddressTypes();
+            var addressTypes = new AddressTypesData();
+            mapper.MapList(types, addressTypes, typeof(AddressTypeData));
+            return addressTypes;
+        }
+
         public bool Authenticate(string username, string password)
         {
             return loginServiceImpl.Authenticate(username, password);

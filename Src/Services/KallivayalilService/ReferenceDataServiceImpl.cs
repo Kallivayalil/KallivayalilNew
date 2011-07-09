@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain.ReferenceData;
@@ -7,7 +6,7 @@ namespace Kallivayalil
 {
     public class ReferenceDataServiceImpl
     {
-        private ReferenceDataRepository repository;
+        private readonly ReferenceDataRepository repository;
 
         public ReferenceDataServiceImpl()
         {
@@ -22,6 +21,11 @@ namespace Kallivayalil
         public IList<EmailType> GetEmailTypes()
         {
             return repository.LoadAll<EmailType>();
+        }
+
+        public IList<AddressType> GetAddressTypes()
+        {
+            return repository.LoadAll<AddressType>();
         }
     }
 }
