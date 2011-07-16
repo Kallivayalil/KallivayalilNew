@@ -52,6 +52,8 @@
     <Compile Include="EmailTypeData.cs" />
     <Compile Include="HttpHelper.cs" />
     <Compile Include="LinkData.cs" />
+    <Compile Include="OccupationData.cs" />
+    <Compile Include="OccupationTypeData.cs" />
     <Compile Include="PhoneData.cs" />
     <Compile Include="PhoneTypeData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
