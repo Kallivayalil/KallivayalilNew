@@ -52,6 +52,8 @@
     <Compile Include="Mothers\EducationDetailTypeMother.cs" />
     <Compile Include="Mothers\EmailMother.cs" />
     <Compile Include="Mothers\EmailTypeMother.cs" />
+    <Compile Include="Mothers\OccupationMother.cs" />
+    <Compile Include="Mothers\OccupationTypeMother.cs" />
     <Compile Include="Mothers\PhoneMother.cs" />
     <Compile Include="Mothers\PhoneTypeMother.cs" />
     <Compile Include="Mothers\SalutationTypeMother.cs" />

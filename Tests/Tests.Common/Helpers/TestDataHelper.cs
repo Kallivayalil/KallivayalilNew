@@ -66,6 +66,15 @@ namespace Tests.Common.Helpers
             session.Flush();
         }
 
+
+        public void HardDeleteOccupations()
+        {
+            var sqlCommand = session.Connection.CreateCommand();
+            sqlCommand.CommandText = "delete from occupations where id !=123";
+            sqlCommand.ExecuteNonQuery();
+            session.Flush();
+        }
+
         public void HardDeleteEducationDetails()
         {
             var sqlCommand = session.Connection.CreateCommand();
@@ -79,6 +88,13 @@ namespace Tests.Common.Helpers
             var savedPhone = session.SaveOrUpdateCopy(phone);
             session.Flush();
             return (Phone)savedPhone;
+        }
+
+        public Occupation CreateOccupation(Occupation occupation)
+        {
+            var savedOccupation = session.SaveOrUpdateCopy(occupation);
+            session.Flush();
+            return (Occupation)savedOccupation;
         }
 
         public EducationDetail CreateEducationDetail(EducationDetail educationDetail)

@@ -60,6 +60,7 @@
     <Compile Include="RepositoryTests\EducationDetailsRepositoryTest.cs" />
     <Compile Include="RepositoryTests\EmailRepositoryTest.cs" />
     <Compile Include="RepositoryTests\LoginRepositoryTest.cs" />
+    <Compile Include="RepositoryTests\OccupationRepositoryTest.cs" />
     <Compile Include="RepositoryTests\PhoneRepositoryTest.cs" />
     <Compile Include="RepositoryTests\ReferenceDataRepositoryTest.cs" />
     <Compile Include="ServiceTests\AddressTest.cs" />

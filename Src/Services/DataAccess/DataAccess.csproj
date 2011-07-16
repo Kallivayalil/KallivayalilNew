@@ -61,10 +61,12 @@
     <Compile Include="Mappings\EducationDetailsMap.cs" />
     <Compile Include="Mappings\EmailMap.cs" />
     <Compile Include="Mappings\LoginMap.cs" />
+    <Compile Include="Mappings\OccupationMap.cs" />
     <Compile Include="Mappings\PhoneMap.cs" />
     <Compile Include="Mappings\ReferenceData\AddressTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\EducationTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\EmailTypeMap.cs" />
+    <Compile Include="Mappings\ReferenceData\OccupationTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\PhoneTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\SalutationTypeMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="Repositories\EmailRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
+    <Compile Include="Repositories\OccupationRepository.cs" />
     <Compile Include="Repositories\PhoneRepository.cs" />
     <Compile Include="Repositories\ReferenceDataRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
