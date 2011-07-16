@@ -18,6 +18,11 @@ namespace Kallivayalil
             return repository.LoadAll<PhoneType>();
         }
 
+        public IList<EducationType> GetEducationTypes()
+        {
+            return repository.LoadAll<EducationType>();
+        }
+
         public IList<EmailType> GetEmailTypes()
         {
             return repository.LoadAll<EmailType>();

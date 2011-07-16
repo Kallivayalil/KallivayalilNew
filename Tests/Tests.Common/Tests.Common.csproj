@@ -48,6 +48,8 @@
     <Compile Include="Mothers\AddressTypeMother.cs" />
     <Compile Include="Mothers\ConstituentMother.cs" />
     <Compile Include="Mothers\ConstituentNameMother.cs" />
+    <Compile Include="Mothers\EducationDetailMother.cs" />
+    <Compile Include="Mothers\EducationDetailTypeMother.cs" />
     <Compile Include="Mothers\EmailMother.cs" />
     <Compile Include="Mothers\EmailTypeMother.cs" />
     <Compile Include="Mothers\PhoneMother.cs" />

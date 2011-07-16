@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 using System.ServiceModel.Activation;
 using Kallivayalil.Client;
 using Kallivayalil.Common;
@@ -16,6 +17,7 @@ namespace Kallivayalil
         private readonly AddressServiceImpl addressServiceImpl;
         private readonly PhoneServiceImpl phoneServiceImpl;
         private readonly EmailServiceImpl emailServiceImpl;
+        private readonly EducationDetailServiceImpl educationalDetailServiceImpl;
         private readonly ReferenceDataServiceImpl referenceDataServiceImpl;
         private readonly LoginServiceImpl loginServiceImpl;
 
@@ -27,6 +29,7 @@ namespace Kallivayalil
             phoneServiceImpl = new PhoneServiceImpl();
             emailServiceImpl = new EmailServiceImpl();
             loginServiceImpl = new LoginServiceImpl();
+            educationalDetailServiceImpl = new EducationDetailServiceImpl();
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl();
         }
@@ -243,9 +246,73 @@ namespace Kallivayalil
             var emails = emailServiceImpl.FindEmails(constituentId);
 
             var emailData = new EmailsData();
-            mapper.MapList(emails, emailData, typeof (EmailData));
+            mapper.MapList(emails, emailData, typeof(EmailData));
             return emailData;
         }
+
+        public virtual EducationDetailData CreateEducationDetail(string constituentId, EducationDetailData educationDetailData)
+        {
+            var educationDetail = new EducationDetail();
+            mapper.Map(educationDetailData, educationDetail);
+            var saveEducationDetail = educationalDetailServiceImpl.CreateEducationDetail(educationDetail);
+
+            var savedEducationDetail = new EducationDetailData();
+
+            mapper.Map(saveEducationDetail, savedEducationDetail);
+
+            return savedEducationDetail;
+        }
+
+        public virtual EducationDetailData UpdateEducationDetail(string id, EducationDetailData educationDetailData)
+        {
+            var educationDetail = new EducationDetail();
+            mapper.Map(educationDetailData, educationDetail);
+
+            var updateEducationDetail = educationalDetailServiceImpl.UpdateEducationDetail(educationDetail);
+            var updatedEducationalDetail = new EducationDetailData();
+            mapper.Map(updateEducationDetail, updatedEducationalDetail);
+
+            return updatedEducationalDetail;
+        }
+
+        public virtual EducationDetailData GetEducationDetail(string id)
+        {
+            var educationDetail = educationalDetailServiceImpl.FindEducationDetail(id);
+            var educationalDetailData = new EducationDetailData();
+
+            if (educationDetail == null)
+            {
+                throw new NotFoundException(string.Format("Educational Detail with Id:{0} not found.", id));
+            }
+
+            mapper.Map(educationDetail, educationalDetailData);
+
+            return educationalDetailData;
+        }
+
+        public virtual void DeleteEducationDetail(string id)
+        {
+            educationalDetailServiceImpl.DeleteEducationDetail(id);
+        }
+
+        public virtual EducationDetailsData GetEducationDetails(string constituentId)
+        {
+            var educationDetails = educationalDetailServiceImpl.FindEducationDetails(constituentId);
+
+            var educationalDetailsData = new EducationDetailsData();
+            mapper.MapList(educationDetails, educationalDetailsData, typeof (EducationDetailData));
+            return educationalDetailsData;
+        }
+
+        public virtual EducationTypesData GetEducationTypes()
+        {
+            var types = referenceDataServiceImpl.GetEducationTypes();
+
+            var educationTypesData = new EducationTypesData();
+            mapper.MapList(types, educationTypesData, typeof(EducationTypeData));
+            return educationTypesData;
+        }
+
 
         public virtual PhoneTypesData GetPhoneTypes()
         {
