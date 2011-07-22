@@ -46,6 +46,8 @@
     <Compile Include="ConstituentData.cs" />
     <Compile Include="ConstituentNameData.cs" />
     <Compile Include="DataContractHelper.cs" />
+    <Compile Include="EducationDetailData.cs" />
+    <Compile Include="EducationTypeData.cs" />
     <Compile Include="EmailData.cs" />
     <Compile Include="EmailTypeData.cs" />
     <Compile Include="HttpHelper.cs" />

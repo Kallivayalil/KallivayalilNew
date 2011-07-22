@@ -46,6 +46,7 @@
     <Compile Include="Address.cs" />
     <Compile Include="Constituent.cs" />
     <Compile Include="ConstituentName.cs" />
+    <Compile Include="EducationDetail.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="ErrorMessageEntity.cs" />
     <Compile Include="ErrorMessagesEntity.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Phone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceData\AddressType.cs" />
+    <Compile Include="ReferenceData\EducationType.cs" />
     <Compile Include="ReferenceData\EmailType.cs" />
     <Compile Include="ReferenceData\PhoneType.cs" />
     <Compile Include="ReferenceData\SalutationType.cs" />

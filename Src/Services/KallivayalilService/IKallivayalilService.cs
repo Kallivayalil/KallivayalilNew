@@ -91,6 +91,30 @@ namespace Kallivayalil
         [OperationContract]
         [WebGet(UriTemplate = "/Emails?constituentId={constituentId}")]
         EmailsData GetEmails(string constituentId); 
+          
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/EducationDetails?constituentId={constituentId}", Method = "POST")]
+        EducationDetailData CreateEducationDetail(string constituentId, EducationDetailData educationDetailData);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/EducationDetails/{id}", Method = "PUT")]
+        EducationDetailData UpdateEducationDetail(string id, EducationDetailData educationDetailData);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/EducationDetails/{id}")]
+        EducationDetailData GetEducationDetail(string id);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/EducationDetails/{id}", Method = "DELETE")]
+        void DeleteEducationDetail(string id);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/EducationDetails?constituentId={constituentId}")]
+        EducationDetailsData GetEducationDetails(string constituentId); 
+        
+        [OperationContract]
+        [WebGet(UriTemplate = "/EducationTypes")]
+        EducationTypesData GetEducationTypes();  
         
         [OperationContract]
         [WebGet(UriTemplate = "/PhoneTypes")]

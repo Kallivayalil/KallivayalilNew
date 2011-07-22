@@ -66,11 +66,26 @@ namespace Tests.Common.Helpers
             session.Flush();
         }
 
+        public void HardDeleteEducationDetails()
+        {
+            var sqlCommand = session.Connection.CreateCommand();
+            sqlCommand.CommandText = "delete from educationdetails where id !=123";
+            sqlCommand.ExecuteNonQuery();
+            session.Flush();
+        }
+
         public Phone CreatePhone(Phone phone)
         {
             var savedPhone = session.SaveOrUpdateCopy(phone);
             session.Flush();
             return (Phone)savedPhone;
+        }
+
+        public EducationDetail CreateEducationDetail(EducationDetail educationDetail)
+        {
+            var savedEducationDetail = session.SaveOrUpdateCopy(educationDetail);
+            session.Flush();
+            return (EducationDetail)savedEducationDetail;
         }
 
         public void HardDeleteEmails()

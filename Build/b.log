@@ -1,0 +1,66 @@
+Buildfile: file:///c:/Personal Project/Kall/Build/master.build
+Target framework: Microsoft .NET Framework 4.0
+Target(s) specified: all 
+
+     [echo] LKURIAN-PC.config not found. Using defaults.
+
+all:
+
+
+dbdeploy:
+
+     [echo] Call Existing Build File: dbDeploy.build
+     [nant] c:\Personal Project\Kall\Build\dbDeploy.build dbdeploy
+            Buildfile: file:///c:/Personal Project/Kall/Build/dbDeploy.build
+            Target framework: Microsoft .NET Framework 4.0
+            Target(s) specified: dbdeploy 
+            
+            
+            generate-schema:
+            
+                 [exec] Changed database context to 'master'.
+                 [exec] Msg 1801, Level 16, State 3, Server LKURIAN-PC, Line 3
+                 [exec] Database 'Kallivayalil' already exists. Choose a different database name.
+                 [exec] Changed database context to 'master'.
+                 [exec] Changed database context to 'Kallivayalil'.
+                 [exec] Changed database context to 'master'.
+                 [exec] Changed database context to 'Kallivayalil'.
+                 [exec] Changed database context to 'Kallivayalil'.
+            
+            dbdeploy:
+            
+            
+            BUILD SUCCEEDED
+            
+            Total time: 0.8 seconds.
+            
+
+KallivayalilService:
+
+     [echo] Call Existing Build File: KallivayalilService.build
+     [nant] c:\Personal Project\Kall\src\services\KallivayalilService\KallivayalilService.build compile
+            Buildfile: file:///c:/Personal Project/Kall/src/services/KallivayalilService/KallivayalilService.build
+            Target framework: Microsoft .NET Framework 4.0
+            Target(s) specified: compile 
+            
+            
+            clean:
+            
+               [delete] Deleting 144 files.
+               [delete] Deleted 9 directories.
+            
+            create.virtual.dir:
+            
+            
+            compile:
+            
+            
+            BUILD SUCCEEDED
+            
+            Total time: 14.8 seconds.
+            
+
+BUILD SUCCEEDED - 0 non-fatal error(s), 1 warning(s)
+
+Total time: 15.7 seconds.
+
