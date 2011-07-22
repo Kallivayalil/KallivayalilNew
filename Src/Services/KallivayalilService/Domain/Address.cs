@@ -13,5 +13,6 @@ namespace Kallivayalil.Domain
         public virtual string Country { get; set; }
         public virtual AddressType Type { get; set; }
         public virtual Constituent Constituent { get; set; }
+        public virtual bool IsPrimary { get; set; }
     }
 }

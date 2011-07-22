@@ -20,6 +20,7 @@ CREATE TABLE [dbo].[Addresses](
 	[Postcode] [varchar](10) NOT NULL,
 	[Country] [varchar](50) NOT NULL,
 	[Type] [int] NOT NULL,
+	[IsPrimary] [bit] NOT NULL default 1,
 	[ConstituentId] [int] NOT NULL,
 	[CreatedDateTime] [datetime] NOT NULL,
 	[CreatedBy] [varchar](50) NOT NULL,
