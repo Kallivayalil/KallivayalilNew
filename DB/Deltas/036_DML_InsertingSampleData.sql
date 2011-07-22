@@ -17,5 +17,8 @@ INSERT INTO [Kallivayalil].[dbo].[Phones]
            ([Id],[Type],[Number],[AddressId],[ConstituentId],[CreatedDateTime],[CreatedBy],[UpdatedDateTime],[UpdatedBy])
 		    VALUES(123,1 ,'1234567890',123,123,GETDATE(),'MAC',GETDATE(),'MAC');
 INSERT INTO [Kallivayalil].[dbo].[EducationDetails]
-           ([Id],[Type],[Qualification],[InstituteName],[InstituteLocation],[Graduation],[CreatedDateTime],[CreatedBy],[UpdatedDateTime],[UpdatedBy])
-		    VALUES(123,1 ,'10th grade','SHY','Yercaud','',GETDATE(),'MAC',GETDATE(),'MAC');
+           ([Id],[Type],[ConstituentId],[Qualification],[InstituteName],[InstituteLocation],[YearOfGraduation],[CreatedDateTime],[CreatedBy],[UpdatedDateTime],[UpdatedBy])
+		    VALUES(123,1 ,123,'10th grade','SHY','Yercaud','11/13/2010 17:13:27',GETDATE(),'MAC',GETDATE(),'MAC');
+INSERT INTO [Kallivayalil].[dbo].[Occupations]
+           ([Id],[Type],[ConstituentId],[AddressId],[OccupationName],[Description],[CreatedDateTime],[CreatedBy],[UpdatedDateTime],[UpdatedBy])
+		    VALUES(123,1,123 ,123,'Doctor','Senior Doctor',GETDATE(),'MAC',GETDATE(),'MAC');

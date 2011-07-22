@@ -52,6 +52,7 @@
     <Compile Include="Mothers\AddressDataMother.cs" />
     <Compile Include="Mothers\EducationDetailDataMother.cs" />
     <Compile Include="Mothers\EmailDataMother.cs" />
+    <Compile Include="Mothers\OccupationDataMother.cs" />
     <Compile Include="Mothers\PhoneDataMother.cs" />
     <Compile Include="RepositoryTests\AddressRepositoryTest.cs" />
     <Compile Include="RepositoryTests\ConstituentNameRepositoryTest.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="RepositoryTests\EducationDetailsRepositoryTest.cs" />
     <Compile Include="RepositoryTests\EmailRepositoryTest.cs" />
     <Compile Include="RepositoryTests\LoginRepositoryTest.cs" />
+    <Compile Include="RepositoryTests\OccupationRepositoryTest.cs" />
     <Compile Include="RepositoryTests\PhoneRepositoryTest.cs" />
     <Compile Include="RepositoryTests\ReferenceDataRepositoryTest.cs" />
     <Compile Include="ServiceTests\AddressTest.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="ServiceTests\EducationDetailTest.cs" />
     <Compile Include="ServiceTests\EmailTest.cs" />
     <Compile Include="ServiceTests\LoginTest.cs" />
+    <Compile Include="ServiceTests\OccupationTest.cs" />
     <Compile Include="ServiceTests\PhoneTest.cs" />
     <Compile Include="ServiceTests\ReferenceDataTest.cs" />
   </ItemGroup>

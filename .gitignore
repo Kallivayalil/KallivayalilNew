@@ -39,7 +39,7 @@
 /Src/Client/Website/Website/obj/*.*
 /Src/Client/Website/Website/obj/Debug/*.*
 
-Build/b.log
+/Build/b.log
 
-DB/output.sql
-DB/output-undo.sql
+/DB/output.sql
+/DB/output-undo.sql

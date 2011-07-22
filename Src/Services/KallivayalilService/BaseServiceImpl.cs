@@ -12,7 +12,6 @@ namespace Kallivayalil
 
             var isPrimary = isPrimaryProperty.GetValue(entity,null);
 
-            if(isPrimary)
         }
     }
 }

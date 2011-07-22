@@ -110,8 +110,33 @@ namespace Kallivayalil
 
         [OperationContract]
         [WebGet(UriTemplate = "/EducationDetails?constituentId={constituentId}")]
-        EducationDetailsData GetEducationDetails(string constituentId); 
-        
+        EducationDetailsData GetEducationDetails(string constituentId);
+
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Occupations?constituentId={constituentId}", Method = "POST")]
+        OccupationData CreateOccupation(string constituentId, OccupationData occupationData);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Occupations/{id}", Method = "PUT")]
+        OccupationData UpdateOccupation(string id, OccupationData occupationData);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Occupations/{id}")]
+        OccupationData GetOccupation(string id);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Occupations/{id}", Method = "DELETE")]
+        void DeleteOccupation(string id);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Occupations?constituentId={constituentId}")]
+        OccupationsData GetOccupations(string constituentId);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/OccupationTypes")]
+        OccupationTypesData GetOccupationTypes();  
+
         [OperationContract]
         [WebGet(UriTemplate = "/EducationTypes")]
         EducationTypesData GetEducationTypes();  

@@ -8,7 +8,7 @@ using Kallivayalil.Domain.Validators;
 
 namespace Kallivayalil
 {
-    public class AddressServiceImpl : BaseServiceImpl
+    public class AddressServiceImpl 
     {
         private readonly AddressRepository repository;
         private AddressValidator validator;

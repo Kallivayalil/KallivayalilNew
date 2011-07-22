@@ -17,6 +17,7 @@ namespace Kallivayalil
         private readonly AddressServiceImpl addressServiceImpl;
         private readonly PhoneServiceImpl phoneServiceImpl;
         private readonly EmailServiceImpl emailServiceImpl;
+        private readonly OccupationServiceImpl occupationServiceImpl;
         private readonly EducationDetailServiceImpl educationalDetailServiceImpl;
         private readonly ReferenceDataServiceImpl referenceDataServiceImpl;
         private readonly LoginServiceImpl loginServiceImpl;
@@ -29,6 +30,7 @@ namespace Kallivayalil
             phoneServiceImpl = new PhoneServiceImpl();
             emailServiceImpl = new EmailServiceImpl();
             loginServiceImpl = new LoginServiceImpl();
+            occupationServiceImpl = new OccupationServiceImpl();
             educationalDetailServiceImpl = new EducationDetailServiceImpl();
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl();
@@ -302,6 +304,68 @@ namespace Kallivayalil
             var educationalDetailsData = new EducationDetailsData();
             mapper.MapList(educationDetails, educationalDetailsData, typeof (EducationDetailData));
             return educationalDetailsData;
+        }
+
+        public virtual OccupationData CreateOccupation(string constituentId, OccupationData occupationData)
+        {
+            var occupation = new Occupation();
+            mapper.Map(occupationData, occupation);
+            var savedOccupation = occupationServiceImpl.CreateOccupation(occupation);
+
+            var savedOccupationData = new OccupationData();
+
+            mapper.Map(savedOccupation, savedOccupationData);
+
+            return savedOccupationData;
+        }
+
+        public virtual OccupationData UpdateOccupation(string id, OccupationData occupationData)
+        {
+            var occupation = new Occupation();
+            mapper.Map(occupationData, occupation);
+
+            var updatedOccupation = occupationServiceImpl.UpdateOccupation(occupation);
+            var updatedOccupationData = new OccupationData();
+            mapper.Map(updatedOccupation, updatedOccupationData);
+
+            return updatedOccupationData;
+        }
+
+        public virtual OccupationData GetOccupation(string id)
+        {
+            var occupation = occupationServiceImpl.FindOccupation(id);
+            var occupationData = new OccupationData();
+
+            if (occupation == null)
+            {
+                throw new NotFoundException(string.Format("Email with Id:{0} not found.", id));
+            }
+
+            mapper.Map(occupation, occupationData);
+
+            return occupationData;
+        }
+
+        public virtual void DeleteOccupation(string id)
+        {
+            occupationServiceImpl.DeleteOccupation(id);
+        }
+
+        public virtual OccupationsData GetOccupations(string constituentId)
+        {
+            var occupations = occupationServiceImpl.FindOccupations(constituentId);
+            var occupationData = new OccupationsData();
+            mapper.MapList(occupations, occupationData, typeof(OccupationData));
+            return occupationData;
+        }
+
+        public virtual OccupationTypesData GetOccupationTypes()
+        {
+            var types = referenceDataServiceImpl.GetOccupationTypes();
+
+            var occupationTypes = new OccupationTypesData();
+            mapper.MapList(types, occupationTypes, typeof(OccupationTypeData));
+            return occupationTypes;
         }
 
         public virtual EducationTypesData GetEducationTypes()
