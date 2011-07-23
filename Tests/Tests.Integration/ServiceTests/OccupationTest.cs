@@ -35,7 +35,6 @@ namespace Tests.Integration.ServiceTests
         }
 
 
-
         [Test]
         public void ShouldSaveOccupation()
         {

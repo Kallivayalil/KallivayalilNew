@@ -32,7 +32,6 @@ namespace Tests.Integration.ServiceTests
         }
 
 
-
         [Test]
         public void ShouldSaveEducationDetail()
         {

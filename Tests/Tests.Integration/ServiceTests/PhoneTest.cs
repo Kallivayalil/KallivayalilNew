@@ -58,6 +58,7 @@ namespace Tests.Integration.ServiceTests
             Assert.That(updatedData.Number,Is.EqualTo(number));
         }
 
+
         [Test]
         public void ShouldLoadExitingPhone()
         {

@@ -22,6 +22,11 @@ namespace Kallivayalil
             phone.Type = repository.Load<PhoneType>(phone.Type.Id);
         }
 
+        private void LoadAddress(Phone phone)
+        {
+            phone.Address = repository.Load<Address>(phone.Address.Id);
+        }
+
 
         public PhoneServiceImpl()
         {
@@ -31,6 +36,7 @@ namespace Kallivayalil
 
         public Phone CreatePhone(Phone phone)
         {
+            LoadAddress(phone);
             LoadPhoneType(phone);
             return repository.Save(phone);
         }
@@ -38,6 +44,7 @@ namespace Kallivayalil
 
         public Phone UpdatePhone(Phone phone)
         {
+            LoadAddress(phone);
             LoadPhoneType(phone);
             return repository.Update(phone);
         }
