@@ -9,5 +9,6 @@ namespace Kallivayalil.Domain
         public virtual string Number { get; set; }
         public virtual Address Address { get; set; }
         public virtual Constituent Constituent { get; set; }
+        public virtual bool IsPrimary { get; set; }
     }
 }

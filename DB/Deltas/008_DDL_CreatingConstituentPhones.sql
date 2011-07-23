@@ -15,6 +15,7 @@ CREATE TABLE [dbo].[Phones](
 	[Id] [int] NOT NULL,
 	[Type] [int] NOT NULL,
 	[Number] [varchar](20) NOT NULL,
+	[IsPrimary] [bit] NOT NULL default 1,
 	[AddressId] [int] NULL,
 	[ConstituentId] [int] NOT NULL,
 	[CreatedDateTime] [datetime] NOT NULL,

@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressServiceImpl.cs" />
+    <Compile Include="BaseServiceImpl.cs" />
     <Compile Include="ConstituentNameServiceImpl.cs" />
     <Compile Include="ConstituentServiceImpl.cs" />
     <Compile Include="EducationDetailServiceImpl.cs" />

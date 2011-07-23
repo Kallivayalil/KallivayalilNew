@@ -38,3 +38,8 @@
 /Src/Client/Website/Website/bin/*.*
 /Src/Client/Website/Website/obj/*.*
 /Src/Client/Website/Website/obj/Debug/*.*
+
+/Build/b.log
+
+/DB/output.sql
+/DB/output-undo.sql

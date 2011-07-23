@@ -13,6 +13,7 @@ namespace Kallivayalil.DataAccess.Mappings
             References(x => x.Constituent).Column("ConstituentId");
             References(x => x.Address).Column("AddressId");
             References(x => x.Type).Column("Type");
+            Map(x => x.IsPrimary).Not.Nullable().Column("IsPrimary");
             MapTimeStampColumns();
         }
     }

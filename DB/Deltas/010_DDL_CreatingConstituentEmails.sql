@@ -15,6 +15,7 @@ CREATE TABLE [dbo].[Emails](
 	[Id] [int] NOT NULL,
 	[Type] [int] NOT NULL,
 	[Address] [varchar](50) NOT NULL,
+	[IsPrimary] [bit] NOT NULL default 1,
 	[ConstituentId] [int] NOT NULL,
 	[CreatedDateTime] [datetime] NOT NULL,
 	[CreatedBy] [varchar](50) NOT NULL,

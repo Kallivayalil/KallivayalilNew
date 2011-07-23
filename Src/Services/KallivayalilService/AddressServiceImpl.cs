@@ -8,7 +8,7 @@ using Kallivayalil.Domain.Validators;
 
 namespace Kallivayalil
 {
-    public class AddressServiceImpl
+    public class AddressServiceImpl 
     {
         private readonly AddressRepository repository;
         private AddressValidator validator;
@@ -32,7 +32,6 @@ namespace Kallivayalil
             {
                 throw new BadRequestException("AddressType can not be null");
             }
-
             address.Type = repository.Load<AddressType>(address.Type.Id);
         }
 
