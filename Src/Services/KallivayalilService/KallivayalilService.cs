@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 using System.ServiceModel.Activation;
 using Kallivayalil.Client;
 using Kallivayalil.Common;
@@ -21,6 +22,7 @@ namespace Kallivayalil
         private readonly EducationDetailServiceImpl educationalDetailServiceImpl;
         private readonly ReferenceDataServiceImpl referenceDataServiceImpl;
         private readonly LoginServiceImpl loginServiceImpl;
+        private AssociationServiceImpl asociationServiceImpl;
 
         public KallivayalilService()
         {
@@ -32,6 +34,7 @@ namespace Kallivayalil
             loginServiceImpl = new LoginServiceImpl();
             occupationServiceImpl = new OccupationServiceImpl(new OccupationRepository(), new ConstituentRepository());
             educationalDetailServiceImpl = new EducationDetailServiceImpl();
+            asociationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl();
         }
@@ -357,6 +360,62 @@ namespace Kallivayalil
             var occupationData = new OccupationsData();
             mapper.MapList(occupations, occupationData, typeof (OccupationData));
             return occupationData;
+        }
+
+        public virtual AssociationData CreateAssociation(string constituentId, AssociationData associationData)
+        {
+            var association = new Association();
+            mapper.Map(associationData, association);
+            var savedAssociation = asociationServiceImpl.CreateAssociation(association);
+
+            var savedAssociationData = new AssociationData();
+
+            mapper.Map(savedAssociation, savedAssociationData);
+
+            return savedAssociationData;
+
+        }
+
+        public virtual AssociationData UpdateAssociation(string id, AssociationData associationData)
+        {
+            var association = new Association();
+            mapper.Map(associationData, association);
+
+            var updatedAssociation = asociationServiceImpl.UpdateAssociation(association);
+            var updatedAssociationData = new AssociationData();
+            mapper.Map(updatedAssociation, updatedAssociationData);
+
+            return updatedAssociationData;
+        }
+
+        public virtual AssociationData GetAssociation(string id)
+        {
+            var association = asociationServiceImpl.FindAssociation(id);
+            var associationData = new AssociationData();
+
+            if (association == null)
+            {
+                throw new NotFoundException(string.Format("Association with Id:{0} not found.", id));
+            }
+
+            mapper.Map(association, associationData);
+
+            return associationData;
+        }
+
+        public virtual void DeleteAssociation(string id)
+        {
+            asociationServiceImpl.DeleteAssociation(id);
+        }
+
+        public virtual AssociationsData GetAssociations(string constituentId)
+        {
+            var associations = asociationServiceImpl.FindAssociations(constituentId);
+
+            var associationsData = new AssociationsData();
+            mapper.MapList(associations, associationsData, typeof(AssociationData));
+
+            return associationsData;
         }
 
         public virtual OccupationTypesData GetOccupationTypes()

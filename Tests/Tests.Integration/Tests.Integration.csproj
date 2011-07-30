@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AesEncryption.cs" />
     <Compile Include="Mothers\AddressDataMother.cs" />
+    <Compile Include="Mothers\AssociationDataMother.cs" />
     <Compile Include="Mothers\EducationDetailDataMother.cs" />
     <Compile Include="Mothers\EmailDataMother.cs" />
     <Compile Include="Mothers\OccupationDataMother.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="RepositoryTests\PhoneRepositoryTest.cs" />
     <Compile Include="RepositoryTests\ReferenceDataRepositoryTest.cs" />
     <Compile Include="ServiceTests\AddressTest.cs" />
+    <Compile Include="ServiceTests\AssociationTest.cs" />
     <Compile Include="ServiceTests\ConstituentNameTest.cs" />
     <Compile Include="ServiceTests\ConstituentTest.cs" />
     <Compile Include="ServiceTests\EducationDetailTest.cs" />

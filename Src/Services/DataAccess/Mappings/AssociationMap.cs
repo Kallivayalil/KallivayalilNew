@@ -12,7 +12,7 @@ namespace Kallivayalil.DataAccess.Mappings
             References(x => x.Type).Column("Type");
             References(x => x.Constituent).Column("ConstituentId");
             References(x => x.AssociatedConstituent).Column("AssociatedConstituentId");
-            References(x => x.ReciprocalAssociation).Column("ReciprocalId");
+            References(x => x.ReciprocalAssociation).Column("ReciprocalId").Cascade.All();
             Map(x => x.AssociatedConstituentName).Column("AssociatedConstituentName");
             Map(x => x.StartDate).Column("StartDate");
             Map(x => x.EndDate).Column("EndDate");

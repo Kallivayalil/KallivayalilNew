@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="AddressData.cs" />
     <Compile Include="AddressTypeData.cs" />
+    <Compile Include="AssociationData.cs" />
+    <Compile Include="AssociationTypeData.cs" />
     <Compile Include="ConstituentData.cs" />
     <Compile Include="ConstituentNameData.cs" />
     <Compile Include="DataContractHelper.cs" />

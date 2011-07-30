@@ -132,6 +132,28 @@ namespace Kallivayalil
         [WebGet(UriTemplate = "/Occupations?constituentId={constituentId}")]
         OccupationsData GetOccupations(string constituentId);
 
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Associations?constituentId={constituentId}", Method = "POST")]
+        AssociationData CreateAssociation(string constituentId, AssociationData occupationData);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Associations/{id}", Method = "PUT")]
+        AssociationData UpdateAssociation(string id, AssociationData occupationData);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Associations/{id}")]
+        AssociationData GetAssociation(string id);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Associations/{id}", Method = "DELETE")]
+        void DeleteAssociation(string id);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Associations?constituentId={constituentId}")]
+        AssociationsData GetAssociations(string constituentId);
+
+
         [OperationContract]
         [WebGet(UriTemplate = "/OccupationTypes")]
         OccupationTypesData GetOccupationTypes();

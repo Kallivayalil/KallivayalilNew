@@ -13,5 +13,25 @@ namespace Kallivayalil.Domain
         public virtual string AssociatedConstituentName { get; set; }
         public virtual DateTime? StartDate { get; set; }
         public virtual DateTime? EndDate { get; set; }
+
+        public virtual void CreateReciprocal()
+        {
+            if(IsHardAssociation())
+            ReciprocalAssociation = new Association()
+                       {
+                           Constituent = AssociatedConstituent,
+                           AssociatedConstituent = Constituent,
+                           AssociatedConstituentName = AssociatedConstituentName,
+                           StartDate = StartDate,
+                           EndDate = EndDate,
+                           ReciprocalAssociation = ReciprocalAssociation,
+                           Type = Type.ReciprocalType
+                       };
+        }
+
+        private bool IsHardAssociation()
+        {
+            return !IsNull(AssociatedConstituent) && !string.IsNullOrEmpty(AssociatedConstituentName);
+        }
     }
 }
