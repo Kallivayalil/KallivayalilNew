@@ -8,8 +8,8 @@ namespace Kallivayalil.DataAccess.Mappings
         {
             Table("Associations");
             LazyLoad();
-            Id(x => x.Id).GeneratedBy.Identity().Column("Id");
-            References(x => x.AssociationType).Column("Type");
+            Id(x => x.Id).GeneratedBy.HiLo("NextIds", "NextId", "0", "type='ASN'");
+            References(x => x.Type).Column("Type");
             References(x => x.Constituent).Column("ConstituentId");
             References(x => x.AssociatedConstituent).Column("AssociatedConstituentId");
             References(x => x.ReciprocalAssociation).Column("ReciprocalId");

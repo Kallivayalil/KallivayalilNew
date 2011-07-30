@@ -1,4 +1,5 @@
-﻿using Kallivayalil.DataAccess;
+﻿using System;
+using Kallivayalil.DataAccess;
 using Kallivayalil.Domain;
 using NHibernate;
 
@@ -117,6 +118,22 @@ namespace Tests.Common.Helpers
             var savedEmail = session.SaveOrUpdateCopy(email);
             session.Flush();
             return (Email) savedEmail;
+        }
+
+        public void HardDeleteAssociations()
+        {
+            var sqlCommand = session.Connection.CreateCommand();
+            sqlCommand.CommandText = "delete from Associations where id !=0";
+            sqlCommand.ExecuteNonQuery();
+            session.Flush();
+
+        }
+
+        public Association CreateAssociation(Association association)
+        {
+            var savedAssociation = session.SaveOrUpdateCopy(association);
+            session.Flush();
+            return (Association)savedAssociation; 
         }
     }
 }

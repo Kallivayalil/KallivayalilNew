@@ -4,6 +4,18 @@ namespace Tests.Common.Mothers
 {
     public static class ConstituentNameMother
     {
+        public static ConstituentName Franklin()
+        {
+            return new ConstituentName
+            {
+                FirstName = "A.J.",
+                LastName = "Franklin",
+                MiddleName = "H",
+                Salutation = SalutationTypeMother.Mr(),
+                PreferedName = "Franky",
+            };
+        }
+
         public static ConstituentName JamesFranklin()
         {
             return new ConstituentName
