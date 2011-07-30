@@ -58,6 +58,7 @@
     <Compile Include="PhoneTypeData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalutationTypeData.cs" />
+    <Compile Include="ShortAddressData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ReferenceData\" />

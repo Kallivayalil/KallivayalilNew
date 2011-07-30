@@ -22,6 +22,12 @@ namespace Kallivayalil
             phone.Type = repository.Load<PhoneType>(phone.Type.Id);
         }
 
+        private void LoadAddress(Phone phone)
+        {
+            phone.Address = repository.Load<Address>(phone.Address.Id);
+        }
+
+
         public PhoneServiceImpl(PhoneRepository phoneRepository, ConstituentRepository constituentRepository) : base(phoneRepository)
         {
             repository = phoneRepository;
@@ -30,6 +36,7 @@ namespace Kallivayalil
 
         public Phone CreatePhone(Phone phone)
         {
+            LoadAddress(phone);
             LoadPhoneType(phone);
             OneEntityShouldBePrimary(phone);
             return repository.Save(phone);
@@ -37,6 +44,7 @@ namespace Kallivayalil
 
         public Phone UpdatePhone(Phone phone)
         {
+            LoadAddress(phone);
             LoadPhoneType(phone);
             OneEntityShouldBePrimary(phone);
             return repository.Update(phone);

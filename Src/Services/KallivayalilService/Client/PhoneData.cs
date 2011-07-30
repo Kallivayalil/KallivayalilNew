@@ -17,7 +17,7 @@ namespace Kallivayalil.Client
         public string Number { get; set; }
 
         [DataMember]
-        public LinkData Address { get; set; }
+        public ShortAddressData Address { get; set; }
 
         [DataMember]
         public LinkData Constituent { get; set; }

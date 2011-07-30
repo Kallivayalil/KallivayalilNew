@@ -12,19 +12,19 @@ namespace Tests.Integration.Mothers
                            Type = new PhoneTypeData {Description = "Mobile", Id = 1},
                            Number = "9900012345",
                            Constituent = new LinkData {Id = constituent.Id},
-                           Address = new LinkData {Id = address.Id}
+                           Address = new ShortAddressData() {Id = address.Id}
                        };
         }
 
         public static PhoneData Mobile(Phone phone)
         {
             return new PhoneData
-                       {
-                           Type = new PhoneTypeData {Description = "Mobile", Id = 1},
-                           Number = "9900012345",
-                           Constituent = new LinkData {Id = phone.Constituent.Id},
-                           Address = new LinkData {Id = phone.Address.Id}
-                       };
+            {
+                Type = new PhoneTypeData { Description = "Mobile", Id = 1 },
+                Number = "9900012345",
+                Constituent = new LinkData { Id = phone.Constituent.Id },
+                Address = new ShortAddressData() { Id = phone.Address.Id }
+            };
         }
     }
 }
