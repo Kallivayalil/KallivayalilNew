@@ -8,7 +8,7 @@ namespace Kallivayalil.DataAccess.Mappings
         {
             Table("Addresses");
             LazyLoad();
-            Id(x => x.Id).GeneratedBy.HiLo("NextIds","NextId","0","type='ADD'");
+            Id(x => x.Id).GeneratedBy.HiLo("NextIds", "NextId", "0", "type='ADD'");
             Map(x => x.Line1).Not.Nullable().Column("Line1");
             Map(x => x.Line2).Column("Line2");
             Map(x => x.City).Not.Nullable().Column("City");

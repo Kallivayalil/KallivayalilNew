@@ -14,11 +14,13 @@ namespace Kallivayalil
         }
 
 
-        public bool Authenticate(string username,string password)
+        public bool Authenticate(string username, string password)
         {
             var email = emailRepository.Load(username);
-            if(email ==null)
+            if (email == null)
+            {
                 return false;
+            }
 
             var login = repository.Load(email);
             return repository.Authenticate(login, password);

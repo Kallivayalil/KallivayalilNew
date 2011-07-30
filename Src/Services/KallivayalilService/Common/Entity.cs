@@ -8,7 +8,6 @@ namespace Kallivayalil.Common
     [Serializable]
     public abstract class Entity : IEntity, ICloneable
     {
-
         public virtual int Id { get; set; }
 
         [DoNotAudit]
@@ -16,7 +15,7 @@ namespace Kallivayalil.Common
 
         [DoNotAudit]
         public virtual DateTime? UpdatedDateTime { get; set; }
-        
+
         [DoNotAudit]
         public virtual string CreatedBy { get; set; }
 
@@ -40,15 +39,27 @@ namespace Kallivayalil.Common
 
         public virtual bool Equals(Entity other)
         {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
             return other.Id == Id;
         }
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
             return typeof (Entity).IsAssignableFrom(obj.GetType()) && Equals((Entity) obj);
         }
 
@@ -65,7 +76,9 @@ namespace Kallivayalil.Common
         public virtual bool HasOnlyOnePrimaryEntity<T>(ICollection<T> entities, Func<T, bool> action)
         {
             if (entities == null || entities.Count == 0)
+            {
                 return true;
+            }
             return entities.Count(action) == 1;
         }
     }

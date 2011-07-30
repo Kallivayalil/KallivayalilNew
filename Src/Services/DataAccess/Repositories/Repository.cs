@@ -22,7 +22,9 @@ namespace Kallivayalil.DataAccess.Repositories
         public void Dispose()
         {
             if (session.IsOpen)
+            {
                 session.Close();
+            }
         }
 
         #endregion
@@ -52,7 +54,7 @@ namespace Kallivayalil.DataAccess.Repositories
             return session.Get<T>(entityId);
         }
 
-        public IList<T> LoadAll<T>() where T : IEntity
+        public IList<T> LoadAll<T>(AbstractCriterion[] criteria = null)
         {
             return session.CreateCriteria(typeof (T)).List<T>();
         }
@@ -60,9 +62,13 @@ namespace Kallivayalil.DataAccess.Repositories
         public bool Exists(IEntity entity)
         {
             if (entity == null)
+            {
                 return false;
+            }
             if (entity.Id <= 0)
+            {
                 return false;
+            }
             var savedEntityCount =
                 session.CreateCriteria(entity.GetType()).Add(Restrictions.Eq("Id", entity.Id)).SetProjection(Projections.Count("Id")).UniqueResult
                     <Int32>();
@@ -72,7 +78,9 @@ namespace Kallivayalil.DataAccess.Repositories
         public bool Exists(Type entityType, int entityId)
         {
             if (entityId <= 0)
+            {
                 return false;
+            }
 
             object savedEntity = session.Get(entityType, entityId);
             if (savedEntity != null)

@@ -11,14 +11,12 @@ namespace Kallivayalil.Domain.Exception
 
         public ValidationException(ErrorMessageEntity messageEntity)
         {
-            ErrorMessages = new ErrorMessagesEntity{messageEntity};
+            ErrorMessages = new ErrorMessagesEntity {messageEntity};
         }
 
         public ValidationException(ErrorMessagesEntity messagesEntity)
         {
             ErrorMessages = messagesEntity;
         }
-
-
     }
 }

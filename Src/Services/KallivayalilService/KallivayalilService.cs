@@ -1,8 +1,8 @@
-﻿using System;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 using System.ServiceModel.Activation;
 using Kallivayalil.Client;
 using Kallivayalil.Common;
+using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
 
 namespace Kallivayalil
@@ -26,7 +26,7 @@ namespace Kallivayalil
         {
             constituentServiceImpl = new ConstituentServiceImpl();
             nameServiceImpl = new ConstituentNameServiceImpl();
-            addressServiceImpl = new AddressServiceImpl();
+            addressServiceImpl = new AddressServiceImpl(new AddressRepository());
             phoneServiceImpl = new PhoneServiceImpl();
             emailServiceImpl = new EmailServiceImpl();
             loginServiceImpl = new LoginServiceImpl();
@@ -248,7 +248,7 @@ namespace Kallivayalil
             var emails = emailServiceImpl.FindEmails(constituentId);
 
             var emailData = new EmailsData();
-            mapper.MapList(emails, emailData, typeof(EmailData));
+            mapper.MapList(emails, emailData, typeof (EmailData));
             return emailData;
         }
 
@@ -355,7 +355,7 @@ namespace Kallivayalil
         {
             var occupations = occupationServiceImpl.FindOccupations(constituentId);
             var occupationData = new OccupationsData();
-            mapper.MapList(occupations, occupationData, typeof(OccupationData));
+            mapper.MapList(occupations, occupationData, typeof (OccupationData));
             return occupationData;
         }
 
@@ -364,7 +364,7 @@ namespace Kallivayalil
             var types = referenceDataServiceImpl.GetOccupationTypes();
 
             var occupationTypes = new OccupationTypesData();
-            mapper.MapList(types, occupationTypes, typeof(OccupationTypeData));
+            mapper.MapList(types, occupationTypes, typeof (OccupationTypeData));
             return occupationTypes;
         }
 
@@ -373,7 +373,7 @@ namespace Kallivayalil
             var types = referenceDataServiceImpl.GetEducationTypes();
 
             var educationTypesData = new EducationTypesData();
-            mapper.MapList(types, educationTypesData, typeof(EducationTypeData));
+            mapper.MapList(types, educationTypesData, typeof (EducationTypeData));
             return educationTypesData;
         }
 

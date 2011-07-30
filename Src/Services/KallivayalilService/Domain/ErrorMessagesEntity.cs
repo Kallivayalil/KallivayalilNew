@@ -31,12 +31,15 @@ namespace Kallivayalil.Domain
 
         public void Add(ErrorMessageEntity errorMessage)
         {
-            if (!Errors.Contains(errorMessage)) Errors.Add(errorMessage);
+            if (!Errors.Contains(errorMessage))
+            {
+                Errors.Add(errorMessage);
+            }
         }
 
         public void AddError(string errorCode, string description, string propertyPath)
         {
-            var message = new ErrorMessageEntity { Code = errorCode, Description = description, ErrorPath = propertyPath };
+            var message = new ErrorMessageEntity {Code = errorCode, Description = description, ErrorPath = propertyPath};
             Add(message);
         }
 

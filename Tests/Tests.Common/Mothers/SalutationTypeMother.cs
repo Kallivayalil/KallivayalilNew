@@ -6,12 +6,12 @@ namespace Tests.Common.Mothers
     {
         public static SalutationType Mr()
         {
-            return new SalutationType { Id = 1, Description = "Mr" };
+            return new SalutationType {Id = 1, Description = "Mr"};
         }
 
         public static SalutationType Ms()
         {
-            return new SalutationType { Id = 2, Description = "Ms" };
+            return new SalutationType {Id = 2, Description = "Ms"};
         }
     }
 }

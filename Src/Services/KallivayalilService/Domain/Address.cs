@@ -3,7 +3,7 @@ using Kallivayalil.Domain.ReferenceData;
 
 namespace Kallivayalil.Domain
 {
-    public class Address : Entity
+    public class Address : PrimaryEntity
     {
         public virtual string Line1 { get; set; }
         public virtual string Line2 { get; set; }
@@ -13,6 +13,5 @@ namespace Kallivayalil.Domain
         public virtual string Country { get; set; }
         public virtual AddressType Type { get; set; }
         public virtual Constituent Constituent { get; set; }
-        public virtual bool IsPrimary { get; set; }
     }
 }

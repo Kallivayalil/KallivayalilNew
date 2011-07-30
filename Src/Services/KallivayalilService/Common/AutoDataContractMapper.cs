@@ -8,7 +8,7 @@ namespace Kallivayalil.Common
 {
     public class AutoDataContractMapper
     {
-        private readonly List<Type> primitiveTypes = new List<Type> {typeof(int?), typeof(decimal?), typeof(decimal), typeof(string), typeof(DateTime?), typeof(DateTime) };
+        private readonly List<Type> primitiveTypes = new List<Type> {typeof (int?), typeof (decimal?), typeof (decimal), typeof (string), typeof (DateTime?), typeof (DateTime)};
 
         public IEnumerable MapList(IEnumerable source, IEnumerable destination, Type destinationType)
         {
@@ -17,7 +17,10 @@ namespace Kallivayalil.Common
                 var objects = destination as IList;
                 var instance = Activator.CreateInstance(destinationType);
                 Map(srcObj, instance);
-                if (objects != null) objects.Add(instance);
+                if (objects != null)
+                {
+                    objects.Add(instance);
+                }
             }
             return destination;
         }
@@ -36,14 +39,18 @@ namespace Kallivayalil.Common
                 var destinationType = destinationProperty.PropertyType;
                 var destPropName = destinationProperty.Name;
                 var srcPropInfo = sourcePropInfos.Find(p => p.Name.Equals(destPropName, StringComparison.CurrentCultureIgnoreCase));
-                if (srcPropInfo == null) continue;
+                if (srcPropInfo == null)
+                {
+                    continue;
+                }
 
                 var srcValue = srcPropInfo.GetValue(source, null);
                 if (srcValue == null)
                 {
                     continue;
                 }
-                if (typeof(IEnumerable).IsAssignableFrom(destinationType) && ((destinationType.IsGenericType || destinationType.BaseType.IsGenericType) && destinationType.BaseType != typeof(List<string>)))
+                if (typeof (IEnumerable).IsAssignableFrom(destinationType) &&
+                    ((destinationType.IsGenericType || destinationType.BaseType.IsGenericType) && destinationType.BaseType != typeof (List<string>)))
                 {
                     Type actualDestinationType;
                     Type genericType;
@@ -55,17 +62,17 @@ namespace Kallivayalil.Common
                     else
                     {
                         actualDestinationType = destinationType.GetGenericArguments()[0];
-                        genericType = typeof(List<>).MakeGenericType(actualDestinationType);
+                        genericType = typeof (List<>).MakeGenericType(actualDestinationType);
                     }
                     var destList = Activator.CreateInstance(genericType);
-                    MapList((IEnumerable)srcValue, (IEnumerable)destList, actualDestinationType);
+                    MapList((IEnumerable) srcValue, (IEnumerable) destList, actualDestinationType);
                     destinationProperty.SetValue(destination, destList, null);
                     continue;
                 }
-                if (typeof(IList).IsAssignableFrom(destinationType))
+                if (typeof (IList).IsAssignableFrom(destinationType))
                 {
-                    var destList = (IList)Activator.CreateInstance(destinationType);
-                    var srcValues = (IEnumerable)srcValue;
+                    var destList = (IList) Activator.CreateInstance(destinationType);
+                    var srcValues = (IEnumerable) srcValue;
                     foreach (var value in srcValues)
                     {
                         destList.Add(value);
@@ -81,23 +88,23 @@ namespace Kallivayalil.Common
                     destinationProperty.SetValue(destination, instance, null);
                     continue;
                 }
-                if(typeof(LinkData).IsAssignableFrom(destinationType))
+                if (typeof (LinkData).IsAssignableFrom(destinationType))
                 {
-                    var instance = (LinkData)Activator.CreateInstance(destinationType);
+                    var instance = (LinkData) Activator.CreateInstance(destinationType);
                     var propertyInfos = srcValue.GetType().GetProperties().ToList();
                     var idPropertyInfos = propertyInfos.FindAll(info => info.Name.Equals("Id"));
                     var sourceId = idPropertyInfos[0];
 
-                    if(idPropertyInfos.Count == 2)
+                    if (idPropertyInfos.Count == 2)
                     {
-                        if (srcPropInfo.PropertyType.IsAssignableFrom(typeof(ReferenceDataEntity)))
+                        if (srcPropInfo.PropertyType.IsAssignableFrom(typeof (ReferenceDataEntity)))
                         {
                             sourceId = idPropertyInfos.Find(info => info.PropertyType.Equals(typeof (int)));
                         }
                     }
 
                     instance.Id = Convert.ToInt32(sourceId.GetValue(srcValue, null));
-                    destinationProperty.SetValue(destination,instance, null);
+                    destinationProperty.SetValue(destination, instance, null);
                     continue;
                 }
                 if (destinationProperty.PropertyType.Name.Equals("Int32") && srcValue.GetType().Name.Equals("Int64"))
@@ -112,6 +119,5 @@ namespace Kallivayalil.Common
         {
             return !(destinationType.IsValueType || primitiveTypes.Contains(destinationType));
         }
-
     }
 }

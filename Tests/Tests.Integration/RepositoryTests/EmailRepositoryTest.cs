@@ -37,7 +37,7 @@ namespace Tests.Integration.RepositoryTests
         {
             var email = emailRepository.Save(EmailMother.Official(savedConstituent));
 
-            Assert.That(email.Id,Is.GreaterThan(0));
+            Assert.That(email.Id, Is.GreaterThan(0));
         }
 
         [Test]
@@ -47,7 +47,7 @@ namespace Tests.Integration.RepositoryTests
             savedEmail.Address = newEmail;
             var updatedEmail = emailRepository.Update(savedEmail);
 
-            Assert.That(updatedEmail.Address,Is.EqualTo(newEmail));
+            Assert.That(updatedEmail.Address, Is.EqualTo(newEmail));
         }
 
         [Test]
@@ -56,8 +56,7 @@ namespace Tests.Integration.RepositoryTests
             var email = emailRepository.Load(savedEmail.Id);
 
             Assert.IsNotNull(email);
-            Assert.That(email.Id,Is.EqualTo(savedEmail.Id));
-
+            Assert.That(email.Id, Is.EqualTo(savedEmail.Id));
         }
 
         [Test]
@@ -66,8 +65,7 @@ namespace Tests.Integration.RepositoryTests
             var email = emailRepository.Load(savedEmail.Address);
 
             Assert.IsNotNull(email);
-            Assert.That(email.Address,Is.EqualTo(savedEmail.Address));
-
+            Assert.That(email.Address, Is.EqualTo(savedEmail.Address));
         }
 
         [Test]
@@ -76,7 +74,7 @@ namespace Tests.Integration.RepositoryTests
             testDataHelper.CreateEmail(EmailMother.Official(savedConstituent));
 
             var emails = emailRepository.LoadAll(savedConstituent.Id);
-            Assert.That(emails.Count,Is.EqualTo(2));
+            Assert.That(emails.Count, Is.EqualTo(2));
         }
 
         [Test]

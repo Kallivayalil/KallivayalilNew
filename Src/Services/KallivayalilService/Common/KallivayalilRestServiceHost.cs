@@ -10,8 +10,12 @@ namespace Kallivayalil.Common
     public class KallivayalilRestServiceHost : WebServiceHost
     {
         private readonly Type serviceType;
-        readonly Collection<RequestInterceptor> interceptors = new Collection<RequestInterceptor>();
-        public Collection<RequestInterceptor> Interceptors { get { return interceptors; } }
+        private readonly Collection<RequestInterceptor> interceptors = new Collection<RequestInterceptor>();
+
+        public Collection<RequestInterceptor> Interceptors
+        {
+            get { return interceptors; }
+        }
 
         public KallivayalilRestServiceHost(Type serviceType, params Uri[] baseAddresses)
             : base(serviceType, baseAddresses)
@@ -21,7 +25,7 @@ namespace Kallivayalil.Common
 
         protected override void OnOpening()
         {
-            Description.Behaviors.Add(new KallivayalilRestServiceInterceptorProvider(serviceType, new IInterceptor[] { new RestInterceptor()}));
+            Description.Behaviors.Add(new KallivayalilRestServiceInterceptorProvider(serviceType, new IInterceptor[] {new RestInterceptor()}));
             base.OnOpening();
             foreach (var ep in Description.Endpoints)
             {

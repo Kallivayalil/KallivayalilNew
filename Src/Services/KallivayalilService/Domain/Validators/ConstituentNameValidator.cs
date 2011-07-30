@@ -7,7 +7,6 @@ namespace Kallivayalil.Domain.Validators
     {
         public ConstituentNameValidator()
         {
-
             RuleFor(constituentName => constituentName.FirstName).Must(s => !string.IsNullOrEmpty(s)).WithMessage(MessageConstants.FieldCannotBeNullOrEmpty);
             RuleFor(constituentName => constituentName.FirstName).Length(0, 50).WithMessage(MessageConstants.FieldTooLong);
 

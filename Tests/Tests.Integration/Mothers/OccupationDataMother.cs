@@ -7,9 +7,9 @@ namespace Tests.Integration.Mothers
     {
         public static OccupationData Doctor(Constituent constituent, Address address)
         {
-            return new OccupationData()
+            return new OccupationData
                        {
-                           Type = new OccupationTypeData(){Description = "Primary",Id = 1},
+                           Type = new OccupationTypeData {Description = "Primary", Id = 1},
                            OccupationName = "Doctor",
                            Description = "Senior Doctor",
                            Constituent = new LinkData {Id = constituent.Id},
@@ -19,13 +19,13 @@ namespace Tests.Integration.Mothers
 
         public static OccupationData Doctor(Occupation occupation)
         {
-            return new OccupationData()
+            return new OccupationData
                        {
-                           Type = new OccupationTypeData() { Description = "Mobile", Id = 1 },
+                           Type = new OccupationTypeData {Description = "Mobile", Id = 1},
                            OccupationName = occupation.OccupationName,
                            Description = occupation.Description,
-                           Constituent = new LinkData { Id = occupation.Constituent.Id },
-                           Address = new LinkData { Id = occupation.Address.Id }
+                           Constituent = new LinkData {Id = occupation.Constituent.Id},
+                           Address = new LinkData {Id = occupation.Address.Id}
                        };
         }
     }

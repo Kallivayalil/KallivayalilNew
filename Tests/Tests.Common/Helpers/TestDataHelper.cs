@@ -1,11 +1,11 @@
-﻿using System;
-using Kallivayalil.DataAccess;
+﻿using Kallivayalil.DataAccess;
 using Kallivayalil.Domain;
 using NHibernate;
 
 namespace Tests.Common.Helpers
 {
-    public class TestDataHelper {
+    public class TestDataHelper
+    {
         public readonly ISession session;
 
         public TestDataHelper()
@@ -23,7 +23,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteConstituents()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from constituents where id !=123";
+            sqlCommand.CommandText = "delete from constituents where id !=0";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -31,7 +31,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteConstituentNames()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from constituentNames where id !=123";
+            sqlCommand.CommandText = "delete from constituentNames where id !=0";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -39,7 +39,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteAddress()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from addresses where id !=123";
+            sqlCommand.CommandText = "delete from addresses where id !=0";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -48,20 +48,20 @@ namespace Tests.Common.Helpers
         {
             var savedAddress = session.SaveOrUpdateCopy(address);
             session.Flush();
-            return (Address)savedAddress;
+            return (Address) savedAddress;
         }
 
         public ConstituentName CreateConstituentName(ConstituentName constituentName)
         {
             var savedConstituentName = session.SaveOrUpdateCopy(constituentName);
             session.Flush();
-            return (ConstituentName)savedConstituentName;            
+            return (ConstituentName) savedConstituentName;
         }
 
         public void HardDeletePhones()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from phones where id !=123";
+            sqlCommand.CommandText = "delete from phones where id !=0";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -70,7 +70,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteOccupations()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from occupations where id !=123";
+            sqlCommand.CommandText = "delete from occupations where id !=0";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -78,7 +78,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteEducationDetails()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from educationdetails where id !=123";
+            sqlCommand.CommandText = "delete from educationdetails where id !=0";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -87,27 +87,27 @@ namespace Tests.Common.Helpers
         {
             var savedPhone = session.SaveOrUpdateCopy(phone);
             session.Flush();
-            return (Phone)savedPhone;
+            return (Phone) savedPhone;
         }
 
         public Occupation CreateOccupation(Occupation occupation)
         {
             var savedOccupation = session.SaveOrUpdateCopy(occupation);
             session.Flush();
-            return (Occupation)savedOccupation;
+            return (Occupation) savedOccupation;
         }
 
         public EducationDetail CreateEducationDetail(EducationDetail educationDetail)
         {
             var savedEducationDetail = session.SaveOrUpdateCopy(educationDetail);
             session.Flush();
-            return (EducationDetail)savedEducationDetail;
+            return (EducationDetail) savedEducationDetail;
         }
 
         public void HardDeleteEmails()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from Emails where id !=123";
+            sqlCommand.CommandText = "delete from Emails where id !=0";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -116,7 +116,7 @@ namespace Tests.Common.Helpers
         {
             var savedEmail = session.SaveOrUpdateCopy(email);
             session.Flush();
-            return (Email)savedEmail;
+            return (Email) savedEmail;
         }
     }
 }

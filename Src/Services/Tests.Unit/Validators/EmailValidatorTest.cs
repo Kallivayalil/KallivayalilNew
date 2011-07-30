@@ -28,7 +28,7 @@ namespace Tests.Unit.Validators
             ValidationResult result = validator.Validate(official);
 
             Assert.IsTrue(result.IsValid);
-            Assert.That(result.Errors.Count,Is.EqualTo(0));
+            Assert.That(result.Errors.Count, Is.EqualTo(0));
         }
 
         [Test]
@@ -58,7 +58,5 @@ namespace Tests.Unit.Validators
             result = validator.Validate(official);
             AssertInavlidField(result, "Address", MessageConstants.FieldTooLong);
         }
-
-
     }
 }

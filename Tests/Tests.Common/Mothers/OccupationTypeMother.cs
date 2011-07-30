@@ -6,13 +6,12 @@ namespace Tests.Common.Mothers
     {
         public static OccupationType Primary()
         {
-            return new OccupationType() { Id = 1, Description = "Primary" };
-        } 
-        
-        public static OccupationType Secondary()
-        {
-            return new OccupationType() { Id = 1, Description = "Secondary" };
+            return new OccupationType {Id = 1, Description = "Primary"};
         }
 
+        public static OccupationType Secondary()
+        {
+            return new OccupationType {Id = 1, Description = "Secondary"};
+        }
     }
 }

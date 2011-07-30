@@ -1,9 +1,9 @@
+using System.Linq;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
 using NUnit.Framework;
 using Tests.Common.Helpers;
 using Tests.Common.Mothers;
-using System.Linq;
 
 namespace Tests.Integration.RepositoryTests
 {
@@ -21,10 +21,9 @@ namespace Tests.Integration.RepositoryTests
             testDataHelper = new TestDataHelper();
             var constituent = ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin());
             savedConstituent = testDataHelper.CreateConstituent(constituent);
-            savedAddress = testDataHelper.CreateAddress(AddressMother.SanFrancisco(savedConstituent)); 
-            
-            addressRepository = new AddressRepository(testDataHelper.session);
+            savedAddress = testDataHelper.CreateAddress(AddressMother.SanFrancisco(savedConstituent));
 
+            addressRepository = new AddressRepository(testDataHelper.session);
         }
 
         [TearDown]
@@ -40,7 +39,7 @@ namespace Tests.Integration.RepositoryTests
         {
             var address = addressRepository.Save(AddressMother.SanFrancisco(savedConstituent));
 
-            Assert.That(address.Id,Is.GreaterThan(0));
+            Assert.That(address.Id, Is.GreaterThan(0));
         }
 
         [Test]
@@ -75,8 +74,8 @@ namespace Tests.Integration.RepositoryTests
             var address = addressRepository.Load(savedAddress.Id);
 
             Assert.IsNotNull(address);
-            Assert.That(address.Country,Is.EqualTo(savedAddress.Country));
-            Assert.That(address.Id,Is.EqualTo(savedAddress.Id));
+            Assert.That(address.Country, Is.EqualTo(savedAddress.Country));
+            Assert.That(address.Id, Is.EqualTo(savedAddress.Id));
         }
 
         [Test]
@@ -88,10 +87,9 @@ namespace Tests.Integration.RepositoryTests
 
             var addresses = addressRepository.LoadAll(savedConstituent.Id).ToList();
 
-            Assert.That(addresses.Count,Is.EqualTo(2));
+            Assert.That(addresses.Count, Is.EqualTo(2));
             Assert.That(addresses.Exists(address => address.Id.Equals(savedAddress.Id)));
             Assert.That(addresses.Exists(address => address.Id.Equals(london.Id)));
         }
     }
-
 }

@@ -1,21 +1,19 @@
-﻿using System;
-using Kallivayalil.Common;
-using Kallivayalil.Domain;
+﻿using Kallivayalil.Domain;
 using NHibernate;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
     public class ConstituentRepository : Repository
     {
-        public ConstituentRepository(ISession session) : base(session){}
+        public ConstituentRepository(ISession session) : base(session) {}
 
-        public ConstituentRepository() : this(SessionFactory.OpenSession()){}
+        public ConstituentRepository() : this(SessionFactory.OpenSession()) {}
 
         public Constituent Save(Constituent constituent)
         {
-            using (var txn =session.BeginTransaction())
+            using (var txn = session.BeginTransaction())
             {
-                var savedConstituent = SaveOrUpdate(constituent,txn);                
+                var savedConstituent = SaveOrUpdate(constituent, txn);
                 txn.Commit();
                 return savedConstituent;
             }
@@ -36,7 +34,7 @@ namespace Kallivayalil.DataAccess.Repositories
             using (var txn = session.BeginTransaction())
             {
                 var constituent = session.Load<Constituent>(constituentId);
-                if(constituent != null)
+                if (constituent != null)
                 {
                     session.Delete(constituent);
                 }
@@ -46,7 +44,7 @@ namespace Kallivayalil.DataAccess.Repositories
 
         public Constituent Load(int constituentId)
         {
-               return session.Get<Constituent>(constituentId);
+            return session.Get<Constituent>(constituentId);
         }
     }
 }

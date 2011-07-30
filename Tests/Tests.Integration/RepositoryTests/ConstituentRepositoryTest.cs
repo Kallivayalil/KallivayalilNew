@@ -15,11 +15,10 @@ namespace Tests.Integration.RepositoryTests
         [SetUp]
         public void SetUp()
         {
-            constituent = new Constituent { Gender = "M", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false };
+            constituent = new Constituent {Gender = "M", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false};
             constituent.Name = ConstituentNameMother.JamesFranklin();
 
             constituentRepository = new ConstituentRepository();
-
         }
 
         [Test]
@@ -27,11 +26,11 @@ namespace Tests.Integration.RepositoryTests
         {
             var savedConstituent = constituentRepository.Save(constituent);
 
-            Assert.That(savedConstituent.Id,Is.GreaterThan(0));
-            Assert.That(savedConstituent.Name.Id,Is.GreaterThan(0));
+            Assert.That(savedConstituent.Id, Is.GreaterThan(0));
+            Assert.That(savedConstituent.Name.Id, Is.GreaterThan(0));
             constituentRepository.Delete(savedConstituent);
         }
-        
+
         [Test]
         public void ShouldUpdateAnExistingConstituent()
         {
@@ -44,7 +43,7 @@ namespace Tests.Integration.RepositoryTests
             Assert.That(savedConstituent.Name.UpdatedDateTime, Is.Not.EqualTo(savedConstituent.UpdatedDateTime));
             Assert.That(savedConstituent.UpdatedDateTime, Is.Not.Null);
             Assert.That(savedConstituent.UpdatedBy, Is.Not.Null);
-            
+
             constituentRepository.Delete(updatedConstituent);
         }
 
@@ -58,7 +57,7 @@ namespace Tests.Integration.RepositoryTests
 
             Assert.That(updatedConstituent.Name.MiddleName, Is.EqualTo("Einstein"));
             Assert.That(savedConstituent.Name.UpdatedDateTime, Is.Not.EqualTo(savedConstituent.UpdatedDateTime));
-            
+
             constituentRepository.Delete(updatedConstituent);
         }
 
@@ -68,7 +67,7 @@ namespace Tests.Integration.RepositoryTests
             var savedConstituent = constituentRepository.Save(constituent);
             constituentRepository.Delete(savedConstituent.Id);
 
-            Assert.That(constituentRepository.Exists(savedConstituent),Is.False);
+            Assert.That(constituentRepository.Exists(savedConstituent), Is.False);
         }
 
         [Test]
@@ -78,10 +77,8 @@ namespace Tests.Integration.RepositoryTests
             var result = constituentRepository.Load(savedConstituent.Id);
 
             Assert.IsNotNull(result);
-            Assert.That(result,Is.TypeOf(typeof(Constituent)));
-            Assert.That(result.Id,Is.EqualTo(savedConstituent.Id));
+            Assert.That(result, Is.TypeOf(typeof (Constituent)));
+            Assert.That(result.Id, Is.EqualTo(savedConstituent.Id));
         }
-
-
     }
 }

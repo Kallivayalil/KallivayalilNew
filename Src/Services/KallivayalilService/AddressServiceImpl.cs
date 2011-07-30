@@ -8,14 +8,14 @@ using Kallivayalil.Domain.Validators;
 
 namespace Kallivayalil
 {
-    public class AddressServiceImpl 
+    public class AddressServiceImpl : BaseServiceImpl<Address>
     {
         private readonly AddressRepository repository;
-        private AddressValidator validator;
+        private readonly AddressValidator validator;
 
-        public AddressServiceImpl()
+        public AddressServiceImpl(AddressRepository repository) : base(repository)
         {
-            repository = new AddressRepository();
+            this.repository = repository;
             validator = new AddressValidator();
         }
 
@@ -23,6 +23,7 @@ namespace Kallivayalil
         {
             LoadAddressType(address);
             validator.Validate(address).ProcessValidationResults();
+            OneEntityShouldBePrimary(address);
             return repository.Save(address);
         }
 
@@ -39,6 +40,7 @@ namespace Kallivayalil
         {
             LoadAddressType(address);
             validator.Validate(address).ProcessValidationResults();
+            OneEntityShouldBePrimary(address);
             return repository.Update(address);
         }
 

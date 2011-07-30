@@ -1,15 +1,15 @@
 ﻿using FluentValidation.Results;
 using Kallivayalil.Common;
+using Kallivayalil.Common.Extensions;
 using Kallivayalil.Domain;
 using Kallivayalil.Domain.Validators;
 using NUnit.Framework;
 using Tests.Common.Mothers;
-using Kallivayalil.Common.Extensions;
 
 namespace Tests.Unit.Validators
 {
     [TestFixture]
-    public class AddressValidatorTest :ValidatorTestBase
+    public class AddressValidatorTest : ValidatorTestBase
     {
         private Address sanFrancisco;
         private AddressValidator validator;
@@ -27,7 +27,7 @@ namespace Tests.Unit.Validators
             ValidationResult result = validator.Validate(sanFrancisco);
 
             Assert.IsTrue(result.IsValid);
-            Assert.That(result.Errors.Count,Is.EqualTo(0));
+            Assert.That(result.Errors.Count, Is.EqualTo(0));
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace Tests.Unit.Validators
             result = validator.Validate(sanFrancisco);
             AssertInavlidField(result, "Country", MessageConstants.FieldTooLong);
         }
-        
+
         [Test]
         public void StateValidation()
         {
@@ -85,8 +85,8 @@ namespace Tests.Unit.Validators
             sanFrancisco.State = "a".Repeat(60);
             result = validator.Validate(sanFrancisco);
             AssertInavlidField(result, "State", MessageConstants.FieldTooLong);
-        } 
-        
+        }
+
         [Test]
         public void PostCodeValidation()
         {
@@ -101,8 +101,8 @@ namespace Tests.Unit.Validators
             sanFrancisco.PostCode = "a".Repeat(60);
             result = validator.Validate(sanFrancisco);
             AssertInavlidField(result, "PostCode", MessageConstants.FieldTooLong);
-        }  
-        
+        }
+
         [Test]
         public void CityValidation()
         {
@@ -117,8 +117,8 @@ namespace Tests.Unit.Validators
             sanFrancisco.City = "a".Repeat(60);
             result = validator.Validate(sanFrancisco);
             AssertInavlidField(result, "City", MessageConstants.FieldTooLong);
-        } 
-        
+        }
+
         [Test]
         public void ConstituentAndTypeForAddressValidation()
         {
@@ -131,8 +131,6 @@ namespace Tests.Unit.Validators
             sanFrancisco.Constituent = constituent;
             result = validator.Validate(sanFrancisco);
             AssertInavlidField(result, "Type", MessageConstants.FieldCannotBeNull);
-
         }
-
     }
 }

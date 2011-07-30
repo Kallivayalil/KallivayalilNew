@@ -27,7 +27,7 @@ namespace Tests.Unit.Validators
             ValidationResult result = validator.Validate(jamesFranklin);
 
             Assert.IsTrue(result.IsValid);
-            Assert.That(result.Errors.Count,Is.EqualTo(0));
+            Assert.That(result.Errors.Count, Is.EqualTo(0));
         }
 
         [Test]
@@ -41,15 +41,15 @@ namespace Tests.Unit.Validators
             result = validator.Validate(jamesFranklin);
             AssertInavlidField(result, "FirstName", MessageConstants.FieldTooLong);
         }
-       
+
         [Test]
         public void MiddleNameValidation()
         {
             jamesFranklin.MiddleName = "a".Repeat(100);
             ValidationResult result = validator.Validate(jamesFranklin);
             AssertInavlidField(result, "MiddleName", MessageConstants.FieldTooLong);
-        }  
-        
+        }
+
         [Test]
         public void PreferredNameValidation()
         {

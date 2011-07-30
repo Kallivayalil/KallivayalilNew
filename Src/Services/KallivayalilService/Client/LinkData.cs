@@ -5,11 +5,11 @@ namespace Kallivayalil.Client
     [DataContract(Namespace = "")]
     public class LinkData
     {
-        [DataMember] 
-        public string Href {get; set;}
+        [DataMember]
+        public string Href { get; set; }
 
         [DataMember]
-        public int Id {get; set;}
+        public int Id { get; set; }
 
         public static bool IsNull(LinkData linkData)
         {

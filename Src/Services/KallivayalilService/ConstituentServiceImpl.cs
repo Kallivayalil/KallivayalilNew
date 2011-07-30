@@ -7,7 +7,7 @@ namespace Kallivayalil
 {
     public class ConstituentServiceImpl
     {
-        private ConstituentRepository repository;
+        private readonly ConstituentRepository repository;
 
         public ConstituentServiceImpl()
         {
@@ -26,8 +26,10 @@ namespace Kallivayalil
 
         public Constituent UpdateConstituent(string id, Constituent constituent)
         {
-            if(repository.Exists<Constituent>(Convert.ToInt32(id)))
+            if (repository.Exists<Constituent>(Convert.ToInt32(id)))
+            {
                 return repository.Update(constituent);
+            }
             return null;
         }
 

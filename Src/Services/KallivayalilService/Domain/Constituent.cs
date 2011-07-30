@@ -2,8 +2,8 @@ using System;
 using Kallivayalil.Common;
 using Kallivayalil.Domain.Attributes;
 
-namespace Kallivayalil.Domain {
-
+namespace Kallivayalil.Domain
+{
     [Serializable, Audited]
     public class Constituent : Entity
     {

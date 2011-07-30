@@ -21,8 +21,7 @@ namespace Tests.Integration.RepositoryTests
             var phoneTypes = repo.LoadAll<PhoneType>();
 
             Assert.NotNull(phoneTypes);
-            Assert.That(phoneTypes.Count,Is.EqualTo(2));
-
+            Assert.That(phoneTypes.Count, Is.EqualTo(2));
         }
 
         [Test]
@@ -31,8 +30,7 @@ namespace Tests.Integration.RepositoryTests
             var emailTypes = repo.LoadAll<EmailType>();
 
             Assert.NotNull(emailTypes);
-            Assert.That(emailTypes.Count,Is.EqualTo(2));
-
+            Assert.That(emailTypes.Count, Is.EqualTo(2));
         }
     }
 }

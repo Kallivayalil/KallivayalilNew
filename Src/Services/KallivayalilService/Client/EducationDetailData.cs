@@ -4,16 +4,15 @@ using System.Runtime.Serialization;
 
 namespace Kallivayalil.Client
 {
-
     [CollectionDataContract(Namespace = "")]
-    public class EducationDetailsData : List<EducationDetailData> { }
+    public class EducationDetailsData : List<EducationDetailData> {}
 
     [DataContract(Namespace = "")]
-    public class EducationDetailData 
+    public class EducationDetailData
     {
         [DataMember]
-        public int Id { get; set; }       
-        
+        public int Id { get; set; }
+
         [DataMember]
         public string Qualification { get; set; }
 
@@ -28,9 +27,9 @@ namespace Kallivayalil.Client
 
         [DataMember]
         public LinkData Constituent { get; set; }
-        
+
         [DataMember]
-        public EducationTypeData Type{ get; set; }
+        public EducationTypeData Type { get; set; }
 
         [DataMember]
         public DateTime? CreatedDateTime { get; set; }

@@ -71,9 +71,11 @@
     <Compile Include="Entity.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="IEntity.cs" />
+    <Compile Include="IPrimaryEntity.cs" />
     <Compile Include="KallivayalilRestServiceHost.cs" />
     <Compile Include="MessageConstants.cs" />
     <Compile Include="NotFoundException.cs" />
+    <Compile Include="PrimaryEntity.cs" />
     <Compile Include="ReferenceDataEntity.cs" />
     <Compile Include="RestServiceFactory.cs" />
     <Compile Include="ObjectCopier.cs" />

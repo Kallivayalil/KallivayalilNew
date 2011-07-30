@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using Kallivayalil.Common;
-using Kallivayalil.Domain;
 using NHibernate;
-using NHibernate.Criterion;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
@@ -12,11 +10,9 @@ namespace Kallivayalil.DataAccess.Repositories
         public ReferenceDataRepository() : base(SessionFactory.OpenSession()) {}
 
 
-        public new  IList<T> LoadAll<T>() where T : IEntity
+        public IList<T> LoadAll<T>() where T : IEntity
         {
             return base.LoadAll<T>();
         }
-
-
     }
 }

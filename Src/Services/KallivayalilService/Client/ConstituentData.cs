@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Kallivayalil.Client {
-
+namespace Kallivayalil.Client
+{
     [DataContract(Namespace = "")]
-    public class ConstituentData 
+    public class ConstituentData
     {
         [DataMember]
         public int Id { get; set; }
@@ -45,11 +45,11 @@ namespace Kallivayalil.Client {
 
         [DataMember]
         public string UpdatedBy { get; set; }
-        
+
         [DataMember]
         public ConstituentNameData Name { get; set; }
     }
 
     [CollectionDataContract(Namespace = "")]
-    public class ConstituentsData : List<ConstituentData> { }
+    public class ConstituentsData : List<ConstituentData> {}
 }

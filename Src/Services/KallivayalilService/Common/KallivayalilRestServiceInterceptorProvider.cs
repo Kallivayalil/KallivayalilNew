@@ -35,16 +35,17 @@ namespace Kallivayalil.Common
             return proxyGenerator.CreateClassProxy(serviceType, Interceptors);
         }
 
-        public void ReleaseInstance(InstanceContext instanceContext, object instance)
-        {
-        }
+        public void ReleaseInstance(InstanceContext instanceContext, object instance) {}
 
         public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
         {
             foreach (var channelDispatcherBase in serviceHostBase.ChannelDispatchers)
             {
                 var channelDispatcher = channelDispatcherBase as ChannelDispatcher;
-                if (channelDispatcher == null) continue;
+                if (channelDispatcher == null)
+                {
+                    continue;
+                }
 
                 foreach (var endpoint in channelDispatcher.Endpoints)
                 {
@@ -53,12 +54,9 @@ namespace Kallivayalil.Common
             }
         }
 
-        public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
-        {
-        }
+        public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints,
+                                         BindingParameterCollection bindingParameters) {}
 
-        public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
-        {
-        }
+        public void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase) {}
     }
 }

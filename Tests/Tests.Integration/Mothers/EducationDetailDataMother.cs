@@ -8,13 +8,13 @@ namespace Tests.Integration.Mothers
     {
         public static EducationDetailData School(Constituent constituent)
         {
-            return new EducationDetailData()
+            return new EducationDetailData
                        {
-                           Type = new EducationTypeData(){Id = 1,Description = "School"},
+                           Type = new EducationTypeData {Id = 1, Description = "School"},
                            Qualification = "12th grade",
                            InstituteName = "SHY",
                            InstituteLocation = "Yercaud",
-                           YearOfGraduation = DateTime.Now.ToString(),
+                           YearOfGraduation = DateTime.Now.ToShortDateString(),
                            Constituent = new LinkData {Id = constituent.Id},
                        };
         }
@@ -22,14 +22,14 @@ namespace Tests.Integration.Mothers
         public static EducationDetailData School(EducationDetail educationDetail)
         {
             return new EducationDetailData
-            {
-                Type = new EducationTypeData() { Description = "School", Id = 1 },
-                Qualification = educationDetail.Qualification,
-                InstituteLocation = educationDetail.InstituteLocation,
-                InstituteName = educationDetail.InstituteName,
-                YearOfGraduation = educationDetail.YearOfGraduation,
-                Constituent = new LinkData { Id = educationDetail.Constituent.Id },
-            };
+                       {
+                           Type = new EducationTypeData {Description = "School", Id = 1},
+                           Qualification = educationDetail.Qualification,
+                           InstituteLocation = educationDetail.InstituteLocation,
+                           InstituteName = educationDetail.InstituteName,
+                           YearOfGraduation = educationDetail.YearOfGraduation,
+                           Constituent = new LinkData {Id = educationDetail.Constituent.Id},
+                       };
         }
     }
 }

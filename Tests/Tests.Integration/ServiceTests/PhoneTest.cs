@@ -35,11 +35,10 @@ namespace Tests.Integration.ServiceTests
         }
 
 
-
         [Test]
         public void ShouldSavePhone()
         {
-            var savedMobile = HttpHelper.Post(string.Format("{0}?constituentId={1}", baseUri, constituent.Id), PhoneDataMother.Mobile(constituent,savedAddress));
+            var savedMobile = HttpHelper.Post(string.Format("{0}?constituentId={1}", baseUri, constituent.Id), PhoneDataMother.Mobile(constituent, savedAddress));
 
             Assert.IsNotNull(savedMobile);
             Assert.That(savedMobile.Id, Is.GreaterThan(0));
@@ -55,7 +54,7 @@ namespace Tests.Integration.ServiceTests
             phoneData.Number = number;
             var updatedData = HttpHelper.Put(string.Format("{0}/{1}", baseUri, phone.Id), phoneData);
 
-            Assert.That(updatedData.Number,Is.EqualTo(number));
+            Assert.That(updatedData.Number, Is.EqualTo(number));
         }
 
         [Test]
@@ -65,7 +64,7 @@ namespace Tests.Integration.ServiceTests
 
             var phoneData = HttpHelper.Get<PhoneData>(string.Format("{0}/{1}", baseUri, phone.Id));
 
-            Assert.That(phoneData.Id,Is.GreaterThan(0));
+            Assert.That(phoneData.Id, Is.GreaterThan(0));
         }
 
         [Test]
@@ -77,7 +76,7 @@ namespace Tests.Integration.ServiceTests
 
             var phonesData = HttpHelper.Get<PhonesData>(string.Format("{0}?constituentId={1}", baseUri, constituent.Id));
 
-            Assert.That(phonesData.Count,Is.EqualTo(3));
+            Assert.That(phonesData.Count, Is.EqualTo(3));
         }
 
         [Test]

@@ -12,6 +12,5 @@ namespace Kallivayalil.DataAccess.Mappings
             Map(x => x.UpdatedDateTime).Column("UpdatedDateTime");
             Map(x => x.UpdatedBy).Column("UpdatedBy");
         }
-        
     }
 }

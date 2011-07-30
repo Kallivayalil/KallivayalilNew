@@ -22,8 +22,8 @@ namespace Tests.Integration.ServiceTests
             testDataHelper = new TestDataHelper();
             constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
             testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JessicaAlba()));
-            constituentData = new ConstituentData { Gender = "F", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false };
-            constituentData.Name = new ConstituentNameData { FirstName = "James", LastName = "Franklin", Salutation = new SalutationTypeData {Id = 1,Description = "Mr"} };
+            constituentData = new ConstituentData {Gender = "F", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false};
+            constituentData.Name = new ConstituentNameData {FirstName = "James", LastName = "Franklin", Salutation = new SalutationTypeData {Id = 1, Description = "Mr"}};
         }
 
         [TearDown]
@@ -39,18 +39,18 @@ namespace Tests.Integration.ServiceTests
         [Test]
         public void ShouldLoadConstituent()
         {
-            var result = HttpHelper.Get<ConstituentData>(string.Format("{0}/{1}",baseUri,constituent.Id));
+            var result = HttpHelper.Get<ConstituentData>(string.Format("{0}/{1}", baseUri, constituent.Id));
             Assert.IsNotNull(result);
         }
 
         [Test]
         public void ShouldCreateConstituent()
         {
-            var savedConstituent = HttpHelper.Post(baseUri,constituentData);
+            var savedConstituent = HttpHelper.Post(baseUri, constituentData);
 
             Assert.IsNotNull(savedConstituent);
-            Assert.That(savedConstituent.Id,Is.GreaterThan(0));
-            Assert.That(savedConstituent.Name.Id,Is.GreaterThan(0));
+            Assert.That(savedConstituent.Id, Is.GreaterThan(0));
+            Assert.That(savedConstituent.Name.Id, Is.GreaterThan(0));
         }
 
         [Test]
@@ -61,8 +61,8 @@ namespace Tests.Integration.ServiceTests
             savedConstituent.Gender = "M";
             savedConstituent.BranchName = 3;
             savedConstituent.IsRegistered = true;
-            
-            var updatedConstituentData = HttpHelper.Put(string.Format("{0}/{1}", baseUri, savedConstituent.Id),savedConstituent);
+
+            var updatedConstituentData = HttpHelper.Put(string.Format("{0}/{1}", baseUri, savedConstituent.Id), savedConstituent);
             Assert.IsNotNull(updatedConstituentData);
             Assert.That(updatedConstituentData.Id, Is.EqualTo(savedConstituent.Id));
             Assert.That(updatedConstituentData.Gender, Is.EqualTo("M"));
@@ -74,7 +74,7 @@ namespace Tests.Integration.ServiceTests
         public void ShouldDeleteExistingConstituent()
         {
             var response = HttpHelper.DoHttpDelete(string.Format("{0}/{1}", baseUri, constituent.Id));
-            Assert.That(response.StatusCode,Is.EqualTo(HttpStatusCode.OK));
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
             var getResponse = HttpHelper.DoHttpGet(string.Format("{0}/{1}", baseUri, constituent.Id));
             Assert.IsNotNull(getResponse);
@@ -86,8 +86,8 @@ namespace Tests.Integration.ServiceTests
         {
             var savedConstituent = HttpHelper.Post(baseUri, constituentData);
 
-            Assert.That(savedConstituent.Id,Is.GreaterThan(0));
-            Assert.That(savedConstituent.Name.Id,Is.GreaterThan(0));
+            Assert.That(savedConstituent.Id, Is.GreaterThan(0));
+            Assert.That(savedConstituent.Name.Id, Is.GreaterThan(0));
         }
 
         [Test]
@@ -95,8 +95,7 @@ namespace Tests.Integration.ServiceTests
         {
             var result = HttpHelper.Get<ConstituentsData>(baseUri);
 
-            Assert.That(result.Count,Is.EqualTo(3));
+            Assert.That(result.Count, Is.EqualTo(3));
         }
-
     }
 }

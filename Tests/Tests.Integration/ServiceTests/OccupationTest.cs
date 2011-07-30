@@ -35,11 +35,10 @@ namespace Tests.Integration.ServiceTests
         }
 
 
-
         [Test]
         public void ShouldSaveOccupation()
         {
-            var savedOccupation = HttpHelper.Post(string.Format("{0}?constituentId={1}", baseUri, constituent.Id), OccupationDataMother.Doctor(constituent,savedAddress));
+            var savedOccupation = HttpHelper.Post(string.Format("{0}?constituentId={1}", baseUri, constituent.Id), OccupationDataMother.Doctor(constituent, savedAddress));
 
             Assert.IsNotNull(savedOccupation);
             Assert.That(savedOccupation.Id, Is.GreaterThan(0));
@@ -48,14 +47,14 @@ namespace Tests.Integration.ServiceTests
         [Test]
         public void ShouldUpdateExistingOccupation()
         {
-            var occupation = testDataHelper.CreateOccupation(OccupationMother.Doctor(constituent,savedAddress));
+            var occupation = testDataHelper.CreateOccupation(OccupationMother.Doctor(constituent, savedAddress));
 
-            var occupationData = OccupationDataMother.Doctor(constituent,savedAddress);
+            var occupationData = OccupationDataMother.Doctor(constituent, savedAddress);
             const string occupationName = "Lawyer";
             occupationData.OccupationName = occupationName;
             var updatedData = HttpHelper.Put(string.Format("{0}/{1}", baseUri, occupation.Id), occupationData);
 
-            Assert.That(updatedData.OccupationName,Is.EqualTo(occupationName));
+            Assert.That(updatedData.OccupationName, Is.EqualTo(occupationName));
         }
 
         [Test]
@@ -65,7 +64,7 @@ namespace Tests.Integration.ServiceTests
 
             var occupationData = HttpHelper.Get<OccupationData>(string.Format("{0}/{1}", baseUri, occupation.Id));
 
-            Assert.That(occupationData.Id,Is.GreaterThan(0));
+            Assert.That(occupationData.Id, Is.GreaterThan(0));
         }
 
         [Test]
@@ -77,7 +76,7 @@ namespace Tests.Integration.ServiceTests
 
             var occupationsData = HttpHelper.Get<OccupationsData>(string.Format("{0}?constituentId={1}", baseUri, constituent.Id));
 
-            Assert.That(occupationsData.Count,Is.EqualTo(3));
+            Assert.That(occupationsData.Count, Is.EqualTo(3));
         }
 
         [Test]

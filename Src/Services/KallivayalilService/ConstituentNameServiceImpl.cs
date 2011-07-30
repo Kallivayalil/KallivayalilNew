@@ -8,7 +8,7 @@ namespace Kallivayalil
 {
     public class ConstituentNameServiceImpl
     {
-        private ConstituentNameRepository repository;
+        private readonly ConstituentNameRepository repository;
 
 
         private void LoadSalutationType(ConstituentName name)
@@ -29,8 +29,10 @@ namespace Kallivayalil
         public ConstituentName UpdateConstituentName(string id, ConstituentName name)
         {
             LoadSalutationType(name);
-            if(repository.Exists<ConstituentName>(Convert.ToInt32(id)))
+            if (repository.Exists<ConstituentName>(Convert.ToInt32(id)))
+            {
                 return repository.Update(name);
+            }
             return null;
         }
     }

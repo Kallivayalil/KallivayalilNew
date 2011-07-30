@@ -1,9 +1,5 @@
-using System;
-using System.Text;
 using Kallivayalil.Client;
 using NUnit.Framework;
-using System.Security.Cryptography;
-
 
 namespace Tests.Integration.ServiceTests
 {
@@ -15,7 +11,7 @@ namespace Tests.Integration.ServiceTests
         [Test]
         public void ShouldAuthenticateUser()
         {
-            var isAuthenticated = HttpHelper.Get<bool>(string.Format("{0}?userName={1}&password={2}", baseUri, "james@franklin.com","Password"));
+            var isAuthenticated = HttpHelper.Get<bool>(string.Format("{0}?userName={1}&password={2}", baseUri, "james@franklin.com", "Password"));
             Assert.IsTrue(isAuthenticated);
         }
     }

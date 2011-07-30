@@ -1,6 +1,5 @@
 ﻿using System.ServiceModel;
 using System.ServiceModel.Web;
-using System.Web.Services;
 using Kallivayalil.Client;
 
 namespace Kallivayalil
@@ -14,20 +13,20 @@ namespace Kallivayalil
 
         [OperationContract]
         [WebGet(UriTemplate = "/Constituents")]
-        ConstituentsData GetConstituents(); 
-        
+        ConstituentsData GetConstituents();
+
         [OperationContract]
         [WebInvoke(UriTemplate = "/Constituents/{id}", Method = "DELETE")]
         void DeleteConstituent(string id);
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "/Constituents" , Method = "POST")]
+        [WebInvoke(UriTemplate = "/Constituents", Method = "POST")]
         ConstituentData CreateConstituent(ConstituentData constituentData);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/Constituents/{id}", Method = "PUT")]
         ConstituentData UpdateConstituent(string id, ConstituentData constituentData);
-        
+
         [OperationContract]
         [WebInvoke(UriTemplate = "/ConstituentNames/{id}", Method = "PUT")]
         ConstituentNameData UpdateConstituentName(string id, ConstituentNameData nameData);
@@ -35,7 +34,7 @@ namespace Kallivayalil
         [OperationContract]
         [WebInvoke(UriTemplate = "/Addresses?constituentId={constituentId}", Method = "POST")]
         AddressData CreateAddress(string constituentId, AddressData addressData);
-       
+
         [OperationContract]
         [WebInvoke(UriTemplate = "/Addresses/{id}", Method = "PUT")]
         AddressData UpdateAddress(string id, AddressData addressData);
@@ -46,8 +45,8 @@ namespace Kallivayalil
 
         [OperationContract]
         [WebGet(UriTemplate = "/Addresses/{id}")]
-        AddressData GetAddress(string id);  
-        
+        AddressData GetAddress(string id);
+
         [OperationContract]
         [WebGet(UriTemplate = "/Addresses?constituentId={constituentId}")]
         AddressesData GetAddresses(string constituentId);
@@ -90,8 +89,8 @@ namespace Kallivayalil
 
         [OperationContract]
         [WebGet(UriTemplate = "/Emails?constituentId={constituentId}")]
-        EmailsData GetEmails(string constituentId); 
-          
+        EmailsData GetEmails(string constituentId);
+
         [OperationContract]
         [WebInvoke(UriTemplate = "/EducationDetails?constituentId={constituentId}", Method = "POST")]
         EducationDetailData CreateEducationDetail(string constituentId, EducationDetailData educationDetailData);
@@ -135,31 +134,30 @@ namespace Kallivayalil
 
         [OperationContract]
         [WebGet(UriTemplate = "/OccupationTypes")]
-        OccupationTypesData GetOccupationTypes();  
+        OccupationTypesData GetOccupationTypes();
 
         [OperationContract]
         [WebGet(UriTemplate = "/EducationTypes")]
-        EducationTypesData GetEducationTypes();  
-        
+        EducationTypesData GetEducationTypes();
+
         [OperationContract]
         [WebGet(UriTemplate = "/PhoneTypes")]
-        PhoneTypesData GetPhoneTypes(); 
-        
+        PhoneTypesData GetPhoneTypes();
+
         [OperationContract]
         [WebGet(UriTemplate = "/EmailTypes")]
-        EmailTypesData GetEmailTypes(); 
-        
+        EmailTypesData GetEmailTypes();
+
         [OperationContract]
         [WebGet(UriTemplate = "/AddressTypes")]
-        AddressTypesData GetAddressTypes();  
-        
+        AddressTypesData GetAddressTypes();
+
         [OperationContract]
         [WebGet(UriTemplate = "/SalutationTypes")]
         SalutationTypesData GetSalutationTypes();
 
         [OperationContract]
         [WebGet(UriTemplate = "/Authenticate?username={username}&password={password}")]
-        bool Authenticate(string username,string password);  
-
+        bool Authenticate(string username, string password);
     }
 }

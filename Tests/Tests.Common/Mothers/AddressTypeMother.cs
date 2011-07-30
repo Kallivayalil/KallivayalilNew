@@ -1,4 +1,3 @@
-using Kallivayalil.Domain;
 using Kallivayalil.Domain.ReferenceData;
 
 namespace Tests.Common.Mothers

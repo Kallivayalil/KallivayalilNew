@@ -1,7 +1,5 @@
-using System;
 using System.IO;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace Tests.Integration
 {
@@ -12,7 +10,7 @@ namespace Tests.Integration
             var memoryStream = new MemoryStream();
 
             Rijndael algorithm = Rijndael.Create();
-            
+
             algorithm.Key = Key;
             algorithm.KeySize = 192;
 
@@ -24,7 +22,7 @@ namespace Tests.Integration
             return encryptedData;
         }
 
-        public  static byte[] Decrypt(byte[] cipherData, byte[] Key)
+        public static byte[] Decrypt(byte[] cipherData, byte[] Key)
         {
             var memoryStream = new MemoryStream();
 
@@ -44,5 +42,4 @@ namespace Tests.Integration
             return decryptedData;
         }
     }
-    
 }

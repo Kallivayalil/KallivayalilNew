@@ -6,11 +6,13 @@ namespace Kallivayalil.Common
 {
     public class TimeStampListener : AbstractPersistenceListener, IPreInsertEventListener, IPreUpdateEventListener
     {
-
         public bool OnPreInsert(PreInsertEvent preInsertEvent)
         {
             var entity = preInsertEvent.Entity as Entity;
-            if (entity == null) return false;
+            if (entity == null)
+            {
+                return false;
+            }
 
             var userName = "bla";
             var now = DateTime.Now;
@@ -31,13 +33,16 @@ namespace Kallivayalil.Common
         public bool OnPreUpdate(PreUpdateEvent preUpdateEvent)
         {
             var entity = preUpdateEvent.Entity as Entity;
-            if (entity == null) return false;
+            if (entity == null)
+            {
+                return false;
+            }
 
             var now = DateTime.Now;
 
             Set(preUpdateEvent.Persister, preUpdateEvent.State, "UpdatedDateTime", now);
 
-            var userName="bla";
+            var userName = "bla";
             Set(preUpdateEvent.Persister, preUpdateEvent.State, "UpdatedBy", userName);
 
             entity.UpdatedDateTime = now;
@@ -49,7 +54,10 @@ namespace Kallivayalil.Common
         private static void Set(IEntityPersister persister, object[] locale, string propertyName, object value)
         {
             var index = Array.IndexOf(persister.PropertyNames, propertyName);
-            if (index == -1) return;
+            if (index == -1)
+            {
+                return;
+            }
             locale[index] = value;
         }
     }

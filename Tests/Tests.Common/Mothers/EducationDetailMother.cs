@@ -7,17 +7,15 @@ namespace Tests.Common.Mothers
     {
         public static EducationDetail School(Constituent constituent)
         {
-            return new EducationDetail()
+            return new EducationDetail
                        {
-                           Constituent = constituent, 
+                           Constituent = constituent,
                            Qualification = "10th Grade",
                            InstituteName = "SHY",
-                           InstituteLocation = "Yercaud", 
-                           YearOfGraduation = DateTime.Now.ToString(),
+                           InstituteLocation = "Yercaud",
+                           YearOfGraduation = DateTime.Now.Date.ToShortDateString(),
                            Type = EducationDetailTypeMother.School()
                        };
         }
-
-        
     }
 }

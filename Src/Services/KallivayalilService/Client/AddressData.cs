@@ -8,34 +8,34 @@ namespace Kallivayalil.Client
     public class AddressesData : List<AddressData> {}
 
     [DataContract(Namespace = "")]
-    public class AddressData 
+    public class AddressData
     {
         [DataMember]
         public int Id { get; set; }
 
         [DataMember]
-        public string Line1{ get; set; } 
-        
+        public string Line1 { get; set; }
+
         [DataMember]
-        public string Line2{ get; set; }  
-        
+        public string Line2 { get; set; }
+
         [DataMember]
-        public string Country{ get; set; }  
-        
+        public string Country { get; set; }
+
         [DataMember]
-        public string State { get; set; } 
-        
+        public string State { get; set; }
+
         [DataMember]
-        public string City { get; set; }  
-        
+        public string City { get; set; }
+
         [DataMember]
-        public string PostCode { get; set; }  
-        
+        public string PostCode { get; set; }
+
         [DataMember]
         public LinkData Constituent { get; set; }
-        
+
         [DataMember]
-        public AddressTypeData Type{ get; set; }
+        public AddressTypeData Type { get; set; }
 
         [DataMember]
         public DateTime? CreatedDateTime { get; set; }

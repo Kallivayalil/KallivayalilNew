@@ -76,6 +76,7 @@
     <Compile Include="Repositories\EducationDetailRepository.cs" />
     <Compile Include="Repositories\EmailRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\ISubEntityRepository.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\OccupationRepository.cs" />
     <Compile Include="Repositories\PhoneRepository.cs" />

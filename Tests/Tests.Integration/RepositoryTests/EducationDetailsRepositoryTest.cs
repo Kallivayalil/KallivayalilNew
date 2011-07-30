@@ -37,7 +37,7 @@ namespace Tests.Integration.RepositoryTests
         {
             var educationDetail = educationDetailRepository.Save(EducationDetailMother.School(savedConstituent));
 
-            Assert.That(educationDetail.Id,Is.GreaterThan(0));
+            Assert.That(educationDetail.Id, Is.GreaterThan(0));
         }
 
 
@@ -53,7 +53,7 @@ namespace Tests.Integration.RepositoryTests
             savedEducationalDetail.Qualification = newQualification;
 
             var updatedEducationDetail = educationDetailRepository.Update(savedEducationalDetail);
-            Assert.That(updatedEducationDetail.InstituteLocation,Is.EqualTo(newInstituteLocation));
+            Assert.That(updatedEducationDetail.InstituteLocation, Is.EqualTo(newInstituteLocation));
             Assert.That(updatedEducationDetail.InstituteName, Is.EqualTo(newInstituteName));
             Assert.That(updatedEducationDetail.Qualification, Is.EqualTo(newQualification));
         }
@@ -62,10 +62,10 @@ namespace Tests.Integration.RepositoryTests
         public void ShouldLoadExistingEducationDetail()
         {
             var educationDetail = educationDetailRepository.Load(savedEducationalDetail.Id);
-           
+
             Assert.IsNotNull(educationDetail);
 
-            Assert.That(educationDetail.Id,Is.EqualTo(savedEducationalDetail.Id));
+            Assert.That(educationDetail.Id, Is.EqualTo(savedEducationalDetail.Id));
         }
 
         [Test]
@@ -84,8 +84,7 @@ namespace Tests.Integration.RepositoryTests
 
             var educationDetails = educationDetailRepository.LoadAll(savedConstituent);
 
-            Assert.That(educationDetails.Count,Is.EqualTo(2));
+            Assert.That(educationDetails.Count, Is.EqualTo(2));
         }
-
     }
 }

@@ -1,5 +1,4 @@
 using Kallivayalil.Domain;
-using Kallivayalil.Domain.ReferenceData;
 
 namespace Tests.Common.Mothers
 {
@@ -9,6 +8,5 @@ namespace Tests.Common.Mothers
         {
             return new Email {Constituent = constituent, Address = "james.franklin@kallivayalil.com", Type = EmailTypeMother.Official()};
         }
-
     }
 }

@@ -24,7 +24,6 @@ namespace Tests.Integration.RepositoryTests
             savedAddress = testDataHelper.CreateAddress(AddressMother.SanFrancisco(savedConstituent));
             occupationRepository = new OccupationRepository(testDataHelper.session);
             savedOccupation = testDataHelper.CreateOccupation(OccupationMother.Doctor(savedConstituent, savedAddress));
-
         }
 
         [TearDown]
@@ -40,7 +39,7 @@ namespace Tests.Integration.RepositoryTests
         public void ShouldSaveOccupation()
         {
             var occupation = occupationRepository.Save(OccupationMother.Doctor(savedConstituent));
-            Assert.That(occupation.Id,Is.GreaterThan(0));
+            Assert.That(occupation.Id, Is.GreaterThan(0));
             Assert.IsNull(occupation.Address);
         }
 
@@ -49,8 +48,7 @@ namespace Tests.Integration.RepositoryTests
         {
             var occupation = occupationRepository.Save(OccupationMother.Doctor(savedConstituent, savedAddress));
             Assert.That(occupation.Id, Is.GreaterThan(0));
-            Assert.That(occupation.Address.Id,Is.EqualTo(savedAddress.Id));
-
+            Assert.That(occupation.Address.Id, Is.EqualTo(savedAddress.Id));
         }
 
         [Test]
@@ -64,8 +62,8 @@ namespace Tests.Integration.RepositoryTests
             savedOccupation.Address = null;
 
             var updatedOccupation = occupationRepository.Update(savedOccupation);
-            Assert.That(updatedOccupation.OccupationName,Is.EqualTo(newOccupationName));
-            Assert.That(updatedOccupation.Description,Is.EqualTo(newDescription));
+            Assert.That(updatedOccupation.OccupationName, Is.EqualTo(newOccupationName));
+            Assert.That(updatedOccupation.Description, Is.EqualTo(newDescription));
             Assert.IsNull(updatedOccupation.Address);
         }
 
@@ -73,9 +71,9 @@ namespace Tests.Integration.RepositoryTests
         public void ShouldLoadExistingOccupation()
         {
             var occupation = occupationRepository.Load(savedOccupation.Id);
-           
+
             Assert.IsNotNull(occupation);
-            Assert.That(occupation.Id,Is.EqualTo(savedOccupation.Id));
+            Assert.That(occupation.Id, Is.EqualTo(savedOccupation.Id));
         }
 
         [Test]
@@ -94,17 +92,17 @@ namespace Tests.Integration.RepositoryTests
 
             var occupations = occupationRepository.LoadAll(savedConstituent);
 
-            Assert.That(occupations.Count,Is.EqualTo(2));
+            Assert.That(occupations.Count, Is.EqualTo(2));
         }
 
         [Test]
         public void ShouldLoadAllOccupationsForAnAddress()
         {
-            testDataHelper.CreateOccupation(OccupationMother.Doctor(savedConstituent,savedAddress));
+            testDataHelper.CreateOccupation(OccupationMother.Doctor(savedConstituent, savedAddress));
 
             var occupations = occupationRepository.LoadAll(savedAddress);
 
-            Assert.That(occupations.Count,Is.EqualTo(2));
+            Assert.That(occupations.Count, Is.EqualTo(2));
         }
     }
 }

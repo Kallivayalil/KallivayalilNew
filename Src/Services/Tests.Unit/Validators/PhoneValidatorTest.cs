@@ -27,7 +27,7 @@ namespace Tests.Unit.Validators
             ValidationResult result = validator.Validate(mobile);
 
             Assert.IsTrue(result.IsValid);
-            Assert.That(result.Errors.Count,Is.EqualTo(0));
+            Assert.That(result.Errors.Count, Is.EqualTo(0));
         }
 
         [Test]
@@ -46,7 +46,6 @@ namespace Tests.Unit.Validators
             AssertInavlidField(result, "Constituent", MessageConstants.FieldCannotBeNull);
         }
 
-     
 
         [Test]
         public void NumberValidation()
@@ -59,7 +58,5 @@ namespace Tests.Unit.Validators
             result = validator.Validate(mobile);
             AssertInavlidField(result, "Number", MessageConstants.FieldTooLong);
         }
-
-
     }
 }

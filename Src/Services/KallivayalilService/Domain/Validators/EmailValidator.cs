@@ -7,7 +7,6 @@ namespace Kallivayalil.Domain.Validators
     {
         public EmailValidator()
         {
-
             RuleFor(email => email.Type).NotNull().WithMessage(MessageConstants.FieldCannotBeNull);
 
             RuleFor(email => email.Address).Must(s => !string.IsNullOrEmpty(s)).WithMessage(MessageConstants.FieldCannotBeNullOrEmpty);

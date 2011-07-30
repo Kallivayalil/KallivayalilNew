@@ -20,13 +20,12 @@ namespace Tests.Integration.ServiceTests
             constituent.Name.LastName = "Smith";
             var mapper = new AutoDataContractMapper();
             var nameData = new ConstituentNameData();
-            mapper.Map(constituent.Name,nameData);
-            var constituentName = HttpHelper.Put(string.Format("{0}/{1}",baseUri,nameData.Id),nameData);
+            mapper.Map(constituent.Name, nameData);
+            var constituentName = HttpHelper.Put(string.Format("{0}/{1}", baseUri, nameData.Id), nameData);
 
             Assert.IsNotNull(constituentName);
-            Assert.That(constituentName.FirstName,Is.EqualTo("John"));
-            Assert.That(constituentName.LastName,Is.EqualTo("Smith"));
+            Assert.That(constituentName.FirstName, Is.EqualTo("John"));
+            Assert.That(constituentName.LastName, Is.EqualTo("Smith"));
         }
-
     }
 }

@@ -7,7 +7,6 @@ namespace Kallivayalil.Domain.Validators
     {
         public PhoneValidator()
         {
-
             RuleFor(email => email.Type).NotNull().WithMessage(MessageConstants.FieldCannotBeNull);
 
             RuleFor(email => email.Number).Must(s => !string.IsNullOrEmpty(s)).WithMessage(MessageConstants.FieldCannotBeNullOrEmpty);

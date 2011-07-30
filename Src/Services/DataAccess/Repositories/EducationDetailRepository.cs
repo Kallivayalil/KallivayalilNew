@@ -54,6 +54,5 @@ namespace Kallivayalil.DataAccess.Repositories
             criteria.Add(Restrictions.Eq("Constituent.Id", constituent.Id));
             return criteria.List<EducationDetail>();
         }
-
     }
 }

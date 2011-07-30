@@ -24,7 +24,6 @@ namespace Tests.Integration.RepositoryTests
             savedAddress = testDataHelper.CreateAddress(AddressMother.SanFrancisco(savedConstituent));
             phoneRepository = new PhoneRepository(testDataHelper.session);
             savedPhone = testDataHelper.CreatePhone(PhoneMother.Mobile(savedConstituent, savedAddress));
-
         }
 
         [TearDown]
@@ -40,7 +39,7 @@ namespace Tests.Integration.RepositoryTests
         public void ShouldSavePhone()
         {
             var phone = phoneRepository.Save(PhoneMother.Mobile(savedConstituent));
-            Assert.That(phone.Id,Is.GreaterThan(0));
+            Assert.That(phone.Id, Is.GreaterThan(0));
             Assert.IsNull(phone.Address);
         }
 
@@ -49,8 +48,7 @@ namespace Tests.Integration.RepositoryTests
         {
             var phone = phoneRepository.Save(PhoneMother.Mobile(savedConstituent, savedAddress));
             Assert.That(phone.Id, Is.GreaterThan(0));
-            Assert.That(phone.Address.Id,Is.EqualTo(savedAddress.Id));
-
+            Assert.That(phone.Address.Id, Is.EqualTo(savedAddress.Id));
         }
 
         [Test]
@@ -62,7 +60,7 @@ namespace Tests.Integration.RepositoryTests
             savedPhone.Address = null;
 
             var updatedPhone = phoneRepository.Update(savedPhone);
-            Assert.That(updatedPhone.Number,Is.EqualTo(newNumber));
+            Assert.That(updatedPhone.Number, Is.EqualTo(newNumber));
             Assert.IsNull(updatedPhone.Address);
         }
 
@@ -70,9 +68,9 @@ namespace Tests.Integration.RepositoryTests
         public void ShouldLoadExistingPhone()
         {
             var phone = phoneRepository.Load(savedPhone.Id);
-           
+
             Assert.IsNotNull(phone);
-            Assert.That(phone.Id,Is.EqualTo(savedPhone.Id));
+            Assert.That(phone.Id, Is.EqualTo(savedPhone.Id));
         }
 
         [Test]
@@ -91,17 +89,17 @@ namespace Tests.Integration.RepositoryTests
 
             var phones = phoneRepository.LoadAll(savedConstituent);
 
-            Assert.That(phones.Count,Is.EqualTo(2));
+            Assert.That(phones.Count, Is.EqualTo(2));
         }
 
         [Test]
         public void ShouldLoadAllPhonesForAnAddress()
         {
-            testDataHelper.CreatePhone(PhoneMother.Mobile(savedConstituent,savedAddress));
+            testDataHelper.CreatePhone(PhoneMother.Mobile(savedConstituent, savedAddress));
 
             var phones = phoneRepository.LoadAll(savedAddress);
 
-            Assert.That(phones.Count,Is.EqualTo(2));
+            Assert.That(phones.Count, Is.EqualTo(2));
         }
     }
 }

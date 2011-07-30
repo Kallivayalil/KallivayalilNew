@@ -1,5 +1,4 @@
-﻿using System;
-using Kallivayalil.Domain;
+﻿using Kallivayalil.Domain;
 using NHibernate;
 
 namespace Kallivayalil.DataAccess.Repositories
@@ -13,7 +12,7 @@ namespace Kallivayalil.DataAccess.Repositories
         {
             using (var txn = session.BeginTransaction())
             {
-                var savedConstituentName = SaveOrUpdate(constituentName,txn);
+                var savedConstituentName = SaveOrUpdate(constituentName, txn);
                 txn.Commit();
                 return savedConstituentName;
             }
@@ -23,7 +22,7 @@ namespace Kallivayalil.DataAccess.Repositories
         {
             using (var txn = session.BeginTransaction())
             {
-                var savedConstituentName = SaveOrUpdate(constituentName,txn);
+                var savedConstituentName = SaveOrUpdate(constituentName, txn);
                 txn.Commit();
                 return savedConstituentName;
             }
@@ -34,7 +33,7 @@ namespace Kallivayalil.DataAccess.Repositories
             using (var txn = session.BeginTransaction())
             {
                 var constituentName = session.Load<ConstituentName>(id);
-                if(constituentName!=null)
+                if (constituentName != null)
                 {
                     session.Delete(constituentName);
                 }

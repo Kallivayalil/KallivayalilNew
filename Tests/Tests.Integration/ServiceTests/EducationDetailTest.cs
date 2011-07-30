@@ -32,7 +32,6 @@ namespace Tests.Integration.ServiceTests
         }
 
 
-
         [Test]
         public void ShouldSaveEducationDetail()
         {
@@ -52,7 +51,7 @@ namespace Tests.Integration.ServiceTests
             educationDetailData.Qualification = qualification;
             var updatedData = HttpHelper.Put(string.Format("{0}/{1}", baseUri, educationDetail.Id), educationDetailData);
 
-            Assert.That(updatedData.Qualification,Is.EqualTo(qualification));
+            Assert.That(updatedData.Qualification, Is.EqualTo(qualification));
         }
 
         [Test]
@@ -62,7 +61,7 @@ namespace Tests.Integration.ServiceTests
 
             var educationDetailData = HttpHelper.Get<EducationDetailData>(string.Format("{0}/{1}", baseUri, educationDetail.Id));
 
-            Assert.That(educationDetailData.Id,Is.GreaterThan(0));
+            Assert.That(educationDetailData.Id, Is.GreaterThan(0));
         }
 
         [Test]
@@ -74,7 +73,7 @@ namespace Tests.Integration.ServiceTests
 
             var educationDetailsData = HttpHelper.Get<EducationDetailsData>(string.Format("{0}?constituentId={1}", baseUri, constituent.Id));
 
-            Assert.That(educationDetailsData.Count,Is.EqualTo(3));
+            Assert.That(educationDetailsData.Count, Is.EqualTo(3));
         }
 
         [Test]

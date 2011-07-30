@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Kallivayalil.Domain;
 using NHibernate;
@@ -6,26 +5,26 @@ using NHibernate.Criterion;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
-    public class AddressRepository : Repository
+    public class AddressRepository : Repository, ISubEntityRepository<Address>
     {
         public AddressRepository(ISession session) : base(session) {}
         public AddressRepository() : base(SessionFactory.OpenSession()) {}
 
-        public Address Save(Address address)
+        public Address Save(Address entity)
         {
             using (var txn = session.BeginTransaction())
             {
-                var savedAddress = SaveOrUpdate(address,txn);
+                var savedAddress = SaveOrUpdate(entity, txn);
                 txn.Commit();
                 return savedAddress;
             }
         }
 
-        public Address Update(Address address)
+        public Address Update(Address entity)
         {
             using (var txn = session.BeginTransaction())
             {
-                var savedAddress = SaveOrUpdate(address, txn);
+                var savedAddress = SaveOrUpdate(entity, txn);
                 txn.Commit();
                 return savedAddress;
             }
@@ -56,6 +55,12 @@ namespace Kallivayalil.DataAccess.Repositories
             return criteria.List<Address>();
         }
 
-
+        public Address GetPrimary(int constituentId)
+        {
+            var criteria = session.CreateCriteria<Address>();
+            criteria.Add(Restrictions.Eq("Constituent.Id", constituentId));
+            criteria.Add(Restrictions.Eq("IsPrimary", true));
+            return criteria.UniqueResult<Address>();
+        }
     }
 }

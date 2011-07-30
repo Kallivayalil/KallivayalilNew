@@ -6,7 +6,7 @@ namespace Tests.Common.Mothers
     {
         public static Occupation Doctor(Constituent constituent)
         {
-            return new Occupation { Constituent = constituent, OccupationName = "Doctor",Description = "Senior Doc", Type = OccupationTypeMother.Primary() };
+            return new Occupation {Constituent = constituent, OccupationName = "Doctor", Description = "Senior Doc", Type = OccupationTypeMother.Primary()};
         }
 
         public static Occupation Doctor(Constituent constituent, Address address)

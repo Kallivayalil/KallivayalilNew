@@ -17,7 +17,6 @@ namespace Tests.Integration.RepositoryTests
         [SetUp]
         public void SetUp()
         {
-
             testDataHelper = new TestDataHelper();
             repository = new ConstituentNameRepository(testDataHelper.session);
 
@@ -34,20 +33,19 @@ namespace Tests.Integration.RepositoryTests
 
         [Test]
         public void ShouldSaveConstituentName()
-        {            
+        {
             var savedName = new ConstituentNameRepository().Save(jamesFranklin);
 
-            Assert.That(savedName.Id,Is.GreaterThan(0));
+            Assert.That(savedName.Id, Is.GreaterThan(0));
         }
 
         [Test]
         public void ShouldUpdateConstituentName()
         {
-
             savedConstituentName.FirstName = "John";
             var johnFranklin = repository.Update(savedConstituentName);
 
-            Assert.That(johnFranklin.FirstName,Is.EqualTo("John"));
+            Assert.That(johnFranklin.FirstName, Is.EqualTo("John"));
         }
 
         [Test]
@@ -64,8 +62,7 @@ namespace Tests.Integration.RepositoryTests
         {
             var james = repository.Load(savedConstituentName.Id);
 
-            Assert.That(james.Id,Is.EqualTo(savedConstituentName.Id));
-
+            Assert.That(james.Id, Is.EqualTo(savedConstituentName.Id));
         }
     }
 }

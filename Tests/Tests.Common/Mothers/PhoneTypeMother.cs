@@ -6,12 +6,12 @@ namespace Tests.Common.Mothers
     {
         public static PhoneType Mobile()
         {
-            return new PhoneType { Id = 1, Description = "Mobile" };
+            return new PhoneType {Id = 1, Description = "Mobile"};
         }
 
         public static PhoneType Landline()
         {
-            return new PhoneType { Id = 2, Description = "Landline" };
+            return new PhoneType {Id = 2, Description = "Landline"};
         }
     }
 }

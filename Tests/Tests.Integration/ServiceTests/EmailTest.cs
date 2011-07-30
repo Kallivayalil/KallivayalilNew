@@ -50,7 +50,7 @@ namespace Tests.Integration.ServiceTests
             emailData.Address = emailAddress;
             var updatedData = HttpHelper.Put(string.Format("{0}/{1}", baseUri, email.Id), emailData);
 
-            Assert.That(updatedData.Address,Is.EqualTo(emailAddress));
+            Assert.That(updatedData.Address, Is.EqualTo(emailAddress));
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace Tests.Integration.ServiceTests
 
             var emailData = HttpHelper.Get<EmailData>(string.Format("{0}/{1}", baseUri, email.Id));
 
-            Assert.That(emailData.Id,Is.GreaterThan(0));
+            Assert.That(emailData.Id, Is.GreaterThan(0));
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace Tests.Integration.ServiceTests
 
             var emailsData = HttpHelper.Get<EmailsData>(string.Format("{0}?constituentId={1}", baseUri, constituent.Id));
 
-            Assert.That(emailsData.Count,Is.EqualTo(3));
+            Assert.That(emailsData.Count, Is.EqualTo(3));
         }
 
         [Test]

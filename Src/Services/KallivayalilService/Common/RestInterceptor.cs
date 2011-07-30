@@ -7,7 +7,6 @@ namespace Kallivayalil.Common
 {
     public class RestInterceptor : IInterceptor
     {
-
         public void Intercept(IInvocation invocation)
         {
             try
@@ -22,8 +21,7 @@ namespace Kallivayalil.Common
             catch (Exception e)
             {
                 HandleException(e, HttpStatusCode.InternalServerError);
-            } 
-            
+            }
         }
 
         private void HandleException(Exception ex, HttpStatusCode responseStatusCode)

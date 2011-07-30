@@ -7,7 +7,6 @@ namespace Kallivayalil.Domain.Validators
     {
         public AddressValidator()
         {
-
             RuleFor(address => address.Line1).Must(s => !string.IsNullOrEmpty(s)).WithMessage(MessageConstants.FieldCannotBeNullOrEmpty);
             RuleFor(address => address.Line1).Length(0, 100).WithMessage(MessageConstants.FieldTooLong);
 

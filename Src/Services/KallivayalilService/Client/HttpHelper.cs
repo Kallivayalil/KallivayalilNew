@@ -44,7 +44,7 @@ namespace Kallivayalil.Client
 
         public static HttpWebResponse DoHttpGet(string uriString, WebHeaderCollection headers)
         {
-            var request = (HttpWebRequest)WebRequest.Create(uriString);
+            var request = (HttpWebRequest) WebRequest.Create(uriString);
             request.Headers = headers;
             return ExecuteRequestSwallowingExceptions(request);
         }
@@ -57,7 +57,7 @@ namespace Kallivayalil.Client
 
         public static HttpWebResponse DoHttpDelete(string uriString, WebHeaderCollection headers)
         {
-            var request = (HttpWebRequest)WebRequest.Create(uriString);
+            var request = (HttpWebRequest) WebRequest.Create(uriString);
             request.Headers = headers;
             request.Method = "DELETE";
             return ExecuteRequestSwallowingExceptions(request);
@@ -65,7 +65,7 @@ namespace Kallivayalil.Client
 
         public static HttpWebResponse DoHttpDeleteOverPost(string uriString)
         {
-            var request = (HttpWebRequest)WebRequest.Create(uriString);
+            var request = (HttpWebRequest) WebRequest.Create(uriString);
             request.Method = "DELETE"; // So the hmac security will match the server side			
             request.ContentLength = 0;
             request.Method = "POST";
@@ -81,7 +81,7 @@ namespace Kallivayalil.Client
 
         public static HttpWebResponse DoHttpPost(string uriString, string postData, WebHeaderCollection headers)
         {
-            var request = (HttpWebRequest)WebRequest.Create(uriString);
+            var request = (HttpWebRequest) WebRequest.Create(uriString);
             request.Headers = headers;
             request.Method = "POST";
             AddXmlBodyDataToRequest(request, postData);
@@ -91,12 +91,12 @@ namespace Kallivayalil.Client
         public static HttpWebResponse DoHttpPut(string uriString, string putData)
         {
             var webHeaderCollection = new WebHeaderCollection();
-            return DoHttpPut(uriString,putData,webHeaderCollection);
+            return DoHttpPut(uriString, putData, webHeaderCollection);
         }
 
         public static HttpWebResponse DoHttpPut(string uriString, string putData, WebHeaderCollection headers)
         {
-            var request = (HttpWebRequest)WebRequest.Create(uriString);
+            var request = (HttpWebRequest) WebRequest.Create(uriString);
             request.Headers = headers;
             request.Method = "PUT";
             AddXmlBodyDataToRequest(request, putData);
@@ -105,7 +105,7 @@ namespace Kallivayalil.Client
 
         public static HttpWebResponse DoHttpPutOverPost(string uriString, string putData)
         {
-            var request = (HttpWebRequest)WebRequest.Create(uriString);
+            var request = (HttpWebRequest) WebRequest.Create(uriString);
             request.Method = "PUT"; // So the hmac security will match the server side
             AddXmlBodyDataToRequest(request, putData);
             request.Method = "POST";
@@ -118,11 +118,11 @@ namespace Kallivayalil.Client
             HttpWebResponse response;
             try
             {
-                response = (HttpWebResponse)request.GetResponse();
+                response = (HttpWebResponse) request.GetResponse();
             }
             catch (WebException wex)
             {
-                response = (HttpWebResponse)wex.Response;
+                response = (HttpWebResponse) wex.Response;
             }
             return response;
         }
