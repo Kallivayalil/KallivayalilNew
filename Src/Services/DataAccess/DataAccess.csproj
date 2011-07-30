@@ -56,6 +56,7 @@
     <Compile Include="ConfigurationFactory.cs" />
     <Compile Include="Mappings\AbstractEntityMap.cs" />
     <Compile Include="Mappings\AddressMap.cs" />
+    <Compile Include="Mappings\AssociationMap.cs" />
     <Compile Include="Mappings\ConstituentMap.cs" />
     <Compile Include="Mappings\ConstituentNameMap.cs" />
     <Compile Include="Mappings\EducationDetailsMap.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Mappings\OccupationMap.cs" />
     <Compile Include="Mappings\PhoneMap.cs" />
     <Compile Include="Mappings\ReferenceData\AddressTypeMap.cs" />
+    <Compile Include="Mappings\ReferenceData\AssociationTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\EducationTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\EmailTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\OccupationTypeMap.cs" />

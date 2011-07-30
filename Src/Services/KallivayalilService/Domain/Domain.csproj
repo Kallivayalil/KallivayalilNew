@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="Association.cs" />
     <Compile Include="Constituent.cs" />
     <Compile Include="ConstituentName.cs" />
     <Compile Include="EducationDetail.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Phone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceData\AddressType.cs" />
+    <Compile Include="ReferenceData\AssociationType.cs" />
     <Compile Include="ReferenceData\EducationType.cs" />
     <Compile Include="ReferenceData\EmailType.cs" />
     <Compile Include="ReferenceData\OccupationType.cs" />

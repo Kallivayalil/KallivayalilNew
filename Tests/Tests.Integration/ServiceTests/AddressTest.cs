@@ -84,7 +84,7 @@ namespace Tests.Integration.ServiceTests
         {
             var london = testDataHelper.CreateAddress(AddressMother.London(constituent));
 
-            AddressesData addressesData = HttpHelper.Get<AddressesData>(string.Format("{0}?constituentId={1}", baseUri, constituent.Id));
+            var addressesData = HttpHelper.Get<AddressesData>(string.Format("{0}?constituentId={1}", baseUri, constituent.Id));
 
             Assert.That(addressesData.Count, Is.EqualTo(2));
             Assert.That(addressesData.Exists(data => data.Id.Equals(london.Id)));
