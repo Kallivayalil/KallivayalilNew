@@ -3,7 +3,7 @@ using Kallivayalil.Domain.ReferenceData;
 
 namespace Kallivayalil.Domain
 {
-    public class Occupation : Entity
+    public class Occupation : PrimaryEntity
     {
         public virtual OccupationType Type { get; set; }
         public virtual string OccupationName { get; set; }

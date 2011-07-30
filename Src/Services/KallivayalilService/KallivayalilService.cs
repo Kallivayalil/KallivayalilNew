@@ -27,10 +27,10 @@ namespace Kallivayalil
             constituentServiceImpl = new ConstituentServiceImpl();
             nameServiceImpl = new ConstituentNameServiceImpl();
             addressServiceImpl = new AddressServiceImpl(new AddressRepository());
-            phoneServiceImpl = new PhoneServiceImpl();
-            emailServiceImpl = new EmailServiceImpl();
+            phoneServiceImpl = new PhoneServiceImpl(new PhoneRepository(), new ConstituentRepository());
+            emailServiceImpl = new EmailServiceImpl(new EmailRepository());
             loginServiceImpl = new LoginServiceImpl();
-            occupationServiceImpl = new OccupationServiceImpl();
+            occupationServiceImpl = new OccupationServiceImpl(new OccupationRepository(), new ConstituentRepository());
             educationalDetailServiceImpl = new EducationDetailServiceImpl();
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl();

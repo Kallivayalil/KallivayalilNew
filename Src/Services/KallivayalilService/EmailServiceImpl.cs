@@ -7,10 +7,9 @@ using Kallivayalil.Domain.ReferenceData;
 
 namespace Kallivayalil
 {
-    public class EmailServiceImpl
+    public class EmailServiceImpl : BaseServiceImpl<Email>
     {
         private readonly EmailRepository repository;
-
 
         private void LoadEmailType(Email email)
         {
@@ -22,14 +21,15 @@ namespace Kallivayalil
             email.Type = repository.Load<EmailType>(email.Type.Id);
         }
 
-        public EmailServiceImpl()
+        public EmailServiceImpl(EmailRepository emailRepository) : base(emailRepository)
         {
-            repository = new EmailRepository();
+            repository = emailRepository;
         }
 
         public Email CreateEmail(Email email)
         {
             LoadEmailType(email);
+            OneEntityShouldBePrimary(email);
             return repository.Save(email);
         }
 
@@ -37,6 +37,7 @@ namespace Kallivayalil
         public Email UpdateEmail(Email email)
         {
             LoadEmailType(email);
+            OneEntityShouldBePrimary(email);
             return repository.Update(email);
         }
 

@@ -7,7 +7,7 @@ using Kallivayalil.Domain.ReferenceData;
 
 namespace Kallivayalil
 {
-    public class PhoneServiceImpl
+    public class PhoneServiceImpl : BaseServiceImpl<Phone>
     {
         private readonly PhoneRepository repository;
         private readonly ConstituentRepository constituentRepository;
@@ -22,23 +22,23 @@ namespace Kallivayalil
             phone.Type = repository.Load<PhoneType>(phone.Type.Id);
         }
 
-
-        public PhoneServiceImpl()
+        public PhoneServiceImpl(PhoneRepository phoneRepository, ConstituentRepository constituentRepository) : base(phoneRepository)
         {
-            repository = new PhoneRepository();
-            constituentRepository = new ConstituentRepository();
+            repository = phoneRepository;
+            this.constituentRepository = constituentRepository;
         }
 
         public Phone CreatePhone(Phone phone)
         {
             LoadPhoneType(phone);
+            OneEntityShouldBePrimary(phone);
             return repository.Save(phone);
         }
-
 
         public Phone UpdatePhone(Phone phone)
         {
             LoadPhoneType(phone);
+            OneEntityShouldBePrimary(phone);
             return repository.Update(phone);
         }
 

@@ -7,7 +7,7 @@ using Kallivayalil.Domain.ReferenceData;
 
 namespace Kallivayalil
 {
-    public class OccupationServiceImpl
+    public class OccupationServiceImpl : BaseServiceImpl<Occupation>
     {
         private readonly OccupationRepository repository;
         private readonly ConstituentRepository constituentRepository;
@@ -23,10 +23,10 @@ namespace Kallivayalil
         }
 
 
-        public OccupationServiceImpl()
+        public OccupationServiceImpl(OccupationRepository occupationRepository, ConstituentRepository constituentRepository) : base(occupationRepository)
         {
-            repository = new OccupationRepository();
-            constituentRepository = new ConstituentRepository();
+            repository = occupationRepository;
+            this.constituentRepository = constituentRepository;
         }
 
         public Occupation CreateOccupation(Occupation occupation)

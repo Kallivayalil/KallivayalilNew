@@ -5,7 +5,7 @@ using NHibernate.Criterion;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
-    public class PhoneRepository : Repository
+    public class PhoneRepository : Repository, ISubEntityRepository<Phone>
     {
         public PhoneRepository(ISession session) : base(session) {}
         public PhoneRepository() : base(SessionFactory.OpenSession()) {}
@@ -35,6 +35,21 @@ namespace Kallivayalil.DataAccess.Repositories
             return session.Get<Phone>(id);
         }
 
+        public IList<Phone> LoadAll(int constituentId)
+        {
+            var criteria = session.CreateCriteria<Phone>();
+            criteria.Add(Restrictions.Eq("Constituent.Id", constituentId));
+            return criteria.List<Phone>();
+        }
+
+        public Phone GetPrimary(int constituentId)
+        {
+            var criteria = session.CreateCriteria<Phone>();
+            criteria.Add(Restrictions.Eq("Constituent.Id", constituentId));
+            criteria.Add(Restrictions.Eq("IsPrimary", true));
+            return criteria.UniqueResult<Phone>();
+        }
+
         public void Delete(int id)
         {
             using (var txn = session.BeginTransaction())
@@ -47,7 +62,6 @@ namespace Kallivayalil.DataAccess.Repositories
                 txn.Commit();
             }
         }
-
         public IList<Phone> LoadAll(Constituent constituent)
         {
             var criteria = session.CreateCriteria<Phone>();

@@ -17,6 +17,7 @@ CREATE TABLE [dbo].[Occupations](
 	[AddressId] [int] NULL,
 	[OccupationName] [varchar](20) NOT NULL,
 	[Description] [varchar](20) NULL,
+	[IsPrimary] [bit] NOT NULL default 1,
 	[ConstituentId] [int] NOT NULL,
 	[CreatedDateTime] [datetime] NOT NULL,
 	[CreatedBy] [varchar](50) NOT NULL,

@@ -5,7 +5,7 @@ using NHibernate.Criterion;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
-    public class EmailRepository : Repository
+    public class EmailRepository : Repository, ISubEntityRepository<Email>
     {
         public EmailRepository(ISession session) : base(session) {}
         public EmailRepository() : base(SessionFactory.OpenSession()) {}
@@ -41,6 +41,14 @@ namespace Kallivayalil.DataAccess.Repositories
             var criteria = session.CreateCriteria<Email>();
             criteria.Add(Restrictions.Eq("Constituent.Id", constituentId));
             return criteria.List<Email>();
+        }
+
+        public Email GetPrimary(int constituentId)
+        {
+            var criteria = session.CreateCriteria<Email>();
+            criteria.Add(Restrictions.Eq("Constituent.Id", constituentId));
+            criteria.Add(Restrictions.Eq("IsPrimary", true));
+            return criteria.UniqueResult<Email>();
         }
 
         public void Delete(int id)

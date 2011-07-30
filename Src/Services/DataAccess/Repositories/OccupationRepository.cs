@@ -5,7 +5,7 @@ using NHibernate.Criterion;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
-    public class OccupationRepository : Repository
+    public class OccupationRepository : Repository,ISubEntityRepository<Occupation>
     {
         public OccupationRepository(ISession session) : base(session) {}
         public OccupationRepository() : base(SessionFactory.OpenSession()) {}
@@ -33,6 +33,21 @@ namespace Kallivayalil.DataAccess.Repositories
         public Occupation Load(int id)
         {
             return session.Get<Occupation>(id);
+        }
+
+        public IList<Occupation> LoadAll(int constituentId)
+        {
+            var criteria = session.CreateCriteria<Occupation>();
+            criteria.Add(Restrictions.Eq("Constituent.Id", constituentId));
+            return criteria.List<Occupation>();
+        }
+
+        public Occupation GetPrimary(int constituentId)
+        {
+            var criteria = session.CreateCriteria<Occupation>();
+            criteria.Add(Restrictions.Eq("Constituent.Id", constituentId));
+            criteria.Add(Restrictions.Eq("IsPrimary", true));
+            return criteria.UniqueResult<Occupation>();
         }
 
         public void Delete(int id)
