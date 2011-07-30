@@ -20,6 +20,9 @@ namespace Kallivayalil.Client
         public LinkData Constituent { get; set; }
 
         [DataMember]
+        public bool IsPrimary { get; set; }
+
+        [DataMember]
         public EmailTypeData Type { get; set; }
 
         [DataMember]

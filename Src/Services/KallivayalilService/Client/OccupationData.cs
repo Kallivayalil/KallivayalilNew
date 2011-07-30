@@ -26,6 +26,9 @@ namespace Kallivayalil.Client
         public LinkData Constituent { get; set; }
 
         [DataMember]
+        public bool IsPrimary { get; set; }
+
+        [DataMember]
         public OccupationTypeData Type { get; set; }
 
         [DataMember]

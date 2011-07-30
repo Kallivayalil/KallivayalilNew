@@ -4,7 +4,7 @@ using Kallivayalil.Domain;
 
 namespace Kallivayalil
 {
-    public class BaseServiceImpl<T>
+    public class BaseServiceImpl<T> where T : PrimaryEntity
     {
         private readonly ISubEntityRepository<T> repository;
 
@@ -23,10 +23,17 @@ namespace Kallivayalil
 
             if (!isPrimary && !Entity.IsNull(constituent))
             {
-                var existingPrimary = repository.GetPrimary(constituent.Id) as Entity;
+                var existingPrimary = repository.GetPrimary(constituent.Id);
                 if (Entity.IsNull(existingPrimary))
                 {
                     isPrimaryProperty.SetValue(entity, true, null);
+                }
+                else
+                {
+                    if (entity.Id == existingPrimary.Id)
+                    {
+                        throw new BadRequestException(string.Format("Can not update a Primary to Non-Primary {0}", typeof (T).Name));
+                    }
                 }
             }
         }
@@ -42,9 +49,11 @@ namespace Kallivayalil
             if (isPrimary && !Entity.IsNull(constituent))
             {
                 var existingPrimary = repository.GetPrimary(constituent.Id);
-                isPrimaryProperty.SetValue(existingPrimary, false, null);
-
-                repository.Save(existingPrimary);
+                if (!Entity.IsNull(existingPrimary))
+                {
+                    isPrimaryProperty.SetValue(existingPrimary, false, null);
+                    repository.Save(existingPrimary);
+                }
             }
         }
 
