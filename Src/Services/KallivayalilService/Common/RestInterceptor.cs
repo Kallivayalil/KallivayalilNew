@@ -17,6 +17,10 @@ namespace Kallivayalil.Common
             catch (NotFoundException e)
             {
                 HandleException(e, HttpStatusCode.NotFound);
+            } 
+            catch (BadRequestException e)
+            {
+                HandleException(e, HttpStatusCode.BadRequest);
             }
             catch (Exception e)
             {

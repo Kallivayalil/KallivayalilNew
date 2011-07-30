@@ -34,12 +34,47 @@ namespace Tests.Integration.ServiceTests
         }
 
         [Test]
-        public void ShouldSaveConstituentAddress()
+        public void ShouldSaveFirstAddressAsPrimaryAddress()
         {
             var savedSanFrancisco = HttpHelper.Post(string.Format("{0}?constituentId={1}", baseUri, constituent.Id), AddressDataMother.SanFrancisco(constituent));
 
             Assert.IsNotNull(savedSanFrancisco);
             Assert.That(savedSanFrancisco.Id, Is.GreaterThan(0));
+            Assert.True(savedSanFrancisco.IsPrimary);
+        }
+
+        [Test]
+        public void ShouldThrowBadRequestOnUpdatingAPrimaryAddressToNonPrimary()
+        {
+            var savedSanFrancisco = HttpHelper.Post(string.Format("{0}?constituentId={1}", baseUri, constituent.Id), AddressDataMother.SanFrancisco(constituent));
+
+            Assert.IsNotNull(savedSanFrancisco);
+            Assert.That(savedSanFrancisco.Id, Is.GreaterThan(0));
+            Assert.True(savedSanFrancisco.IsPrimary);
+
+            savedSanFrancisco.IsPrimary = false;
+            var response = HttpHelper.DoHttpPut(string.Format("{0}/{1}", baseUri, savedSanFrancisco.Id), new DataContractHelper().Serialize(savedSanFrancisco));
+
+            Assert.That(response.StatusCode,Is.EqualTo(HttpStatusCode.BadRequest));
+            
+        }
+        
+        [Test]
+        public void ShouldTogglePrimaryAddress()
+        {
+            var savedSanFrancisco = HttpHelper.Post(string.Format("{0}?constituentId={1}", baseUri, constituent.Id), AddressDataMother.SanFrancisco(constituent));
+
+            Assert.IsNotNull(savedSanFrancisco);
+            Assert.That(savedSanFrancisco.Id, Is.GreaterThan(0));
+            Assert.True(savedSanFrancisco.IsPrimary);
+
+            var savedLondon = HttpHelper.Post(string.Format("{0}?constituentId={1}", baseUri, constituent.Id), AddressDataMother.London(constituent));
+            Assert.IsNotNull(savedLondon);
+            Assert.That(savedLondon.Id, Is.GreaterThan(0));
+            Assert.True(savedLondon.IsPrimary);
+
+            var sanfrancisco = HttpHelper.Get<AddressData>(string.Format("{0}/{1}", baseUri, savedSanFrancisco.Id));
+            Assert.False(sanfrancisco.IsPrimary);
         }
 
         [Test]

@@ -23,6 +23,9 @@ namespace Kallivayalil.Client
         public LinkData Constituent { get; set; }
 
         [DataMember]
+        public bool IsPrimary { get; set; }
+
+        [DataMember]
         public PhoneTypeData Type { get; set; }
 
         [DataMember]

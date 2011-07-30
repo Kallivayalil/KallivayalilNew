@@ -26,7 +26,10 @@ namespace Kallivayalil.Client
         public string State { get; set; }
 
         [DataMember]
-        public string City { get; set; }
+        public string City { get; set; }  
+        
+        [DataMember]
+        public bool IsPrimary { get; set; }
 
         [DataMember]
         public string PostCode { get; set; }

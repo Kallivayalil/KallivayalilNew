@@ -28,6 +28,7 @@ namespace Tests.Integration.Mothers
                            State = "London",
                            PostCode = "SE1 3TQ",
                            Country = "UK",
+                           IsPrimary = true,
                            Type = new AddressTypeData {Id = 1, Description = "Home"},
                            Constituent = new LinkData {Id = constituent.Id},
                        };
