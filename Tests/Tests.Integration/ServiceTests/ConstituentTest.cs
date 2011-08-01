@@ -37,10 +37,17 @@ namespace Tests.Integration.ServiceTests
         }
 
         [Test]
+        public void ShouldSearchConstituentByName()
+        {
+            var result = HttpHelper.Get<ConstituentsData>(string.Format("{0}?firstName={1}&lastName={2}", baseUri, "james","james"));
+            Assert.That(result.Count, Is.EqualTo(2));
+        }
+
+        [Test]
         public void ShouldLoadConstituent()
         {
-            var result = HttpHelper.Get<ConstituentData>(string.Format("{0}/{1}", baseUri, constituent.Id));
-            Assert.IsNotNull(result);
+            var result = HttpHelper.Get<ConstituentsData>(string.Format("{0}/{1}", baseUri, constituent.Id));
+            Assert.That(result.Count, Is.EqualTo(2));
         }
 
         [Test]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
 
@@ -8,6 +9,7 @@ namespace Kallivayalil
     public class ConstituentServiceImpl
     {
         private readonly ConstituentRepository repository;
+
 
         public ConstituentServiceImpl()
         {
@@ -41,6 +43,11 @@ namespace Kallivayalil
         public IEnumerable GetAllConstituents()
         {
             return repository.LoadAll<Constituent>();
+        }
+
+        public IEnumerable<Constituent> GetAllConstituents(IList nameIds)
+        {
+            return repository.FetchConstituentByConstituentName(nameIds);
         }
     }
 }

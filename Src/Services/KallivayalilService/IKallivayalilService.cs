@@ -29,7 +29,11 @@ namespace Kallivayalil
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/ConstituentNames/{id}", Method = "PUT")]
-        ConstituentNameData UpdateConstituentName(string id, ConstituentNameData nameData);
+        ConstituentNameData UpdateConstituentName(string id, ConstituentNameData nameData); 
+        
+        [OperationContract]
+        [WebGet(UriTemplate = "/Constituents?firstName={firstName}&lastName={lastName}")]
+        ConstituentsData SearchByConstituentName(string firstName, string lastName);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/Addresses?constituentId={constituentId}", Method = "POST")]

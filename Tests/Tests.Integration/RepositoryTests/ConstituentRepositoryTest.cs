@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
 using NUnit.Framework;
+using Tests.Common.Helpers;
 using Tests.Common.Mothers;
 
 namespace Tests.Integration.RepositoryTests
@@ -11,31 +14,46 @@ namespace Tests.Integration.RepositoryTests
     {
         private Constituent constituent;
         private ConstituentRepository constituentRepository;
+        private TestDataHelper testDataHelper;
+        private Constituent savedConstituent;
+
 
         [SetUp]
         public void SetUp()
         {
+            testDataHelper = new TestDataHelper();
+
             constituent = new Constituent {Gender = "M", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false};
             constituent.Name = ConstituentNameMother.JamesFranklin();
+            savedConstituent = testDataHelper.CreateConstituent(constituent);
 
             constituentRepository = new ConstituentRepository();
         }
 
+
+        [TearDown]
+        public void TearDown()
+        {
+            testDataHelper.session.Clear();
+            testDataHelper.HardDeleteConstituents();
+            testDataHelper.HardDeleteConstituentNames();
+        }
+
+
         [Test]
         public void ShouldSaveAConstituent()
         {
-            var savedConstituent = constituentRepository.Save(constituent);
+            var savedConst = constituentRepository.Save(constituent);
 
-            Assert.That(savedConstituent.Id, Is.GreaterThan(0));
-            Assert.That(savedConstituent.Name.Id, Is.GreaterThan(0));
-            constituentRepository.Delete(savedConstituent);
+            Assert.That(savedConst.Id, Is.GreaterThan(0));
+            Assert.That(savedConst.Name.Id, Is.GreaterThan(0));
+            constituentRepository.Delete(savedConst);
         }
 
         [Test]
         public void ShouldUpdateAnExistingConstituent()
         {
-            var savedConstituent = constituentRepository.Save(constituent);
-
+            
             savedConstituent.Gender = "F";
             var updatedConstituent = constituentRepository.Update(savedConstituent);
 
@@ -50,8 +68,6 @@ namespace Tests.Integration.RepositoryTests
         [Test]
         public void ShouldUpdateAnExistingConstituentName()
         {
-            var savedConstituent = constituentRepository.Save(constituent);
-
             savedConstituent.Name.MiddleName = "Einstein";
             var updatedConstituent = constituentRepository.Update(savedConstituent);
 
@@ -64,21 +80,30 @@ namespace Tests.Integration.RepositoryTests
         [Test]
         public void ShouldDeleteAConstituent()
         {
-            var savedConstituent = constituentRepository.Save(constituent);
             constituentRepository.Delete(savedConstituent.Id);
 
             Assert.That(constituentRepository.Exists(savedConstituent), Is.False);
         }
 
+
         [Test]
         public void ShouldLoadConstituentForTheGivenId()
         {
-            var savedConstituent = constituentRepository.Save(constituent);
             var result = constituentRepository.Load(savedConstituent.Id);
 
             Assert.IsNotNull(result);
             Assert.That(result, Is.TypeOf(typeof (Constituent)));
             Assert.That(result.Id, Is.EqualTo(savedConstituent.Id));
         }
+
+        [Test]
+        public void ShouldSearchForConstituentByName()
+        {
+            var constituent1 = testDataHelper.CreateConstituent(constituent);
+            var result = constituentRepository.FetchConstituentByConstituentName(new List<int>() { savedConstituent.Name.Id,constituent1.Name.Id });
+
+            Assert.That(result.Count(), Is.EqualTo(2));
+        }
+
     }
 }

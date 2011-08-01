@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using Kallivayalil.Client;
@@ -96,6 +97,17 @@ namespace Kallivayalil
             mapper.Map(updatedName, updatedNameData);
 
             return updatedNameData;
+        }
+
+        public ConstituentsData SearchByConstituentName(string firstName, string lastName)
+        {
+            var nameIds = nameServiceImpl.SearchConstituentByName(firstName,lastName);
+            var allConstituents = constituentServiceImpl.GetAllConstituents(nameIds);
+
+            var constituentsData = new ConstituentsData();
+            mapper.Map(allConstituents,constituentsData);
+
+            return constituentsData;
         }
 
         public virtual AddressData CreateAddress(string constituentId, AddressData addressData)

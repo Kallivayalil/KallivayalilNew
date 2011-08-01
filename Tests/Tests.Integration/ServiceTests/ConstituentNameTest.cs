@@ -27,5 +27,6 @@ namespace Tests.Integration.ServiceTests
             Assert.That(constituentName.FirstName, Is.EqualTo("John"));
             Assert.That(constituentName.LastName, Is.EqualTo("Smith"));
         }
+
     }
 }

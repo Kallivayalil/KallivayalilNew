@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
@@ -34,6 +36,11 @@ namespace Kallivayalil
                 return repository.Update(name);
             }
             return null;
+        }
+
+        public IList SearchConstituentByName(string firstName, string lastName)
+        {
+            return repository.SearchByName(firstName, lastName);
         }
     }
 }
