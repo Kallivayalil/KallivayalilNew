@@ -37,6 +37,15 @@ namespace Tests.Integration.RepositoryTests
             var savedName = new ConstituentNameRepository().Save(jamesFranklin);
 
             Assert.That(savedName.Id, Is.GreaterThan(0));
+        }  
+        
+        [Test]
+        public void ShouldSearchForConstituent()
+        {
+            testDataHelper.CreateConstituentName(ConstituentNameMother.JessicaAlba());
+            var result = repository.SearchByName("james");
+
+            Assert.That(result.Count,Is.EqualTo(1));
         }
 
         [Test]

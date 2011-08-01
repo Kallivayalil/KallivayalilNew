@@ -1,5 +1,8 @@
-﻿using FluentNHibernate.Mapping;
+﻿using System.Collections.Generic;
+using FluentNHibernate.Mapping;
 using Kallivayalil.Common;
+using NHibernate.Cfg;
+using NHibernate.Search.Mapping;
 
 namespace Kallivayalil.DataAccess.Mappings
 {
@@ -12,5 +15,6 @@ namespace Kallivayalil.DataAccess.Mappings
             Map(x => x.UpdatedDateTime).Column("UpdatedDateTime");
             Map(x => x.UpdatedBy).Column("UpdatedBy");
         }
+
     }
 }

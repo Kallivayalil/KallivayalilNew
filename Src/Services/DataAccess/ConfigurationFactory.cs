@@ -7,6 +7,7 @@ using Kallivayalil.DataAccess.Mappings;
 using NHibernate;
 using NHibernate.ByteCode.Spring;
 using NHibernate.Event;
+using NHibernate.Search.Event;
 using Configuration = NHibernate.Cfg.Configuration;
 
 namespace Kallivayalil.DataAccess
@@ -48,7 +49,8 @@ namespace Kallivayalil.DataAccess
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<ConstituentMap>())
                 .ExposeConfiguration(exposedConfiguration);
 
-            return configuration.BuildSessionFactory();
+            var buildSessionFactory = configuration.BuildSessionFactory();
+            return buildSessionFactory;
         }
 
         private static bool ShouldShowSql
@@ -62,6 +64,13 @@ namespace Kallivayalil.DataAccess
             var timeStampListener = new TimeStampListener();
             configuration.EventListeners.PreInsertEventListeners = new IPreInsertEventListener[] {timeStampListener};
             configuration.EventListeners.PreUpdateEventListeners = new IPreUpdateEventListener[] {timeStampListener};
+            Configuration.SetListeners(ListenerType.PostInsert, new[] {new FullTextIndexEventListener()});
+            Configuration.SetListeners(ListenerType.PostUpdate, new[] {new FullTextIndexEventListener()});
+            Configuration.SetListeners(ListenerType.PostDelete, new[] {new FullTextIndexEventListener()});
+
+            Configuration.SetListener(ListenerType.PostCollectionRecreate, new FullTextIndexCollectionEventListener());
+            Configuration.SetListener(ListenerType.PostCollectionRemove, new FullTextIndexCollectionEventListener());
+            Configuration.SetListener(ListenerType.PostCollectionUpdate, new FullTextIndexCollectionEventListener());
         }
     }
 }

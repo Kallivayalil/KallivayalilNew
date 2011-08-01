@@ -1,5 +1,9 @@
-﻿using Kallivayalil.Domain;
+﻿using System.Collections;
+using Kallivayalil.Domain;
+using Lucene.Net.Analysis;
+using Lucene.Net.QueryParsers;
 using NHibernate;
+using NHibernate.Search;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
@@ -44,6 +48,17 @@ namespace Kallivayalil.DataAccess.Repositories
         public ConstituentName Load(int id)
         {
             return Load<ConstituentName>(id);
+        }
+
+        public IList SearchByName(string name)
+        {
+            IFullTextSession s = Search.CreateFullTextSession(session);
+
+            QueryParser qp = new QueryParser("id", new StopAnalyzer());
+
+            IQuery NHQuery = s.CreateFullTextQuery(qp.Parse("FirstName:" + name), typeof (ConstituentName));
+
+            return NHQuery.List();
         }
     }
 }

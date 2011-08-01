@@ -21,6 +21,7 @@ CREATE TABLE [dbo].[Addresses](
 	[Country] [varchar](50) NOT NULL,
 	[Type] [int] NOT NULL,
 	[IsPrimary] [bit] NOT NULL default 1,
+	[Inactive] [bit] NOT NULL default 0,
 	[ConstituentId] [int] NOT NULL,
 	[CreatedDateTime] [datetime] NOT NULL,
 	[CreatedBy] [varchar](50) NOT NULL,
