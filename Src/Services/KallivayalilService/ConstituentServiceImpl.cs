@@ -45,9 +45,6 @@ namespace Kallivayalil
             return repository.LoadAll<Constituent>();
         }
 
-        public IEnumerable<Constituent> GetAllConstituents(IList nameIds)
-        {
-            return repository.FetchConstituentByConstituentName(nameIds);
-        }
+       
     }
 }

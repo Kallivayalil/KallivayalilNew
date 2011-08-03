@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
@@ -23,9 +21,9 @@ namespace Kallivayalil
             name.Salutation = repository.Load<SalutationType>(name.Salutation.Id);
         }
 
-        public ConstituentNameServiceImpl()
+        public ConstituentNameServiceImpl(ConstituentNameRepository constituentNameRepository)
         {
-            repository = new ConstituentNameRepository();
+            repository = constituentNameRepository;
         }
 
         public ConstituentName UpdateConstituentName(string id, ConstituentName name)
@@ -38,9 +36,5 @@ namespace Kallivayalil
             return null;
         }
 
-        public IList SearchConstituentByName(string firstName, string lastName)
-        {
-            return repository.SearchByName(firstName, lastName);
-        }
     }
 }

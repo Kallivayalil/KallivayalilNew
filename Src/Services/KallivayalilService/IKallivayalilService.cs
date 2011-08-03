@@ -32,7 +32,7 @@ namespace Kallivayalil
         ConstituentNameData UpdateConstituentName(string id, ConstituentNameData nameData); 
         
         [OperationContract]
-        [WebGet(UriTemplate = "/Constituents?firstName={firstName}&lastName={lastName}")]
+        [WebGet(UriTemplate = "/Search?firstName={firstName}&lastName={lastName}")]
         ConstituentsData SearchByConstituentName(string firstName, string lastName);
 
         [OperationContract]

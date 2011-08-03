@@ -62,7 +62,8 @@ namespace Kallivayalil.DataAccess.Repositories
 
             var query = string.Format("FirstName:{0} or LastName:{1}", firstName, lastName);
 
-            var constituentNames = textSession.CreateFullTextQuery(qp.Parse(query), typeof(ConstituentName)).List().Cast<ConstituentName>();
+            var list = textSession.CreateFullTextQuery(qp.Parse(query), typeof(ConstituentName)).List();
+            var constituentNames = list.Cast<ConstituentName>();
 
             return constituentNames.Select(constituentName => constituentName.Id).ToList();
         }

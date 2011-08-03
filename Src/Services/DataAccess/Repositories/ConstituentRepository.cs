@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Kallivayalil.Domain;
-using Lucene.Net.Analysis;
-using Lucene.Net.QueryParsers;
-using Lucene.Net.Search.Function;
 using NHibernate;
 using NHibernate.Criterion;
-using NHibernate.Mapping;
-using NHibernate.Search;
-using NHibernate.Search.Query;
 using System.Linq;
 
 namespace Kallivayalil.DataAccess.Repositories

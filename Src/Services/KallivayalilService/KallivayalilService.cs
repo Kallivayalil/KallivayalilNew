@@ -23,19 +23,24 @@ namespace Kallivayalil
         private readonly EducationDetailServiceImpl educationalDetailServiceImpl;
         private readonly ReferenceDataServiceImpl referenceDataServiceImpl;
         private readonly LoginServiceImpl loginServiceImpl;
+        private readonly SearchServiceImpl searchServiceImpl;
         private AssociationServiceImpl asociationServiceImpl;
 
         public KallivayalilService()
         {
+            var constituentNameRepository = new ConstituentNameRepository();
+            var constituentRepository = new ConstituentRepository();
+
             constituentServiceImpl = new ConstituentServiceImpl();
-            nameServiceImpl = new ConstituentNameServiceImpl();
+            nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(new AddressRepository());
-            phoneServiceImpl = new PhoneServiceImpl(new PhoneRepository(), new ConstituentRepository());
+            phoneServiceImpl = new PhoneServiceImpl(new PhoneRepository(), constituentRepository);
             emailServiceImpl = new EmailServiceImpl(new EmailRepository());
             loginServiceImpl = new LoginServiceImpl();
-            occupationServiceImpl = new OccupationServiceImpl(new OccupationRepository(), new ConstituentRepository());
+            occupationServiceImpl = new OccupationServiceImpl(new OccupationRepository(), constituentRepository);
             educationalDetailServiceImpl = new EducationDetailServiceImpl();
             asociationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
+            searchServiceImpl = new SearchServiceImpl(constituentNameRepository,constituentRepository);
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl();
         }
@@ -99,10 +104,9 @@ namespace Kallivayalil
             return updatedNameData;
         }
 
-        public ConstituentsData SearchByConstituentName(string firstName, string lastName)
+        public virtual ConstituentsData SearchByConstituentName(string firstName, string lastName)
         {
-            var nameIds = nameServiceImpl.SearchConstituentByName(firstName,lastName);
-            var allConstituents = constituentServiceImpl.GetAllConstituents(nameIds);
+            var allConstituents = searchServiceImpl.SearchByConstituentName(firstName,lastName);
 
             var constituentsData = new ConstituentsData();
             mapper.Map(allConstituents,constituentsData);
