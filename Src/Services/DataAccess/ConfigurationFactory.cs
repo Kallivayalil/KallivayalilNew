@@ -4,11 +4,14 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Mappings;
+using Lucene.Net.Analysis;
 using NHibernate;
 using NHibernate.ByteCode.Spring;
 using NHibernate.Event;
 using NHibernate.Search.Event;
+using NHibernate.Search.Store;
 using Configuration = NHibernate.Cfg.Configuration;
+using Environment = NHibernate.Search.Environment;
 
 namespace Kallivayalil.DataAccess
 {
@@ -71,6 +74,11 @@ namespace Kallivayalil.DataAccess
             Configuration.SetListener(ListenerType.PostCollectionRecreate, new FullTextIndexCollectionEventListener());
             Configuration.SetListener(ListenerType.PostCollectionRemove, new FullTextIndexCollectionEventListener());
             Configuration.SetListener(ListenerType.PostCollectionUpdate, new FullTextIndexCollectionEventListener());
+
+            Configuration.SetProperty("hibernate.search.default.directory_provider",
+                                      typeof (RAMDirectoryProvider).AssemblyQualifiedName);
+            Configuration.SetProperty(Environment.AnalyzerClass,
+                                      typeof (StopAnalyzer).AssemblyQualifiedName);
         }
     }
 }
