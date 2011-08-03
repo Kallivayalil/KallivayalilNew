@@ -1,9 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Kallivayalil.Domain;
+using Lucene.Net.Analysis;
+using Lucene.Net.Analysis.Standard;
+using Lucene.Net.QueryParsers;
 using NHibernate;
-using NHibernate.Criterion;
 using System.Linq;
+using NHibernate.Search;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
@@ -52,10 +54,16 @@ namespace Kallivayalil.DataAccess.Repositories
         }
 
 
-        public IEnumerable<Constituent> FetchConstituentByConstituentName(ICollection nameIds)
+        public IEnumerable<Constituent> SearchByName(string firstName, string lastName)
         {
-            var criteria = session.CreateCriteria<Constituent>().Add(Restrictions.In("Name.Id", nameIds));
-            return criteria.List().Cast<Constituent>(); ;
+            var textSession = Search.CreateFullTextSession(session);
+
+            var qp = new QueryParser("id", new StandardAnalyzer());
+
+            var query = string.Format("Name.FirstName:{0} or Name.LastName:{1}", firstName, lastName);
+
+             return textSession.CreateFullTextQuery(qp.Parse(query), typeof(Constituent)).List().Cast<Constituent>();
+
         }
     }
 }

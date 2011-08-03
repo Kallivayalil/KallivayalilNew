@@ -40,15 +40,6 @@ namespace Tests.Integration.RepositoryTests
         }  
         
         [Test]
-        public void ShouldSearchForConstituent()
-        {
-            testDataHelper.CreateConstituentName(ConstituentNameMother.JessicaAlba());
-            var result = repository.SearchByName("james", "alba");
-
-            Assert.That(result.Count,Is.EqualTo(2));
-        }
-
-        [Test]
         public void ShouldUpdateConstituentName()
         {
             savedConstituentName.FirstName = "John";
@@ -65,6 +56,7 @@ namespace Tests.Integration.RepositoryTests
             var constituentName = repository.Get<ConstituentName>(savedConstituentName.Id);
             Assert.IsNull(constituentName);
         }
+
 
         [Test]
         public void ShouldLoadConstituentName()

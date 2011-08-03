@@ -5,6 +5,7 @@ using FluentNHibernate.Cfg.Db;
 using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Mappings;
 using Lucene.Net.Analysis;
+using Lucene.Net.Analysis.Standard;
 using NHibernate;
 using NHibernate.ByteCode.Spring;
 using NHibernate.Event;
@@ -78,7 +79,7 @@ namespace Kallivayalil.DataAccess
             Configuration.SetProperty("hibernate.search.default.directory_provider",
                                       typeof (RAMDirectoryProvider).AssemblyQualifiedName);
             Configuration.SetProperty(Environment.AnalyzerClass,
-                                      typeof (StopAnalyzer).AssemblyQualifiedName);
+                                      typeof (StandardAnalyzer).AssemblyQualifiedName);
         }
     }
 }
