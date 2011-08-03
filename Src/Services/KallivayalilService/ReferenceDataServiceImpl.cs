@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain.ReferenceData;
@@ -41,6 +42,11 @@ namespace Kallivayalil
         public IList<SalutationType> GetSaluationTypes()
         {
             return repository.LoadAll<SalutationType>();
+        }
+
+        public IList<AssociationType> GetAssociationTypes()
+        {
+            return repository.LoadAll<AssociationType>();
         }
     }
 }

@@ -471,6 +471,14 @@ namespace Kallivayalil
             return salutationTypes;
         }
 
+        public virtual AssociationTypesData GetAssociationTypes()
+        {
+            var types = referenceDataServiceImpl.GetAssociationTypes();
+            var associationTypes = new AssociationTypesData();
+            mapper.MapList(types, associationTypes, typeof(AssociationTypeData));
+            return associationTypes;
+        }
+
         public virtual bool Authenticate(string username, string password)
         {
             return loginServiceImpl.Authenticate(username, password);
