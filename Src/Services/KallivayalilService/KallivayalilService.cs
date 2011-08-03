@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using Kallivayalil.Client;
@@ -22,19 +23,24 @@ namespace Kallivayalil
         private readonly EducationDetailServiceImpl educationalDetailServiceImpl;
         private readonly ReferenceDataServiceImpl referenceDataServiceImpl;
         private readonly LoginServiceImpl loginServiceImpl;
+        private readonly SearchServiceImpl searchServiceImpl;
         private AssociationServiceImpl asociationServiceImpl;
 
         public KallivayalilService()
         {
+            var constituentNameRepository = new ConstituentNameRepository();
+            var constituentRepository = new ConstituentRepository();
+
             constituentServiceImpl = new ConstituentServiceImpl();
-            nameServiceImpl = new ConstituentNameServiceImpl();
+            nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(new AddressRepository());
-            phoneServiceImpl = new PhoneServiceImpl(new PhoneRepository(), new ConstituentRepository());
+            phoneServiceImpl = new PhoneServiceImpl(new PhoneRepository(), constituentRepository);
             emailServiceImpl = new EmailServiceImpl(new EmailRepository());
             loginServiceImpl = new LoginServiceImpl();
-            occupationServiceImpl = new OccupationServiceImpl(new OccupationRepository(), new ConstituentRepository());
+            occupationServiceImpl = new OccupationServiceImpl(new OccupationRepository(), constituentRepository);
             educationalDetailServiceImpl = new EducationDetailServiceImpl();
             asociationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
+            searchServiceImpl = new SearchServiceImpl(constituentNameRepository,constituentRepository);
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl();
         }
@@ -96,6 +102,16 @@ namespace Kallivayalil
             mapper.Map(updatedName, updatedNameData);
 
             return updatedNameData;
+        }
+
+        public virtual ConstituentsData SearchByConstituentName(string firstName, string lastName)
+        {
+            var allConstituents = searchServiceImpl.SearchByConstituentName(firstName,lastName);
+
+            var constituentsData = new ConstituentsData();
+            mapper.Map(allConstituents,constituentsData);
+
+            return constituentsData;
         }
 
         public virtual AddressData CreateAddress(string constituentId, AddressData addressData)

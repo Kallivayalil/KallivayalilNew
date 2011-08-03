@@ -1,7 +1,10 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Kallivayalil.Domain;
 using Lucene.Net.Analysis;
 using Lucene.Net.QueryParsers;
+using Lucene.Net.Util;
 using NHibernate;
 using NHibernate.Search;
 
@@ -21,6 +24,7 @@ namespace Kallivayalil.DataAccess.Repositories
                 return savedConstituentName;
             }
         }
+
 
         public ConstituentName Update(ConstituentName constituentName)
         {
@@ -50,15 +54,18 @@ namespace Kallivayalil.DataAccess.Repositories
             return Load<ConstituentName>(id);
         }
 
-        public IList SearchByName(string name)
+        public IList SearchByName(string firstName, string lastName)
         {
-            IFullTextSession s = Search.CreateFullTextSession(session);
+            var textSession = Search.CreateFullTextSession(session);
 
-            QueryParser qp = new QueryParser("id", new StopAnalyzer());
+            var qp = new QueryParser(Version.LUCENE_20, "id", new StopAnalyzer(Version.LUCENE_20));
 
-            IQuery NHQuery = s.CreateFullTextQuery(qp.Parse("FirstName:" + name), typeof (ConstituentName));
+            var query = string.Format("FirstName:{0} or LastName:{1}", firstName, lastName);
 
-            return NHQuery.List();
+            var list = textSession.CreateFullTextQuery(qp.Parse(query), typeof(ConstituentName)).List();
+            var constituentNames = list.Cast<ConstituentName>();
+
+            return constituentNames.Select(constituentName => constituentName.Id).ToList();
         }
     }
 }

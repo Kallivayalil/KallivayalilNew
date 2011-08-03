@@ -5,7 +5,7 @@ using NHibernate.Search.Attributes;
 
 namespace Kallivayalil.Domain
 {
-    [Serializable, Indexed]
+    [Serializable,Indexed]
     public class ConstituentName : Entity
     {
         [DocumentId]

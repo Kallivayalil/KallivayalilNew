@@ -36,6 +36,7 @@ namespace Tests.Integration.ServiceTests
             testDataHelper.HardDeleteConstituentNames();
         }
 
+
         [Test]
         public void ShouldLoadConstituent()
         {

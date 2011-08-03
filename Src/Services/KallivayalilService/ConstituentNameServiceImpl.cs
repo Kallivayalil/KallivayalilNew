@@ -21,9 +21,9 @@ namespace Kallivayalil
             name.Salutation = repository.Load<SalutationType>(name.Salutation.Id);
         }
 
-        public ConstituentNameServiceImpl()
+        public ConstituentNameServiceImpl(ConstituentNameRepository constituentNameRepository)
         {
-            repository = new ConstituentNameRepository();
+            repository = constituentNameRepository;
         }
 
         public ConstituentName UpdateConstituentName(string id, ConstituentName name)
@@ -35,5 +35,6 @@ namespace Kallivayalil
             }
             return null;
         }
+
     }
 }

@@ -43,9 +43,9 @@ namespace Tests.Integration.RepositoryTests
         public void ShouldSearchForConstituent()
         {
             testDataHelper.CreateConstituentName(ConstituentNameMother.JessicaAlba());
-            var result = repository.SearchByName("james");
+            var result = repository.SearchByName("james", "alba");
 
-            Assert.That(result.Count,Is.EqualTo(1));
+            Assert.That(result.Count,Is.EqualTo(2));
         }
 
         [Test]
