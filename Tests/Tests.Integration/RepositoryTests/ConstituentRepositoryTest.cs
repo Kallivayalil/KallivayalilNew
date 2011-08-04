@@ -96,11 +96,12 @@ namespace Tests.Integration.RepositoryTests
             Assert.That(result.Id, Is.EqualTo(savedConstituent.Id));
         }
 
+
         [Test]
-        public void ShouldSearchForConstituentByName()
+        public void ShouldSearchConstituentByName()
         {
-            var constituent1 = testDataHelper.CreateConstituent(constituent);
-            var result = constituentRepository.FetchConstituentByConstituentName(new List<int>() { savedConstituent.Name.Id,constituent1.Name.Id });
+            testDataHelper.CreateConstituent(constituent);
+            var result = constituentRepository.SearchByName("james","james");
 
             Assert.That(result.Count(), Is.EqualTo(2));
         }

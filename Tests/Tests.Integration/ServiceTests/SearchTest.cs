@@ -29,7 +29,7 @@ namespace Tests.Integration.ServiceTests
 
 
         [Test]
-        public void ShouldGetConstituentByFirstName()
+        public void ShouldGetConstituentByName()
         {
             var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, "James","james");
             var constituentsData = HttpHelper.Get<ConstituentsData>(uriString);

@@ -6,21 +6,17 @@ namespace Kallivayalil
 {
     public class SearchServiceImpl
     {
-        private readonly ConstituentNameRepository nameRepository;
         private readonly ConstituentRepository constituentRepository;
 
 
-        public SearchServiceImpl(ConstituentNameRepository constituentNameRepository, ConstituentRepository constituentRepository)
+        public SearchServiceImpl(ConstituentRepository constituentRepository)
         {
-            nameRepository = constituentNameRepository;
             this.constituentRepository = constituentRepository;
         }
 
         public IEnumerable<Constituent> SearchByConstituentName(string firstName, string lastName)
         {
-            var nameIds = nameRepository.SearchByName(firstName, lastName);
-
-            return constituentRepository.FetchConstituentByConstituentName(nameIds);
+            return constituentRepository.SearchByName(firstName, lastName);
         }
     }
 }
