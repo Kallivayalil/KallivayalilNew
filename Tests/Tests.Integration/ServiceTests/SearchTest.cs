@@ -28,7 +28,7 @@ namespace Tests.Integration.ServiceTests
         }
 
 
-        [Test]
+        [Test,Ignore()]
         public void ShouldGetConstituentByName()
         {
             var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, "James","james");

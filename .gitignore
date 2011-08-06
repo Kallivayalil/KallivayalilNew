@@ -9,8 +9,6 @@
 /Src/Services/KallivayalilService/*.suo
 /Src/Services/KallivayalilService/_ReSharper*
 
-
-
 /Src/Services/KallivayalilService/Client/obj/Debug/*.*
 /Src/Services/KallivayalilService/WebService/obj/Debug/*.*
 /Src/Services/KallivayalilService/WebService/*.user
@@ -21,6 +19,7 @@
 /Src/Services/Tests.Unit/obj/Debug/*.*
 /Tests/Tests.Common/obj/Debug/*.*
 /Tests/Tests.Integration/obj/Debug/*.*
+
 
 /Src/Services/KallivayalilService/Client/bin/Debug/*.*
 /Src/Services/KallivayalilService/WebService/bin/*.*
