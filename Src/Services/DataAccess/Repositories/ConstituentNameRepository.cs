@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Kallivayalil.Domain;
-using Lucene.Net.Util;
+﻿using Kallivayalil.Domain;
 using NHibernate;
 
 namespace Kallivayalil.DataAccess.Repositories

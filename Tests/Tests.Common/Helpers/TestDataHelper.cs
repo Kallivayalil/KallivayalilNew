@@ -37,6 +37,15 @@ namespace Tests.Common.Helpers
             session.Flush();
         }
 
+
+        public void HardDeleteEvents()
+        {
+            var sqlCommand = session.Connection.CreateCommand();
+            sqlCommand.CommandText = "delete from events where id !=0";
+            sqlCommand.ExecuteNonQuery();
+            session.Flush();
+        }
+
         public void HardDeleteAddress()
         {
             var sqlCommand = session.Connection.CreateCommand();
@@ -134,6 +143,13 @@ namespace Tests.Common.Helpers
             var savedAssociation = session.SaveOrUpdateCopy(association);
             session.Flush();
             return (Association)savedAssociation; 
+        }
+
+        public Event CreateEvent(Event @event)
+        {
+            var savedEvent = session.SaveOrUpdateCopy(@event);
+            session.Flush();
+            return (Event)savedEvent; 
         }
     }
 }
