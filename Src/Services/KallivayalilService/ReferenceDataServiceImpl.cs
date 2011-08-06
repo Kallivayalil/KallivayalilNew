@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Kallivayalil.DataAccess.Repositories;
@@ -47,6 +48,11 @@ namespace Kallivayalil
         public IList<AssociationType> GetAssociationTypes()
         {
             return repository.LoadAll<AssociationType>();
+        }
+
+        public IList<EventType> EventTypes()
+        {
+            return repository.LoadAll<EventType>();
         }
     }
 }

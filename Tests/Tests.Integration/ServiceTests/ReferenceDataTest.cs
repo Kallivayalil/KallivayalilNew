@@ -38,6 +38,14 @@ namespace Tests.Integration.ServiceTests
             var salutationTypes = HttpHelper.Get<SalutationTypesData>(string.Format("{0}/{1}", BaseUri, "SalutationTypes"));
 
             Assert.That(salutationTypes.Count, Is.EqualTo(3));
+        } 
+        
+        [Test]
+        public void ShouldLoadAllEventTypes()
+        {
+            var salutationTypes = HttpHelper.Get<EventTypesData>(string.Format("{0}/{1}", BaseUri, "EventTypes"));
+
+            Assert.That(salutationTypes.Count, Is.EqualTo(2));
         }
     }
 }

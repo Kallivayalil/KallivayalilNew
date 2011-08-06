@@ -498,6 +498,14 @@ namespace Kallivayalil
             return associationTypes;
         }
 
+        public virtual EventTypesData GetEventTypes()
+        {
+            var types = referenceDataServiceImpl.EventTypes();
+            var eventTypesData = new EventTypesData();
+            mapper.MapList(types, eventTypesData, typeof(EventTypeData));
+            return eventTypesData;
+        }
+
         public virtual bool Authenticate(string username, string password)
         {
             return loginServiceImpl.Authenticate(username, password);

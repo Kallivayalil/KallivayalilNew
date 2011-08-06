@@ -184,7 +184,11 @@ namespace Kallivayalil
         
         [OperationContract]
         [WebGet(UriTemplate = "/AssociationTypes")]
-        AssociationTypesData GetAssociationTypes();
+        AssociationTypesData GetAssociationTypes(); 
+        
+        [OperationContract]
+        [WebGet(UriTemplate = "/EventTypes")]
+        EventTypesData GetEventTypes();
 
         [OperationContract]
         [WebGet(UriTemplate = "/Authenticate?username={username}&password={password}")]

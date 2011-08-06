@@ -42,6 +42,9 @@ namespace Tests.Integration.ServiceTests
 
             Assert.IsNotNull(savedMobile);
             Assert.That(savedMobile.Id, Is.GreaterThan(0));
+            Assert.That(savedMobile.Address.Description,
+                        Is.EqualTo(string.Format("{0},{1},{2},{3}-{4},{5}", savedAddress.Line1, savedAddress.Line2, savedAddress.City, savedAddress.State, savedAddress.PostCode,
+                                                 savedAddress.Country)));
         }
 
         [Test]

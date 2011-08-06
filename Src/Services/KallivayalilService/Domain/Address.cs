@@ -13,5 +13,10 @@ namespace Kallivayalil.Domain
         public virtual string Country { get; set; }
         public virtual AddressType Type { get; set; }
         public virtual Constituent Constituent { get; set; }
+
+        public virtual string Description
+        {
+            get { return string.Format("{0},{1},{2},{3}-{4},{5}", Line1, Line2, City, State, PostCode, Country); }
+        }
     }
 }
