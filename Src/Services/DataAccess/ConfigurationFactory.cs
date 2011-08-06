@@ -76,10 +76,14 @@ namespace Kallivayalil.DataAccess
             Configuration.SetListener(ListenerType.PostCollectionRemove, new FullTextIndexCollectionEventListener());
             Configuration.SetListener(ListenerType.PostCollectionUpdate, new FullTextIndexCollectionEventListener());
 
-            Configuration.SetProperty("hibernate.search.default.directory_provider",
-                                      typeof (RAMDirectoryProvider).AssemblyQualifiedName);
-            Configuration.SetProperty(Environment.AnalyzerClass,
-                                      typeof (StandardAnalyzer).AssemblyQualifiedName);
+//            Configuration.SetProperty("hibernate.search.default.directory_provider", typeof(FSDirectoryProvider).AssemblyQualifiedName);
+//            Configuration.SetProperty("hibernate.search.default.indexBase", "~/Index");
+//            Configuration.SetProperty("hibernate.search.default.indexBase.create", "true");
+
+//            Configuration.SetProperty("hibernate.search.default.directory_provider",
+//                                      typeof (RAMDirectoryProvider).AssemblyQualifiedName);
+//            Configuration.SetProperty(Environment.AnalyzerClass,
+//                                      typeof (StandardAnalyzer).AssemblyQualifiedName);
         }
     }
 }

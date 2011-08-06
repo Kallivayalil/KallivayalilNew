@@ -5,7 +5,7 @@ INSERT INTO [NextIds]
            ([Type]
            ,[Description]
            ,[NextId])
-     VALUES  ('NAM','ConstituentName',1)
+     VALUES  ('NAM','ConstituentName',10)
 GO
 
 

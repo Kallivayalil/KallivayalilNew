@@ -14,7 +14,7 @@ namespace Tests.Integration.RepositoryTests
         [SetUp]
         public void SetUp()
         {
-            savedEmail = new Email {Id = 0};
+            savedEmail = new Email {Id = 1};
             loginRepository = new LoginRepository(ConfigurationFactory.SessionFactory.OpenSession());
         }
 
