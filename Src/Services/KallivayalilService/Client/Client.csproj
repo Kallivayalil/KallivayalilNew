@@ -52,6 +52,8 @@
     <Compile Include="EducationTypeData.cs" />
     <Compile Include="EmailData.cs" />
     <Compile Include="EmailTypeData.cs" />
+    <Compile Include="EventData.cs" />
+    <Compile Include="EventTypeData.cs" />
     <Compile Include="HttpHelper.cs" />
     <Compile Include="LinkData.cs" />
     <Compile Include="OccupationData.cs" />

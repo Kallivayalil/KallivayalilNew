@@ -9,7 +9,7 @@ namespace Tests.Common.Mothers
         {
             return new Event
                        {
-                           Type = EventlTypeMother.Birthday(),
+                           Type = EventTypeMother.Birthday(),
                            EventTitle = "Birthday Party",
                            EventDescription = "Party at 10",
                            StartDate = DateTime.Now,
@@ -26,11 +26,11 @@ namespace Tests.Common.Mothers
         {
             return new Event
                        {
-                           Type = EventlTypeMother.Anniversary(),
+                           Type = EventTypeMother.Anniversary(),
                            EventTitle = "Anniversary Party",
                            EventDescription = "Anniversary at 10",
-                           StartDate = DateTime.Now,
-                           EndDate = DateTime.Now.AddDays(2),
+                           StartDate = DateTime.Today,
+                           EndDate = DateTime.Today.AddDays(2),
                            ContactPerson = "Jessica",
                            ContactNumber = "998006543",
                            CreatedBy = "James Franklin",

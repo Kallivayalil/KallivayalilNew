@@ -25,7 +25,8 @@ namespace Kallivayalil
         private readonly ReferenceDataServiceImpl referenceDataServiceImpl;
         private readonly LoginServiceImpl loginServiceImpl;
         private readonly SearchServiceImpl searchServiceImpl;
-        private AssociationServiceImpl asociationServiceImpl;
+        private readonly AssociationServiceImpl associationServiceImpl;
+        private readonly EventServiceImpl eventServiceImpl;
 
         public KallivayalilService()
         {
@@ -33,6 +34,7 @@ namespace Kallivayalil
 //            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
             var constituentNameRepository = new ConstituentNameRepository();
             var constituentRepository = new ConstituentRepository();
+            var eventRepository = new EventRepository();
 
             constituentServiceImpl = new ConstituentServiceImpl();
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
@@ -42,8 +44,9 @@ namespace Kallivayalil
             loginServiceImpl = new LoginServiceImpl();
             occupationServiceImpl = new OccupationServiceImpl(new OccupationRepository(), constituentRepository);
             educationalDetailServiceImpl = new EducationDetailServiceImpl();
-            asociationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
+            associationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
             searchServiceImpl = new SearchServiceImpl(constituentRepository);
+            eventServiceImpl = new EventServiceImpl(eventRepository);
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl();
         }
@@ -385,7 +388,7 @@ namespace Kallivayalil
         {
             var association = new Association();
             mapper.Map(associationData, association);
-            var savedAssociation = asociationServiceImpl.CreateAssociation(association);
+            var savedAssociation = associationServiceImpl.CreateAssociation(association);
 
             var savedAssociationData = new AssociationData();
 
@@ -400,7 +403,7 @@ namespace Kallivayalil
             var association = new Association();
             mapper.Map(associationData, association);
 
-            var updatedAssociation = asociationServiceImpl.UpdateAssociation(association);
+            var updatedAssociation = associationServiceImpl.UpdateAssociation(association);
             var updatedAssociationData = new AssociationData();
             mapper.Map(updatedAssociation, updatedAssociationData);
 
@@ -409,7 +412,7 @@ namespace Kallivayalil
 
         public virtual AssociationData GetAssociation(string id)
         {
-            var association = asociationServiceImpl.FindAssociation(id);
+            var association = associationServiceImpl.FindAssociation(id);
             var associationData = new AssociationData();
 
             if (association == null)
@@ -424,17 +427,71 @@ namespace Kallivayalil
 
         public virtual void DeleteAssociation(string id)
         {
-            asociationServiceImpl.DeleteAssociation(id);
+            associationServiceImpl.DeleteAssociation(id);
         }
 
         public virtual AssociationsData GetAssociations(string constituentId)
         {
-            var associations = asociationServiceImpl.FindAssociations(constituentId);
+            var associations = associationServiceImpl.FindAssociations(constituentId);
 
             var associationsData = new AssociationsData();
             mapper.MapList(associations, associationsData, typeof(AssociationData));
 
             return associationsData;
+        }
+
+        public virtual EventData CreateEvent(EventData eventData)
+        {
+            var @event = new Event();
+            mapper.Map(eventData, @event);
+            var savedEvent = eventServiceImpl.CreateEvent(@event);
+
+            var savedEventData = new EventData();
+
+            mapper.Map(savedEvent, savedEventData);
+
+            return savedEventData;
+        }
+
+        public virtual EventData UpdateEvent(string id, EventData eventData)
+        {
+            var @event = new Event();
+            mapper.Map(eventData, @event);
+
+            var updatedEvent = eventServiceImpl.UpdateEvent(@event);
+            var updatedEventData = new EventData();
+            mapper.Map(updatedEvent, updatedEventData);
+
+            return updatedEventData;
+        }
+
+        public virtual EventData GetEvent(string id)
+        {
+            var @event = eventServiceImpl.FindEvent(id);
+            var eventData = new EventData();
+
+            if (@event == null)
+            {
+                throw new NotFoundException(string.Format("Event with Id:{0} not found.", id));
+            }
+
+            mapper.Map(@event, eventData);
+
+            return eventData;
+        }
+
+        public virtual void DeleteEvent(string id)
+        {
+            eventServiceImpl.DeletEvent(id);
+        }
+
+        public virtual EventsData GetEvents(string isApproved)
+        {
+            var events = eventServiceImpl.FindEvents(bool.Parse(isApproved));
+
+            var eventsData = new EventsData();
+            mapper.MapList(events, eventsData, typeof(EventData));
+            return eventsData;
         }
 
         public virtual OccupationTypesData GetOccupationTypes()

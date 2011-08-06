@@ -2,7 +2,7 @@ using Kallivayalil.Domain.ReferenceData;
 
 namespace Tests.Common.Mothers
 {
-    public static class EventlTypeMother
+    public static class EventTypeMother
     {
         public static EventType Birthday()
         {
