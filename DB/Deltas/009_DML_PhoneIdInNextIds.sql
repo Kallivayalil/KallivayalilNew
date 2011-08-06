@@ -5,7 +5,7 @@ INSERT INTO [NextIds]
            ([Type]
            ,[Description]
            ,[NextId])
-     VALUES  ('PHN','Phones',1)
+     VALUES  ('PHN','Phones',10)
 GO
 
 

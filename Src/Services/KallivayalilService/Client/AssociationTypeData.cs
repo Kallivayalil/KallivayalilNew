@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Kallivayalil.Client
@@ -11,4 +12,7 @@ namespace Kallivayalil.Client
         [DataMember]
         public string Description { get; set; }
     }
+
+    [CollectionDataContract(Namespace = "")]
+    public class AssociationTypesData : List<AssociationTypeData> { }
 }

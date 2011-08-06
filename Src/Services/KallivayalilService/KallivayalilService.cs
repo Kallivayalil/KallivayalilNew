@@ -6,6 +6,7 @@ using Kallivayalil.Client;
 using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
+using System.Linq;
 
 namespace Kallivayalil
 {
@@ -28,6 +29,8 @@ namespace Kallivayalil
 
         public KallivayalilService()
         {
+
+//            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
             var constituentNameRepository = new ConstituentNameRepository();
             var constituentRepository = new ConstituentRepository();
 
@@ -485,6 +488,14 @@ namespace Kallivayalil
             var salutationTypes = new SalutationTypesData();
             mapper.MapList(types, salutationTypes, typeof (SalutationTypeData));
             return salutationTypes;
+        }
+
+        public virtual AssociationTypesData GetAssociationTypes()
+        {
+            var types = referenceDataServiceImpl.GetAssociationTypes();
+            var associationTypes = new AssociationTypesData();
+            mapper.MapList(types, associationTypes, typeof(AssociationTypeData));
+            return associationTypes;
         }
 
         public virtual bool Authenticate(string username, string password)

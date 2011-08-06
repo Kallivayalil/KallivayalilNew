@@ -3,6 +3,7 @@ using Kallivayalil.Domain;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.QueryParsers;
+using Lucene.Net.Util;
 using NHibernate;
 using System.Linq;
 using NHibernate.Search;
@@ -11,7 +12,9 @@ namespace Kallivayalil.DataAccess.Repositories
 {
     public class ConstituentRepository : Repository
     {
-        public ConstituentRepository(ISession session) : base(session) {}
+        public ConstituentRepository(ISession session) : base(session)
+        {
+        }
 
         public ConstituentRepository() : this(SessionFactory.OpenSession()) {}
 
@@ -53,17 +56,15 @@ namespace Kallivayalil.DataAccess.Repositories
             return session.Get<Constituent>(constituentId);
         }
 
-
         public IEnumerable<Constituent> SearchByName(string firstName, string lastName)
         {
             var textSession = Search.CreateFullTextSession(session);
 
-            var qp = new QueryParser("id", new StandardAnalyzer());
+            var qp = new QueryParser(Version.LUCENE_CURRENT,"", new StandardAnalyzer(Version.LUCENE_CURRENT));
 
             var query = string.Format("Name.FirstName:{0} or Name.LastName:{1}", firstName, lastName);
 
              return textSession.CreateFullTextQuery(qp.Parse(query), typeof(Constituent)).List().Cast<Constituent>();
-
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteConstituents()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from constituents where id !=0";
+            sqlCommand.CommandText = "delete from constituents where id >= 10";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -32,7 +32,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteConstituentNames()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from constituentNames where id !=0";
+            sqlCommand.CommandText = "delete from constituentNames where id >= 10";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -49,7 +49,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteAddress()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from addresses where id !=0";
+            sqlCommand.CommandText = "delete from addresses where id >= 10";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -71,7 +71,7 @@ namespace Tests.Common.Helpers
         public void HardDeletePhones()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from phones where id !=0";
+            sqlCommand.CommandText = "delete from phones where id >= 10";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -80,7 +80,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteOccupations()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from occupations where id !=0";
+            sqlCommand.CommandText = "delete from occupations where id >= 10";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -88,7 +88,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteEducationDetails()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from educationdetails where id !=0";
+            sqlCommand.CommandText = "delete from educationdetails where id >=10";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -117,7 +117,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteEmails()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from Emails where id !=0";
+            sqlCommand.CommandText = "delete from Emails where id >=10";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -132,7 +132,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteAssociations()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from Associations where id !=0";
+            sqlCommand.CommandText = "delete from Associations where id >=10";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
 

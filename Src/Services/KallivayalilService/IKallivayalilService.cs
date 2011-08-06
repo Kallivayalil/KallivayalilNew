@@ -181,6 +181,10 @@ namespace Kallivayalil
         [OperationContract]
         [WebGet(UriTemplate = "/SalutationTypes")]
         SalutationTypesData GetSalutationTypes();
+        
+        [OperationContract]
+        [WebGet(UriTemplate = "/AssociationTypes")]
+        AssociationTypesData GetAssociationTypes();
 
         [OperationContract]
         [WebGet(UriTemplate = "/Authenticate?username={username}&password={password}")]
