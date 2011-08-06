@@ -38,7 +38,7 @@ SET ANSI_PADDING OFF
 GO
 
 ALTER TABLE [dbo].[Events]  WITH CHECK ADD  CONSTRAINT [FK_Events_Constituent] FOREIGN KEY([ConstituentId])
-REFERENCES [dbo].[Constiutents] ([Id])
+REFERENCES [dbo].[Constituents] ([Id])
 GO
 
 ALTER TABLE [dbo].[Events] CHECK CONSTRAINT [FK_Events_Constituent]

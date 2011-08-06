@@ -26,9 +26,9 @@ namespace Tests.Integration.ServiceTests
         [TearDown]
         public void TearDown()
         {
+            testDataHelper.HardDeleteEvents();
             testDataHelper.HardDeleteConstituents();
             testDataHelper.HardDeleteConstituentNames();
-            testDataHelper.HardDeleteEvents();
         }
 
 

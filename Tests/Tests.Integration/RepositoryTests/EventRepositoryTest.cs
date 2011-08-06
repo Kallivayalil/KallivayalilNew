@@ -31,9 +31,10 @@ namespace Tests.Integration.RepositoryTests
         [TearDown]
         public void TearDown()
         {
+            testDataHelper.session.Clear();
+            testDataHelper.HardDeleteEvents();
             testDataHelper.HardDeleteConstituents();
             testDataHelper.HardDeleteConstituentNames();
-            testDataHelper.HardDeleteEvents();
         }
 
         [Test]
