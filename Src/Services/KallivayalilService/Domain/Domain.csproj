@@ -54,6 +54,7 @@
     <Compile Include="Email.cs" />
     <Compile Include="ErrorMessageEntity.cs" />
     <Compile Include="ErrorMessagesEntity.cs" />
+    <Compile Include="Event.cs" />
     <Compile Include="Exception\ValidationException.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="Occupation.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="ReferenceData\AssociationType.cs" />
     <Compile Include="ReferenceData\EducationType.cs" />
     <Compile Include="ReferenceData\EmailType.cs" />
+    <Compile Include="ReferenceData\EventType.cs" />
     <Compile Include="ReferenceData\OccupationType.cs" />
     <Compile Include="ReferenceData\PhoneType.cs" />
     <Compile Include="ReferenceData\SalutationType.cs" />

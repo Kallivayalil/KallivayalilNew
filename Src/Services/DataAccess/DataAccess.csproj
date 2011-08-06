@@ -67,6 +67,7 @@
     <Compile Include="Mappings\ConstituentNameMap.cs" />
     <Compile Include="Mappings\EducationDetailsMap.cs" />
     <Compile Include="Mappings\EmailMap.cs" />
+    <Compile Include="Mappings\EventMap.cs" />
     <Compile Include="Mappings\LoginMap.cs" />
     <Compile Include="Mappings\OccupationMap.cs" />
     <Compile Include="Mappings\PhoneMap.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Mappings\ReferenceData\AssociationTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\EducationTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\EmailTypeMap.cs" />
+    <Compile Include="Mappings\ReferenceData\EventTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\OccupationTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\PhoneTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\SalutationTypeMap.cs" />
@@ -84,6 +86,7 @@
     <Compile Include="Repositories\ConstituentRepository.cs" />
     <Compile Include="Repositories\EducationDetailRepository.cs" />
     <Compile Include="Repositories\EmailRepository.cs" />
+    <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\ISubEntityRepository.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />

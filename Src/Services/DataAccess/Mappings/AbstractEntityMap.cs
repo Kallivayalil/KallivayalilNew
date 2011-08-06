@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using FluentNHibernate.Mapping;
+﻿using FluentNHibernate.Mapping;
 using Kallivayalil.Common;
-using NHibernate.Cfg;
-using NHibernate.Search.Mapping;
 
 namespace Kallivayalil.DataAccess.Mappings
 {
