@@ -1,5 +1,9 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Kallivayalil.Domain;
 using NHibernate;
+using NHibernate.Criterion;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
@@ -43,7 +47,16 @@ namespace Kallivayalil.DataAccess.Repositories
 
         public Event Load(int id)
         {
-            return Load<Event>(id);
+            return session.Get<Event>(id);
+        }
+
+        public IList<Event> LoadAll(bool isApproved)
+        {
+            var criteria = session.CreateCriteria<Event>();
+            criteria.Add(Restrictions.Ge("StartDate", DateTime.Today));
+            criteria.Add(Restrictions.Ge("EndDate", DateTime.Today));
+            criteria.Add(Restrictions.Eq("IsApproved", isApproved));
+            return criteria.List<Event>();
         }
     }
 }

@@ -155,8 +155,27 @@ namespace Kallivayalil
 
         [OperationContract]
         [WebGet(UriTemplate = "/Associations?constituentId={constituentId}")]
-        AssociationsData GetAssociations(string constituentId);
+        AssociationsData GetAssociations(string constituentId); 
+        
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Events", Method = "POST")]
+        EventData CreateEvent(EventData eventData);
 
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Events/{id}", Method = "PUT")]
+        EventData UpdateEvent(string id, EventData eventData);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Events/{id}")]
+        EventData GetEvent(string id);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Events/{id}", Method = "DELETE")]
+        void DeleteEvent(string id);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Events?isApproved={isApproved}")]
+        EventsData GetEvents(string isApproved);
 
         [OperationContract]
         [WebGet(UriTemplate = "/OccupationTypes")]

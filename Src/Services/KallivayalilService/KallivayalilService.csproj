@@ -59,6 +59,7 @@
     <Compile Include="ConstituentServiceImpl.cs" />
     <Compile Include="EducationDetailServiceImpl.cs" />
     <Compile Include="EmailServiceImpl.cs" />
+    <Compile Include="EventServiceImpl.cs" />
     <Compile Include="IKallivayalilService.cs" />
     <Compile Include="LoginServiceImpl.cs" />
     <Compile Include="OccupationServiceImpl.cs" />

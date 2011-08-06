@@ -31,9 +31,10 @@ namespace Tests.Integration.RepositoryTests
         [TearDown]
         public void TearDown()
         {
+            testDataHelper.session.Clear();
+            testDataHelper.HardDeleteEvents();
             testDataHelper.HardDeleteConstituents();
             testDataHelper.HardDeleteConstituentNames();
-            testDataHelper.HardDeleteEvents();
         }
 
         [Test]
@@ -45,7 +46,7 @@ namespace Tests.Integration.RepositoryTests
         }  
         
         [Test]
-        public void ShouldUpdateConstituentName()
+        public void ShouldUpdateEvent()
         {
             savedEvent.Constituent = savedConstituent;
             savedEvent.IsApproved = true;
@@ -57,7 +58,7 @@ namespace Tests.Integration.RepositoryTests
         }
 
         [Test]
-        public void ShouldDeleteConstituentName()
+        public void ShouldDeleteEvent()
         {
             eventRepository.Delete(savedEvent.Id);
 
@@ -67,11 +68,22 @@ namespace Tests.Integration.RepositoryTests
 
 
         [Test]
-        public void ShouldLoadConstituentName()
+        public void ShouldLoadEvent()
         {
             var @event = eventRepository.Load(savedEvent.Id);
 
             Assert.That(@event.Id, Is.EqualTo(savedEvent.Id));
-        }
+        }  
+        
+        [Test]
+        public void ShouldLoadAllEvents()
+        {
+            testDataHelper.CreateEvent(EventMother.Birthday(savedConstituent));
+
+            var @event = eventRepository.LoadAll(true);
+
+            Assert.That(@event.Count, Is.EqualTo(1));
+        }  
+        
     }
 }

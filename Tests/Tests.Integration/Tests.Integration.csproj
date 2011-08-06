@@ -53,6 +53,7 @@
     <Compile Include="Mothers\AssociationDataMother.cs" />
     <Compile Include="Mothers\EducationDetailDataMother.cs" />
     <Compile Include="Mothers\EmailDataMother.cs" />
+    <Compile Include="Mothers\EventDataMother.cs" />
     <Compile Include="Mothers\OccupationDataMother.cs" />
     <Compile Include="Mothers\PhoneDataMother.cs" />
     <Compile Include="RepositoryTests\AddressRepositoryTest.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="ServiceTests\ConstituentTest.cs" />
     <Compile Include="ServiceTests\EducationDetailTest.cs" />
     <Compile Include="ServiceTests\EmailTest.cs" />
+    <Compile Include="ServiceTests\EventTest.cs" />
     <Compile Include="ServiceTests\LoginTest.cs" />
     <Compile Include="ServiceTests\OccupationTest.cs" />
     <Compile Include="ServiceTests\PhoneTest.cs" />
