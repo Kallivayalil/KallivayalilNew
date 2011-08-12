@@ -10,9 +10,9 @@ namespace Kallivayalil
     {
         private readonly ReferenceDataRepository repository;
 
-        public ReferenceDataServiceImpl()
+        public ReferenceDataServiceImpl(ReferenceDataRepository repository)
         {
-            repository = new ReferenceDataRepository();
+            this.repository = repository;
         }
 
         public IList<PhoneType> GetPhoneTypes()

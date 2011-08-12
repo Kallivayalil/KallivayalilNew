@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using Kallivayalil.Client;
 using Kallivayalil.Domain;
@@ -68,7 +69,7 @@ namespace Tests.Integration.ServiceTests
         }
 
         [Test]
-        public void ShouldLoadAllEvents()
+        public void ShouldLoadAllEventsForToday()
         {
             testDataHelper.CreateEvent(EventMother.Birthday(savedConstituent));
             testDataHelper.CreateEvent(EventMother.Birthday(savedConstituent));
@@ -76,7 +77,35 @@ namespace Tests.Integration.ServiceTests
             testDataHelper.CreateEvent(EventMother.Anniversary());
             testDataHelper.CreateEvent(EventMother.Anniversary());
 
-            var eventsData = HttpHelper.Get<EventsData>(string.Format("{0}?isApproved={1}", baseUri,"true"));
+            var eventsData = HttpHelper.Get<EventsData>(string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}", baseUri, "true", DateTime.Today, DateTime.Today));
+
+            Assert.That(eventsData.Count, Is.EqualTo(3));
+        }
+        
+        [Test]
+        public void ShouldLoadAllEventsForTodayIncludingBirthdays()
+        {
+            testDataHelper.CreateEvent(EventMother.Birthday(savedConstituent));
+            testDataHelper.CreateEvent(EventMother.Birthday(savedConstituent));
+            testDataHelper.CreateEvent(EventMother.Birthday(savedConstituent));
+            testDataHelper.CreateEvent(EventMother.Anniversary());
+            testDataHelper.CreateEvent(EventMother.Anniversary());
+
+            var eventsData = HttpHelper.Get<EventsData>(string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdays={4}", baseUri, "true", DateTime.Today, DateTime.Today,"true"));
+
+            Assert.That(eventsData.Count, Is.EqualTo(4));
+        } 
+        
+        [Test]
+        public void ShouldLoadAllEventsForGivenDateRange()
+        {
+            testDataHelper.CreateEvent(EventMother.Event1(savedConstituent));
+            testDataHelper.CreateEvent(EventMother.Event2(savedConstituent));
+            testDataHelper.CreateEvent(EventMother.Event1(savedConstituent));
+            testDataHelper.CreateEvent(EventMother.Anniversary());
+            testDataHelper.CreateEvent(EventMother.Anniversary());
+
+            var eventsData = HttpHelper.Get<EventsData>(string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}", baseUri,"true",DateTime.Today.AddDays(-5),DateTime.Today.AddDays(5)));
 
             Assert.That(eventsData.Count, Is.EqualTo(3));
         }
