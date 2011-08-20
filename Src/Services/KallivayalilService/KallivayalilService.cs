@@ -35,16 +35,17 @@ namespace Kallivayalil
             var constituentNameRepository = new ConstituentNameRepository();
             var constituentRepository = new ConstituentRepository();
             var referenceDataRepository = new ReferenceDataRepository();
+            var educationDetailRepository = new EducationDetailRepository();
             var eventRepository = new EventRepository();
 
-            constituentServiceImpl = new ConstituentServiceImpl();
+            constituentServiceImpl = new ConstituentServiceImpl(constituentRepository);
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(new AddressRepository());
             phoneServiceImpl = new PhoneServiceImpl(new PhoneRepository(), constituentRepository);
             emailServiceImpl = new EmailServiceImpl(new EmailRepository());
             loginServiceImpl = new LoginServiceImpl();
             occupationServiceImpl = new OccupationServiceImpl(new OccupationRepository(), constituentRepository);
-            educationalDetailServiceImpl = new EducationDetailServiceImpl();
+            educationalDetailServiceImpl = new EducationDetailServiceImpl(educationDetailRepository,constituentRepository);
             associationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
             searchServiceImpl = new SearchServiceImpl(constituentRepository);
             eventServiceImpl = new EventServiceImpl(eventRepository,constituentRepository,referenceDataRepository);

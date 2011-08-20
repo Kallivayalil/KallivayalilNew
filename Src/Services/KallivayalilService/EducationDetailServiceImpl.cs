@@ -23,10 +23,10 @@ namespace Kallivayalil
             educationDetail.Type = repository.Load<EducationType>(educationDetail.Type.Id);
         }
 
-        public EducationDetailServiceImpl()
+        public EducationDetailServiceImpl(EducationDetailRepository repository, ConstituentRepository constituentRepository)
         {
-            repository = new EducationDetailRepository();
-            constituentRepository = new ConstituentRepository();
+            this.repository = repository;
+            this.constituentRepository = constituentRepository;
         }
 
         public EducationDetail CreateEducationDetail(EducationDetail educationDetail)

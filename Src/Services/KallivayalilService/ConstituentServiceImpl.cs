@@ -11,9 +11,9 @@ namespace Kallivayalil
         private readonly ConstituentRepository repository;
 
 
-        public ConstituentServiceImpl()
+        public ConstituentServiceImpl(ConstituentRepository repository)
         {
-            repository = new ConstituentRepository();
+            this.repository = repository;
         }
 
         public Constituent FindConstituent(string id)
