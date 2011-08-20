@@ -41,12 +41,13 @@ namespace Kallivayalil
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(new AddressRepository());
             phoneServiceImpl = new PhoneServiceImpl(new PhoneRepository(), constituentRepository);
-            emailServiceImpl = new EmailServiceImpl(new EmailRepository());
+            var emailRepository = new EmailRepository();
+            emailServiceImpl = new EmailServiceImpl(emailRepository);
             loginServiceImpl = new LoginServiceImpl();
             occupationServiceImpl = new OccupationServiceImpl(new OccupationRepository(), constituentRepository);
             educationalDetailServiceImpl = new EducationDetailServiceImpl();
             associationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
-            searchServiceImpl = new SearchServiceImpl(constituentRepository);
+            searchServiceImpl = new SearchServiceImpl(constituentRepository,emailRepository);
             eventServiceImpl = new EventServiceImpl(eventRepository,constituentRepository,referenceDataRepository);
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl(referenceDataRepository);
@@ -119,6 +120,16 @@ namespace Kallivayalil
             mapper.Map(allConstituents,constituentsData);
 
             return constituentsData;
+        }
+
+        public virtual ConstituentData SearchByEmailId(string emailId)
+        {
+            var constituent = searchServiceImpl.SearchBy(emailId);
+
+            var constituentData = new ConstituentData();
+            mapper.Map(constituent,constituentData);
+
+            return constituentData;
         }
 
         public virtual AddressData CreateAddress(string constituentId, AddressData addressData)
@@ -312,7 +323,6 @@ namespace Kallivayalil
             {
                 throw new NotFoundException(string.Format("Educational Detail with Id:{0} not found.", id));
             }
-
             mapper.Map(educationDetail, educationalDetailData);
 
             return educationalDetailData;

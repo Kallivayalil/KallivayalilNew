@@ -16,9 +16,7 @@ namespace Tests.Integration.ServiceTests
         {
             testDataHelper = new TestDataHelper();
             testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
-            
         }
-
 
         [TearDown]
         public void TearDown()
@@ -27,6 +25,15 @@ namespace Tests.Integration.ServiceTests
             testDataHelper.HardDeleteConstituentNames();
         }
 
+        [Test]
+        public void ShouldSearchForConstituentByEmailId()
+        {
+            var uriString = string.Format("{0}?emailId={1}", "http://localhost/kallivayalilService/KallivayalilService.svc/Find", "james@franklin.com");
+            var constituentData = HttpHelper.Get<ConstituentData>(uriString);
+
+            Assert.IsNotNull(constituentData);
+            Assert.That(constituentData.Id,Is.EqualTo(1));
+        }
 
         [Test,Ignore()]
         public void ShouldGetConstituentByName()
