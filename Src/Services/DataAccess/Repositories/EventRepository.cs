@@ -58,5 +58,14 @@ namespace Kallivayalil.DataAccess.Repositories
             criteria.Add(Restrictions.Eq("IsApproved", isApproved));
             return criteria.List<Event>();
         }
+
+        public IList<Event> LoadAll(bool isApproved, DateTime startDate, DateTime endDate)
+        {
+            var criteria = session.CreateCriteria<Event>();
+            criteria.Add(Restrictions.Ge("StartDate", startDate));
+            criteria.Add(Restrictions.Le("EndDate", endDate));
+            criteria.Add(Restrictions.Eq("IsApproved", isApproved));
+            return criteria.List<Event>();
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace Tests.Integration.RepositoryTests
 //            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
             testDataHelper = new TestDataHelper();
 
-            constituent = new Constituent {Gender = "M", BornOn = DateTime.Now, BranchName = 1, MaritialStatus = 1, IsRegistered = false};
+            constituent = new Constituent {Gender = "M", BornOn = DateTime.Today, BranchName = 1, MaritialStatus = 1, IsRegistered = false};
             constituent.Name = ConstituentNameMother.JamesFranklin();
             savedConstituent = testDataHelper.CreateConstituent(constituent);
 
@@ -95,6 +95,16 @@ namespace Tests.Integration.RepositoryTests
             Assert.IsNotNull(result);
             Assert.That(result, Is.TypeOf(typeof (Constituent)));
             Assert.That(result.Id, Is.EqualTo(savedConstituent.Id));
+        }
+
+        [Test]
+        public void ShouldLoadAllConstituentsWithBirthdayToday()
+        {
+            testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JessicaAlba()));
+
+            var constituents = constituentRepository.LoadAllConstituentsWithBirthdayToday();
+
+            Assert.That(constituents.Count,Is.EqualTo(2));
         }
 
 

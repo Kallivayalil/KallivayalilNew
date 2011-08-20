@@ -34,6 +34,7 @@ namespace Kallivayalil
 //            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
             var constituentNameRepository = new ConstituentNameRepository();
             var constituentRepository = new ConstituentRepository();
+            var referenceDataRepository = new ReferenceDataRepository();
             var eventRepository = new EventRepository();
 
             constituentServiceImpl = new ConstituentServiceImpl();
@@ -46,9 +47,9 @@ namespace Kallivayalil
             educationalDetailServiceImpl = new EducationDetailServiceImpl();
             associationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
             searchServiceImpl = new SearchServiceImpl(constituentRepository);
-            eventServiceImpl = new EventServiceImpl(eventRepository);
+            eventServiceImpl = new EventServiceImpl(eventRepository,constituentRepository,referenceDataRepository);
             mapper = new AutoDataContractMapper();
-            referenceDataServiceImpl = new ReferenceDataServiceImpl();
+            referenceDataServiceImpl = new ReferenceDataServiceImpl(referenceDataRepository);
         }
 
         public virtual ConstituentData GetConstituent(string id)
@@ -510,10 +511,10 @@ namespace Kallivayalil
             eventServiceImpl.DeletEvent(id);
         }
 
-        public virtual EventsData GetEvents(string isApproved)
+        public virtual EventsData GetEvents(string isApproved, string startDate, string endDate, string includeBirthdays)
         {
-            var events = eventServiceImpl.FindEvents(bool.Parse(isApproved));
-
+            var events = eventServiceImpl.FindEvents(bool.Parse(isApproved), DateTime.Parse(startDate), DateTime.Parse(endDate), bool.Parse(includeBirthdays));
+                
             var eventsData = new EventsData();
             mapper.MapList(events, eventsData, typeof(EventData));
             return eventsData;

@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 using Kallivayalil.Domain;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.QueryParsers;
-using Lucene.Net.Util;
 using NHibernate;
 using System.Linq;
+using NHibernate.Criterion;
 using NHibernate.Search;
+using Version = Lucene.Net.Util.Version;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
@@ -56,6 +59,8 @@ namespace Kallivayalil.DataAccess.Repositories
             return session.Get<Constituent>(constituentId);
         }
 
+        
+
         public IEnumerable<Constituent> SearchByName(string firstName, string lastName)
         {
             var textSession = Search.CreateFullTextSession(session);
@@ -65,6 +70,14 @@ namespace Kallivayalil.DataAccess.Repositories
             var query = string.Format("Name.FirstName:{0} or Name.LastName:{1}", firstName, lastName);
 
              return textSession.CreateFullTextQuery(qp.Parse(query), typeof(Constituent)).List().Cast<Constituent>();
+        }
+
+        public IList<Constituent> LoadAllConstituentsWithBirthdayToday()
+        {
+            var criteria = session.CreateCriteria<Constituent>();
+            criteria.Add(Restrictions.Eq("BornOn", DateTime.Today));
+            return criteria.List<Constituent>();
+
         }
     }
 }

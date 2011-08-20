@@ -1,3 +1,4 @@
+using System;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
 using NUnit.Framework;
@@ -76,14 +77,28 @@ namespace Tests.Integration.RepositoryTests
         }  
         
         [Test]
-        public void ShouldLoadAllEvents()
+        public void ShouldLoadAllEventsForToday()
         {
             testDataHelper.CreateEvent(EventMother.Birthday(savedConstituent));
 
             var @event = eventRepository.LoadAll(true);
 
             Assert.That(@event.Count, Is.EqualTo(1));
+        }    
+        
+        [Test]
+        public void ShouldLoadAllEventsForGivenDateRange()
+        {
+            testDataHelper.CreateEvent(EventMother.Birthday(savedConstituent));
+            testDataHelper.CreateEvent(EventMother.Event1(savedConstituent));
+            testDataHelper.CreateEvent(EventMother.Event2(savedConstituent));
+            
+            var @event = eventRepository.LoadAll(true,DateTime.Today.AddDays(-5),DateTime.Today.AddDays(5));
+
+            Assert.That(@event.Count, Is.EqualTo(3));
         }  
+
+
         
     }
 }

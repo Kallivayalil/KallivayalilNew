@@ -37,6 +37,38 @@ namespace Tests.Common.Mothers
                            IsApproved = false
                        };
         }
+        public static Event Event1(Constituent constituent)
+        {
+            return new Event
+                       {
+                           Type = EventTypeMother.Anniversary(),
+                           EventTitle = "Anniversary Party",
+                           EventDescription = "Anniversary at 10",
+                           StartDate = DateTime.Today.AddDays(-2),
+                           EndDate = DateTime.Today.AddDays(2),
+                           ContactPerson = "Jessica",
+                           ContactNumber = "998006543",
+                           CreatedBy = "James Franklin",
+                           IsApproved = true,
+                           Constituent = constituent
+                       };
+        }
+        public static Event Event2(Constituent constituent)
+        {
+            return new Event
+                       {
+                           Type = EventTypeMother.Anniversary(),
+                           EventTitle = "Anniversary Party",
+                           EventDescription = "Anniversary at 10",
+                           StartDate = DateTime.Today,
+                           EndDate = DateTime.Today.AddDays(2),
+                           ContactPerson = "Jessica",
+                           ContactNumber = "998006543",
+                           CreatedBy = "James Franklin",
+                           IsApproved = true,
+                           Constituent = constituent
+                       };
+        }
       
     }
 }
