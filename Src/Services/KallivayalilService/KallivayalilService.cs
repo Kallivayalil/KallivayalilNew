@@ -42,12 +42,13 @@ namespace Kallivayalil
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(new AddressRepository());
             phoneServiceImpl = new PhoneServiceImpl(new PhoneRepository(), constituentRepository);
-            emailServiceImpl = new EmailServiceImpl(new EmailRepository());
+            var emailRepository = new EmailRepository();
+            emailServiceImpl = new EmailServiceImpl(emailRepository);
             loginServiceImpl = new LoginServiceImpl();
             occupationServiceImpl = new OccupationServiceImpl(new OccupationRepository(), constituentRepository);
             educationalDetailServiceImpl = new EducationDetailServiceImpl(educationDetailRepository,constituentRepository);
             associationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
-            searchServiceImpl = new SearchServiceImpl(constituentRepository);
+            searchServiceImpl = new SearchServiceImpl(constituentRepository,emailRepository);
             eventServiceImpl = new EventServiceImpl(eventRepository,constituentRepository,referenceDataRepository);
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl(referenceDataRepository);
@@ -120,6 +121,16 @@ namespace Kallivayalil
             mapper.Map(allConstituents,constituentsData);
 
             return constituentsData;
+        }
+
+        public virtual ConstituentData SearchByEmailId(string emailId)
+        {
+            var constituent = searchServiceImpl.SearchBy(emailId);
+
+            var constituentData = new ConstituentData();
+            mapper.Map(constituent,constituentData);
+
+            return constituentData;
         }
 
         public virtual AddressData CreateAddress(string constituentId, AddressData addressData)
@@ -313,7 +324,6 @@ namespace Kallivayalil
             {
                 throw new NotFoundException(string.Format("Educational Detail with Id:{0} not found.", id));
             }
-
             mapper.Map(educationDetail, educationalDetailData);
 
             return educationalDetailData;
@@ -440,6 +450,31 @@ namespace Kallivayalil
             mapper.MapList(associations, associationsData, typeof(AssociationData));
 
             return associationsData;
+        }
+
+        public virtual RelationshipData GetRelationships(string constituentId)
+        {
+            var associations = associationServiceImpl.FindAssociations(constituentId);
+            var constituent = constituentServiceImpl.FindConstituent(constituentId);
+            var relationshipData = new RelationshipData() {id = constituent.Id, name = constituent.Name.FirstName, children = new List<RelationshipData>()};
+
+            foreach (var association in associations)
+            {
+                var data = new RelationshipData();
+                if (Entity.IsNull(association.AssociatedConstituent))
+                {
+                    data.id = -1;
+                    data.name = association.AssociatedConstituentName;
+                }
+                else
+                {
+                    data.id = association.AssociatedConstituent.Id;
+                    data.name = association.AssociatedConstituent.Name.FirstName;
+                }
+                relationshipData.children.Add(data);
+            }
+
+            return relationshipData;
         }
 
         public virtual EventData CreateEvent(EventData eventData)

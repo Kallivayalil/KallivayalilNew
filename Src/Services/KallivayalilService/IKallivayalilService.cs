@@ -33,7 +33,11 @@ namespace Kallivayalil
         
         [OperationContract]
         [WebGet(UriTemplate = "/Search?firstName={firstName}&lastName={lastName}")]
-        ConstituentsData SearchByConstituentName(string firstName, string lastName);
+        ConstituentsData SearchByConstituentName(string firstName, string lastName); 
+        
+        [OperationContract]
+        [WebGet(UriTemplate = "/Find?emailId={emailId}")]
+        ConstituentData SearchByEmailId(string emailId);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/Addresses?constituentId={constituentId}", Method = "POST")]
@@ -156,6 +160,10 @@ namespace Kallivayalil
         [OperationContract]
         [WebGet(UriTemplate = "/Associations?constituentId={constituentId}")]
         AssociationsData GetAssociations(string constituentId); 
+        
+        [OperationContract]
+        [WebGet(UriTemplate = "/Relationships?constituentId={constituentId}")]
+        RelationshipData GetRelationships(string constituentId); 
         
         [OperationContract]
         [WebInvoke(UriTemplate = "/Events", Method = "POST")]

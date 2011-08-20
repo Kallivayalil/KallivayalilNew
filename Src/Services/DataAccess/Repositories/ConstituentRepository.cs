@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using Kallivayalil.Domain;
-using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.QueryParsers;
 using NHibernate;
@@ -58,8 +56,6 @@ namespace Kallivayalil.DataAccess.Repositories
         {
             return session.Get<Constituent>(constituentId);
         }
-
-        
 
         public IEnumerable<Constituent> SearchByName(string firstName, string lastName)
         {
