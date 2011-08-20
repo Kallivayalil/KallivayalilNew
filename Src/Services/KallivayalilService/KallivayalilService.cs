@@ -440,6 +440,31 @@ namespace Kallivayalil
             return associationsData;
         }
 
+        public virtual RelationshipData GetRelationships(string constituentId)
+        {
+            var associations = associationServiceImpl.FindAssociations(constituentId);
+            var constituent = constituentServiceImpl.FindConstituent(constituentId);
+            var relationshipData = new RelationshipData() {id = constituent.Id, name = constituent.Name.FirstName, children = new List<RelationshipData>()};
+
+            foreach (var association in associations)
+            {
+                var data = new RelationshipData();
+                if (Entity.IsNull(association.AssociatedConstituent))
+                {
+                    data.id = -1;
+                    data.name = association.AssociatedConstituentName;
+                }
+                else
+                {
+                    data.id = association.AssociatedConstituent.Id;
+                    data.name = association.AssociatedConstituent.Name.FirstName;
+                }
+                relationshipData.children.Add(data);
+            }
+
+            return relationshipData;
+        }
+
         public virtual EventData CreateEvent(EventData eventData)
         {
             var @event = new Event();

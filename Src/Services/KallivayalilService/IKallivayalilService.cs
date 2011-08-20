@@ -158,6 +158,10 @@ namespace Kallivayalil
         AssociationsData GetAssociations(string constituentId); 
         
         [OperationContract]
+        [WebGet(UriTemplate = "/Relationships?constituentId={constituentId}")]
+        RelationshipData GetRelationships(string constituentId); 
+        
+        [OperationContract]
         [WebInvoke(UriTemplate = "/Events", Method = "POST")]
         EventData CreateEvent(EventData eventData);
 
