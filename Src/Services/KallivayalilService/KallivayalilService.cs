@@ -27,6 +27,7 @@ namespace Kallivayalil
         private readonly SearchServiceImpl searchServiceImpl;
         private readonly AssociationServiceImpl associationServiceImpl;
         private readonly EventServiceImpl eventServiceImpl;
+        private readonly ContactUsServiceImpl contactUsServiceImpl;
 
         public KallivayalilService()
         {
@@ -37,8 +38,10 @@ namespace Kallivayalil
             var referenceDataRepository = new ReferenceDataRepository();
             var educationDetailRepository = new EducationDetailRepository();
             var eventRepository = new EventRepository();
+            var contactUsRepository = new ContactUsRepository();
 
             constituentServiceImpl = new ConstituentServiceImpl(constituentRepository);
+            contactUsServiceImpl = new ContactUsServiceImpl(contactUsRepository);
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(new AddressRepository());
             phoneServiceImpl = new PhoneServiceImpl(new PhoneRepository(), constituentRepository);
@@ -488,6 +491,19 @@ namespace Kallivayalil
             mapper.Map(savedEvent, savedEventData);
 
             return savedEventData;
+        }
+
+        public virtual ContactUsData CreateFeedback(ContactUsData feedbackData)
+        {
+            var contactUs = new ContactUs();
+            mapper.Map(feedbackData, contactUs);
+            var savedContactUs = contactUsServiceImpl.CreateContactUs(contactUs);
+
+            var contactUsData = new ContactUsData();
+
+            mapper.Map(savedContactUs, contactUsData);
+
+            return contactUsData;
         }
 
         public virtual EventData UpdateEvent(string id, EventData eventData)

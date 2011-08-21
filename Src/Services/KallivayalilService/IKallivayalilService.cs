@@ -168,6 +168,10 @@ namespace Kallivayalil
         [OperationContract]
         [WebInvoke(UriTemplate = "/Events", Method = "POST")]
         EventData CreateEvent(EventData eventData);
+        
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/ContactUs", Method = "POST")]
+        ContactUsData CreateFeedback(ContactUsData feedbackData);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/Events/{id}", Method = "PUT")]

@@ -65,6 +65,7 @@
     <Compile Include="Mappings\AssociationMap.cs" />
     <Compile Include="Mappings\ConstituentMap.cs" />
     <Compile Include="Mappings\ConstituentNameMap.cs" />
+    <Compile Include="Mappings\ContactUsMap.cs" />
     <Compile Include="Mappings\EducationDetailsMap.cs" />
     <Compile Include="Mappings\EmailMap.cs" />
     <Compile Include="Mappings\EventMap.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Repositories\AssociationRepository.cs" />
     <Compile Include="Repositories\ConstituentNameRepository.cs" />
     <Compile Include="Repositories\ConstituentRepository.cs" />
+    <Compile Include="Repositories\ContactUsRepository.cs" />
     <Compile Include="Repositories\EducationDetailRepository.cs" />
     <Compile Include="Repositories\EmailRepository.cs" />
     <Compile Include="Repositories\EventRepository.cs" />

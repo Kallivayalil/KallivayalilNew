@@ -76,6 +76,14 @@ namespace Tests.Common.Helpers
             session.Flush();
         }
 
+        public void HardDeleteContactUs()
+        {
+            var sqlCommand = session.Connection.CreateCommand();
+            sqlCommand.CommandText = "delete from contactus where id >= 10";
+            sqlCommand.ExecuteNonQuery();
+            session.Flush();
+        }
+
 
         public void HardDeleteOccupations()
         {
@@ -150,6 +158,13 @@ namespace Tests.Common.Helpers
             var savedEvent = session.SaveOrUpdateCopy(@event);
             session.Flush();
             return (Event)savedEvent; 
+        }
+
+        public ContactUs CreateContactUs(ContactUs contactUs)
+        {
+            var savedContactUs = session.SaveOrUpdateCopy(contactUs);
+            session.Flush();
+            return (ContactUs)savedContactUs; 
         }
     }
 }

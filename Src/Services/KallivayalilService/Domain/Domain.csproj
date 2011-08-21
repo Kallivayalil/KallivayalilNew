@@ -50,6 +50,7 @@
     <Compile Include="Association.cs" />
     <Compile Include="Constituent.cs" />
     <Compile Include="ConstituentName.cs" />
+    <Compile Include="ContactUs.cs" />
     <Compile Include="EducationDetail.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="ErrorMessageEntity.cs" />
