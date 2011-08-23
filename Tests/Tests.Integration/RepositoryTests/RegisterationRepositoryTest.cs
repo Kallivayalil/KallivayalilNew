@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
 using NUnit.Framework;

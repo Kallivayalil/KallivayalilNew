@@ -17,24 +17,12 @@ namespace Kallivayalil.DataAccess.Repositories
             using (var txn = session.BeginTransaction())
             {
                 var savedConstituent = SaveOrUpdate(registerationConstituent.Constituent, txn);
-                if(savedConstituent.Id > 0)
+                if (savedConstituent.Id > 0)
                 {
                     savedRegisterationConstituent.Constituent = savedConstituent;
-                    var savedAddress = GetSavedAddress(registerationConstituent, txn, savedConstituent);
-                  
-                    if (savedAddress.Id > 0)
-                    {
-                        savedRegisterationConstituent.Address = savedAddress;
-                        var savedEmail = GetSavedEmail(registerationConstituent, txn, savedConstituent);
-                        if (savedEmail != null && savedEmail.Id > 0)
-                        {
-                            savedRegisterationConstituent.Email = savedEmail;
-                            var savedPhone = GetSavedPhone(registerationConstituent, txn, savedConstituent);
-                            if (savedPhone != null && savedPhone.Id > 0)
-                                savedRegisterationConstituent.Phone = savedPhone;
-                        }
-                    }
-                   
+                    savedRegisterationConstituent.Address = GetSavedAddress(registerationConstituent, txn, savedConstituent);
+                    savedRegisterationConstituent.Email = GetSavedEmail(registerationConstituent, txn, savedConstituent);
+                    savedRegisterationConstituent.Phone = GetSavedPhone(registerationConstituent, txn, savedConstituent);
                 }
                 txn.Commit();
                 return savedRegisterationConstituent;

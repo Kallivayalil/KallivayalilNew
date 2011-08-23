@@ -14,6 +14,7 @@ namespace Kallivayalil
     public class KallivayalilService : IKallivayalilService
     {
         private readonly ConstituentServiceImpl constituentServiceImpl;
+        private readonly RegistrationServiceImpl registrationServiceImpl;
         private readonly ConstituentNameServiceImpl nameServiceImpl;
         private readonly AutoDataContractMapper mapper;
         private readonly AddressServiceImpl addressServiceImpl;
@@ -38,8 +39,10 @@ namespace Kallivayalil
             var educationDetailRepository = new EducationDetailRepository();
             var eventRepository = new EventRepository();
             var contactUsRepository = new ContactUsRepository();
+            var registerationRepository = new RegisterationRepository();
 
             constituentServiceImpl = new ConstituentServiceImpl(constituentRepository);
+            registrationServiceImpl = new RegistrationServiceImpl(registerationRepository);
             contactUsServiceImpl = new ContactUsServiceImpl(contactUsRepository);
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(new AddressRepository());
@@ -91,6 +94,16 @@ namespace Kallivayalil
             var savedConstituentData = new ConstituentData();
             mapper.Map(savedConstituent, savedConstituentData);
             return savedConstituentData;
+        }
+
+        public RegisterationData CreateRegistrationConstituent(RegisterationData registerationData)
+        {
+            var registerationConstituent = new RegisterationConstituent();
+            mapper.Map(registerationData, registerationConstituent);
+            var savedRegistrationConstituent = registrationServiceImpl.CreateRegistrationConstituent(registerationConstituent);
+            var savedData = new RegisterationData();
+            mapper.Map(savedRegistrationConstituent,savedData);
+            return savedData;
         }
 
         public virtual ConstituentData UpdateConstituent(string id, ConstituentData constituentData)

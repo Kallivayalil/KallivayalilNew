@@ -15,6 +15,15 @@ namespace Tests.Integration.Mothers
                            Address = new ShortAddressData() {Id = address.Id}
                        };
         }
+        
+        public static PhoneData Mobile()
+        {
+            return new PhoneData
+                       {
+                           Type = new PhoneTypeData {Description = "Mobile", Id = 1},
+                           Number = "9900012345",
+                       };
+        }
 
         public static PhoneData Mobile(Phone phone)
         {

@@ -21,6 +21,13 @@ namespace Tests.Integration.Mothers
 
         public static AddressData London(Constituent constituent)
         {
+            var addressData = London();
+            addressData.Constituent = new LinkData {Id = constituent.Id};
+            return addressData;
+        }
+
+        public static AddressData London()
+        {
             return new AddressData
                        {
                            Line1 = "190 Bermondsey Street",
@@ -30,7 +37,6 @@ namespace Tests.Integration.Mothers
                            Country = "UK",
                            IsPrimary = true,
                            Type = new AddressTypeData {Id = 1, Description = "Home"},
-                           Constituent = new LinkData {Id = constituent.Id},
                        };
         }
     }

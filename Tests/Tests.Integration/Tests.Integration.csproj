@@ -82,6 +82,7 @@
     <Compile Include="ServiceTests\OccupationTest.cs" />
     <Compile Include="ServiceTests\PhoneTest.cs" />
     <Compile Include="ServiceTests\ReferenceDataTest.cs" />
+    <Compile Include="ServiceTests\RegisterationTest.cs" />
     <Compile Include="ServiceTests\SearchTest.cs" />
   </ItemGroup>
   <ItemGroup>

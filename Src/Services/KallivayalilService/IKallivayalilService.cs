@@ -21,7 +21,11 @@ namespace Kallivayalil
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/Constituents", Method = "POST")]
-        ConstituentData CreateConstituent(ConstituentData constituentData);
+        ConstituentData CreateConstituent(ConstituentData constituentData); 
+        
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Registration", Method = "POST")]
+        RegisterationData CreateRegistrationConstituent(RegisterationData registerationData);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/Constituents/{id}", Method = "PUT")]
