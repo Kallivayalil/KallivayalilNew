@@ -6,7 +6,6 @@ using Kallivayalil.Client;
 using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
-using System.Linq;
 
 namespace Kallivayalil
 {

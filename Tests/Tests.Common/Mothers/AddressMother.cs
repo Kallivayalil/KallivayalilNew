@@ -30,6 +30,19 @@ namespace Tests.Common.Mothers
                            Type = AddressTypeMother.Office(),
                            Constituent = constituent,
                        };
+        } 
+        
+        public static Address London()
+        {
+            return new Address
+                       {
+                           Line1 = "190 Bermondsey Street",
+                           City = "London",
+                           State = "London",
+                           PostCode = "SE1 3TQ",
+                           Country = "UK",
+                           Type = AddressTypeMother.Office(),
+                       };
         }
     }
 }

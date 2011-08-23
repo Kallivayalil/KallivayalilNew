@@ -9,6 +9,11 @@ namespace Tests.Common.Mothers
             return new Phone {Constituent = constituent, Number = "9900012345", Type = PhoneTypeMother.Mobile()};
         }
 
+        public static Phone Mobile()
+        {
+            return new Phone { Number = "9900012345", Type = PhoneTypeMother.Mobile()};
+        }
+
         public static Phone Mobile(Constituent constituent, Address address)
         {
             var mobile = Mobile(constituent);

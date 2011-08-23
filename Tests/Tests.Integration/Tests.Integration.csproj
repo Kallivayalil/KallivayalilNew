@@ -69,6 +69,7 @@
     <Compile Include="RepositoryTests\OccupationRepositoryTest.cs" />
     <Compile Include="RepositoryTests\PhoneRepositoryTest.cs" />
     <Compile Include="RepositoryTests\ReferenceDataRepositoryTest.cs" />
+    <Compile Include="RepositoryTests\RegisterationRepositoryTest.cs" />
     <Compile Include="ServiceTests\AddressTest.cs" />
     <Compile Include="ServiceTests\AssociationTest.cs" />
     <Compile Include="ServiceTests\ConstituentNameTest.cs" />

@@ -95,6 +95,7 @@
     <Compile Include="Repositories\OccupationRepository.cs" />
     <Compile Include="Repositories\PhoneRepository.cs" />
     <Compile Include="Repositories\ReferenceDataRepository.cs" />
+    <Compile Include="Repositories\RegisterationRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
