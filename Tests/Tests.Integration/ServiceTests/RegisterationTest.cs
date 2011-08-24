@@ -39,13 +39,6 @@ namespace Tests.Integration.ServiceTests
 
 
         [Test]
-        public void ShouldLoadConstituent()
-        {
-            var result = HttpHelper.Get<ConstituentData>(string.Format("{0}/{1}", baseUri, constituent.Id));
-            Assert.IsNotNull(result);
-        }
-
-        [Test]
         public void ShouldCreateRegisterationConstituent()
         {
             var registerationData = new RegisterationData()
