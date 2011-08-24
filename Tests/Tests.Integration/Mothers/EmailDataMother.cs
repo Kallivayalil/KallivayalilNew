@@ -15,6 +15,14 @@ namespace Tests.Integration.Mothers
                        };
         }
 
+        public static EmailData Official()
+        {
+            return new EmailData
+            {
+                Type = new EmailTypeData { Id = 1, Description = "Official" },
+                Address = "james.franklin@kallivayalil.com",
+            };
+        }
         public static EmailData Official(Email email)
         {
             return new EmailData

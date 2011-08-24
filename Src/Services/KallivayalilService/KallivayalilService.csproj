@@ -57,6 +57,7 @@
     <Compile Include="BaseServiceImpl.cs" />
     <Compile Include="ConstituentNameServiceImpl.cs" />
     <Compile Include="ConstituentServiceImpl.cs" />
+    <Compile Include="ContactUsServiceImpl.cs" />
     <Compile Include="EducationDetailServiceImpl.cs" />
     <Compile Include="EmailServiceImpl.cs" />
     <Compile Include="EventServiceImpl.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="KallivayalilService.cs" />
     <Compile Include="ReferenceDataServiceImpl.cs" />
+    <Compile Include="RegistrationServiceImpl.cs" />
     <Compile Include="SearchServiceImpl.cs" />
     <Compile Include="ValidationResultExtension.cs" />
   </ItemGroup>

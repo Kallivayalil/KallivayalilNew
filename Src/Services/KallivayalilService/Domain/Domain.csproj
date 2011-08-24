@@ -50,6 +50,7 @@
     <Compile Include="Association.cs" />
     <Compile Include="Constituent.cs" />
     <Compile Include="ConstituentName.cs" />
+    <Compile Include="ContactUs.cs" />
     <Compile Include="EducationDetail.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="ErrorMessageEntity.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="ReferenceData\OccupationType.cs" />
     <Compile Include="ReferenceData\PhoneType.cs" />
     <Compile Include="ReferenceData\SalutationType.cs" />
+    <Compile Include="RegisterationConstituent.cs" />
     <Compile Include="Validators\AddressValidator.cs" />
     <Compile Include="Validators\ConstituentNameValidator.cs" />
     <Compile Include="Validators\EmailValidator.cs" />

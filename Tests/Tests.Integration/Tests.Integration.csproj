@@ -61,6 +61,7 @@
     <Compile Include="RepositoryTests\ConstituentNameRepositoryTest.cs" />
     <Compile Include="RepositoryTests\ConstituentRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryTests\ContactUsRepositoryTest.cs" />
     <Compile Include="RepositoryTests\EducationDetailsRepositoryTest.cs" />
     <Compile Include="RepositoryTests\EmailRepositoryTest.cs" />
     <Compile Include="RepositoryTests\EventRepositoryTest.cs" />
@@ -68,10 +69,12 @@
     <Compile Include="RepositoryTests\OccupationRepositoryTest.cs" />
     <Compile Include="RepositoryTests\PhoneRepositoryTest.cs" />
     <Compile Include="RepositoryTests\ReferenceDataRepositoryTest.cs" />
+    <Compile Include="RepositoryTests\RegisterationRepositoryTest.cs" />
     <Compile Include="ServiceTests\AddressTest.cs" />
     <Compile Include="ServiceTests\AssociationTest.cs" />
     <Compile Include="ServiceTests\ConstituentNameTest.cs" />
     <Compile Include="ServiceTests\ConstituentTest.cs" />
+    <Compile Include="ServiceTests\ContactUsTest.cs" />
     <Compile Include="ServiceTests\EducationDetailTest.cs" />
     <Compile Include="ServiceTests\EmailTest.cs" />
     <Compile Include="ServiceTests\EventTest.cs" />
@@ -79,6 +82,7 @@
     <Compile Include="ServiceTests\OccupationTest.cs" />
     <Compile Include="ServiceTests\PhoneTest.cs" />
     <Compile Include="ServiceTests\ReferenceDataTest.cs" />
+    <Compile Include="ServiceTests\RegisterationTest.cs" />
     <Compile Include="ServiceTests\SearchTest.cs" />
   </ItemGroup>
   <ItemGroup>
