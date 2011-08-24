@@ -23,6 +23,7 @@ namespace Tests.Integration.Mothers
                 Address = "james.franklin@kallivayalil.com",
             };
         }
+
         public static EmailData Official(Email email)
         {
             return new EmailData

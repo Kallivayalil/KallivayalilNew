@@ -42,6 +42,7 @@
       <HintPath>..\..\..\Lib\NHibernate\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -70,6 +71,7 @@
     <Compile Include="ReferenceDataServiceImpl.cs" />
     <Compile Include="RegistrationServiceImpl.cs" />
     <Compile Include="SearchServiceImpl.cs" />
+    <Compile Include="Utility\Mail.cs" />
     <Compile Include="ValidationResultExtension.cs" />
   </ItemGroup>
   <ItemGroup>

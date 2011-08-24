@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
+using Kallivayalil.Utility;
 
 namespace Kallivayalil
 {
@@ -18,10 +19,10 @@ namespace Kallivayalil
        
         public RegisterationConstituent CreateRegistrationConstituent(RegisterationConstituent registerationConstituent)
         {
-            return repository.Save(registerationConstituent);
-        }
+            var registrationConstituent = repository.Save(registerationConstituent);
 
-      
-       
+            
+            return registrationConstituent;
+        }
     }
 }
