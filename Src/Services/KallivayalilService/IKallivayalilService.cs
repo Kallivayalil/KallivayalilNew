@@ -191,7 +191,7 @@ namespace Kallivayalil
 
         [OperationContract]
         [WebGet(UriTemplate = "/Events?isApproved={isApproved}&startDate={startDate}&endDate={endDate}&includeBirthdays={includeBirthdays}")]
-        EventsData GetEvents(string isApproved, string startDate, string endDate, string includeBirthdays);
+        EventsData GetEvents(string isApproved, string startDate, string endDate, string includeBirthdaysAndAnnersary);
 
         [OperationContract]
         [WebGet(UriTemplate = "/OccupationTypes")]

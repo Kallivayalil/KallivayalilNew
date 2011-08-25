@@ -80,5 +80,19 @@ namespace Tests.Integration.RepositoryTests
             Assert.That(association.Id, Is.EqualTo(savedAssociation.Id));
         }
 
+        [Test]
+        public void ShouldLoadAllConstituentsWithAnniversayToday()
+        {
+            testDataHelper.CreateAssociation(AsociationMother.JamesFranklinAndJessicaAlba(savedConstituent,savedAssociatedConstituent));
+            testDataHelper.CreateAssociation(AsociationMother.JamesFranklinAndJessicaAlba(savedConstituent,savedAssociatedConstituent));
+
+            var constituents = associationRepository.LoadAllConstituentsWithAnniversaryToday();
+
+            Assert.IsNotNull(constituents);
+            Assert.That(constituents.Count, Is.EqualTo(2));
+        }
+
+       
+
     }
 }

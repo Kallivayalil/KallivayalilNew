@@ -552,9 +552,9 @@ namespace Kallivayalil
             eventServiceImpl.DeletEvent(id);
         }
 
-        public virtual EventsData GetEvents(string isApproved, string startDate, string endDate, string includeBirthdays)
+        public virtual EventsData GetEvents(string isApproved, string startDate, string endDate, string includeBirthdaysAndAnniversary)
         {
-            var events = eventServiceImpl.FindEvents(bool.Parse(isApproved), DateTime.Parse(startDate), DateTime.Parse(endDate), bool.Parse(includeBirthdays));
+            var events = eventServiceImpl.FindEvents(bool.Parse(isApproved), DateTime.Parse(startDate), DateTime.Parse(endDate), bool.Parse(includeBirthdaysAndAnniversary));
                 
             var eventsData = new EventsData();
             mapper.MapList(events, eventsData, typeof(EventData));

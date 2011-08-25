@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Kallivayalil.Domain;
 using NHibernate;
 using NHibernate.Criterion;
+using System.Linq;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
@@ -55,5 +57,13 @@ namespace Kallivayalil.DataAccess.Repositories
             return criteria.List<Association>();
         }
 
+        public List<Constituent> LoadAllConstituentsWithAnniversaryToday()
+        {
+            var criteria = session.CreateCriteria<Association>();
+            criteria.Add(Restrictions.Eq("StartDate", DateTime.Today));
+            var associations = criteria.List<Association>();
+            var constituents = associations.Select(association => association.Constituent).ToList();
+            return constituents;
+        }
     }
 }

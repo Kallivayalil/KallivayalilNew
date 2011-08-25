@@ -13,6 +13,7 @@ namespace Kallivayalil
     {
         private readonly EventRepository repository;
         private readonly ConstituentRepository constituentRepository;
+        private readonly AssociationRepository associationRepository;
         private readonly ReferenceDataRepository referenceDataRepository;
 
         private void LoadEventType(Event @event)
@@ -31,6 +32,7 @@ namespace Kallivayalil
             repository = eventRepository;
             this.referenceDataRepository = referenceDataRepository;
             this.constituentRepository = constituentRepository;
+            associationRepository = new AssociationRepository();
         }
 
         public Event CreateEvent(Event @event)
@@ -56,16 +58,20 @@ namespace Kallivayalil
         }
 
 
-        public IEnumerable<Event> FindEvents(bool isApproved, DateTime startDate, DateTime endDate, bool includeBirthdays)
+        public IEnumerable<Event> FindEvents(bool isApproved, DateTime startDate, DateTime endDate, bool includeBirthdaysAndAnniversarys)
         {
             if(startDate.Equals(endDate))
             {
                 var events = repository.LoadAll(isApproved);
-                if(includeBirthdays)
+                if(includeBirthdaysAndAnniversarys)
                 {
-                    var constituents = constituentRepository.LoadAllConstituentsWithBirthdayToday();
-                    var birthdays = CreateEvents(constituents);
+                    var constituentsWithBirthday = constituentRepository.LoadAllConstituentsWithBirthdayToday();
+                    var birthdays = CreateEvents(constituentsWithBirthday);
                     events = events.Union(birthdays).ToList();
+
+                    var constituentsWithAnniversary = associationRepository.LoadAllConstituentsWithAnniversaryToday();
+                    var anniversarys = CreateEvents(constituentsWithAnniversary);
+                    events = events.Union(anniversarys).ToList();
                 }
                 return events;
             }

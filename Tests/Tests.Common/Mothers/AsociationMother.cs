@@ -1,3 +1,4 @@
+using System;
 using Kallivayalil.Domain;
 
 namespace Tests.Common.Mothers
@@ -10,6 +11,7 @@ namespace Tests.Common.Mothers
                        {
                            Type = AssociationTypeMother.Spouse(),
                            Constituent = constituent,
+                           StartDate = DateTime.Today,
                            AssociatedConstituent = associatedConstituent,
                        };
         }
