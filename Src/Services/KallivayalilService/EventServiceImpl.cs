@@ -80,9 +80,8 @@ namespace Kallivayalil
                                                                {
                                                                    Constituent = constituent,
                                                                    EventTitle =
-                                                                       string.Format("{0}'s {1}",
-                                                                                     constituent.Name.ToString(),
-                                                                                     "Birthday"),
+                                                                       string.Format("{0}'s",
+                                                                                     constituent.Name.ToString()),
                                                                    StartDate = DateTime.Today,
                                                                    EndDate = DateTime.Today,
                                                                    IsApproved = true,
