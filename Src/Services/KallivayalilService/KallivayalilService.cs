@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Mail;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
 using Kallivayalil.Client;
 using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
+using Kallivayalil.Utility;
 
 namespace Kallivayalil
 {
@@ -42,7 +44,7 @@ namespace Kallivayalil
             var registerationRepository = new RegisterationRepository();
 
             constituentServiceImpl = new ConstituentServiceImpl(constituentRepository);
-            registrationServiceImpl = new RegistrationServiceImpl(registerationRepository);
+            registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, new Mail(new SmtpClient()));
             contactUsServiceImpl = new ContactUsServiceImpl(contactUsRepository);
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(new AddressRepository());
