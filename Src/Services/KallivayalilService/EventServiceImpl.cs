@@ -14,6 +14,7 @@ namespace Kallivayalil
         private readonly EventRepository repository;
         private readonly ConstituentRepository constituentRepository;
         private readonly AssociationRepository associationRepository;
+        private readonly PhoneRepository phoneRepository;
         private readonly ReferenceDataRepository referenceDataRepository;
 
         private void LoadEventType(Event @event)
@@ -33,6 +34,7 @@ namespace Kallivayalil
             this.referenceDataRepository = referenceDataRepository;
             this.constituentRepository = constituentRepository;
             associationRepository = new AssociationRepository();
+            phoneRepository = new PhoneRepository();
         }
 
         public Event CreateEvent(Event @event)
@@ -66,11 +68,11 @@ namespace Kallivayalil
                 if(includeBirthdaysAndAnniversarys)
                 {
                     var constituentsWithBirthday = constituentRepository.LoadAllConstituentsWithBirthdayToday();
-                    var birthdays = CreateEvents(constituentsWithBirthday);
+                    var birthdays = CreateEvents(constituentsWithBirthday, "Birthday");
                     events = events.Union(birthdays).ToList();
 
                     var constituentsWithAnniversary = associationRepository.LoadAllConstituentsWithAnniversaryToday();
-                    var anniversarys = CreateEvents(constituentsWithAnniversary);
+                    var anniversarys = CreateEvents(constituentsWithAnniversary, "Anniversary");
                     events = events.Union(anniversarys).ToList();
                 }
                 return events;
@@ -78,11 +80,11 @@ namespace Kallivayalil
             return repository.LoadAll(isApproved, startDate, endDate);
         }
 
-        private IEnumerable<Event> CreateEvents(IEnumerable<Constituent> constituents)
+        private IEnumerable<Event> CreateEvents(IEnumerable<Constituent> constituents, string eventDescription)
         {
             var eventTypes = referenceDataRepository.LoadAll<EventType>();
             var events = new List<Event>();
-            constituents.ForEach(constituent => events.Add(new Event()
+            constituents.ForEach(constituent => events.Add(new Event
                                                                {
                                                                    Constituent = constituent,
                                                                    EventTitle =
@@ -92,7 +94,8 @@ namespace Kallivayalil
                                                                    EndDate = DateTime.Today,
                                                                    IsApproved = true,
                                                                    ContactPerson = constituent.Name.ToString(),
-                                                                   Type = eventTypes.First(type => type.Description.Equals("Birthday"))
+                                                                   Type = eventTypes.First(type => type.Description.Equals(eventDescription)),
+                                                                   ContactNumber = phoneRepository.GetPrimary(constituent.Id).Number
                                                                }));
             return events;
         }
