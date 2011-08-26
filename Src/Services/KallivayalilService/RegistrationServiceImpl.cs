@@ -28,7 +28,7 @@ namespace Kallivayalil
             //need to get all admin mail ids and sent the mail to all admins
             mail.Send("kallivayalil.family@gmail.com", "RegistrationMail@Kallivayalil.com",GetMail(registrationConstituent, Constants.AdminMailText));
 
-            mail.Send(registrationConstituent.Email.Address, "RegistrationMail@Kallivayalil.com",GetMail(registrationConstituent, Constants.UserMailText));
+            mail.Send(registrationConstituent.Email, "RegistrationMail@Kallivayalil.com",GetMail(registrationConstituent, Constants.UserMailText));
 
             return registrationConstituent;
         }

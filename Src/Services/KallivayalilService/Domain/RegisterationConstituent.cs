@@ -7,9 +7,10 @@ namespace Kallivayalil.Domain
     public class RegisterationConstituent
     {
         public Constituent Constituent { get; set; }
-        public Phone Phone { get; set; }
-        public Email Email { get; set; }
+        public Phone Phone { get; set; }        
         public Address Address { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
 
     }
 }

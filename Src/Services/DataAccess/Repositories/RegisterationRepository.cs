@@ -1,4 +1,5 @@
 using Kallivayalil.Domain;
+using Kallivayalil.Domain.ReferenceData;
 using NHibernate;
 
 namespace Kallivayalil.DataAccess.Repositories
@@ -21,7 +22,7 @@ namespace Kallivayalil.DataAccess.Repositories
                 {
                     savedRegisterationConstituent.Constituent = savedConstituent;
                     savedRegisterationConstituent.Address = GetSavedAddress(registerationConstituent, txn, savedConstituent);
-                    savedRegisterationConstituent.Email = GetSavedEmail(registerationConstituent, txn, savedConstituent);
+                    savedRegisterationConstituent.Email = GetSavedEmail(registerationConstituent, txn, savedConstituent).Address;
                     savedRegisterationConstituent.Phone = GetSavedPhone(registerationConstituent, txn, savedConstituent);
                 }
                 txn.Commit();
@@ -43,8 +44,13 @@ namespace Kallivayalil.DataAccess.Repositories
         
         private Email GetSavedEmail(RegisterationConstituent registerationConstituent, ITransaction txn, Constituent savedConstituent)
         {
-            registerationConstituent.Email.Constituent = savedConstituent;
-            return SaveOrUpdate(registerationConstituent.Email,txn);
+            var email = new Email()
+                            {
+                                Constituent =savedConstituent,
+                                Address = registerationConstituent.Email,
+                                Type = new EmailType() { Id = 1}
+                            };
+            return SaveOrUpdate(email,txn);
         }
     }
 }
