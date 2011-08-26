@@ -22,8 +22,10 @@ namespace Kallivayalil.DataAccess.Repositories
                 {
                     savedRegisterationConstituent.Constituent = savedConstituent;
                     savedRegisterationConstituent.Address = GetSavedAddress(registerationConstituent, txn, savedConstituent);
-                    savedRegisterationConstituent.Email = GetSavedEmail(registerationConstituent, txn, savedConstituent).Address;
+                    var savedEmail = GetSavedEmail(registerationConstituent, txn, savedConstituent);
+                    savedRegisterationConstituent.Email = savedEmail.Address;
                     savedRegisterationConstituent.Phone = GetSavedPhone(registerationConstituent, txn, savedConstituent);
+                    savedRegisterationConstituent.Password = GetSavedLogin(savedEmail, registerationConstituent.Password, txn).Password;
                 }
                 txn.Commit();
                 return savedRegisterationConstituent;
@@ -34,6 +36,17 @@ namespace Kallivayalil.DataAccess.Repositories
         {
             registerationConstituent.Address.Constituent = savedConstituent;
             return SaveOrUpdate(registerationConstituent.Address,txn);
+        }   
+        
+        
+        private Login GetSavedLogin(Email email,string  password, ITransaction txn)
+        {
+            var login = new Login()
+                            {
+                                Email = email,
+                                Password = password
+                            };
+            return SaveOrUpdate(login,txn);
         }
 
         private Phone GetSavedPhone(RegisterationConstituent registerationConstituent, ITransaction txn, Constituent savedConstituent)

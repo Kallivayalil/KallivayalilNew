@@ -31,6 +31,7 @@ namespace Tests.Integration.RepositoryTests
         public void TearDown()
         {
             testDataHelper.session.Clear();
+            testDataHelper.HardDeleteLogins();
             testDataHelper.HardDeleteEmails();
             testDataHelper.HardDeletePhones();
             testDataHelper.HardDeleteAddress();
@@ -43,14 +44,14 @@ namespace Tests.Integration.RepositoryTests
         public void ShouldSaveARegisteratonConstituent()
         {
             var mobileToSave = PhoneMother.Mobile();
-            var emailToSave = EmailMother.Official();
             var addressToSave = AddressMother.London();
 
             var registerationConstituent = new RegisterationConstituent()
                                                {
                                                    Constituent = constituent,
                                                    Phone = mobileToSave,
-                                                   Email = emailToSave,
+                                                   Email = "test1@test.com",
+                                                   Password=  "password",
                                                    Address = addressToSave
                                                };
 
@@ -60,7 +61,8 @@ namespace Tests.Integration.RepositoryTests
             Assert.That(savedConst.Constituent.Name.Id, Is.GreaterThan(0));
             Assert.That(savedConst.Phone.Id, Is.GreaterThan(0));
             Assert.That(savedConst.Address.Id, Is.GreaterThan(0));
-            Assert.That(savedConst.Email.Id, Is.GreaterThan(0));
+            Assert.That(savedConst.Password, Is.EqualTo(registerationConstituent.Password));
+            Assert.That(savedConst.Email, Is.EqualTo(registerationConstituent.Email));
             
         } 
         

@@ -129,6 +129,15 @@ namespace Tests.Common.Helpers
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
+       
+        
+        public void HardDeleteLogins()
+        {
+            var sqlCommand = session.Connection.CreateCommand();
+            sqlCommand.CommandText = "delete from Logins where id >=10";
+            sqlCommand.ExecuteNonQuery();
+            session.Flush();
+        }
 
         public Email CreateEmail(Email email)
         {
