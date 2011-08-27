@@ -98,7 +98,7 @@ namespace Kallivayalil
             return savedConstituentData;
         }
 
-        public RegisterationData CreateRegistrationConstituent(RegisterationData registerationData)
+        public virtual RegisterationData CreateRegistrationConstituent(RegisterationData registerationData)
         {
             var registerationConstituent = new RegisterationConstituent();
             mapper.Map(registerationData, registerationConstituent);

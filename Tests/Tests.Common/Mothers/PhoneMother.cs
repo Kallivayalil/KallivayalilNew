@@ -8,6 +8,13 @@ namespace Tests.Common.Mothers
         {
             return new Phone {Constituent = constituent, Number = "9900012345", Type = PhoneTypeMother.Mobile()};
         }
+        
+        public static Phone PrimaryMobile(Constituent constituent)
+        {
+            var mobile = Mobile(constituent);
+            mobile.IsPrimary = true;
+            return mobile;
+        }
 
         public static Phone Mobile()
         {

@@ -13,7 +13,10 @@ namespace Kallivayalil.Client
         public AddressData Address { get; set; }
 
         [DataMember]
-        public EmailData Email { get; set; }
+        public string Email { get; set; } 
+        
+        [DataMember]
+        public string Password { get; set; }
 
         [DataMember]
         public PhoneData Phone { get; set; }

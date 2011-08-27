@@ -190,8 +190,8 @@ namespace Kallivayalil
         void DeleteEvent(string id);
 
         [OperationContract]
-        [WebGet(UriTemplate = "/Events?isApproved={isApproved}&startDate={startDate}&endDate={endDate}&includeBirthdays={includeBirthdays}")]
-        EventsData GetEvents(string isApproved, string startDate, string endDate, string includeBirthdaysAndAnniversary);
+        [WebGet(UriTemplate = "/Events?isApproved={isApproved}&startDate={startDate}&endDate={endDate}&includeBirthdaysAndAnniversarys={includeBirthdaysAndAnniversarys}")]
+        EventsData GetEvents(string isApproved, string startDate, string endDate, string includeBirthdaysAndAnniversarys);
 
         [OperationContract]
         [WebGet(UriTemplate = "/OccupationTypes")]

@@ -22,16 +22,17 @@ namespace Tests.Integration.ServiceTests
             testDataHelper = new TestDataHelper();
 
             savedConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
+            testDataHelper.CreatePhone(PhoneMother.PrimaryMobile(savedConstituent));
         }
 
         [TearDown]
         public void TearDown()
         {
             testDataHelper.HardDeleteEvents();
+            testDataHelper.HardDeletePhones();
             testDataHelper.HardDeleteConstituents();
             testDataHelper.HardDeleteConstituentNames();
         }
-
 
         [Test]
         public void ShouldSaveEvent()
@@ -77,7 +78,7 @@ namespace Tests.Integration.ServiceTests
             testDataHelper.CreateEvent(EventMother.Anniversary());
             testDataHelper.CreateEvent(EventMother.Anniversary());
 
-            var eventsData = HttpHelper.Get<EventsData>(string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdays={4}", baseUri, "true", DateTime.Today, DateTime.Today,"false"));
+            var eventsData = HttpHelper.Get<EventsData>(string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdaysAndAnniversarys={4}", baseUri, "true", DateTime.Today, DateTime.Today, "false"));
 
             Assert.That(eventsData.Count, Is.EqualTo(3));
         }
@@ -91,7 +92,7 @@ namespace Tests.Integration.ServiceTests
             testDataHelper.CreateEvent(EventMother.Anniversary());
             testDataHelper.CreateEvent(EventMother.Anniversary());
 
-            var eventsData = HttpHelper.Get<EventsData>(string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdays={4}", baseUri, "true", DateTime.Today, DateTime.Today,"true"));
+            var eventsData = HttpHelper.Get<EventsData>(string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdaysAndAnniversarys={4}", baseUri, "true", DateTime.Today, DateTime.Today, "true"));
 
             Assert.That(eventsData.Count, Is.EqualTo(4));
         } 
@@ -105,7 +106,7 @@ namespace Tests.Integration.ServiceTests
             testDataHelper.CreateEvent(EventMother.Anniversary());
             testDataHelper.CreateEvent(EventMother.Anniversary());
 
-            var eventsData = HttpHelper.Get<EventsData>(string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdays={4}", baseUri, "true", DateTime.Today.AddDays(-5), DateTime.Today.AddDays(5),"true"));
+            var eventsData = HttpHelper.Get<EventsData>(string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdaysAndAnniversarys={4}", baseUri, "true", DateTime.Today.AddDays(-5), DateTime.Today.AddDays(5), "true"));
 
             Assert.That(eventsData.Count, Is.EqualTo(3));
         }

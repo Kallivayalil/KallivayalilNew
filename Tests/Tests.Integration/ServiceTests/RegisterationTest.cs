@@ -30,6 +30,7 @@ namespace Tests.Integration.ServiceTests
         [TearDown]
         public void TearDown()
         {
+            testDataHelper.HardDeleteLogins();
             testDataHelper.HardDeleteEmails();
             testDataHelper.HardDeletePhones();
             testDataHelper.HardDeleteAddress();
@@ -45,7 +46,8 @@ namespace Tests.Integration.ServiceTests
                                         {
                                             Constituent = constituentData,
                                             Phone = PhoneDataMother.Mobile(),
-                                            Email = EmailDataMother.Official(),
+                                            Email = EmailDataMother.Official().Address,
+                                            Password = "Password",
                                             Address = AddressDataMother.London()
                                         };
 
@@ -56,7 +58,8 @@ namespace Tests.Integration.ServiceTests
             Assert.That(savedRegisterationConstituent.Constituent.Name.Id, Is.GreaterThan(0));
             Assert.That(savedRegisterationConstituent.Phone.Id, Is.GreaterThan(0));
             Assert.That(savedRegisterationConstituent.Address.Id, Is.GreaterThan(0));
-            Assert.That(savedRegisterationConstituent.Email.Id, Is.GreaterThan(0));
+            Assert.That(savedRegisterationConstituent.Email, Is.Not.Null);
+            Assert.That(savedRegisterationConstituent.Password, Is.Not.Null);
         }
 
     }
