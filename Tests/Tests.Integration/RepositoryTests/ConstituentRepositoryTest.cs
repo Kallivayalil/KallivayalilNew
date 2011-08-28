@@ -121,9 +121,9 @@ namespace Tests.Integration.RepositoryTests
         {
             testDataHelper.CreateConstituent(constituent);
 
-            var result = constituentRepository.SearchByConstituentName("james","james");
+            var result = constituentRepository.SearchByConstituentName("Jessica", "frank");
 
-            Assert.That(result.Count(), Is.EqualTo(3));
+            Assert.That(result.Count(), Is.EqualTo(4));
         }
 
     }
