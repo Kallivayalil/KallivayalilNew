@@ -107,11 +107,21 @@ namespace Tests.Integration.RepositoryTests
         }
 
 
-        [Test,Ignore("WIP")]
-        public void ShouldSearchConstituentByName()
+//        [Test,Ignore("WIP")]
+//        public void ShouldSearchConstituentByName()
+//        {
+//            testDataHelper.CreateConstituent(constituent);
+//            var result = constituentRepository.SearchByName("james","james");
+//
+//            Assert.That(result.Count(), Is.EqualTo(3));
+//        } 
+//        
+        [Test]
+        public void ShouldSearchConstituentByFirstAndLastName()
         {
             testDataHelper.CreateConstituent(constituent);
-            var result = constituentRepository.SearchByName("james","james");
+
+            var result = constituentRepository.SearchByConstituentName("james","james");
 
             Assert.That(result.Count(), Is.EqualTo(3));
         }

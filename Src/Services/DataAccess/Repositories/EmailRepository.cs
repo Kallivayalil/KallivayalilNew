@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Kallivayalil.Domain;
 using NHibernate;
 using NHibernate.Criterion;
+using System.Linq;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
@@ -69,6 +71,15 @@ namespace Kallivayalil.DataAccess.Repositories
             var criteria = session.CreateCriteria<Email>();
             criteria.Add(Restrictions.Eq("Address", address));
             return (Email) criteria.UniqueResult();
+        }
+
+        public List<Constituent> SearchByEmail(string email)
+        {
+            var criteria = session.CreateCriteria<Email>();
+            criteria.Add(Restrictions.InsensitiveLike("Address", email));
+            var emails = criteria.List<Email>();
+            return emails.Select(email1 => email1.Constituent).ToList();
+
         }
     }
 }

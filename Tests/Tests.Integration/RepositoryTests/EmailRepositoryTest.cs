@@ -85,5 +85,20 @@ namespace Tests.Integration.RepositoryTests
             var email = emailRepository.Load(savedEmail.Id);
             Assert.IsNull(email);
         }
+
+
+        [Test]
+        public void ShouldSearchForEmails()
+        {
+            var email = EmailMother.Official(savedConstituent);
+            var email1 = EmailMother.Official(savedConstituent);
+            email1.Address = "TesT@test.com";
+            testDataHelper.CreateEmail(email);
+            testDataHelper.CreateEmail(email1);
+
+            var constituents = emailRepository.SearchByEmail("test@test.com");
+
+            Assert.That(constituents.Count, Is.EqualTo(1));
+        }
     }
 }

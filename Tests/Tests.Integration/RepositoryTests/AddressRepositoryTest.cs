@@ -91,5 +91,19 @@ namespace Tests.Integration.RepositoryTests
             Assert.That(addresses.Exists(address => address.Id.Equals(savedAddress.Id)));
             Assert.That(addresses.Exists(address => address.Id.Equals(london.Id)));
         }
+
+        [Test]
+        public void ShouldSearchForAddress()
+        {
+            var address = AddressMother.London(savedConstituent);
+            var address1 = AddressMother.SanFrancisco((savedConstituent));
+            
+            testDataHelper.CreateAddress(address);
+            testDataHelper.CreateAddress(address1);
+
+            var phones = addressRepository.SearchByAddress("Montgomery", "London", "California", "USA", "ABCD");
+
+            Assert.That(phones.Count, Is.EqualTo(3));
+        }
     }
 }

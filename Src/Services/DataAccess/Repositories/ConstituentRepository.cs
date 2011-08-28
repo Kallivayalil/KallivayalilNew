@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Kallivayalil.Domain;
-using Lucene.Net.Analysis.Standard;
-using Lucene.Net.QueryParsers;
 using NHibernate;
-using System.Linq;
 using NHibernate.Criterion;
-using NHibernate.Search;
-using Version = Lucene.Net.Util.Version;
+using NHibernate.SqlCommand;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
@@ -57,16 +53,16 @@ namespace Kallivayalil.DataAccess.Repositories
             return session.Get<Constituent>(constituentId);
         }
 
-        public IEnumerable<Constituent> SearchByName(string firstName, string lastName)
-        {
-            var textSession = Search.CreateFullTextSession(session);
-
-            var qp = new QueryParser(Version.LUCENE_CURRENT,"", new StandardAnalyzer(Version.LUCENE_CURRENT));
-
-            var query = string.Format("Name.FirstName:{0} or Name.LastName:{1}", firstName, lastName);
-
-             return textSession.CreateFullTextQuery(qp.Parse(query), typeof(Constituent)).List().Cast<Constituent>();
-        }
+//        public IEnumerable<Constituent> SearchByName(string firstName, string lastName)
+//        {
+//            var textSession = Search.CreateFullTextSession(session);
+//
+//            var qp = new QueryParser(Version.LUCENE_CURRENT,"", new StandardAnalyzer(Version.LUCENE_CURRENT));
+//
+//            var query = string.Format("Name.FirstName:{0} or Name.LastName:{1}", firstName, lastName);
+//
+//             return textSession.CreateFullTextQuery(qp.Parse(query), typeof(Constituent)).List().Cast<Constituent>();
+//        }
 
         public IList<Constituent> LoadAllConstituentsWithBirthdayToday()
         {
@@ -74,6 +70,13 @@ namespace Kallivayalil.DataAccess.Repositories
             criteria.Add(Restrictions.Eq("BornOn", DateTime.Today));
             return criteria.List<Constituent>();
 
+        }
+
+        public IList<Constituent> SearchByConstituentName(string firstName, string lastName)
+        {
+            var criteria = session.CreateCriteria<Constituent>();
+            criteria.CreateAlias("ConstituentName", "name", JoinType.FullJoin).Add(Restrictions.InsensitiveLike("name.FirstName", firstName));
+            return criteria.List<Constituent>();
         }
     }
 }

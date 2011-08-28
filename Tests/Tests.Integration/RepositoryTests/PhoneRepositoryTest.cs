@@ -100,6 +100,23 @@ namespace Tests.Integration.RepositoryTests
             var phones = phoneRepository.LoadAll(savedAddress);
 
             Assert.That(phones.Count, Is.EqualTo(2));
+        } 
+        
+        
+        [Test]
+        public void ShouldSearchForPhones()
+        {
+            var mobile = PhoneMother.Mobile(savedConstituent, savedAddress);
+            var mobile1 = PhoneMother.Mobile(savedConstituent, savedAddress);
+            mobile1.Number = "9886545400";
+            testDataHelper.CreatePhone(mobile);
+            testDataHelper.CreatePhone(mobile1);
+
+            var constituents = phoneRepository.SearchByNumber("9886545400");
+
+            Assert.That(constituents.Count, Is.EqualTo(1));
         }
+
+        
     }
 }

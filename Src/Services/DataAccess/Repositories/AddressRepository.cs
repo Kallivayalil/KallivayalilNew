@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Kallivayalil.Domain;
 using NHibernate;
 using NHibernate.Criterion;
+using System.Linq;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
@@ -61,6 +63,15 @@ namespace Kallivayalil.DataAccess.Repositories
             criteria.Add(Restrictions.Eq("Constituent.Id", constituentId));
             criteria.Add(Restrictions.Eq("IsPrimary", true));
             return criteria.UniqueResult<Address>();
+        }
+
+        public IList<Constituent> SearchByAddress(string address, string state, string city, string country, string postcode)
+        {
+            var criteria = session.CreateCriteria<Address>();
+            criteria.Add(Restrictions.InsensitiveLike("Line1", address) || Restrictions.InsensitiveLike("Line2", address) || Restrictions.InsensitiveLike("City", city)
+                || Restrictions.InsensitiveLike("State", state) || Restrictions.InsensitiveLike("PostCode", postcode) || Restrictions.InsensitiveLike("Country", country));
+            var addresses = criteria.List<Address>();
+            return addresses.Select(address1 => address1.Constituent).ToList();
         }
     }
 }

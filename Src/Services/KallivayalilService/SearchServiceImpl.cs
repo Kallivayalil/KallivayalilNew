@@ -17,9 +17,9 @@ namespace Kallivayalil
             this.emailRepository = emailRepository;
         }
 
-        public IEnumerable<Constituent> SearchByConstituentName(string firstName, string lastName)
+        public IList<Constituent> SearchByConstituentName(string firstName, string lastName)
         {
-            return constituentRepository.SearchByName(firstName, lastName);
+            return constituentRepository.SearchByConstituentName(firstName, lastName);
         }
 
         public Constituent SearchBy(string emailId)

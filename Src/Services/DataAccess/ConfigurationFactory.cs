@@ -59,7 +59,7 @@ namespace Kallivayalil.DataAccess
 
         private static bool ShouldShowSql
         {
-            get { return false; }
+            get { return true; }
         }
 
         private static void AddListeners(Configuration configuration)
@@ -80,10 +80,10 @@ namespace Kallivayalil.DataAccess
 //            Configuration.SetProperty("hibernate.search.default.indexBase", "~/Index");
 //            Configuration.SetProperty("hibernate.search.default.indexBase.create", "true");
 
-            Configuration.SetProperty("hibernate.search.default.directory_provider",
-                                      typeof (RAMDirectoryProvider).AssemblyQualifiedName);
-            Configuration.SetProperty(Environment.AnalyzerClass,
-                                      typeof (StandardAnalyzer).AssemblyQualifiedName);
+//            Configuration.SetProperty("hibernate.search.default.directory_provider",
+//                                      typeof (RAMDirectoryProvider).AssemblyQualifiedName);
+//            Configuration.SetProperty(Environment.AnalyzerClass,
+//                                      typeof (StandardAnalyzer).AssemblyQualifiedName);
         }
     }
 }
