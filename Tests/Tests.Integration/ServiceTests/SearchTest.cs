@@ -15,7 +15,7 @@ namespace Tests.Integration.ServiceTests
         public void Setup()
         {
             testDataHelper = new TestDataHelper();
-            testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
+            testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JessicaAlba()));
         }
 
         [TearDown]
@@ -35,10 +35,10 @@ namespace Tests.Integration.ServiceTests
             Assert.That(constituentData.Id,Is.EqualTo(1));
         }
 
-        [Test,Ignore()]
+        [Test]
         public void ShouldGetConstituentByName()
         {
-            var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, "James","james");
+            var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, "Jessica","alba");
             var constituentsData = HttpHelper.Get<ConstituentsData>(uriString);
 
             Assert.IsNotNull(constituentsData);

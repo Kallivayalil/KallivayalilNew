@@ -75,7 +75,9 @@ namespace Kallivayalil.DataAccess.Repositories
         public IList<Constituent> SearchByConstituentName(string firstName, string lastName)
         {
             var criteria = session.CreateCriteria<Constituent>();
-            criteria.CreateCriteria("Name").Add(Restrictions.InsensitiveLike("FirstName", string.Format("%{0}%", firstName)) || Restrictions.InsensitiveLike("LastName", string.Format("%{0}%", lastName)));
+            criteria.CreateCriteria("Name")
+                .Add(Restrictions.InsensitiveLike("FirstName", string.Format("%{0}%", firstName)) 
+                || Restrictions.InsensitiveLike("LastName", string.Format("%{0}%", lastName)));
             return criteria.List<Constituent>();
         }
     }
