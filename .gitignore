@@ -19,6 +19,10 @@
 /Src/Services/Tests.Unit/obj/Debug/*.*
 /Tests/Tests.Common/obj/Debug/*.*
 /Tests/Tests.Integration/obj/Debug/*.*
+/Tests/Tests.Integration/bin/Debug/Constituent/*.*
+/Tests/Tests.Integration/bin/Debug/ConstituentName/*.*
+/Tests/Tests.Integration/bin/Debug/LuceneIndex/Constituent/*.*
+/Tests/Tests.Integration/bin/Debug/LuceneIndex/ConstituentName/*.*
 
 
 /Src/Services/KallivayalilService/Client/bin/Debug/*.*
