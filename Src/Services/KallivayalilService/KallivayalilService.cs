@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Mail;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
@@ -33,7 +34,6 @@ namespace Kallivayalil
 
         public KallivayalilService()
         {
-
 //            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
             var constituentNameRepository = new ConstituentNameRepository();
             var constituentRepository = new ConstituentRepository();
@@ -53,10 +53,10 @@ namespace Kallivayalil
             emailServiceImpl = new EmailServiceImpl(emailRepository);
             loginServiceImpl = new LoginServiceImpl();
             occupationServiceImpl = new OccupationServiceImpl(new OccupationRepository(), constituentRepository);
-            educationalDetailServiceImpl = new EducationDetailServiceImpl(educationDetailRepository,constituentRepository);
+            educationalDetailServiceImpl = new EducationDetailServiceImpl(educationDetailRepository, constituentRepository);
             associationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
-            searchServiceImpl = new SearchServiceImpl(constituentRepository,emailRepository);
-            eventServiceImpl = new EventServiceImpl(eventRepository,constituentRepository,referenceDataRepository);
+            searchServiceImpl = new SearchServiceImpl(constituentRepository, emailRepository);
+            eventServiceImpl = new EventServiceImpl(eventRepository, constituentRepository, referenceDataRepository);
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl(referenceDataRepository);
         }
@@ -104,7 +104,7 @@ namespace Kallivayalil
             mapper.Map(registerationData, registerationConstituent);
             var savedRegistrationConstituent = registrationServiceImpl.CreateRegistrationConstituent(registerationConstituent);
             var savedData = new RegisterationData();
-            mapper.Map(savedRegistrationConstituent,savedData);
+            mapper.Map(savedRegistrationConstituent, savedData);
             return savedData;
         }
 
@@ -132,10 +132,10 @@ namespace Kallivayalil
 
         public virtual ConstituentsData SearchByConstituentName(string firstName, string lastName)
         {
-            var allConstituents = searchServiceImpl.SearchByConstituentName(firstName,lastName);
+            var allConstituents = searchServiceImpl.SearchByConstituentName(firstName, lastName);
 
             var constituentsData = new ConstituentsData();
-            mapper.MapList(allConstituents, constituentsData, typeof(ConstituentData));
+            mapper.MapList(allConstituents, constituentsData, typeof (ConstituentData));
 
             return constituentsData;
         }
@@ -145,7 +145,7 @@ namespace Kallivayalil
             var constituent = searchServiceImpl.SearchBy(emailId);
 
             var constituentData = new ConstituentData();
-            mapper.Map(constituent,constituentData);
+            mapper.Map(constituent, constituentData);
 
             return constituentData;
         }
@@ -424,7 +424,6 @@ namespace Kallivayalil
             mapper.Map(savedAssociation, savedAssociationData);
 
             return savedAssociationData;
-
         }
 
         public virtual AssociationData UpdateAssociation(string id, AssociationData associationData)
@@ -464,7 +463,7 @@ namespace Kallivayalil
             var associations = associationServiceImpl.FindAssociations(constituentId);
 
             var associationsData = new AssociationsData();
-            mapper.MapList(associations, associationsData, typeof(AssociationData));
+            mapper.MapList(associations, associationsData, typeof (AssociationData));
 
             return associationsData;
         }
@@ -472,26 +471,57 @@ namespace Kallivayalil
         public virtual RelationshipData GetRelationships(string constituentId)
         {
             var associations = associationServiceImpl.FindAssociations(constituentId);
-            var constituent = constituentServiceImpl.FindConstituent(constituentId);
-            var relationshipData = new RelationshipData() {id = constituent.Id, name = constituent.Name.FirstName, children = new List<RelationshipData>()};
 
-            foreach (var association in associations)
+            var parents = associations.ToList().FindAll(assn => assn.Type.Id.Equals(2) && assn.Constituent.Id != Convert.ToInt32(constituentId));
+            var spouse = associations.ToList().Find(assn => assn.Type.Id.Equals(1));
+            var childs = associations.ToList().FindAll(assn => assn.Type.Id.Equals(3) && assn.Constituent.Id != Convert.ToInt32(constituentId));
+            var sibilings = associations.ToList().FindAll(assn => assn.Type.Id.Equals(4));
+
+            var parentFamily = GetFamilyRelationship(parents[0].Constituent, parents[1].Constituent,"top");
+            RelationshipData myFamily = null;
+            parentFamily.children = new List<RelationshipData>();
+
+            foreach (var sibiling in sibilings)
             {
-                var data = new RelationshipData();
-                if (Entity.IsNull(association.AssociatedConstituent))
-                {
-                    data.id = -1;
-                    data.name = association.AssociatedConstituentName;
-                }
-                else
-                {
-                    data.id = association.AssociatedConstituent.Id;
-                    data.name = association.AssociatedConstituent.Name.FirstName;
-                }
-                relationshipData.children.Add(data);
+                var dat = new TreeData();
+                dat.orientation = "top";
+                parentFamily.children.Add(new RelationshipData {id = sibiling.Constituent.Name.ToString(), name = sibiling.Constituent.Name.ToString(),data = dat});
             }
 
-            return relationshipData;
+            if (spouse != null)
+            {
+                var dat = new TreeData();
+                dat.orientation = "top";
+                myFamily = GetFamilyRelationship(spouse.AssociatedConstituent, spouse.Constituent,"center");
+                myFamily.data = dat;
+            }
+
+            if (myFamily != null)
+            {
+                myFamily.children = new List<RelationshipData>();
+                foreach (var child in childs)
+                {
+                    var dat = new TreeData();
+                    dat.orientation = "top";
+                    myFamily.children.Add(new RelationshipData { id = child.Constituent.Name.ToString(), data = dat, name = child.Constituent.Name.ToString() });
+                }
+            }
+
+            parentFamily.children.Add(myFamily);
+            return parentFamily;
+        }
+
+        private RelationshipData GetFamilyRelationship(Constituent familyMember, Constituent spouse, string orientation = null)
+        {
+            var name = familyMember.Name.ToString();
+            var data =new TreeData();
+            data.type = "family";
+            data.spouse= spouse.Name.ToString();
+            if (orientation != null)
+            {
+                data.orientation = orientation;
+            }
+            return new RelationshipData {id = name, name = name, children = new List<RelationshipData>(), data = data};
         }
 
         public virtual EventData CreateEvent(EventData eventData)
@@ -555,9 +585,9 @@ namespace Kallivayalil
         public virtual EventsData GetEvents(string isApproved, string startDate, string endDate, string includeBirthdaysAndAnniversary)
         {
             var events = eventServiceImpl.FindEvents(bool.Parse(isApproved), DateTime.Parse(startDate), DateTime.Parse(endDate), bool.Parse(includeBirthdaysAndAnniversary));
-                
+
             var eventsData = new EventsData();
-            mapper.MapList(events, eventsData, typeof(EventData));
+            mapper.MapList(events, eventsData, typeof (EventData));
             return eventsData;
         }
 
@@ -618,7 +648,7 @@ namespace Kallivayalil
         {
             var types = referenceDataServiceImpl.GetAssociationTypes();
             var associationTypes = new AssociationTypesData();
-            mapper.MapList(types, associationTypes, typeof(AssociationTypeData));
+            mapper.MapList(types, associationTypes, typeof (AssociationTypeData));
             return associationTypes;
         }
 
@@ -626,7 +656,7 @@ namespace Kallivayalil
         {
             var types = referenceDataServiceImpl.EventTypes();
             var eventTypesData = new EventTypesData();
-            mapper.MapList(types, eventTypesData, typeof(EventTypeData));
+            mapper.MapList(types, eventTypesData, typeof (EventTypeData));
             return eventTypesData;
         }
 
