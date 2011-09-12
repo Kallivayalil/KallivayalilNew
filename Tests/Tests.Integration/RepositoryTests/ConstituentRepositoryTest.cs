@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
@@ -35,6 +36,11 @@ namespace Tests.Integration.RepositoryTests
         public void TearDown()
         {
             testDataHelper.session.Clear();
+            testDataHelper.HardDeleteAddress();
+            testDataHelper.HardDeletePhones();
+            testDataHelper.HardDeleteEmails();
+            testDataHelper.HardDeleteEducationDetails();
+            testDataHelper.HardDeleteOccupations();
             testDataHelper.HardDeleteConstituents();
             testDataHelper.HardDeleteConstituentNames();
         }
@@ -119,11 +125,24 @@ namespace Tests.Integration.RepositoryTests
         [Test]
         public void ShouldSearchConstituentByFirstAndLastName()
         {
-            testDataHelper.CreateConstituent(constituent);
+            var savedConst = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JessicaAlba()));
+            testDataHelper.CreateEmail(EmailMother.Official(savedConst));
+            testDataHelper.CreatePhone(PhoneMother.Mobile(savedConst));
+            testDataHelper.CreatePhone(PhoneMother.PrimaryMobile((savedConst)));
+            testDataHelper.CreateAddress(AddressMother.London(savedConst));
+            testDataHelper.CreateOccupation(OccupationMother.Doctor(savedConst));
+            testDataHelper.CreateEducationDetail(EducationDetailMother.School((savedConst)));
 
-            var result = constituentRepository.SearchByConstituentName("Jessica", "frank");
 
-            Assert.That(result.Count(), Is.EqualTo(4));
+            IList<Constituent> result = constituentRepository.SearchByConstituentName("Jessica", "alba");
+
+            Assert.That(result.Count(), Is.EqualTo(2));
+            var constituentResult = result[1];
+            Assert.That(constituentResult.Phones.Count,Is.EqualTo(2));
+            Assert.That(constituentResult.Emails.Count,Is.EqualTo(1));
+            Assert.That(constituentResult.Addresses.Count,Is.EqualTo(1));
+            Assert.That(constituentResult.Occupations.Count,Is.EqualTo(1));
+            Assert.That(constituentResult.EducationDetails.Count,Is.EqualTo(1));
         }
 
     }

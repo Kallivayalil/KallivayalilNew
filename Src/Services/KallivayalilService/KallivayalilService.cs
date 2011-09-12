@@ -134,7 +134,7 @@ namespace Kallivayalil
         {
             var allConstituents = searchServiceImpl.SearchByConstituentName(firstName, lastName);
 
-  SearchResultsData searchResultsData = GetSearchResultData(allConstituents);
+//  SearchResultsData searchResultsData = GetSearchResultData(allConstituents);
             var searchDatas = new SearchResultsData();
             mapper.MapList(allConstituents, searchDatas, typeof(SearchResultData));
 
