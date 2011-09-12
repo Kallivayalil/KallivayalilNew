@@ -8,10 +8,13 @@ namespace Kallivayalil.Client
     public class RelationshipData
     {
         [DataMember]
-        public int id { get; set; }
+        public string id { get; set; }
 
         [DataMember]
         public string name { get; set; }
+        
+        [DataMember]
+        public TreeData data { get; set; }
 
         [DataMember]
         public List<RelationshipData> children { get; set; }

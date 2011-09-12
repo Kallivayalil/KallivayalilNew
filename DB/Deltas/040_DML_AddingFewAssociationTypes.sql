@@ -10,7 +10,7 @@ GO
 
 
 UPDATE [Kallivayalil].[dbo].[AssociationType]
-SET [ReciprocalType] = (SELECT [ID] FROM  [Kallivayalil].[dbo].[AssociationType] WHERE [Description]='Spouse')
+SET [ReciprocalType] = (SELECT [ID] FROM  [Kallivayalil].[dbo].[AssociationType] WHERE [Description]='Spouse') where [Description] ='Spouse'
 GO
 
 INSERT INTO [Kallivayalil].[dbo].[AssociationType]

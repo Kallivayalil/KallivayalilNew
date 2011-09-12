@@ -55,5 +55,15 @@ namespace Tests.Integration.ServiceTests
             Assert.That(searchDatas.Count, Is.EqualTo(0));
         }
 
+        [Test]
+        public void ShouldNotGetAnyResultsWhenNoSearchValuesAreSent()
+        {
+            var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, null,null);
+            var constituentsData = HttpHelper.Get<ConstituentsData>(uriString);
+
+            Assert.IsNotNull(constituentsData);
+            Assert.That(constituentsData.Count, Is.EqualTo(0));
+        }
+
     }
 }
