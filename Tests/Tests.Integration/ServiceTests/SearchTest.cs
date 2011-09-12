@@ -39,10 +39,20 @@ namespace Tests.Integration.ServiceTests
         public void ShouldGetConstituentByName()
         {
             var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, "Jessica","alba");
-            var constituentsData = HttpHelper.Get<ConstituentsData>(uriString);
+            var searchDatas = HttpHelper.Get<SearchResultsData>(uriString);
 
-            Assert.IsNotNull(constituentsData);
-            Assert.That(constituentsData.Count, Is.EqualTo(1));
+            Assert.IsNotNull(searchDatas);
+            Assert.That(searchDatas.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ShouldNotGetAnyResultsWhenNoSearchValuesAreSent()
+        {
+            var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, null,null);
+            var searchDatas = HttpHelper.Get<SearchResultsData>(uriString);
+
+            Assert.IsNotNull(searchDatas);
+            Assert.That(searchDatas.Count, Is.EqualTo(0));
         }
 
     }

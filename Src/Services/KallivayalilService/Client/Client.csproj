@@ -65,6 +65,7 @@
     <Compile Include="RegisterationData.cs" />
     <Compile Include="RelationshipData.cs" />
     <Compile Include="SalutationTypeData.cs" />
+    <Compile Include="SearchResultData.cs" />
     <Compile Include="ShortAddressData.cs" />
   </ItemGroup>
   <ItemGroup>
