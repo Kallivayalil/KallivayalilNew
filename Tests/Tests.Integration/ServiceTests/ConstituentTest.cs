@@ -96,7 +96,7 @@ namespace Tests.Integration.ServiceTests
         {
             var result = HttpHelper.Get<ConstituentsData>(baseUri);
 
-            Assert.That(result.Count, Is.EqualTo(4));
+            Assert.That(result.Count, Is.EqualTo(11));
         }
     }
 }

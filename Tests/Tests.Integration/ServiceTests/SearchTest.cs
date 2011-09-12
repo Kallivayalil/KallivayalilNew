@@ -42,7 +42,7 @@ namespace Tests.Integration.ServiceTests
             var searchDatas = HttpHelper.Get<SearchResultsData>(uriString);
 
             Assert.IsNotNull(searchDatas);
-            Assert.That(searchDatas.Count, Is.EqualTo(1));
+            Assert.That(searchDatas.Count, Is.EqualTo(2));
         }
 
         [Test]

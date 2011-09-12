@@ -67,8 +67,6 @@ namespace Tests.Integration.RepositoryTests
             Assert.That(savedConstituent.Name.UpdatedDateTime, Is.Not.EqualTo(savedConstituent.UpdatedDateTime));
             Assert.That(savedConstituent.UpdatedDateTime, Is.Not.Null);
             Assert.That(savedConstituent.UpdatedBy, Is.Not.Null);
-
-            constituentRepository.Delete(updatedConstituent);
         }
 
         [Test]
@@ -80,7 +78,6 @@ namespace Tests.Integration.RepositoryTests
             Assert.That(updatedConstituent.Name.MiddleName, Is.EqualTo("Einstein"));
             Assert.That(savedConstituent.Name.UpdatedDateTime, Is.Not.EqualTo(savedConstituent.UpdatedDateTime));
 
-            constituentRepository.Delete(updatedConstituent);
         }
 
         [Test]
