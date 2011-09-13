@@ -47,63 +47,21 @@ namespace Tests.Integration.ServiceTests
         {
             testDataHelper.CreateAddress(AddressMother.London(savedConstituent));
             var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, "Agnes","alba");
-            var searchDatas = HttpHelper.Get<SearchResultsData>(uriString);
+            var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
             Assert.IsNotNull(searchDatas);
             Assert.That(searchDatas.Count, Is.EqualTo(1));
-            var searchResultData = searchDatas[0];
-            Assert.That(searchResultData.Addresses.Count, Is.EqualTo(1));
         }
 
-        [Test]
-        public void ShouldGetConstituentWhenSearchingByNameWithPhones()
-        {
-            testDataHelper.CreatePhone(PhoneMother.Mobile(savedConstituent));
-            testDataHelper.CreatePhone(PhoneMother.PrimaryMobile(savedConstituent));
-
-            var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, "Agnes","alba");
-            var searchDatas = HttpHelper.Get<SearchResultsData>(uriString);
-
-            Assert.IsNotNull(searchDatas);
-            Assert.That(searchDatas.Count, Is.EqualTo(1));
-            var searchResultData = searchDatas[0];
-            Assert.That(searchResultData.Phones.Count, Is.EqualTo(2));
-        }  
-        
-        [Test]
-        public void ShouldGetConstituentWhenSearchingByNameWithEmails()
-        {
-            testDataHelper.CreateEmail(EmailMother.Official(savedConstituent));
-            var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, "Agnes","alba");
-            var searchDatas = HttpHelper.Get<SearchResultsData>(uriString);
-
-            Assert.IsNotNull(searchDatas);
-            Assert.That(searchDatas.Count, Is.EqualTo(1));
-            var searchResultData = searchDatas[0];
-            Assert.That(searchResultData.Emails.Count, Is.EqualTo(1));
-        }
-
-        [Test]
-        public void ShouldGetConstituentWhenSearchingByNameWithOccupations()
-        {
-            testDataHelper.CreateOccupation(OccupationMother.Doctor(savedConstituent));
-            var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, "Agnes","alba");
-            var searchDatas = HttpHelper.Get<SearchResultsData>(uriString);
-
-            Assert.IsNotNull(searchDatas);
-            Assert.That(searchDatas.Count, Is.EqualTo(1));
-            var searchResultData = searchDatas[0];
-            Assert.That(searchResultData.Occupations.Count, Is.EqualTo(1));
-        }
 
         [Test]
         public void ShouldNotGetAnyResultsWhenNoSearchValuesAreSent()
         {
             var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, null,null);
-            var searchDatas = HttpHelper.Get<SearchResultsData>(uriString);
+            var constituentsData = HttpHelper.Get<ConstituentsData>(uriString);
 
-            Assert.IsNotNull(searchDatas);
-            Assert.That(searchDatas.Count, Is.EqualTo(0));
+            Assert.IsNotNull(constituentsData);
+            Assert.That(constituentsData.Count, Is.EqualTo(0));
         }
 
 

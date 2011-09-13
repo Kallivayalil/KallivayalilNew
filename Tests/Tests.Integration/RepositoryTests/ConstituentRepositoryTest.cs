@@ -123,23 +123,10 @@ namespace Tests.Integration.RepositoryTests
         public void ShouldSearchConstituentByFirstAndLastName()
         {
             var savedConst = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.AgnesAlba()));
-            testDataHelper.CreateEmail(EmailMother.Official(savedConst));
-            testDataHelper.CreatePhone(PhoneMother.Mobile(savedConst));
-            testDataHelper.CreatePhone(PhoneMother.PrimaryMobile((savedConst)));
-            testDataHelper.CreateAddress(AddressMother.London(savedConst));
-            testDataHelper.CreateOccupation(OccupationMother.Doctor(savedConst));
-            testDataHelper.CreateEducationDetail(EducationDetailMother.School((savedConst)));
 
-
-            IList<Constituent> result = constituentRepository.SearchByConstituentName("Jessica", "alba");
+            IList<Constituent> result = constituentRepository.SearchByConstituentName("Agnes", "alba");
 
             Assert.That(result.Count(), Is.EqualTo(2));
-            var constituentResult = result[1];
-            Assert.That(constituentResult.Phones.Count,Is.EqualTo(2));
-            Assert.That(constituentResult.Emails.Count,Is.EqualTo(1));
-            Assert.That(constituentResult.Addresses.Count,Is.EqualTo(1));
-            Assert.That(constituentResult.Occupations.Count,Is.EqualTo(1));
-            Assert.That(constituentResult.EducationDetails.Count,Is.EqualTo(1));
         }
 
     }
