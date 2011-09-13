@@ -477,7 +477,8 @@ namespace Kallivayalil
             var childs = associations.ToList().FindAll(assn => assn.Type.Id.Equals(3) && assn.Constituent.Id != Convert.ToInt32(constituentId));
             var sibilings = associations.ToList().FindAll(assn => assn.Type.Id.Equals(4));
 
-            var parentFamily = GetFamilyRelationship(parents[0].Constituent, parents[1].Constituent,"top");
+            var parentFamily = GetFamilyNode(parents[0].Constituent, parents[1].Constituent,"top");
+            return parentFamily;
             RelationshipData myFamily = null;
             parentFamily.children = new List<RelationshipData>();
 
@@ -492,7 +493,7 @@ namespace Kallivayalil
             {
                 var dat = new TreeData();
                 dat.orientation = "top";
-                myFamily = GetFamilyRelationship(spouse.AssociatedConstituent, spouse.Constituent,"center");
+                myFamily = GetFamilyNode(spouse.AssociatedConstituent, spouse.Constituent,"center");
                 myFamily.data = dat;
             }
 
@@ -501,9 +502,7 @@ namespace Kallivayalil
                 myFamily.children = new List<RelationshipData>();
                 foreach (var child in childs)
                 {
-                    var dat = new TreeData();
-                    dat.orientation = "top";
-                    myFamily.children.Add(new RelationshipData { id = child.Constituent.Name.ToString(), data = dat, name = child.Constituent.Name.ToString() });
+                    myFamily.children.Add(GetPersonNode(child.Constituent,"top"));
                 }
             }
 
@@ -511,12 +510,33 @@ namespace Kallivayalil
             return parentFamily;
         }
 
-        private RelationshipData GetFamilyRelationship(Constituent familyMember, Constituent spouse, string orientation = null)
+        private RelationshipData GetFamilyNode(Constituent familyMember, Constituent spouse, string orientation = null)
         {
             var name = familyMember.Name.ToString();
             var data =new TreeData();
             data.type = "family";
             data.spouse= spouse.Name.ToString();
+            data.familyMemberId= "const_"+ familyMember.Id;
+            data.spouseId = "const_"+ spouse.Id;
+            data.familyMemberUrl= "http://localhost/Kallivayalil/Profile/Index";
+            data.spouseUrl = "http://localhost/Kallivayalil/Profile/Index";
+            if (orientation != null)
+            {
+                data.orientation = orientation;
+            }
+            return new RelationshipData {id = name, name = name, children = new List<RelationshipData>(), data = data};
+        }
+        
+        private RelationshipData GetPersonNode(Constituent familyMember, string orientation = null)
+        {
+            var name = familyMember.Name.ToString();
+            var data =new TreeData();
+            data.type = "person";
+            data.familyMemberId = "const_" + familyMember.Id;
+            data.spouse = string.Empty;
+            data.spouseId = string.Empty;
+            data.familyMemberUrl= "http://localhost/Kallivayalil/Profile/Index";
+            data.spouseUrl = string.Empty;
             if (orientation != null)
             {
                 data.orientation = orientation;
