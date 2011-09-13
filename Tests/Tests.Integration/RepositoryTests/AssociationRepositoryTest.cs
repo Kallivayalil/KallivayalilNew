@@ -23,7 +23,7 @@ namespace Tests.Integration.RepositoryTests
             var constituent = ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin());
             savedConstituent = testDataHelper.CreateConstituent(constituent);
             
-            constituent = ConstituentMother.ConstituentWithName(ConstituentNameMother.JessicaAlba());
+            constituent = ConstituentMother.ConstituentWithName(ConstituentNameMother.AgnesAlba());
             savedAssociatedConstituent = testDataHelper.CreateConstituent(constituent);
 
             savedAssociation = testDataHelper.CreateAssociation(AsociationMother.JamesFranklinAndParent(savedConstituent));

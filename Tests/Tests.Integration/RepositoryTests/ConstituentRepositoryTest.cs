@@ -102,7 +102,7 @@ namespace Tests.Integration.RepositoryTests
         [Test]
         public void ShouldLoadAllConstituentsWithBirthdayToday()
         {
-            testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JessicaAlba()));
+            testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.AgnesAlba()));
 
             var constituents = constituentRepository.LoadAllConstituentsWithBirthdayToday();
 
@@ -122,7 +122,7 @@ namespace Tests.Integration.RepositoryTests
         [Test]
         public void ShouldSearchConstituentByFirstAndLastName()
         {
-            var savedConst = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JessicaAlba()));
+            var savedConst = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.AgnesAlba()));
             testDataHelper.CreateEmail(EmailMother.Official(savedConst));
             testDataHelper.CreatePhone(PhoneMother.Mobile(savedConst));
             testDataHelper.CreatePhone(PhoneMother.PrimaryMobile((savedConst)));

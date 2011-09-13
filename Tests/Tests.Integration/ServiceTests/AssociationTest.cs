@@ -23,7 +23,7 @@ namespace Tests.Integration.ServiceTests
             testDataHelper = new TestDataHelper();
 
             constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
-            reciprocalConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JessicaAlba()));
+            reciprocalConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.AgnesAlba()));
             savedAssociation = testDataHelper.CreateAssociation(AsociationMother.JamesFranklinAndJessicaAlba(constituent,reciprocalConstituent));
         }
 
@@ -38,7 +38,8 @@ namespace Tests.Integration.ServiceTests
         [Test]
         public void ShouldSaveConstituentAssociation()
         {
-            var savedAssociationData = HttpHelper.Post(string.Format("{0}?constituentId={1}", baseUri, constituent.Id), AssociationDataMother.JamesAndJessica(constituent,reciprocalConstituent));
+            var savedAssociationData = HttpHelper.Post(string.Format("{0}?constituentId={1}", baseUri, constituent.Id)
+                , AssociationDataMother.JamesAndJessica(constituent,reciprocalConstituent));
 
             Assert.IsNotNull(savedAssociationData);
             Assert.That(savedAssociationData.Id, Is.GreaterThan(0));
