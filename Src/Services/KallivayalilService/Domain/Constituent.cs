@@ -21,5 +21,10 @@ namespace Kallivayalil.Domain
 
 //        [IndexedEmbedded]
         public virtual ConstituentName Name { get; set; }
+        public virtual IList<Email> Emails { get; set; }
+        public virtual IList<Address> Addresses { get; set; }
+        public virtual IList<Phone> Phones { get; set; }
+        public virtual IList<Occupation> Occupations { get; set; }
+        public virtual IList<EducationDetail> EducationDetails { get; set; }
     }
 }

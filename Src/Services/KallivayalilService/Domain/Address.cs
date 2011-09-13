@@ -1,8 +1,11 @@
+using System;
 using Kallivayalil.Common;
+using Kallivayalil.Domain.Attributes;
 using Kallivayalil.Domain.ReferenceData;
 
 namespace Kallivayalil.Domain
 {
+    [Serializable,Audited]
     public class Address : PrimaryEntity
     {
         public virtual string Line1 { get; set; }

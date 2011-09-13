@@ -134,7 +134,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteLogins()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from Logins where id >=10";
+            sqlCommand.CommandText = "delete from Logins where email >=10";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
@@ -149,7 +149,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteAssociations()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from Associations where id >=10";
+            sqlCommand.CommandText = "delete from Associations where id >=10 or reciprocalid >=10";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
 

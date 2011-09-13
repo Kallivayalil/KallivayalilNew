@@ -130,14 +130,15 @@ namespace Kallivayalil
             return updatedNameData;
         }
 
-        public virtual ConstituentsData SearchByConstituentName(string firstName, string lastName)
+        public virtual SearchResultsData SearchByConstituentName(string firstName, string lastName)
         {
             var allConstituents = searchServiceImpl.SearchByConstituentName(firstName, lastName);
 
-            var constituentsData = new ConstituentsData();
-            mapper.MapList(allConstituents, constituentsData, typeof (ConstituentData));
+//  SearchResultsData searchResultsData = GetSearchResultData(allConstituents);
+            var searchDatas = new SearchResultsData();
+            mapper.MapList(allConstituents, searchDatas, typeof(SearchResultData));
 
-            return constituentsData;
+            return searchDatas;
         }
 
         public virtual ConstituentData SearchByEmailId(string emailId)
