@@ -65,7 +65,7 @@ namespace Kallivayalil.DataAccess.Repositories
             return criteria.UniqueResult<Address>();
         }
 
-        public IList<Constituent> SearchByAddress(string address, string state, string city, string country, string postcode)
+        public IList<Constituent> SearchAddressBy(string address, string state, string city, string country, string postcode)
         {
             var criteria = session.CreateCriteria<Address>();
             criteria.Add(Restrictions.InsensitiveLike("Line1", address) || Restrictions.InsensitiveLike("Line2", address) || Restrictions.InsensitiveLike("City", city)

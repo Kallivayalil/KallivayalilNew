@@ -101,7 +101,7 @@ namespace Tests.Integration.RepositoryTests
             testDataHelper.CreateAddress(address);
             testDataHelper.CreateAddress(address1);
 
-            var phones = addressRepository.SearchByAddress("Montgomery", "London", "California", "USA", "ABCD");
+            var phones = addressRepository.SearchAddressBy("Montgomery", "London", "California", "USA", "ABCD");
 
             Assert.That(phones.Count, Is.EqualTo(3));
         }

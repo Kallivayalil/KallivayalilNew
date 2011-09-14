@@ -13,30 +13,34 @@ namespace Kallivayalil
         private readonly PhoneRepository phoneRepository;
         private readonly OccupationRepository occupationRepository;
         private readonly EducationDetailRepository educationDetailRepository;
+        private readonly AddressRepository addressRepository;
 
 
-        public SearchServiceImpl(ConstituentRepository constituentRepository, EmailRepository emailRepository, PhoneRepository phoneRepository, OccupationRepository occupationRepository, EducationDetailRepository educationDetailRepository)
+        public SearchServiceImpl(ConstituentRepository constituentRepository, EmailRepository emailRepository, PhoneRepository phoneRepository, OccupationRepository occupationRepository, EducationDetailRepository educationDetailRepository, AddressRepository addressRepository)
         {
             this.constituentRepository = constituentRepository;
+            this.addressRepository = addressRepository;
             this.educationDetailRepository = educationDetailRepository;
             this.occupationRepository = occupationRepository;
             this.phoneRepository = phoneRepository;
             this.emailRepository = emailRepository;
         }
 
-        public IList<Constituent> Search(string firstName, string lastName, string email, string phone, string occupationName, string occupationDescription, string instituteName, string instituteLocation, string qualification, string yearOfGradutation)
+        public IList<Constituent> Search(string firstName, string lastName, string email, string phone, string occupationName, string occupationDescription, string instituteName, string instituteLocation, string qualification, string yearOfGradutation, string address, string state, string city, string country, string postcode)
         {
             var constituentsWithNameMatch = constituentRepository.SearchByConstituentName(firstName, lastName);
             var constituentsWithEmailMatch = emailRepository.SearchByEmail(email);
             var constituentsWithPhoneMatch = phoneRepository.SearchByNumber(phone);
             var constituentsWithOccupationMatch = occupationRepository.SearchOccupationBy(occupationName,occupationDescription);
             var constituentsWithEducationDetailMatch = educationDetailRepository.SearchEducationDetailBy(instituteName,instituteLocation,qualification,yearOfGradutation);
+            var constituentsWithAddressMatch = addressRepository.SearchAddressBy(address,state,city,country,postcode);
 
             return constituentsWithNameMatch.Union(
                         constituentsWithEmailMatch.Union(
                             constituentsWithPhoneMatch.Union(
                                 constituentsWithOccupationMatch.Union(
-                                    constituentsWithEducationDetailMatch)))).ToList();
+                                    constituentsWithEducationDetailMatch.Union(
+                                        constituentsWithAddressMatch))))).ToList();
         }
 
         public Constituent SearchBy(string emailId)
