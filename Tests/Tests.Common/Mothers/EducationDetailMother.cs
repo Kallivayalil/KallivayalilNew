@@ -17,5 +17,17 @@ namespace Tests.Common.Mothers
                            Type = EducationDetailTypeMother.School()
                        };
         }
+        public static EducationDetail College(Constituent constituent)
+        {
+            return new EducationDetail
+                       {
+                           Constituent = constituent,
+                           Qualification = "Cse",
+                           InstituteName = "PSG",
+                           InstituteLocation = "CBE",
+                           YearOfGraduation = "1995",
+                           Type = EducationDetailTypeMother.University()
+                       };
+        }
     }
 }

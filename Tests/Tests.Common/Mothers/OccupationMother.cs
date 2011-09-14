@@ -9,6 +9,11 @@ namespace Tests.Common.Mothers
             return new Occupation {Constituent = constituent, OccupationName = "Doctor", Description = "Senior Doc", Type = OccupationTypeMother.Primary()};
         }
 
+        public static Occupation Engineer(Constituent constituent)
+        {
+            return new Occupation {Constituent = constituent, OccupationName = "Engineer", Description = "Senior Engineer", Type = OccupationTypeMother.Secondary()};
+        }
+
         public static Occupation Doctor(Constituent constituent, Address address)
         {
             var doctor = Doctor(constituent);
