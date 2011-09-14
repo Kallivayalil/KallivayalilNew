@@ -18,10 +18,10 @@ namespace Kallivayalil.Client
         public string AssociatedConstituentName { get; set; }
 
         [DataMember]
-        public LinkData Constituent { get; set; }
+        public ConstituentData Constituent { get; set; }
         
         [DataMember]
-        public LinkData AssociatedConstituent { get; set; }
+        public ConstituentData AssociatedConstituent { get; set; }
 
         [DataMember]
         public AssociationTypeData Type { get; set; }
