@@ -46,7 +46,7 @@ namespace Tests.Integration.ServiceTests
         public void ShouldGetConstituentWhenSearchingByName()
         {
             testDataHelper.CreateAddress(AddressMother.London(savedConstituent));
-            var uriString = string.Format("{0}?firstName={1}&lastName={2}&email={3}&phone={4}", baseUri, "Agnes", "alba", string.Empty,null);
+            var uriString = string.Format("{0}?firstName={1}&lastName={2}&email={3}&phone={4}&occupationName={5}&occupationDescription={6}", baseUri, "Agnes", "alba", string.Empty, null,null,null);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
             Assert.IsNotNull(searchDatas);
@@ -57,7 +57,7 @@ namespace Tests.Integration.ServiceTests
         public void ShouldGetConstituentWhenSearchingByEmail()
         {
             testDataHelper.CreateAddress(AddressMother.London(savedConstituent));
-            var uriString = string.Format("{0}?firstName={1}&lastName={2}&email={3}&phone={4}", baseUri, "Agnes", "alba", "mary@franklin.com",null);
+            var uriString = string.Format("{0}?firstName={1}&lastName={2}&email={3}&phone={4}&occupationName={5}&occupationDescription={6}", baseUri, "Agnes", "alba", "mary@franklin.com", null,null,null);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
             Assert.IsNotNull(searchDatas);
@@ -69,7 +69,7 @@ namespace Tests.Integration.ServiceTests
         {
             testDataHelper.CreateAddress(AddressMother.London(savedConstituent));
             var email = testDataHelper.CreateEmail(EmailMother.Official(savedConstituent));
-            var uriString = string.Format("{0}?firstName={1}&lastName={2}&email={3}&phone={4}", baseUri, "Agnes", "alba", email.Address,null);
+            var uriString = string.Format("{0}?firstName={1}&lastName={2}&email={3}&phone={4}&occupationName={5}&occupationDescription={6}", baseUri, "Agnes", "alba", email.Address, null,null,null);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
             Assert.IsNotNull(searchDatas);
@@ -79,7 +79,19 @@ namespace Tests.Integration.ServiceTests
         public void ShouldGetConstituentWhenSearchingByPhone()
         {
             var phone = testDataHelper.CreatePhone(PhoneMother.Mobile(savedConstituent));
-            var uriString = string.Format("{0}?firstName={1}&lastName={2}&email={3}&phone={4}", baseUri, "Agnes", "alba", null,phone.Number);
+            var uriString = string.Format("{0}?firstName={1}&lastName={2}&email={3}&phone={4}&occupationName={5}&occupationDescription={6}", baseUri, "Agnes", "alba", null, phone.Number,null,null);
+            var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
+
+            Assert.IsNotNull(searchDatas);
+            Assert.That(searchDatas.Count, Is.EqualTo(1));
+        }  
+        
+        [Test]
+        public void ShouldGetConstituentWhenSearchingByOccupation()
+        {
+            var occupation = testDataHelper.CreateOccupation(OccupationMother.Doctor(savedConstituent));
+            var uriString = string.Format("{0}?firstName={1}&lastName={2}&email={3}&phone={4}&occupationName={5}&occupationDescription={6}"
+                , baseUri, "Agnes", "alba", null, null, occupation.OccupationName, occupation.Description);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
             Assert.IsNotNull(searchDatas);
@@ -90,7 +102,7 @@ namespace Tests.Integration.ServiceTests
         public void ShouldGetConstituentWhenSearchingByNameWithOneOfTheSearchValuesSet()
         {
             testDataHelper.CreateAddress(AddressMother.London(savedConstituent));
-            var uriString = string.Format("{0}?firstName={1}&lastName={2}&email={3}&phone={4}", baseUri, null, "frank", null,null);
+            var uriString = string.Format("{0}?firstName={1}&lastName={2}&email={3}&phone={4}&occupationName={5}&occupationDescription={6}", baseUri, null, "frank", null, null,null,null);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
             Assert.IsNotNull(searchDatas);
@@ -101,7 +113,7 @@ namespace Tests.Integration.ServiceTests
         [Test]
         public void ShouldNotGetAnyResultsWhenNoSearchValuesAreSent()
         {
-            var uriString = string.Format("{0}?firstName={1}&lastName={2}&email={3}&phone={4}", baseUri, null, null, null,null);
+            var uriString = string.Format("{0}?firstName={1}&lastName={2}&email={3}&phone={4}&occupationName={5}&occupationDescription={6}", baseUri, null, null, null, null,null,null);
             var constituentsData = HttpHelper.Get<ConstituentsData>(uriString);
 
             Assert.IsNotNull(constituentsData);

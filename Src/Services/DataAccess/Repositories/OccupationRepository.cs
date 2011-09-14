@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Kallivayalil.Domain;
 using NHibernate;
 using NHibernate.Criterion;
@@ -75,6 +77,21 @@ namespace Kallivayalil.DataAccess.Repositories
             var criteria = session.CreateCriteria<Occupation>();
             criteria.Add(Restrictions.Eq("Address.Id", address.Id));
             return criteria.List<Occupation>();
+        }
+
+        public IList<Constituent> SearchOccupationBy(string occupationName, string description)
+        {
+            var criteria = session.CreateCriteria<Occupation>();
+            criteria.Add(Restrictions.InsensitiveLike("OccupationName", GetPropertyValue(occupationName)) 
+                || Restrictions.InsensitiveLike("Description", GetPropertyValue(description)));
+            var occupations = criteria.List<Occupation>();
+
+            return occupations.Select(occupation => occupation.Constituent).ToList();
+        }
+
+        private string GetPropertyValue(string propertyValue)
+        {
+            return string.IsNullOrEmpty(propertyValue) ? propertyValue : string.Format("%{0}%", propertyValue);
         }
     }
 }

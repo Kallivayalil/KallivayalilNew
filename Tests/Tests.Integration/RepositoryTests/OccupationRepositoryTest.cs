@@ -104,5 +104,21 @@ namespace Tests.Integration.RepositoryTests
 
             Assert.That(occupations.Count, Is.EqualTo(2));
         }
+
+        [Test]
+        public void ShouldSearchForOccupations()
+        {
+            var occupation = OccupationMother.Doctor(savedConstituent);
+            var occupation1 = OccupationMother.Doctor(savedConstituent);
+            occupation1.OccupationName = "test occ";
+            occupation1.Description = "test occ desc";
+            testDataHelper.CreateOccupation(occupation1);
+            testDataHelper.CreateOccupation(occupation);
+
+            var constituents = occupationRepository.SearchOccupationBy("test occ","test occ desc");
+
+            Assert.That(constituents.Count, Is.EqualTo(1));
+        }
+
     }
 }
