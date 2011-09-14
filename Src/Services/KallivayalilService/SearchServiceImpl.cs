@@ -19,12 +19,7 @@ namespace Kallivayalil
 
         public IList<Constituent> SearchByConstituentName(string firstName, string lastName)
         {
-            return SearchQueryParamsExist(firstName,lastName) ? constituentRepository.SearchByConstituentName(firstName, lastName) : new List<Constituent>();
-        }
-
-        private bool SearchQueryParamsExist(string firstName, string lastName)
-        {
-            return !(string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName));
+            return constituentRepository.SearchByConstituentName(firstName, lastName);
         }
 
         public Constituent SearchBy(string emailId)

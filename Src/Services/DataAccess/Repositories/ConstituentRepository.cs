@@ -76,9 +76,15 @@ namespace Kallivayalil.DataAccess.Repositories
         {
             var criteria = session.CreateCriteria<Constituent>();
             criteria.CreateCriteria("Name")
-                .Add(Restrictions.InsensitiveLike("FirstName", string.Format("%{0}%", firstName)) 
-                || Restrictions.InsensitiveLike("LastName", string.Format("%{0}%", lastName)));
+                .Add(Restrictions.InsensitiveLike("FirstName", GetPropertyValue(firstName)) 
+                || Restrictions.InsensitiveLike("LastName", GetPropertyValue(lastName)));
             return criteria.List<Constituent>();
         }
+
+        private string GetPropertyValue(string propertyValue)
+        {
+            return string.IsNullOrEmpty(propertyValue) ? propertyValue : string.Format("%{0}%", propertyValue);
+        }
+
     }
 }

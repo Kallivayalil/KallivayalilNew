@@ -43,7 +43,7 @@ namespace Tests.Integration.ServiceTests
         }
 
         [Test]
-        public void ShouldGetConstituentWhenSearchingByNameWithAddress()
+        public void ShouldGetConstituentWhenSearchingByName()
         {
             testDataHelper.CreateAddress(AddressMother.London(savedConstituent));
             var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, "Agnes","alba");
@@ -51,6 +51,17 @@ namespace Tests.Integration.ServiceTests
 
             Assert.IsNotNull(searchDatas);
             Assert.That(searchDatas.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ShouldGetConstituentWhenSearchingByNameWithOneOfTheSearchValuesSet()
+        {
+            testDataHelper.CreateAddress(AddressMother.London(savedConstituent));
+            var uriString = string.Format("{0}?firstName={1}&lastName={2}", baseUri, null,"frank");
+            var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
+
+            Assert.IsNotNull(searchDatas);
+            Assert.That(searchDatas.Count, Is.EqualTo(2));
         }
 
 
