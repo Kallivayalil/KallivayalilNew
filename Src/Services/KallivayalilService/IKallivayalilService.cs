@@ -36,8 +36,8 @@ namespace Kallivayalil
         ConstituentNameData UpdateConstituentName(string id, ConstituentNameData nameData); 
         
         [OperationContract]
-        [WebGet(UriTemplate = "/Search?firstName={firstName}&lastName={lastName}")]
-        ConstituentsData SearchByConstituentName(string firstName, string lastName); 
+        [WebGet(UriTemplate = "/Search?firstName={firstName}&lastName={lastName}&email={email}&phone={phone}")]
+        ConstituentsData Search(string firstName, string lastName, string email, string phone); 
         
         [OperationContract]
         [WebGet(UriTemplate = "/Find?emailId={emailId}")]

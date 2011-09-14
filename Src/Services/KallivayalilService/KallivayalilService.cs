@@ -42,20 +42,21 @@ namespace Kallivayalil
             var eventRepository = new EventRepository();
             var contactUsRepository = new ContactUsRepository();
             var registerationRepository = new RegisterationRepository();
+            var phoneRepository = new PhoneRepository();
 
             constituentServiceImpl = new ConstituentServiceImpl(constituentRepository);
             registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, new Mail(new SmtpClient()));
             contactUsServiceImpl = new ContactUsServiceImpl(contactUsRepository);
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(new AddressRepository());
-            phoneServiceImpl = new PhoneServiceImpl(new PhoneRepository(), constituentRepository);
+            phoneServiceImpl = new PhoneServiceImpl(phoneRepository, constituentRepository);
             var emailRepository = new EmailRepository();
             emailServiceImpl = new EmailServiceImpl(emailRepository);
             loginServiceImpl = new LoginServiceImpl();
             occupationServiceImpl = new OccupationServiceImpl(new OccupationRepository(), constituentRepository);
             educationalDetailServiceImpl = new EducationDetailServiceImpl(educationDetailRepository, constituentRepository);
             associationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
-            searchServiceImpl = new SearchServiceImpl(constituentRepository, emailRepository);
+            searchServiceImpl = new SearchServiceImpl(constituentRepository, emailRepository,phoneRepository);
             eventServiceImpl = new EventServiceImpl(eventRepository, constituentRepository, referenceDataRepository);
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl(referenceDataRepository);
@@ -130,9 +131,9 @@ namespace Kallivayalil
             return updatedNameData;
         }
 
-        public virtual ConstituentsData SearchByConstituentName(string firstName, string lastName)
+        public virtual ConstituentsData Search(string firstName, string lastName, string email, string phone)
         {
-            var allConstituents = searchServiceImpl.SearchByConstituentName(firstName, lastName);
+            var allConstituents = searchServiceImpl.Search(firstName, lastName,email,phone);
 
             var constituentsData = new ConstituentsData();
             mapper.MapList(allConstituents, constituentsData, typeof(ConstituentData));
