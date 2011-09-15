@@ -76,10 +76,15 @@ namespace Kallivayalil.DataAccess.Repositories
         public List<Constituent> SearchByEmail(string email)
         {
             var criteria = session.CreateCriteria<Email>();
-            criteria.Add(Restrictions.InsensitiveLike("Address", email));
+            criteria.Add(Restrictions.InsensitiveLike("Address", GetPropertyValue(email)));
             var emails = criteria.List<Email>();
             return emails.Select(email1 => email1.Constituent).ToList();
 
+        }
+
+        private string GetPropertyValue(string propertyValue)
+        {
+            return string.IsNullOrEmpty(propertyValue) ? propertyValue : string.Format("%{0}%", propertyValue);
         }
     }
 }

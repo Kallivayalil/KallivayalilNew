@@ -81,10 +81,15 @@ namespace Kallivayalil.DataAccess.Repositories
         public List<Constituent> SearchByNumber(string number)
         {
             var criteria = session.CreateCriteria<Phone>();
-            criteria.Add(Restrictions.Eq("Number", number));
+            criteria.Add(Restrictions.InsensitiveLike("Number", GetPropertyValue(number)));
             var phones = criteria.List<Phone>();
 
             return phones.Select(phone => phone.Constituent).ToList();
+        }
+
+        private string GetPropertyValue(string propertyValue)
+        {
+            return string.IsNullOrEmpty(propertyValue) ? propertyValue : string.Format("%{0}%", propertyValue);
         }
     }
 }
