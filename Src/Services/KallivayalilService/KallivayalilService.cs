@@ -479,7 +479,6 @@ namespace Kallivayalil
             var sibilings = associations.ToList().FindAll(assn => assn.Type.Id.Equals(4));
 
             var parentFamily = GetFamilyNode(parents[0].Constituent, parents[1].Constituent,"top");
-            return parentFamily;
             RelationshipData myFamily = null;
             parentFamily.children = new List<RelationshipData>();
 
