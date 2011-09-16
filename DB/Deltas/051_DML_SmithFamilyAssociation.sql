@@ -139,4 +139,7 @@ UPDATE [Kallivayalil].[dbo].[Associations] set ReciprocalId = 15 where Id = 16;
 GO
 
 
+Update NextIds set NextId = 20 where Type ='ASN';
+
+
 

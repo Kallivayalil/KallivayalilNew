@@ -149,7 +149,7 @@ namespace Tests.Common.Helpers
         public void HardDeleteAssociations()
         {
             var sqlCommand = session.Connection.CreateCommand();
-            sqlCommand.CommandText = "delete from Associations where id >=10 or reciprocalid >=10";
+            sqlCommand.CommandText = "delete from Associations where id >=20 or reciprocalid >=20";
             sqlCommand.ExecuteNonQuery();
             session.Flush();
 

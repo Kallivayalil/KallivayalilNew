@@ -520,8 +520,8 @@ namespace Kallivayalil
             data.spouse= spouse.Name.ToString();
             data.familyMemberId= "const_"+ familyMember.Id;
             data.spouseId = "const_"+ spouse.Id;
-            data.familyMemberUrl= "http://localhost/Kallivayalil/Profile/Index";
-            data.spouseUrl = "http://localhost/Kallivayalil/Profile/Index";
+            data.familyMemberUrl= "http://localhost/Kallivayalil/Profile/Index/"+familyMember.Id;
+            data.spouseUrl = "http://localhost/Kallivayalil/Profile/Index/"+ spouse.Id;
             if (orientation != null)
             {
                 data.orientation = orientation;
