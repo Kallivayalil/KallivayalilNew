@@ -31,6 +31,19 @@ namespace Tests.Common.Mothers
                            Constituent = constituent,
                        };
         } 
+        public static Address Texas(Constituent constituent)
+        {
+            return new Address
+                       {
+                           Line1 = "1901 Bermondsey Street",
+                           City = "Austin",
+                           State = "Texas",
+                           PostCode = "SE13 3TQ",
+                           Country = "US",
+                           Type = AddressTypeMother.Office(),
+                           Constituent = constituent,
+                       };
+        } 
         
         public static Address London()
         {

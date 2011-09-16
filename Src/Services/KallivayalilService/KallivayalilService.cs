@@ -42,20 +42,23 @@ namespace Kallivayalil
             var eventRepository = new EventRepository();
             var contactUsRepository = new ContactUsRepository();
             var registerationRepository = new RegisterationRepository();
+            var phoneRepository = new PhoneRepository();
+            var occupationRepository = new OccupationRepository();
+            var addressRepository = new AddressRepository();
 
             constituentServiceImpl = new ConstituentServiceImpl(constituentRepository);
             registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, new Mail(new SmtpClient()));
             contactUsServiceImpl = new ContactUsServiceImpl(contactUsRepository);
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
-            addressServiceImpl = new AddressServiceImpl(new AddressRepository());
-            phoneServiceImpl = new PhoneServiceImpl(new PhoneRepository(), constituentRepository);
+            addressServiceImpl = new AddressServiceImpl(addressRepository);
+            phoneServiceImpl = new PhoneServiceImpl(phoneRepository, constituentRepository);
             var emailRepository = new EmailRepository();
             emailServiceImpl = new EmailServiceImpl(emailRepository);
             loginServiceImpl = new LoginServiceImpl();
-            occupationServiceImpl = new OccupationServiceImpl(new OccupationRepository(), constituentRepository);
+            occupationServiceImpl = new OccupationServiceImpl(occupationRepository, constituentRepository);
             educationalDetailServiceImpl = new EducationDetailServiceImpl(educationDetailRepository, constituentRepository);
             associationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
-            searchServiceImpl = new SearchServiceImpl(constituentRepository, emailRepository);
+            searchServiceImpl = new SearchServiceImpl(constituentRepository, emailRepository,phoneRepository,occupationRepository,educationDetailRepository,addressRepository);
             eventServiceImpl = new EventServiceImpl(eventRepository, constituentRepository, referenceDataRepository);
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl(referenceDataRepository);
@@ -130,15 +133,14 @@ namespace Kallivayalil
             return updatedNameData;
         }
 
-        public virtual SearchResultsData SearchByConstituentName(string firstName, string lastName)
+        public virtual ConstituentsData Search(string firstName, string lastName, string email, string phone, string occupationName, string occupationDescription, string instituteName, string instituteLocation, string qualification, string yearOfGradutation, string address, string state, string city, string country, string postcode)
         {
-            var allConstituents = searchServiceImpl.SearchByConstituentName(firstName, lastName);
+            var allConstituents = searchServiceImpl.Search(firstName, lastName,email,phone,occupationName,occupationDescription,instituteName,instituteLocation,qualification,yearOfGradutation,address,state,city,country,postcode);
 
-//  SearchResultsData searchResultsData = GetSearchResultData(allConstituents);
-            var searchDatas = new SearchResultsData();
-            mapper.MapList(allConstituents, searchDatas, typeof(SearchResultData));
+            var constituentsData = new ConstituentsData();
+            mapper.MapList(allConstituents, constituentsData, typeof(ConstituentData));
 
-            return searchDatas;
+            return constituentsData;
         }
 
         public virtual ConstituentData SearchByEmailId(string emailId)
