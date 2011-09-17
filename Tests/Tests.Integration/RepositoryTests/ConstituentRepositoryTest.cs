@@ -108,16 +108,6 @@ namespace Tests.Integration.RepositoryTests
             Assert.That(constituents.Count,Is.EqualTo(2));
         }
 
-
-//        [Test,Ignore("WIP")]
-//        public void ShouldSearchConstituentByName()
-//        {
-//            testDataHelper.CreateConstituent(constituent);
-//            var result = constituentRepository.SearchByName("james","james");
-//
-//            Assert.That(result.Count(), Is.EqualTo(3));
-//        } 
-//        
         [Test]
         public void ShouldSearchConstituentByFirstAndLastName()
         {
@@ -125,7 +115,7 @@ namespace Tests.Integration.RepositoryTests
 
             IList<Constituent> result = constituentRepository.SearchByConstituentName("Agnes", "alba");
 
-            Assert.That(result.Count(), Is.EqualTo(2));
+            Assert.That(result.Count(), Is.EqualTo(1));
         }
 
     }

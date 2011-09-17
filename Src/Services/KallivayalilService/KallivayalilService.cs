@@ -475,12 +475,13 @@ namespace Kallivayalil
         {
             var associations = associationServiceImpl.FindAssociations(constituentId);
 
-            var parents = associations.ToList().FindAll(assn => assn.Type.Id.Equals(2) && assn.Constituent.Id != Convert.ToInt32(constituentId));
+            var parents = associations.ToList().FindAll(assn => assn.Type.Id.Equals(3));
             var spouse = associations.ToList().Find(assn => assn.Type.Id.Equals(1));
-            var childs = associations.ToList().FindAll(assn => assn.Type.Id.Equals(3) && assn.Constituent.Id != Convert.ToInt32(constituentId));
+            var childs = associations.ToList().FindAll(assn => assn.Type.Id.Equals(2));
             var sibilings = associations.ToList().FindAll(assn => assn.Type.Id.Equals(4));
 
-            var parentFamily = GetFamilyNode(parents[0].Constituent, parents[1].Constituent,"top");
+
+            var parentFamily = GetFamilyNode(parents[0].AssociatedConstituent, parents[1].AssociatedConstituent,"top");
             RelationshipData myFamily = null;
             parentFamily.children = new List<RelationshipData>();
 
@@ -488,14 +489,14 @@ namespace Kallivayalil
             {
                 var dat = new TreeData();
                 dat.orientation = "top";
-                parentFamily.children.Add(new RelationshipData {id = sibiling.Constituent.Name.ToString(), name = sibiling.Constituent.Name.ToString(),data = dat});
+                parentFamily.children.Add(new RelationshipData {id = sibiling.AssociatedConstituent.Name.ToString(), name = sibiling.AssociatedConstituent.Name.ToString(),data = dat});
             }
 
             if (spouse != null)
             {
                 var dat = new TreeData();
                 dat.orientation = "top";
-                myFamily = GetFamilyNode(spouse.AssociatedConstituent, spouse.Constituent,"center");
+                myFamily = GetFamilyNode(spouse.Constituent, spouse.AssociatedConstituent,"center");
                 myFamily.data = dat;
             }
 
@@ -504,7 +505,7 @@ namespace Kallivayalil
                 myFamily.children = new List<RelationshipData>();
                 foreach (var child in childs)
                 {
-                    myFamily.children.Add(GetPersonNode(child.Constituent,"top"));
+                    myFamily.children.Add(GetPersonNode(child.AssociatedConstituent,"top"));
                 }
             }
 
