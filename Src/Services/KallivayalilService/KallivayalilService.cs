@@ -134,9 +134,12 @@ namespace Kallivayalil
             return updatedNameData;
         }
 
-        public virtual ConstituentsData Search(string firstName, string lastName, string email, string phone, string occupationName, string occupationDescription, string instituteName, string instituteLocation, string qualification, string yearOfGradutation, string address, string state, string city, string country, string postcode, string preferedName, string houseName, string branch)
+        public virtual ConstituentsData Search(string firstName, string lastName, string email, string phone, string occupationName, string occupationDescription, string instituteName,
+                                               string instituteLocation, string qualification, string yearOfGradutation, string address, string state, string city, string country,
+                                               string postcode, string preferedName, string houseName, string branch)
         {
-            var allConstituents = searchServiceImpl.Search(firstName, lastName, email, phone, occupationName, occupationDescription, instituteName, instituteLocation, qualification, yearOfGradutation, address, state, city, country, postcode, preferedName,houseName,branch);
+            var allConstituents = searchServiceImpl.Search(firstName, lastName, email, phone, occupationName, occupationDescription, instituteName, instituteLocation, qualification,
+                                                           yearOfGradutation, address, state, city, country, postcode, preferedName, houseName, branch);
 
             var constituentsData = new ConstituentsData();
             mapper.MapList(allConstituents, constituentsData, typeof (ConstituentData));
@@ -481,8 +484,16 @@ namespace Kallivayalil
             var spouse = associations.ToList().Find(assn => assn.Type.Id.Equals(1));
             var childs = associations.ToList().FindAll(assn => assn.Type.Id.Equals(2));
             var sibilings = associations.ToList().FindAll(assn => assn.Type.Id.Equals(4));
+            var parentFamily = new RelationshipData();
+            if (parents.Count > 1)
+            {
+                parentFamily = GetFamilyNode(GetConstituentInfo(parents[0]), GetConstituentInfo(parents[1]), parents[0].StartDate, "top");
+            }
+            else if(parents.Count==1)
+            {
+                parentFamily = GetFamilyNode(GetConstituentInfo(parents[0]), GetConstituentInfo((Association)null), parents[0].StartDate, "top");
+            }
 
-            var parentFamily = GetFamilyNode(GetConstituentInfo(parents[0]), GetConstituentInfo(parents[1]), parents[0].StartDate, "top");
             RelationshipData myFamily = null;
             parentFamily.children = new List<RelationshipData>();
 
@@ -515,6 +526,11 @@ namespace Kallivayalil
 
         private ConstituentInfo GetConstituentInfo(Association association)
         {
+            if(association== null)
+            {
+                return new ConstituentInfo(){BornInto = false,Id = -1, Name = "",Parents = ""};
+            }
+
             var associatedConstituent = association.AssociatedConstituent;
             if (Entity.IsNull(associatedConstituent))
             {
@@ -526,10 +542,14 @@ namespace Kallivayalil
             constituentInfo.Id = associatedConstituent.Id;
             constituentInfo.BornInto = associatedConstituent.BornInto;
 
-            if (association.Type.Equals(3) || association.Type.Equals(1))
+            if (association.Type.Id.Equals(3) || association.Type.Id.Equals(1))
             {
-                var parents = associationServiceImpl.FindAssociations(associatedConstituent.Id.ToString()).ToList().FindAll(ass => ass.Type.Equals(3));
-                var parentsName = parents.Aggregate(string.Empty, (current, parent) => current + GetName(parent));
+                var parents = associationServiceImpl.FindAssociations(associatedConstituent.Id.ToString()).ToList().FindAll(ass => ass.Type.Id.Equals(3));
+                var parentsName = parents.Aggregate(string.Empty, (current, parent) => current + (GetName(parent) + " & "));
+                if (!string.IsNullOrEmpty(parentsName))
+                {
+                    parentsName = parentsName.Trim().TrimEnd('&');
+                }
                 if (!string.IsNullOrEmpty(parentsName))
                 {
                     constituentInfo.Parents = parentsName;
@@ -546,6 +566,10 @@ namespace Kallivayalil
 
         private static string GetName(Association association)
         {
+            if (association == null)
+            {
+                return string.Empty;
+            }
             var associatedConstituent = association.AssociatedConstituent;
             if (Entity.IsNull(associatedConstituent))
             {
@@ -562,11 +586,11 @@ namespace Kallivayalil
             data.type = "family";
             if (member1.BornInto)
             {
-                data.familyMemberId = "const_" + member1.Id;
+                data.familyMemberId = member1.Id.ToString();
                 data.familyMemberUrl = "http://localhost/Kallivayalil/Profile/Index/" + member1.Id;
 
                 data.spouse = member2.Name;
-                data.spouseId = "const_" + member2.Id;
+                data.spouseId =  member2.Id.ToString();
                 data.spouseUrl = "http://localhost/Kallivayalil/Profile/Index/" + member2.Id;
                 data.spouseParents = member2.Parents;
                 data.marriageDate = marriageDate;
@@ -587,7 +611,7 @@ namespace Kallivayalil
             var name = familyMember.Name.ToString();
             var data = new TreeData();
             data.type = "person";
-            data.familyMemberId = "const_" + familyMember.Id;
+            data.familyMemberId = familyMember.Id.ToString();
             data.spouse = string.Empty;
             data.spouseId = string.Empty;
             data.familyMemberUrl = "http://localhost/Kallivayalil/Profile/Index" + familyMember.Id;
@@ -731,7 +755,7 @@ namespace Kallivayalil
         {
             var types = referenceDataServiceImpl.GetBranchTypes();
             var branchTypes = new BranchTypesData();
-            mapper.MapList(types, branchTypes, typeof(BranchTypeData));
+            mapper.MapList(types, branchTypes, typeof (BranchTypeData));
             return branchTypes;
         }
 

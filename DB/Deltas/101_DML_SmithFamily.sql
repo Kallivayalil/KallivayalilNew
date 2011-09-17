@@ -1,14 +1,14 @@
 INSERT INTO [Kallivayalil].[dbo].[ConstituentNames]
            ([Id] ,[FirstName],[MiddleName],[LastName],[PreferedName],[Salutation],[CreatedDateTime],[CreatedBy],[UpdatedDateTime],[UpdatedBy]) 
 			VALUES(3,'Joseph','','Smith','Joseph',1,GETDATE(),'MAC',GETDATE(),'MAC');
-INSERT INTO [Kallivayalil].[dbo].[Constituents]           ([Id],[NameId],[BranchName],[HouseName],[BornOn],[DiedOn],[HasExpired],[MaritialStatus],[Gender],[IsRegistered],[CreatedDateTime],[CreatedBy],[UpdatedDateTime],[UpdatedBy])
-			VALUES(3,3,1,'Smith',GETDATE(),NULL,NULL,1 ,'M',1,GETDATE(),'MAC',GETDATE(),'MAC');
+INSERT INTO [Kallivayalil].[dbo].[Constituents]          ([Id],[NameId],[BranchName],[HouseName],[BornOn],[BornInto],[DiedOn],[HasExpired],[MaritialStatus],[Gender],[IsRegistered],[CreatedDateTime],[CreatedBy],[UpdatedDateTime],[UpdatedBy])
+			VALUES(3,3,1,'Smith',GETDATE(),1,NULL,NULL,1 ,'M',1,GETDATE(),'MAC',GETDATE(),'MAC');
 			
 INSERT INTO [Kallivayalil].[dbo].[ConstituentNames]
            ([Id] ,[FirstName],[MiddleName],[LastName],[PreferedName],[Salutation],[CreatedDateTime],[CreatedBy],[UpdatedDateTime],[UpdatedBy]) 
 			VALUES(4,'Sarah','','Jones','Sarah',1,GETDATE(),'MAC',GETDATE(),'MAC');
-INSERT INTO [Kallivayalil].[dbo].[Constituents]           ([Id],[NameId],[BranchName],[HouseName],[BornOn],[DiedOn],[HasExpired],[MaritialStatus],[Gender],[IsRegistered],[CreatedDateTime],[CreatedBy],[UpdatedDateTime],[UpdatedBy])
-			VALUES(4,4,1,'Smith',GETDATE(),NULL,NULL,1 ,'M',1,GETDATE(),'MAC',GETDATE(),'MAC');
+INSERT INTO [Kallivayalil].[dbo].[Constituents]           ([Id],[NameId],[BranchName],[HouseName],[BornOn],[BornInto],[DiedOn],[HasExpired],[MaritialStatus],[Gender],[IsRegistered],[CreatedDateTime],[CreatedBy],[UpdatedDateTime],[UpdatedBy])
+			VALUES(4,4,1,'Smith',GETDATE(),0,NULL,NULL,1 ,'M',1,GETDATE(),'MAC',GETDATE(),'MAC');
 			
 INSERT INTO [Kallivayalil].[dbo].[ConstituentNames]
            ([Id] ,[FirstName],[MiddleName],[LastName],[PreferedName],[Salutation],[CreatedDateTime],[CreatedBy],[UpdatedDateTime],[UpdatedBy]) 
