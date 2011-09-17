@@ -35,5 +35,5 @@ INSERT INTO [NextIds]
            ([Type]
            ,[Description]
            ,[NextId])
-     VALUES  ('LGN','Logins',1)
+     VALUES  ('LGN','Logins',10)
 GO

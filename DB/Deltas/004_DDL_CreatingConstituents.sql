@@ -16,6 +16,7 @@ CREATE TABLE [dbo].[Constituents](
 	[NameId] [int] NOT NULL,
 	[BranchName] [int] NOT NULL,
 	[HouseName] [nvarchar](50) NULL,
+	[BornInto] [bit]  default 1,
 	[BornOn] [datetime] NULL,
 	[DiedOn] [datetime] NULL,
 	[HasExpired] [bit] NULL,
