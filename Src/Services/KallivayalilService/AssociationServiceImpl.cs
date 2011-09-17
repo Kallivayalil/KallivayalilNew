@@ -51,6 +51,11 @@ namespace Kallivayalil
         public IList<Association> FindAssociations(string constituentId)
         {
             return repository.LoadAll(Convert.ToInt32(constituentId));
+        } 
+        
+        public IList<Association> FindAssociationsForFamilyTree(string associatedConstituentId)
+        {
+            return repository.LoadAllForFamilyTree(Convert.ToInt32(associatedConstituentId));
         }
     }
 }

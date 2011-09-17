@@ -50,14 +50,14 @@ namespace Kallivayalil.DataAccess.Repositories
             return session.Get<Association>(id);
         }
 
-//        public IList<Association> LoadAll(int constituentId)
-//        {
-//            var criteria = session.CreateCriteria<Association>();
-//            criteria.Add(Restrictions.Eq("Constituent.Id", constituentId));
-//            return criteria.List<Association>();
-//        } 
-        
         public IList<Association> LoadAll(int constituentId)
+        {
+            var criteria = session.CreateCriteria<Association>();
+            criteria.Add(Restrictions.Eq("Constituent.Id", constituentId));
+            return criteria.List<Association>();
+        } 
+        
+        public IList<Association> LoadAllForFamilyTree(int constituentId)
         {
             var criteria = session.CreateCriteria<Association>();
             criteria.Add(Restrictions.Eq("AssociatedConstituent.Id", constituentId));
