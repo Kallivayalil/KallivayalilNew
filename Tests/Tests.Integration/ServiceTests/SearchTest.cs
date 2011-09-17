@@ -49,8 +49,9 @@ namespace Tests.Integration.ServiceTests
             var uriString = string.Format(@"{0}?firstName={1}&lastName={2}&email={3}&phone={4}
                 &occupationName={4}&occupationDescription={4}
                 &instituteName={4}&instituteLocation={4}&qualification={4}&yearOfGradutation={4}
-                &address={4}&state={4}&city={4}&country={4}&postcode={4}"
-                , baseUri, "Agnes", "alba", string.Empty, null);
+                &address={4}&state={4}&city={4}&country={4}&postcode={4}
+                &preferedName={5}"
+                , baseUri, "Agnes", "alba", string.Empty, null,"agnes");
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
             Assert.IsNotNull(searchDatas);
@@ -64,7 +65,8 @@ namespace Tests.Integration.ServiceTests
             var uriString = string.Format(@"{0}?firstName={1}&lastName={2}&email={3}&phone={4}
                 &occupationName={4}&occupationDescription={4}
                 &instituteName={4}&instituteLocation={4}&qualification={4}&yearOfGradutation={4}
-                &address={4}&state={4}&city={4}&country={4}&postcode={4}"
+                &address={4}&state={4}&city={4}&country={4}&postcode={4}
+                &preferedName={4}"
                 , baseUri, "Agnes", "alba", "mary@franklin.com", null);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -80,7 +82,8 @@ namespace Tests.Integration.ServiceTests
             var uriString = string.Format(@"{0}?firstName={1}&lastName={2}&email={3}&phone={4}
                 &occupationName={4}&occupationDescription={4}
                 &instituteName={4}&instituteLocation={4}&qualification={4}&yearOfGradutation={4}
-                &address={4}&state={4}&city={4}&country={4}&postcode={4}"
+                &address={4}&state={4}&city={4}&country={4}&postcode={4}
+                &preferedName={4}"
                 , baseUri, "Agnes", "alba", email.Address, null);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -94,7 +97,8 @@ namespace Tests.Integration.ServiceTests
             var uriString = string.Format(@"{0}?firstName={1}&lastName={2}&email={3}&phone={4}
                     &occupationName={3}&occupationDescription={3}&instituteName={3}
                     &instituteLocation={3}&qualification={3}&yearOfGradutation={3}
-                    &address={3}&state={3}&city={3}&country={3}&postcode={3}"
+                    &address={3}&state={3}&city={3}&country={3}&postcode={3}
+                    &preferedName={3}"
                 , baseUri, "Agnes", "alba", null, phone.Number);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -109,7 +113,8 @@ namespace Tests.Integration.ServiceTests
             var uriString = string.Format(@"{0}?firstName={1}&lastName={2}&email={3}&phone={3}
                 &occupationName={4}&occupationDescription={5}
                 &instituteName={3}&instituteLocation={3}&qualification={3}&yearOfGradutation={3}
-                &address={3}&state={3}&city={3}&country={3}&postcode={3}"
+                &address={3}&state={3}&city={3}&country={3}&postcode={3}
+                &preferedName={3}"
                 , baseUri, "Agnes", "alba", null, occupation.OccupationName, occupation.Description);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -125,7 +130,8 @@ namespace Tests.Integration.ServiceTests
             var uriString = string.Format(@"{0}?firstName={1}&lastName={2}&email={3}&phone={3}
                 &occupationName={3}&occupationDescription={3}
                 &instituteName={3}&instituteLocation={3}&qualification={3}&yearOfGradutation={3}
-                &address={4}&state={5}&city={6}&country={7}&postcode={8}"
+                &address={4}&state={5}&city={6}&country={7}&postcode={8}
+                &preferedName={3}"
                 , baseUri, "Agnes", "alba", null, address.Line1, address.State,address.City,address.Country,address.PostCode);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -141,7 +147,8 @@ namespace Tests.Integration.ServiceTests
             var uriString = string.Format(@"{0}?firstName={1}&lastName={2}&email={3}&phone={3}
                    &occupationName={3}&occupationDescription={3}
                    &instituteName={4}&instituteLocation={5}&qualification={6}&yearOfGradutation={7}
-                   &address={3}&state={3}&city={3}&country={3}&postcode={3}"
+                   &address={3}&state={3}&city={3}&country={3}&postcode={3}
+                   &preferedName={3}"
                 , baseUri, "Agnes", "alba", null, educationDetail.InstituteName, educationDetail.InstituteLocation,educationDetail.Qualification,educationDetail.YearOfGraduation);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -156,7 +163,8 @@ namespace Tests.Integration.ServiceTests
             var uriString = string.Format(@"{0}?firstName={1}&lastName={2}&email={1}&phone={1}
                 &occupationName={1}&occupationDescription={1}
                 &instituteName={1}&instituteLocation={1}&qualification={1}&yearOfGradutation={1}
-                &address={1}&state={1}&city={1}&country={1}&postcode={1}"
+                &address={1}&state={1}&city={1}&country={1}&postcode={1}
+                &preferedName={1}"
                 , baseUri, null, "frank");
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -171,7 +179,8 @@ namespace Tests.Integration.ServiceTests
             var uriString = string.Format(@"{0}?firstName={1}&lastName={1}&email={1}&phone={1}&occupationName={1}
                 &occupationDescription={1}
                 &instituteName={1}&instituteLocation={1}&qualification={1}&yearOfGradutation={1}
-                &address={1}&state={1}&city={1}&country={1}&postcode={1}", baseUri, null);
+                &address={1}&state={1}&city={1}&country={1}&postcode={1}
+                &preferedName={1}", baseUri, null);
             var constituentsData = HttpHelper.Get<ConstituentsData>(uriString);
 
             Assert.IsNotNull(constituentsData);

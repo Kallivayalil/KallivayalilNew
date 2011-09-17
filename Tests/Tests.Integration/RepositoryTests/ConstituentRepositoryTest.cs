@@ -109,11 +109,25 @@ namespace Tests.Integration.RepositoryTests
         }
 
         [Test]
-        public void ShouldSearchConstituentByFirstAndLastName()
+        public void ShouldSearchConstituentByNameAndBranch()
         {
-            var savedConst = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.AgnesAlba()));
+            var constituentName = ConstituentNameMother.AgnesAlba();
+            var savedConst = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(constituentName));
 
-            IList<Constituent> result = constituentRepository.SearchByConstituentName("Agnes", "alba");
+            IList<Constituent> result = constituentRepository.SearchByConstituentName(constituentName.FirstName, constituentName.LastName,constituentName.PreferedName);
+
+            Assert.That(result.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ShouldSearchConstituentByBranch()
+        {
+            var constituentName = ConstituentNameMother.AgnesAlba();
+            var constituentWithName = ConstituentMother.ConstituentWithName(constituentName);
+            constituentWithName.BranchName = BranchTypeMother.Anavalaril();
+            var savedConst = testDataHelper.CreateConstituent(constituentWithName);
+
+            IList<Constituent> result = constituentRepository.SearchByConstituentBranch(savedConst.BranchName.Description);
 
             Assert.That(result.Count(), Is.EqualTo(1));
         }

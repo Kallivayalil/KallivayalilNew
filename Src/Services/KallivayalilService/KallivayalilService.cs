@@ -133,9 +133,9 @@ namespace Kallivayalil
             return updatedNameData;
         }
 
-        public virtual ConstituentsData Search(string firstName, string lastName, string email, string phone, string occupationName, string occupationDescription, string instituteName, string instituteLocation, string qualification, string yearOfGradutation, string address, string state, string city, string country, string postcode)
+        public virtual ConstituentsData Search(string firstName, string lastName, string email, string phone, string occupationName, string occupationDescription, string instituteName, string instituteLocation, string qualification, string yearOfGradutation, string address, string state, string city, string country, string postcode, string preferedName)
         {
-            var allConstituents = searchServiceImpl.Search(firstName, lastName,email,phone,occupationName,occupationDescription,instituteName,instituteLocation,qualification,yearOfGradutation,address,state,city,country,postcode);
+            var allConstituents = searchServiceImpl.Search(firstName, lastName, email, phone, occupationName, occupationDescription, instituteName, instituteLocation, qualification, yearOfGradutation, address, state, city, country, postcode, preferedName);
 
             var constituentsData = new ConstituentsData();
             mapper.MapList(allConstituents, constituentsData, typeof(ConstituentData));
