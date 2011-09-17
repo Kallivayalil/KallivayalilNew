@@ -10,7 +10,6 @@ namespace Kallivayalil.DataAccess.Mappings
             LazyLoad();
             Id(x => x.Id).GeneratedBy.HiLo("NextIds", "NextId", "0", "type='CON'");
             Map(x => x.Gender).Not.Nullable().Column("Gender");
-            Map(x => x.BranchName).Not.Nullable().Column("BranchName");
             Map(x => x.HouseName).Column("HouseName");
             Map(x => x.BornOn).Column("BornOn");
             Map(x => x.BornInto).Column("BornInto");
@@ -19,6 +18,7 @@ namespace Kallivayalil.DataAccess.Mappings
             Map(x => x.MaritialStatus).Not.Nullable().Column("MaritialStatus");
             Map(x => x.IsRegistered).Not.Nullable().Column("IsRegistered");
             References(x => x.Name).Column("NameId").Cascade.All();
+            References(x => x.BranchName).Column("BranchName");
             MapTimeStampColumns();
         }
     }

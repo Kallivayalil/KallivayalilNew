@@ -21,10 +21,9 @@ namespace Tests.Integration.RepositoryTests
         [SetUp]
         public void SetUp()
         {
-//            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
             testDataHelper = new TestDataHelper();
 
-            constituent = new Constituent {Gender = "M", BornOn = DateTime.Today, BranchName = 1, MaritialStatus = 1, IsRegistered = false};
+            constituent = new Constituent {Gender = "M", BornOn = DateTime.Today, BranchName = BranchTypeMother.Kallivayalil(), MaritialStatus = 1, IsRegistered = false};
             constituent.Name = ConstituentNameMother.JamesFranklin();
             savedConstituent = testDataHelper.CreateConstituent(constituent);
 
@@ -110,11 +109,40 @@ namespace Tests.Integration.RepositoryTests
         }
 
         [Test]
-        public void ShouldSearchConstituentByFirstAndLastName()
+        public void ShouldSearchConstituentByName()
         {
-            var savedConst = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.AgnesAlba()));
+            var constituentName = ConstituentNameMother.AgnesAlba();
+            var savedConst = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(constituentName));
 
-            IList<Constituent> result = constituentRepository.SearchByConstituentName("Agnes", "alba");
+            IList<Constituent> result = constituentRepository.SearchByConstituentName(constituentName.FirstName, constituentName.LastName,constituentName.PreferedName);
+
+            Assert.That(result.Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ShouldSearchConstituentByBranch()
+        {
+            var constituentName = ConstituentNameMother.AgnesAlba();
+            var constituentWithName = ConstituentMother.ConstituentWithName(constituentName);
+            constituentWithName.BranchName = BranchTypeMother.Anavalaril();
+            constituentWithName.HouseName = "xyz";
+            var savedConst = testDataHelper.CreateConstituent(constituentWithName);
+
+            IList<Constituent> result = constituentRepository.SearchByConstituentBranch(savedConst.BranchName.Description);
+
+            Assert.That(result.Count(), Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void ShouldSearchConstituentByHouseName()
+        {
+            var constituentName = ConstituentNameMother.AgnesAlba();
+            var constituentWithName = ConstituentMother.ConstituentWithName(constituentName);
+            constituentWithName.BranchName = BranchTypeMother.Anavalaril();
+            constituentWithName.HouseName = "xyz";
+            var savedConst = testDataHelper.CreateConstituent(constituentWithName);
+
+            IList<Constituent> result = constituentRepository.SearchByConstituentHouseName("xyz");
 
             Assert.That(result.Count(), Is.EqualTo(1));
         }

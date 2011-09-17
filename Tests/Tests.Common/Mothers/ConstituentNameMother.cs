@@ -36,7 +36,7 @@ namespace Tests.Common.Mothers
                            LastName = "Alba",
                            MiddleName = "H",
                            Salutation = SalutationTypeMother.Ms(),
-                           PreferedName = "Jess",
+                           PreferedName = "Agnes",
                        };
         }
     }

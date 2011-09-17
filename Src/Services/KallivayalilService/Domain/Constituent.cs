@@ -1,6 +1,7 @@
 using System;
 using Kallivayalil.Common;
 using Kallivayalil.Domain.Attributes;
+using Kallivayalil.Domain.ReferenceData;
 
 namespace Kallivayalil.Domain
 {
@@ -8,7 +9,7 @@ namespace Kallivayalil.Domain
     public class Constituent : Entity
     {
         public virtual string Gender { get; set; }
-        public virtual int BranchName { get; set; }
+        public virtual BranchType BranchName { get; set; }
         public virtual string HouseName { get; set; }
         public virtual bool BornInto { get; set; }
         public virtual DateTime BornOn { get; set; }

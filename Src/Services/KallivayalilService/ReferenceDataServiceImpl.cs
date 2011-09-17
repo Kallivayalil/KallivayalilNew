@@ -48,6 +48,11 @@ namespace Kallivayalil
         public IList<AssociationType> GetAssociationTypes()
         {
             return repository.LoadAll<AssociationType>();
+        } 
+        
+        public IList<BranchType> GetBranchTypes()
+        {
+            return repository.LoadAll<BranchType>();
         }
 
         public IList<EventType> EventTypes()

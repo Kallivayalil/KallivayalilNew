@@ -68,6 +68,7 @@
     <Compile Include="Mappings\PhoneMap.cs" />
     <Compile Include="Mappings\ReferenceData\AddressTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\AssociationTypeMap.cs" />
+    <Compile Include="Mappings\ReferenceData\BranchTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\EducationTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\EmailTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\EventTypeMap.cs" />
