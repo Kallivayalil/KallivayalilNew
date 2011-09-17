@@ -4,15 +4,10 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Mappings;
-using Lucene.Net.Analysis;
-using Lucene.Net.Analysis.Standard;
 using NHibernate;
 using NHibernate.ByteCode.Spring;
 using NHibernate.Event;
-using NHibernate.Search.Event;
-using NHibernate.Search.Store;
 using Configuration = NHibernate.Cfg.Configuration;
-using Environment = NHibernate.Search.Environment;
 
 namespace Kallivayalil.DataAccess
 {
@@ -68,22 +63,7 @@ namespace Kallivayalil.DataAccess
             var timeStampListener = new TimeStampListener();
             configuration.EventListeners.PreInsertEventListeners = new IPreInsertEventListener[] {timeStampListener};
             configuration.EventListeners.PreUpdateEventListeners = new IPreUpdateEventListener[] {timeStampListener};
-            Configuration.SetListeners(ListenerType.PostInsert, new[] {new FullTextIndexEventListener()});
-            Configuration.SetListeners(ListenerType.PostUpdate, new[] {new FullTextIndexEventListener()});
-            Configuration.SetListeners(ListenerType.PostDelete, new[] {new FullTextIndexEventListener()});
-
-            Configuration.SetListener(ListenerType.PostCollectionRecreate, new FullTextIndexCollectionEventListener());
-            Configuration.SetListener(ListenerType.PostCollectionRemove, new FullTextIndexCollectionEventListener());
-            Configuration.SetListener(ListenerType.PostCollectionUpdate, new FullTextIndexCollectionEventListener());
-
-//            Configuration.SetProperty("hibernate.search.default.directory_provider", typeof(FSDirectoryProvider).AssemblyQualifiedName);
-//            Configuration.SetProperty("hibernate.search.default.indexBase", "~/Index");
-//            Configuration.SetProperty("hibernate.search.default.indexBase.create", "true");
-
-//            Configuration.SetProperty("hibernate.search.default.directory_provider",
-//                                      typeof (RAMDirectoryProvider).AssemblyQualifiedName);
-//            Configuration.SetProperty(Environment.AnalyzerClass,
-//                                      typeof (StandardAnalyzer).AssemblyQualifiedName);
+       
         }
     }
 }

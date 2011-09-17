@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Kallivayalil.Domain;
 using NHibernate;
 using NHibernate.Criterion;
-using NHibernate.SqlCommand;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
@@ -53,16 +52,6 @@ namespace Kallivayalil.DataAccess.Repositories
             return session.Get<Constituent>(constituentId);
         }
 
-//        public IEnumerable<Constituent> SearchByName(string firstName, string lastName)
-//        {
-//            var textSession = Search.CreateFullTextSession(session);
-//
-//            var qp = new QueryParser(Version.LUCENE_CURRENT,"", new StandardAnalyzer(Version.LUCENE_CURRENT));
-//
-//            var query = string.Format("Name.FirstName:{0} or Name.LastName:{1}", firstName, lastName);
-//
-//             return textSession.CreateFullTextQuery(qp.Parse(query), typeof(Constituent)).List().Cast<Constituent>();
-//        }
 
         public IList<Constituent> LoadAllConstituentsWithBirthdayToday()
         {
