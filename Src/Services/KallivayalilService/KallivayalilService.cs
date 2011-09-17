@@ -8,6 +8,7 @@ using Kallivayalil.Client;
 using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
+using Kallivayalil.Domain.inteernal;
 using Kallivayalil.Utility;
 
 namespace Kallivayalil
@@ -58,7 +59,7 @@ namespace Kallivayalil
             occupationServiceImpl = new OccupationServiceImpl(occupationRepository, constituentRepository);
             educationalDetailServiceImpl = new EducationDetailServiceImpl(educationDetailRepository, constituentRepository);
             associationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
-            searchServiceImpl = new SearchServiceImpl(constituentRepository, emailRepository,phoneRepository,occupationRepository,educationDetailRepository,addressRepository);
+            searchServiceImpl = new SearchServiceImpl(constituentRepository, emailRepository, phoneRepository, occupationRepository, educationDetailRepository, addressRepository);
             eventServiceImpl = new EventServiceImpl(eventRepository, constituentRepository, referenceDataRepository);
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl(referenceDataRepository);
@@ -133,12 +134,15 @@ namespace Kallivayalil
             return updatedNameData;
         }
 
-        public virtual ConstituentsData Search(string firstName, string lastName, string email, string phone, string occupationName, string occupationDescription, string instituteName, string instituteLocation, string qualification, string yearOfGradutation, string address, string state, string city, string country, string postcode)
+        public virtual ConstituentsData Search(string firstName, string lastName, string email, string phone, string occupationName, string occupationDescription, string instituteName,
+                                               string instituteLocation, string qualification, string yearOfGradutation, string address, string state, string city, string country,
+                                               string postcode)
         {
-            var allConstituents = searchServiceImpl.Search(firstName, lastName,email,phone,occupationName,occupationDescription,instituteName,instituteLocation,qualification,yearOfGradutation,address,state,city,country,postcode);
+            var allConstituents = searchServiceImpl.Search(firstName, lastName, email, phone, occupationName, occupationDescription, instituteName, instituteLocation, qualification,
+                                                           yearOfGradutation, address, state, city, country, postcode);
 
             var constituentsData = new ConstituentsData();
-            mapper.MapList(allConstituents, constituentsData, typeof(ConstituentData));
+            mapper.MapList(allConstituents, constituentsData, typeof (ConstituentData));
 
             return constituentsData;
         }
@@ -471,6 +475,7 @@ namespace Kallivayalil
             return associationsData;
         }
 
+        //TODO: Clean up this methods and move to the RelationshipsService Impl
         public virtual RelationshipData GetRelationships(string constituentId)
         {
             var associations = associationServiceImpl.FindAssociations(constituentId);
@@ -480,8 +485,7 @@ namespace Kallivayalil
             var childs = associations.ToList().FindAll(assn => assn.Type.Id.Equals(2));
             var sibilings = associations.ToList().FindAll(assn => assn.Type.Id.Equals(4));
 
-
-            var parentFamily = GetFamilyNode(parents[0].AssociatedConstituent, parents[1].AssociatedConstituent,"top");
+            var parentFamily = GetFamilyNode(GetConstituentInfo(parents[0]), GetConstituentInfo(parents[1]), parents[0].StartDate, "top");
             RelationshipData myFamily = null;
             parentFamily.children = new List<RelationshipData>();
 
@@ -489,15 +493,14 @@ namespace Kallivayalil
             {
                 var dat = new TreeData();
                 dat.orientation = "top";
-                parentFamily.children.Add(new RelationshipData {id = sibiling.AssociatedConstituent.Name.ToString(), name = sibiling.AssociatedConstituent.Name.ToString(),data = dat});
+                parentFamily.children.Add(new RelationshipData {id = sibiling.AssociatedConstituent.Name.ToString(), name = sibiling.AssociatedConstituent.Name.ToString(), data = dat});
             }
 
             if (spouse != null)
             {
                 var dat = new TreeData();
                 dat.orientation = "top";
-                myFamily = GetFamilyNode(spouse.Constituent, spouse.AssociatedConstituent,"center");
-                myFamily.data = dat;
+                myFamily = GetFamilyNode(GetConstituentInfo(spouse.Constituent), GetConstituentInfo(spouse), spouse.StartDate, "center");
             }
 
             if (myFamily != null)
@@ -505,7 +508,7 @@ namespace Kallivayalil
                 myFamily.children = new List<RelationshipData>();
                 foreach (var child in childs)
                 {
-                    myFamily.children.Add(GetPersonNode(child.AssociatedConstituent,"top"));
+                    myFamily.children.Add(GetPersonNode(child.AssociatedConstituent, "top"));
                 }
             }
 
@@ -513,32 +516,84 @@ namespace Kallivayalil
             return parentFamily;
         }
 
-        private RelationshipData GetFamilyNode(Constituent familyMember, Constituent spouse, string orientation = null)
+        private ConstituentInfo GetConstituentInfo(Association association)
         {
-            var name = familyMember.Name.ToString();
-            var data =new TreeData();
-            data.type = "family";
-            data.spouse= spouse.Name.ToString();
-            data.familyMemberId= "const_"+ familyMember.Id;
-            data.spouseId = "const_"+ spouse.Id;
-            data.familyMemberUrl= "http://localhost/Kallivayalil/Profile/Index/"+familyMember.Id;
-            data.spouseUrl = "http://localhost/Kallivayalil/Profile/Index/"+ spouse.Id;
-            if (orientation != null)
+            var associatedConstituent = association.AssociatedConstituent;
+            if (Entity.IsNull(associatedConstituent))
             {
-                data.orientation = orientation;
+                return new ConstituentInfo {Name = GetName(association), Id = -1};
             }
-            return new RelationshipData {id = name, name = name, children = new List<RelationshipData>(), data = data};
+
+            var constituentInfo = new ConstituentInfo();
+            constituentInfo.Name = GetName(association);
+            constituentInfo.Id = associatedConstituent.Id;
+            constituentInfo.BornInto = associatedConstituent.BornInto;
+
+            if (association.Type.Equals(3) || association.Type.Equals(1))
+            {
+                var parents = associationServiceImpl.FindAssociations(associatedConstituent.Id.ToString()).ToList().FindAll(ass => ass.Type.Equals(3));
+                var parentsName = parents.Aggregate(string.Empty, (current, parent) => current + GetName(parent));
+                if (!string.IsNullOrEmpty(parentsName))
+                {
+                    constituentInfo.Parents = parentsName;
+                }
+            }
+
+            return constituentInfo;
         }
-        
-        private RelationshipData GetPersonNode(Constituent familyMember, string orientation = null)
+
+        private static ConstituentInfo GetConstituentInfo(Constituent constituent)
+        {
+            return new ConstituentInfo {Id = constituent.Id, Name = constituent.Name.ToString(), BornInto = constituent.BornInto};
+        }
+
+        private static string GetName(Association association)
+        {
+            var associatedConstituent = association.AssociatedConstituent;
+            if (Entity.IsNull(associatedConstituent))
+            {
+                return association.AssociatedConstituentName;
+            }
+
+            return associatedConstituent.Name.ToString();
+        }
+
+
+        private static RelationshipData GetFamilyNode(ConstituentInfo member1, ConstituentInfo member2, DateTime? marriageDate, string orientation = null)
+        {
+            var data = new TreeData();
+            data.type = "family";
+            if (member1.BornInto)
+            {
+                data.familyMemberId = "const_" + member1.Id;
+                data.familyMemberUrl = "http://localhost/Kallivayalil/Profile/Index/" + member1.Id;
+
+                data.spouse = member2.Name;
+                data.spouseId = "const_" + member2.Id;
+                data.spouseUrl = "http://localhost/Kallivayalil/Profile/Index/" + member2.Id;
+                data.spouseParents = member2.Parents;
+                data.marriageDate = marriageDate;
+
+                if (orientation != null)
+                {
+                    data.orientation = orientation;
+                }
+
+                return new RelationshipData {id = member1.Name, name = member1.Name, children = new List<RelationshipData>(), data = data};
+            }
+
+            return GetFamilyNode(member2, member1, marriageDate, orientation);
+        }
+
+        private static RelationshipData GetPersonNode(Constituent familyMember, string orientation = null)
         {
             var name = familyMember.Name.ToString();
-            var data =new TreeData();
+            var data = new TreeData();
             data.type = "person";
             data.familyMemberId = "const_" + familyMember.Id;
             data.spouse = string.Empty;
             data.spouseId = string.Empty;
-            data.familyMemberUrl= "http://localhost/Kallivayalil/Profile/Index";
+            data.familyMemberUrl = "http://localhost/Kallivayalil/Profile/Index" + familyMember.Id;
             data.spouseUrl = string.Empty;
             if (orientation != null)
             {

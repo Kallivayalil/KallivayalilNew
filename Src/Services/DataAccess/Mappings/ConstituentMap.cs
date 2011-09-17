@@ -13,6 +13,7 @@ namespace Kallivayalil.DataAccess.Mappings
             Map(x => x.BranchName).Not.Nullable().Column("BranchName");
             Map(x => x.HouseName).Column("HouseName");
             Map(x => x.BornOn).Column("BornOn");
+            Map(x => x.BornInto).Column("BornInto");
             Map(x => x.DiedOn).Column("DiedOn");
             Map(x => x.HasExpired).Column("HasExpired");
             Map(x => x.MaritialStatus).Not.Nullable().Column("MaritialStatus");

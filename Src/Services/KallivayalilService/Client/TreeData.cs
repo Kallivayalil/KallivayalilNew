@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.Serialization;
 
 namespace Kallivayalil.Client
@@ -25,5 +26,11 @@ namespace Kallivayalil.Client
         
         [DataMember]
         public string spouseUrl { get; set; }
+
+        [DataMember]
+        public string spouseParents { get; set; }
+
+        [DataMember]
+        public DateTime? marriageDate { get; set; }
     }
 }

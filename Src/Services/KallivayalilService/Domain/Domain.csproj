@@ -54,6 +54,7 @@
     <Compile Include="ErrorMessagesEntity.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="Exception\ValidationException.cs" />
+    <Compile Include="inteernal\ConstituentInfo.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="Occupation.cs" />
     <Compile Include="Phone.cs" />
