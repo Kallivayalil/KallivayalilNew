@@ -138,6 +138,20 @@ GO
 UPDATE [Kallivayalil].[dbo].[Associations] set ReciprocalId = 15 where Id = 16;
 GO
 
+INSERT INTO [Kallivayalil].[dbo].[Associations]
+           ([Id],[Type],[ConstituentId],[AssociatedConstituentName],[ReciprocalId]
+           ,[CreatedDateTime],[CreatedBy],[UpdatedDateTime],[UpdatedBy])
+     VALUES
+           (17,3,4,'Paul Jones',null,GETDATE(),'MAC',GETDATE(),'MAC')
+GO
+
+INSERT INTO [Kallivayalil].[dbo].[Associations]
+           ([Id],[Type],[ConstituentId],[AssociatedConstituentName],[ReciprocalId]
+           ,[CreatedDateTime],[CreatedBy],[UpdatedDateTime],[UpdatedBy])
+     VALUES
+           (18,3,4,'Linda Lincon',null,GETDATE(),'MAC',GETDATE(),'MAC')
+GO
+
 
 Update NextIds set NextId = 20 where Type ='ASN';
 

@@ -11,6 +11,7 @@ namespace Kallivayalil.Domain
         public virtual string Gender { get; set; }
         public virtual BranchType BranchName { get; set; }
         public virtual string HouseName { get; set; }
+        public virtual bool BornInto { get; set; }
         public virtual DateTime BornOn { get; set; }
         public virtual DateTime? DiedOn { get; set; }
         public virtual bool HasExpired { get; set; }
