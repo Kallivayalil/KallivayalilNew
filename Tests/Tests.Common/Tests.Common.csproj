@@ -49,6 +49,7 @@
     <Compile Include="Mothers\AsociationMother.cs" />
     <Compile Include="Mothers\AssociationTypeMother.cs" />
     <Compile Include="Mothers\BranchTypeMother.cs" />
+    <Compile Include="Mothers\CommitteeMother.cs" />
     <Compile Include="Mothers\ConstituentMother.cs" />
     <Compile Include="Mothers\ConstituentNameMother.cs" />
     <Compile Include="Mothers\ContactUsMother.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Mothers\OccupationTypeMother.cs" />
     <Compile Include="Mothers\PhoneMother.cs" />
     <Compile Include="Mothers\PhoneTypeMother.cs" />
+    <Compile Include="Mothers\PositionTypeMother.cs" />
     <Compile Include="Mothers\SalutationTypeMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -58,6 +58,7 @@
     <Compile Include="Mothers\PhoneDataMother.cs" />
     <Compile Include="RepositoryTests\AddressRepositoryTest.cs" />
     <Compile Include="RepositoryTests\AssociationRepositoryTest.cs" />
+    <Compile Include="RepositoryTests\CommitteeRepositoryTest.cs" />
     <Compile Include="RepositoryTests\ConstituentNameRepositoryTest.cs" />
     <Compile Include="RepositoryTests\ConstituentRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

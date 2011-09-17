@@ -129,6 +129,14 @@ namespace Tests.Common.Helpers
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
+
+        public void HardDeleteCommittees()
+        {
+            var sqlCommand = session.Connection.CreateCommand();
+            sqlCommand.CommandText = "delete from Committees where id >=10";
+            sqlCommand.ExecuteNonQuery();
+            session.Flush();
+        }
        
         
         public void HardDeleteLogins()
@@ -144,6 +152,13 @@ namespace Tests.Common.Helpers
             var savedEmail = session.SaveOrUpdateCopy(email);
             session.Flush();
             return (Email) savedEmail;
+        }
+       
+        public Committee CreateCommittee(Committee committee)
+        {
+            var savedCommittee = session.SaveOrUpdateCopy(committee);
+            session.Flush();
+            return (Committee)savedCommittee;
         }
 
         public void HardDeleteAssociations()

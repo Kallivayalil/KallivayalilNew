@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Address.cs" />
     <Compile Include="Association.cs" />
+    <Compile Include="Committee.cs" />
     <Compile Include="Constituent.cs" />
     <Compile Include="ConstituentName.cs" />
     <Compile Include="ContactUs.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="ReferenceData\EventType.cs" />
     <Compile Include="ReferenceData\OccupationType.cs" />
     <Compile Include="ReferenceData\PhoneType.cs" />
+    <Compile Include="ReferenceData\PositionType.cs" />
     <Compile Include="ReferenceData\SalutationType.cs" />
     <Compile Include="RegisterationConstituent.cs" />
     <Compile Include="Validators\AddressValidator.cs" />
