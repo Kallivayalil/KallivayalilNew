@@ -17,7 +17,10 @@ namespace Tests.Integration.ServiceTests
         public void Setup()
         {
             testDataHelper = new TestDataHelper();
-            savedConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.AgnesAlba()));
+            var constituentWithName = ConstituentMother.ConstituentWithName(ConstituentNameMother.AgnesAlba());
+            constituentWithName.BranchName = BranchTypeMother.Anavalaril();
+            constituentWithName.HouseName = "xyz";
+            savedConstituent = testDataHelper.CreateConstituent(constituentWithName);
         }
 
         [TearDown]
@@ -50,14 +53,29 @@ namespace Tests.Integration.ServiceTests
                 &occupationName={4}&occupationDescription={4}
                 &instituteName={4}&instituteLocation={4}&qualification={4}&yearOfGradutation={4}
                 &address={4}&state={4}&city={4}&country={4}&postcode={4}
-                &preferedName={5}"
+                &preferedName={5}&houseName={4}&branch={4}"
                 , baseUri, "Agnes", "alba", string.Empty, null,"agnes");
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
             Assert.IsNotNull(searchDatas);
             Assert.That(searchDatas.Count, Is.EqualTo(1));
         }
-        
+
+        [Test]
+        public void ShouldGetConstituentWhenSearchingByBranchAndHouseName()
+        {
+            var uriString = string.Format(@"{0}?firstName={4}&lastName={3}&email={4}&phone={4}
+                &occupationName={4}&occupationDescription={4}
+                &instituteName={4}&instituteLocation={4}&qualification={4}&yearOfGradutation={4}
+                &address={4}&state={4}&city={4}&country={4}&postcode={4}
+                &preferedName={4}&houseName={1}&branch={2}"
+                , baseUri, "xyz", "Anavalaril", null,null);
+            var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
+
+            Assert.IsNotNull(searchDatas);
+            Assert.That(searchDatas.Count, Is.EqualTo(1));
+        }
+
         [Test]
         public void ShouldGetConstituentWhenSearchingByEmail()
         {
@@ -66,7 +84,7 @@ namespace Tests.Integration.ServiceTests
                 &occupationName={4}&occupationDescription={4}
                 &instituteName={4}&instituteLocation={4}&qualification={4}&yearOfGradutation={4}
                 &address={4}&state={4}&city={4}&country={4}&postcode={4}
-                &preferedName={4}"
+                &preferedName={4}&houseName={4}&branch={4}"
                 , baseUri, "Agnes", "alba", "mary@franklin.com", null);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -83,7 +101,7 @@ namespace Tests.Integration.ServiceTests
                 &occupationName={4}&occupationDescription={4}
                 &instituteName={4}&instituteLocation={4}&qualification={4}&yearOfGradutation={4}
                 &address={4}&state={4}&city={4}&country={4}&postcode={4}
-                &preferedName={4}"
+                &preferedName={4}&houseName={4}&branch={4}"
                 , baseUri, "Agnes", "alba", email.Address, null);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -98,7 +116,7 @@ namespace Tests.Integration.ServiceTests
                     &occupationName={3}&occupationDescription={3}&instituteName={3}
                     &instituteLocation={3}&qualification={3}&yearOfGradutation={3}
                     &address={3}&state={3}&city={3}&country={3}&postcode={3}
-                    &preferedName={3}"
+                    &preferedName={3}&houseName={3}&branch={3}"
                 , baseUri, "Agnes", "alba", null, phone.Number);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -114,7 +132,7 @@ namespace Tests.Integration.ServiceTests
                 &occupationName={4}&occupationDescription={5}
                 &instituteName={3}&instituteLocation={3}&qualification={3}&yearOfGradutation={3}
                 &address={3}&state={3}&city={3}&country={3}&postcode={3}
-                &preferedName={3}"
+                &preferedName={3}&houseName={3}&branch={3}"
                 , baseUri, "Agnes", "alba", null, occupation.OccupationName, occupation.Description);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -131,7 +149,7 @@ namespace Tests.Integration.ServiceTests
                 &occupationName={3}&occupationDescription={3}
                 &instituteName={3}&instituteLocation={3}&qualification={3}&yearOfGradutation={3}
                 &address={4}&state={5}&city={6}&country={7}&postcode={8}
-                &preferedName={3}"
+                &preferedName={3}&houseName={3}&branch={3}"
                 , baseUri, "Agnes", "alba", null, address.Line1, address.State,address.City,address.Country,address.PostCode);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -148,7 +166,7 @@ namespace Tests.Integration.ServiceTests
                    &occupationName={3}&occupationDescription={3}
                    &instituteName={4}&instituteLocation={5}&qualification={6}&yearOfGradutation={7}
                    &address={3}&state={3}&city={3}&country={3}&postcode={3}
-                   &preferedName={3}"
+                   &preferedName={3}&houseName={3}&branch={3}"
                 , baseUri, "Agnes", "alba", null, educationDetail.InstituteName, educationDetail.InstituteLocation,educationDetail.Qualification,educationDetail.YearOfGraduation);
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -164,7 +182,7 @@ namespace Tests.Integration.ServiceTests
                 &occupationName={1}&occupationDescription={1}
                 &instituteName={1}&instituteLocation={1}&qualification={1}&yearOfGradutation={1}
                 &address={1}&state={1}&city={1}&country={1}&postcode={1}
-                &preferedName={1}"
+                &preferedName={1}&houseName={1}&branch={1}"
                 , baseUri, null, "frank");
             var searchDatas = HttpHelper.Get<ConstituentsData>(uriString);
 
@@ -180,7 +198,7 @@ namespace Tests.Integration.ServiceTests
                 &occupationDescription={1}
                 &instituteName={1}&instituteLocation={1}&qualification={1}&yearOfGradutation={1}
                 &address={1}&state={1}&city={1}&country={1}&postcode={1}
-                &preferedName={1}", baseUri, null);
+                &preferedName={1}&houseName={1}&branch={1}", baseUri, null);
             var constituentsData = HttpHelper.Get<ConstituentsData>(uriString);
 
             Assert.IsNotNull(constituentsData);

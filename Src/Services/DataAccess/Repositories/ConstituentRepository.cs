@@ -75,9 +75,15 @@ namespace Kallivayalil.DataAccess.Repositories
         public IList<Constituent> SearchByConstituentBranch(string branchName)
         {
             var criteria = session.CreateCriteria<Constituent>();
-            criteria.CreateCriteria("BranchName")
-                .Add(Restrictions.InsensitiveLike("Description", GetPropertyValue(branchName)));
-            return criteria.List<Constituent>();
+            criteria.CreateCriteria("BranchName").Add(Restrictions.InsensitiveLike("Description", GetPropertyValue(branchName)));
+          return criteria.List<Constituent>();
+        }
+        
+        public IList<Constituent> SearchByConstituentHouseName(string houseName)
+        {
+            var criteria = session.CreateCriteria<Constituent>();
+            criteria.Add(Restrictions.InsensitiveLike("HouseName", GetPropertyValue(houseName)));
+          return criteria.List<Constituent>();
         }
 
         private string GetPropertyValue(string propertyValue)

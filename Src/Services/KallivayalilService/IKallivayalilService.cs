@@ -36,8 +36,8 @@ namespace Kallivayalil
         ConstituentNameData UpdateConstituentName(string id, ConstituentNameData nameData); 
         
         [OperationContract]
-        [WebGet(UriTemplate = @"/Search?firstName={firstName}&lastName={lastName}&email={email}&phone={phone}&occupationName={occupationName}&occupationDescription={occupationDescription}&instituteName={instituteName}&instituteLocation={instituteLocation}&qualification={qualification}&yearOfGradutation={yearOfGradutation}&address={address}&state={state}&city={city}&country={country}&postcode={postcode}&preferedName={preferedName}")]
-        ConstituentsData Search(string firstName, string lastName, string email, string phone, string occupationName, string occupationDescription, string instituteName, string instituteLocation, string qualification, string yearOfGradutation, string address, string state, string city, string country, string postcode, string preferedName); 
+        [WebGet(UriTemplate = @"/Search?firstName={firstName}&lastName={lastName}&email={email}&phone={phone}&occupationName={occupationName}&occupationDescription={occupationDescription}&instituteName={instituteName}&instituteLocation={instituteLocation}&qualification={qualification}&yearOfGradutation={yearOfGradutation}&address={address}&state={state}&city={city}&country={country}&postcode={postcode}&preferedName={preferedName}&houseName={houseName}&branch={branch}")]
+        ConstituentsData Search(string firstName, string lastName, string email, string phone, string occupationName, string occupationDescription, string instituteName, string instituteLocation, string qualification, string yearOfGradutation, string address, string state, string city, string country, string postcode, string preferedName, string houseName, string branch); 
         
         [OperationContract]
         [WebGet(UriTemplate = "/Find?emailId={emailId}")]
