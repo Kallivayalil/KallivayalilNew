@@ -674,6 +674,14 @@ namespace Kallivayalil
             return associationTypes;
         }
 
+        public virtual BranchTypesData GetBranchTypes()
+        {
+            var types = referenceDataServiceImpl.GetBranchTypes();
+            var branchTypes = new BranchTypesData();
+            mapper.MapList(types, branchTypes, typeof(BranchTypeData));
+            return branchTypes;
+        }
+
         public virtual EventTypesData GetEventTypes()
         {
             var types = referenceDataServiceImpl.EventTypes();

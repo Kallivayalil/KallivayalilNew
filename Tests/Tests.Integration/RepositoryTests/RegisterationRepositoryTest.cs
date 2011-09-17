@@ -1,6 +1,7 @@
 using System;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
+using Kallivayalil.Domain.ReferenceData;
 using NUnit.Framework;
 using Tests.Common.Helpers;
 using Tests.Common.Mothers;
@@ -20,7 +21,7 @@ namespace Tests.Integration.RepositoryTests
         {
             testDataHelper = new TestDataHelper();
 
-            constituent = new Constituent {Gender = "M", BornOn = DateTime.Today, BranchName = 1, MaritialStatus = 1, IsRegistered = false};
+            constituent = new Constituent {Gender = "M", BornOn = DateTime.Today, BranchName = BranchTypeMother.Kallivayalil(), MaritialStatus = 1, IsRegistered = false};
             constituent.Name = ConstituentNameMother.JamesFranklin();
             
             registerationRepository = new RegisterationRepository();

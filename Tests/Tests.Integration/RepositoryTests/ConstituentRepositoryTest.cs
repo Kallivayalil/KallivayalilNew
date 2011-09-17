@@ -21,10 +21,9 @@ namespace Tests.Integration.RepositoryTests
         [SetUp]
         public void SetUp()
         {
-//            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
             testDataHelper = new TestDataHelper();
 
-            constituent = new Constituent {Gender = "M", BornOn = DateTime.Today, BranchName = 1, MaritialStatus = 1, IsRegistered = false};
+            constituent = new Constituent {Gender = "M", BornOn = DateTime.Today, BranchName = BranchTypeMother.Kallivayalil(), MaritialStatus = 1, IsRegistered = false};
             constituent.Name = ConstituentNameMother.JamesFranklin();
             savedConstituent = testDataHelper.CreateConstituent(constituent);
 

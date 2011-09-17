@@ -48,6 +48,7 @@
     <Compile Include="Mothers\AddressTypeMother.cs" />
     <Compile Include="Mothers\AsociationMother.cs" />
     <Compile Include="Mothers\AssociationTypeMother.cs" />
+    <Compile Include="Mothers\BranchTypeMother.cs" />
     <Compile Include="Mothers\ConstituentMother.cs" />
     <Compile Include="Mothers\ConstituentNameMother.cs" />
     <Compile Include="Mothers\ContactUsMother.cs" />

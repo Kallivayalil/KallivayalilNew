@@ -11,9 +11,9 @@ GO
 SET ANSI_PADDING ON
 GO
 
-ALTER TABLE [dbo].[Constituents]  WITH CHECK ADD  CONSTRAINT [FK_Constituents_BranchType] FOREIGN KEY([Type])
+ALTER TABLE [dbo].[Constituents]  WITH CHECK ADD  CONSTRAINT [FK_Constituents_BranchType] FOREIGN KEY([BranchName])
 REFERENCES [dbo].[BranchType] ([Id])
 GO
 
-ALTER TABLE [dbo].[Constituents] CHECK CONSTRAINT [FK_Constiuents_BranchType]
+ALTER TABLE [dbo].[Constituents] CHECK CONSTRAINT [FK_Constituents_BranchType]
 GO

@@ -14,7 +14,7 @@ namespace Kallivayalil.Client
         public string Gender { get; set; }
 
         [DataMember]
-        public int BranchName { get; set; }
+        public BranchTypeData BranchName { get; set; }
 
         [DataMember]
         public string HouseName { get; set; }

@@ -46,6 +46,14 @@ namespace Tests.Integration.ServiceTests
             var salutationTypes = HttpHelper.Get<EventTypesData>(string.Format("{0}/{1}", BaseUri, "EventTypes"));
 
             Assert.That(salutationTypes.Count, Is.EqualTo(2));
+        } 
+        
+        [Test]
+        public void ShouldLoadAllBranchTypes()
+        {
+            var branchTypesData = HttpHelper.Get<BranchTypesData>(string.Format("{0}/{1}", BaseUri, "BranchTypes"));
+
+            Assert.That(branchTypesData.Count, Is.EqualTo(3));
         }
     }
 }

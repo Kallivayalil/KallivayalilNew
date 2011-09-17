@@ -219,7 +219,11 @@ namespace Kallivayalil
         
         [OperationContract]
         [WebGet(UriTemplate = "/AssociationTypes")]
-        AssociationTypesData GetAssociationTypes(); 
+        AssociationTypesData GetAssociationTypes();
+        
+        [OperationContract]
+        [WebGet(UriTemplate = "/BranchTypes")]
+        BranchTypesData GetBranchTypes(); 
         
         [OperationContract]
         [WebGet(UriTemplate = "/EventTypes")]
