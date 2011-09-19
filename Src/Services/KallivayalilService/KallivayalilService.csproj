@@ -56,6 +56,7 @@
     <Compile Include="AddressServiceImpl.cs" />
     <Compile Include="AssociationServiceImpl.cs" />
     <Compile Include="BaseServiceImpl.cs" />
+    <Compile Include="CommitteeServiceImpl.cs" />
     <Compile Include="ConstituentNameServiceImpl.cs" />
     <Compile Include="ConstituentServiceImpl.cs" />
     <Compile Include="ContactUsServiceImpl.cs" />

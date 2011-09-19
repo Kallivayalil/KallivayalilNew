@@ -46,6 +46,7 @@
     <Compile Include="AssociationData.cs" />
     <Compile Include="AssociationTypeData.cs" />
     <Compile Include="BranchTypeData.cs" />
+    <Compile Include="CommitteeData.cs" />
     <Compile Include="ConstituentData.cs" />
     <Compile Include="ConstituentNameData.cs" />
     <Compile Include="ContactUsData.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="OccupationTypeData.cs" />
     <Compile Include="PhoneData.cs" />
     <Compile Include="PhoneTypeData.cs" />
+    <Compile Include="PositionTypeData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterationData.cs" />
     <Compile Include="RelationshipData.cs" />

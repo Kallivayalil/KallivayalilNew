@@ -22,6 +22,7 @@ namespace Kallivayalil
         private readonly ConstituentNameServiceImpl nameServiceImpl;
         private readonly AutoDataContractMapper mapper;
         private readonly AddressServiceImpl addressServiceImpl;
+        private readonly CommitteeServiceImpl committeeServiceImpl;
         private readonly PhoneServiceImpl phoneServiceImpl;
         private readonly EmailServiceImpl emailServiceImpl;
         private readonly OccupationServiceImpl occupationServiceImpl;
@@ -46,7 +47,9 @@ namespace Kallivayalil
             var phoneRepository = new PhoneRepository();
             var occupationRepository = new OccupationRepository();
             var addressRepository = new AddressRepository();
+            var committeeRepository = new CommitteeRepository();
 
+            committeeServiceImpl = new CommitteeServiceImpl(committeeRepository);
             constituentServiceImpl = new ConstituentServiceImpl(constituentRepository);
             registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, new Mail(new SmtpClient()));
             contactUsServiceImpl = new ContactUsServiceImpl(contactUsRepository);
@@ -166,6 +169,55 @@ namespace Kallivayalil
             var savedAddressData = new AddressData();
             mapper.Map(savedAddress, savedAddressData);
             return savedAddressData;
+        }
+
+        public virtual CommitteeData CreateCommittee(CommitteeData committeeData)
+        {
+            var committee = new Committee();
+            mapper.Map(committeeData, committee);
+
+            var savedCommittee = committeeServiceImpl.CreateCommittee(committee);
+            var savedCommitteeData = new CommitteeData();
+            mapper.Map(savedCommittee, savedCommitteeData);
+            return savedCommitteeData;
+        }
+
+        public virtual CommitteeData UpdateCommittee(string id, CommitteeData committeeData)
+        {
+            var committee = new Committee();
+            mapper.Map(committeeData, committee);
+
+            var savedCommittee = committeeServiceImpl.UpdateCommittee(committee);
+            var savedCommitteeData = new CommitteeData();
+            mapper.Map(savedCommittee, savedCommitteeData);
+            return savedCommitteeData;
+        }
+
+        public virtual  CommitteeData GetCommittee(string id)
+        {
+            var committee = committeeServiceImpl.FindCommittee(id);
+            var committeeData = new CommitteeData();
+            if (committee == null)
+            {
+                throw new NotFoundException(string.Format("Address with Id:{0} not found.", id));
+            }
+            mapper.Map(committee, committeeData);
+            return committeeData;
+        }
+
+        public CommitteesData GetCommittees()
+        {
+            var committees = committeeServiceImpl.FindCommittees();
+
+            var committeesData = new CommitteesData();
+            mapper.MapList(committees, committeesData, typeof(CommitteeData));
+
+            return committeesData;
+        }
+
+        public virtual  void DeleteCommittee(string id)
+        {
+            committeeServiceImpl.DeleteCommittee(id);
         }
 
         public virtual AddressData UpdateAddress(string id, AddressData addressData)
