@@ -46,7 +46,27 @@ namespace Kallivayalil
         [OperationContract]
         [WebInvoke(UriTemplate = "/Addresses?constituentId={constituentId}", Method = "POST")]
         AddressData CreateAddress(string constituentId, AddressData addressData);
+        
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Committees", Method = "POST")]
+        CommitteeData CreateCommittee(CommitteeData committeeData);
 
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Committees/{id}", Method = "PUT")]
+        CommitteeData UpdateCommittee(string id, CommitteeData committeeData);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Committees/{id}")]
+        CommitteeData GetCommittee(string id);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Committees?")]
+        CommitteesData GetCommittees();
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Committees/{id}", Method = "DELETE")]
+        void DeleteCommittee(string id);
+        
         [OperationContract]
         [WebInvoke(UriTemplate = "/Addresses/{id}", Method = "PUT")]
         AddressData UpdateAddress(string id, AddressData addressData);
