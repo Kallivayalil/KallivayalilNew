@@ -15,7 +15,7 @@ namespace Kallivayalil.Client
         public int Id { get; set; }
 
         [DataMember]
-        public LinkData Constituent { get; set; }
+        public ConstituentData Constituent { get; set; }
 
         [DataMember]
         public PositionTypeData Type { get; set; }
