@@ -562,6 +562,12 @@ namespace Kallivayalil
                 dat.orientation = "top";
                 myFamily = GetFamilyNode(GetConstituentInfo(spouse.Constituent), GetConstituentInfo(spouse), spouse.StartDate, "center");
             }
+            else
+            {
+                var dat = new TreeData();
+                dat.orientation = "top";
+                parentFamily.children.Add(new RelationshipData { id = parents[0].Constituent.Name.ToString(), name = parents[0].AssociatedConstituent.Name.ToString(), data = dat });
+            }
 
             if (myFamily != null)
             {
@@ -570,9 +576,9 @@ namespace Kallivayalil
                 {
                     myFamily.children.Add(GetPersonNode(child.AssociatedConstituent, "top"));
                 }
+                parentFamily.children.Add(myFamily);
             }
-
-            parentFamily.children.Add(myFamily);
+            
             return parentFamily;
         }
 
