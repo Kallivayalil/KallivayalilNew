@@ -31,6 +31,15 @@ namespace Tests.Integration.RepositoryTests
 
             Assert.NotNull(emailTypes);
             Assert.That(emailTypes.Count, Is.EqualTo(2));
+        }  
+        
+        [Test]
+        public void ShouldLoadAllPositionTypes()
+        {
+            var positionTypes = repo.LoadAll<PositionType>();
+
+            Assert.NotNull(positionTypes);
+            Assert.That(positionTypes.Count, Is.EqualTo(6));
         }
     }
 }

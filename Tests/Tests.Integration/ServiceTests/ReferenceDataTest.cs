@@ -55,5 +55,13 @@ namespace Tests.Integration.ServiceTests
 
             Assert.That(branchTypesData.Count, Is.EqualTo(3));
         }
+        
+        [Test]
+        public void ShouldLoadAllPositionTypes()
+        {
+            var positionTypesData = HttpHelper.Get<PositionTypesData>(string.Format("{0}/{1}", BaseUri, "PositionTypes"));
+
+            Assert.That(positionTypesData.Count, Is.EqualTo(6));
+        }
     }
 }

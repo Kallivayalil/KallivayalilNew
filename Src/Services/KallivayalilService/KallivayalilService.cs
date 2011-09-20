@@ -811,6 +811,14 @@ namespace Kallivayalil
             return branchTypes;
         }
 
+        public PositionTypesData GetPositionTypes()
+        {
+            var types = referenceDataServiceImpl.GetPositionTypes();
+            var positionTypes = new PositionTypesData();
+            mapper.MapList(types, positionTypes, typeof(PositionTypeData));
+            return positionTypes;
+        }
+
         public virtual EventTypesData GetEventTypes()
         {
             var types = referenceDataServiceImpl.EventTypes();

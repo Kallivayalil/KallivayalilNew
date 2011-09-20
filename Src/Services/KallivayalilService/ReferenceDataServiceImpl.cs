@@ -53,6 +53,11 @@ namespace Kallivayalil
         public IList<BranchType> GetBranchTypes()
         {
             return repository.LoadAll<BranchType>();
+        }   
+        
+        public IList<PositionType> GetPositionTypes()
+        {
+            return repository.LoadAll<PositionType>();
         }
 
         public IList<EventType> EventTypes()

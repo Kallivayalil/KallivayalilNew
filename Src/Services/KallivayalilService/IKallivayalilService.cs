@@ -246,6 +246,10 @@ namespace Kallivayalil
         BranchTypesData GetBranchTypes(); 
         
         [OperationContract]
+        [WebGet(UriTemplate = "/PositionTypes")]
+        PositionTypesData GetPositionTypes(); 
+        
+        [OperationContract]
         [WebGet(UriTemplate = "/EventTypes")]
         EventTypesData GetEventTypes();
 
