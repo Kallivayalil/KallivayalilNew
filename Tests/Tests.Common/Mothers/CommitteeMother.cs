@@ -7,12 +7,12 @@ namespace Tests.Common.Mothers
     {
         public static Committee President(Constituent constituent)
         {
-            return new Committee {Constituent = constituent, StartDate = DateTime.Now,EndDate = DateTime.Now.AddMonths(2), Type = PositionTypeMother.President()};
+            return new Committee {Constituent = constituent, StartYear = "2004",EndYear = "2005", Type = PositionTypeMother.President()};
         }
 
         public static Committee Secretary(Constituent constituent)
         {
-            return new Committee { Constituent = constituent, StartDate = DateTime.Now, EndDate = DateTime.Now.AddMonths(2), Type = PositionTypeMother.Secretary() };
+            return new Committee { Constituent = constituent, StartYear = "2004", EndYear = "2005", Type = PositionTypeMother.Secretary() };
         }
     }
 }

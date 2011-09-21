@@ -21,10 +21,10 @@ namespace Kallivayalil.Client
         public PositionTypeData Type { get; set; }
 
         [DataMember]
-        public DateTime StartDate { get; set; }
+        public string StartYear { get; set; }
 
         [DataMember]
-        public DateTime EndDate { get; set; }
+        public string EndYear { get; set; }
 
         [DataMember]
         public DateTime? CreatedDateTime { get; set; }

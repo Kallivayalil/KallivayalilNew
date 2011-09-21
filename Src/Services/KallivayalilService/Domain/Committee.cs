@@ -8,9 +8,9 @@ namespace Kallivayalil.Domain
     {
         public virtual PositionType Type { get; set; }        
         
-        public virtual DateTime StartDate { get; set; }
+        public virtual string StartYear { get; set; }
 
-        public virtual DateTime EndDate { get; set; }
+        public virtual string EndYear { get; set; }
 
         public virtual Constituent Constituent { get; set; }
     }

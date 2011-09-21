@@ -47,11 +47,11 @@ namespace Tests.Integration.ServiceTests
             var committee = testDataHelper.CreateCommittee(CommitteeMother.President(constituent));
 
             var committeeData = CommitteeDataMother.President(constituent);
-            var newEndDate = DateTime.Today.AddDays(5);
-            committeeData.EndDate = newEndDate;
+            var newEndYear = "2010";
+            committeeData.EndYear = newEndYear;
             var updatedData = HttpHelper.Put(string.Format("{0}/{1}", baseUri, committee.Id), committeeData);
 
-            Assert.That(updatedData.EndDate, Is.EqualTo(newEndDate));
+            Assert.That(updatedData.EndYear, Is.EqualTo(newEndYear));
         }
 
         [Test]

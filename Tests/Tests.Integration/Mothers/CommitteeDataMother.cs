@@ -8,12 +8,12 @@ namespace Tests.Integration.Mothers
     {
         public static CommitteeData President(Constituent constituent)
         {
-            return new CommitteeData { Constituent = new ConstituentData(){Id = constituent.Id}, StartDate = DateTime.Now, EndDate = DateTime.Now.AddMonths(2), Type = new PositionTypeData(){Id = 1} };
+            return new CommitteeData { Constituent = new ConstituentData(){Id = constituent.Id}, StartYear = "2004", EndYear = "2008", Type = new PositionTypeData(){Id = 1} };
         }
 
         public static CommitteeData Secretary(Constituent constituent)
         {
-            return new CommitteeData { Constituent = new ConstituentData() { Id = constituent.Id }, StartDate = DateTime.Now, EndDate = DateTime.Now.AddMonths(2), Type = new PositionTypeData() { Id = 1 } };
+            return new CommitteeData { Constituent = new ConstituentData() { Id = constituent.Id }, StartYear = "2004", EndYear = "2008", Type = new PositionTypeData() { Id = 1 } };
         }
 
 

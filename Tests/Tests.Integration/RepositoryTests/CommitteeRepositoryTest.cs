@@ -45,11 +45,11 @@ namespace Tests.Integration.RepositoryTests
         [Test]
         public void ShouldUpdateExistingCommittee()
         {
-            var newEndDate = DateTime.Now.AddMonths(4);
-            savedCommittee.EndDate = newEndDate;
+            var newEndDate = "2008";
+            savedCommittee.EndYear = newEndDate;
             var updatedEmail = committeeRepository.Update(savedCommittee);
 
-            Assert.That(updatedEmail.EndDate, Is.EqualTo(newEndDate));
+            Assert.That(updatedEmail.EndYear, Is.EqualTo(newEndDate));
         }
 
         [Test]

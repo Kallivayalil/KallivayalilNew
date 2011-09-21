@@ -14,8 +14,8 @@ GO
 CREATE TABLE [dbo].[Committees](
 	[Id] [int] NOT NULL,
 	[Position] [int] NOT NULL,
-	[StartDate] [datetime] NOT NULL,
-	[EndDate] [datetime] NOT NULL,
+	[StartYear] [varchar](4) NOT NULL,
+	[EndYear] [varchar](4) NOT NULL,
 	[ConstituentId] [int] NOT NULL,
 	[CreatedDateTime] [datetime] NOT NULL,
 	[CreatedBy] [varchar](50) NOT NULL,
