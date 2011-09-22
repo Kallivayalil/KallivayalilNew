@@ -57,17 +57,28 @@ namespace Kallivayalil.DataAccess.Repositories
             return criteria.List<EducationDetail>();
         }
 
-        public IList<Constituent> SearchEducationDetailBy(string instituteName, string instituteLocation, string qualification, string yearofGraduation)
+        public List<Constituent> SearchEducationDetailBy(string instituteName, string instituteLocation, string qualification, string yearofGraduation, bool matchAllCriteria)
         {
             var criteria = session.CreateCriteria<EducationDetail>();
-            criteria.Add(Restrictions.InsensitiveLike("InstituteName", GetPropertyValue(instituteName))
-                || Restrictions.InsensitiveLike("InstituteLocation", GetPropertyValue(instituteLocation))
-                || Restrictions.InsensitiveLike("YearOfGraduation", GetPropertyValue(yearofGraduation))
-                || Restrictions.InsensitiveLike("Qualification", GetPropertyValue(qualification)));
+            criteria.Add(AbstractCriterion(instituteName, instituteLocation, yearofGraduation, qualification,matchAllCriteria));
             var occupations = criteria.List<EducationDetail>();
 
             return occupations.Select(occupation => occupation.Constituent).ToList();
 
+        }
+
+        private AbstractCriterion AbstractCriterion(string instituteName, string instituteLocation, string yearofGraduation, string qualification, bool matchAllCriteria)
+        {
+            return matchAllCriteria ?
+                (Restrictions.InsensitiveLike("InstituteName", GetPropertyValue(instituteName))
+                   && Restrictions.InsensitiveLike("InstituteLocation", GetPropertyValue(instituteLocation))
+                   && Restrictions.InsensitiveLike("YearOfGraduation", GetPropertyValue(yearofGraduation))
+                   && Restrictions.InsensitiveLike("Qualification", GetPropertyValue(qualification)))
+                   :
+                (Restrictions.InsensitiveLike("InstituteName", GetPropertyValue(instituteName))
+                   || Restrictions.InsensitiveLike("InstituteLocation", GetPropertyValue(instituteLocation))
+                   || Restrictions.InsensitiveLike("YearOfGraduation", GetPropertyValue(yearofGraduation))
+                   || Restrictions.InsensitiveLike("Qualification", GetPropertyValue(qualification)));
         }
 
         private string GetPropertyValue(string propertyValue)

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Kallivayalil.Domain;
 using NHibernate;
@@ -65,13 +64,21 @@ namespace Kallivayalil.DataAccess.Repositories
             return criteria.UniqueResult<Address>();
         }
 
-        public IList<Constituent> SearchAddressBy(string address, string state, string city, string country, string postcode)
+        public List<Constituent> SearchAddressBy(string address, string state, string city, string country, string postcode, bool matchAllCriteria)
         {
             var criteria = session.CreateCriteria<Address>();
-            criteria.Add(Restrictions.InsensitiveLike("Line1", GetPropertyValue(address)) || Restrictions.InsensitiveLike("Line2", GetPropertyValue(address)) || Restrictions.InsensitiveLike("City", GetPropertyValue(city))
-                || Restrictions.InsensitiveLike("State", GetPropertyValue(state)) || Restrictions.InsensitiveLike("PostCode", GetPropertyValue(postcode)) || Restrictions.InsensitiveLike("Country", GetPropertyValue(country)));
+            criteria.Add(AbstractCriterion(address, city, state, postcode, country,matchAllCriteria));
             var addresses = criteria.List<Address>();
             return addresses.Select(address1 => address1.Constituent).ToList();
+        }
+
+        private AbstractCriterion AbstractCriterion(string address, string city, string state, string postcode, string country, bool matchAllCriteria)
+        {
+            return matchAllCriteria ? ((Restrictions.InsensitiveLike("Line1", GetPropertyValue(address)) || Restrictions.InsensitiveLike("Line2", GetPropertyValue(address))) && Restrictions.InsensitiveLike("City", GetPropertyValue(city))
+                   && Restrictions.InsensitiveLike("State", GetPropertyValue(state)) && Restrictions.InsensitiveLike("PostCode", GetPropertyValue(postcode)) && Restrictions.InsensitiveLike("Country", GetPropertyValue(country)))
+                   :
+                    (Restrictions.InsensitiveLike("Line1", GetPropertyValue(address)) || Restrictions.InsensitiveLike("Line2", GetPropertyValue(address)) || Restrictions.InsensitiveLike("City", GetPropertyValue(city))
+                   || Restrictions.InsensitiveLike("State", GetPropertyValue(state)) || Restrictions.InsensitiveLike("PostCode", GetPropertyValue(postcode)) || Restrictions.InsensitiveLike("Country", GetPropertyValue(country)));
         }
 
         private string GetPropertyValue(string propertyValue)

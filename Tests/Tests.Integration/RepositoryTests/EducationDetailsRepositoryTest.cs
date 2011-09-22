@@ -99,9 +99,26 @@ namespace Tests.Integration.RepositoryTests
             testDataHelper.CreateEducationDetail(educationDetail);
             testDataHelper.CreateEducationDetail(educationDetail1);
 
-            var constituents = educationDetailRepository.SearchEducationDetailBy("PSG", "CBE","CSE","1992");
+            var constituents = educationDetailRepository.SearchEducationDetailBy("PSG1", "CBE","CSE","1992", false);
 
             Assert.That(constituents.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ShouldSearchForEducationDetailsMatchAllCriteria()
+        {
+            var educationDetail = EducationDetailMother.School(savedConstituent);
+            var educationDetail1 = EducationDetailMother.School(savedConstituent);
+            educationDetail1.InstituteName = "PSG";
+            educationDetail1.InstituteLocation = "CBE";
+            educationDetail1.Qualification = "CSE";
+            educationDetail1.YearOfGraduation = "1992";
+            testDataHelper.CreateEducationDetail(educationDetail);
+            testDataHelper.CreateEducationDetail(educationDetail1);
+
+            var constituents = educationDetailRepository.SearchEducationDetailBy("PSG1", "CBE","CSE","1992", true);
+
+            Assert.That(constituents.Count, Is.EqualTo(0));
         }
     }
 }

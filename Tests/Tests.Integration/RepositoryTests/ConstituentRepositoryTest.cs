@@ -114,7 +114,19 @@ namespace Tests.Integration.RepositoryTests
             var constituentName = ConstituentNameMother.AgnesAlba();
             var savedConst = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(constituentName));
 
-            IList<Constituent> result = constituentRepository.SearchByConstituentName(constituentName.FirstName, constituentName.LastName,constituentName.PreferedName);
+            IList<Constituent> result = constituentRepository.SearchByConstituentName(constituentName.FirstName, constituentName.LastName,constituentName.PreferedName, false);
+
+            Assert.That(result.Count(), Is.EqualTo(1));
+        }
+    
+        
+        [Test]
+        public void ShouldSearchConstituentByNameMatchAllCriteria()
+        {
+            var constituentName = ConstituentNameMother.AgnesAlba();
+            var savedConst = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(constituentName));
+
+            IList<Constituent> result = constituentRepository.SearchByConstituentName(constituentName.FirstName, constituentName.LastName,constituentName.PreferedName, true);
 
             Assert.That(result.Count(), Is.EqualTo(1));
         }

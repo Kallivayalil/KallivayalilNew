@@ -62,28 +62,36 @@ namespace Kallivayalil.DataAccess.Repositories
 
         }
 
-        public IList<Constituent> SearchByConstituentName(string firstName, string lastName, string preferedName)
+        public List<Constituent> SearchByConstituentName(string firstName, string lastName, string preferedName, bool matchAllCriteria)
         {
             var criteria = session.CreateCriteria<Constituent>();
             criteria.CreateCriteria("Name")
-                .Add(Restrictions.InsensitiveLike("FirstName", GetPropertyValue(firstName))
-                || Restrictions.InsensitiveLike("LastName", GetPropertyValue(lastName))
-                || Restrictions.InsensitiveLike("PreferedName", GetPropertyValue(preferedName)));
-            return criteria.List<Constituent>();
-        } 
-        
-        public IList<Constituent> SearchByConstituentBranch(string branchName)
+                .Add(AbstractCriterion(firstName, lastName, preferedName,matchAllCriteria));
+            return criteria.List<Constituent>().ToList();
+        }
+
+        private AbstractCriterion AbstractCriterion(string firstName, string lastName, string preferedName, bool matchAllCriteria)
+        {
+            return matchAllCriteria ? (Restrictions.InsensitiveLike("FirstName", GetPropertyValue(firstName))
+                   && Restrictions.InsensitiveLike("LastName", GetPropertyValue(lastName))
+                   && Restrictions.InsensitiveLike("PreferedName", GetPropertyValue(preferedName))) 
+                   :
+                   (Restrictions.InsensitiveLike("FirstName", GetPropertyValue(firstName))
+                   || Restrictions.InsensitiveLike("LastName", GetPropertyValue(lastName))
+                   || Restrictions.InsensitiveLike("PreferedName", GetPropertyValue(preferedName)));
+        }
+
+        public List<Constituent> SearchByConstituentBranch(string branchName)
         {
             var criteria = session.CreateCriteria<Constituent>();
             criteria.CreateCriteria("BranchName").Add(Restrictions.InsensitiveLike("Description", GetPropertyValue(branchName)));
-          return criteria.List<Constituent>();
+          return criteria.List<Constituent>().ToList();
         }
-        
-        public IList<Constituent> SearchByConstituentHouseName(string houseName)
+        public List<Constituent> SearchByConstituentHouseName(string houseName)
         {
             var criteria = session.CreateCriteria<Constituent>();
             criteria.Add(Restrictions.InsensitiveLike("HouseName", GetPropertyValue(houseName)));
-          return criteria.List<Constituent>();
+          return criteria.List<Constituent>().ToList();
         }
 
         private string GetPropertyValue(string propertyValue)

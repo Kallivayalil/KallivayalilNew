@@ -79,14 +79,23 @@ namespace Kallivayalil.DataAccess.Repositories
             return criteria.List<Occupation>();
         }
 
-        public IList<Constituent> SearchOccupationBy(string occupationName, string description)
+        public List<Constituent> SearchOccupationBy(string occupationName, string description, bool matchAllCriteria)
         {
             var criteria = session.CreateCriteria<Occupation>();
-            criteria.Add(Restrictions.InsensitiveLike("OccupationName", GetPropertyValue(occupationName)) 
-                || Restrictions.InsensitiveLike("Description", GetPropertyValue(description)));
+            criteria.Add(AbstractCriterion(occupationName, description,matchAllCriteria));
             var occupations = criteria.List<Occupation>();
 
             return occupations.Select(occupation => occupation.Constituent).ToList();
+        }
+
+        private AbstractCriterion AbstractCriterion(string occupationName, string description, bool matchAllCriteria)
+        {
+            return matchAllCriteria ?
+                   (Restrictions.InsensitiveLike("OccupationName", GetPropertyValue(occupationName)) 
+                   && Restrictions.InsensitiveLike("Description", GetPropertyValue(description)))
+                   :
+                   (Restrictions.InsensitiveLike("OccupationName", GetPropertyValue(occupationName)) 
+                   || Restrictions.InsensitiveLike("Description", GetPropertyValue(description)));
         }
 
         private string GetPropertyValue(string propertyValue)
