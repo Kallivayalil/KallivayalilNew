@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Kallivayalil.DataAccess.Helper;
 using Kallivayalil.Domain;
 using NHibernate;
 using NHibernate.Criterion;
@@ -9,8 +10,11 @@ namespace Kallivayalil.DataAccess.Repositories
 {
     public class ConstituentRepository : Repository
     {
+        private readonly NHibernateCriteriaHelper nHibernateCriteriaHelper;
+
         public ConstituentRepository(ISession session) : base(session)
         {
+            nHibernateCriteriaHelper = new NHibernateCriteriaHelper();
         }
 
         public ConstituentRepository() : this(SessionFactory.OpenSession()) {}
@@ -65,21 +69,20 @@ namespace Kallivayalil.DataAccess.Repositories
         public List<Constituent> SearchByConstituentName(string firstName, string lastName, string preferedName, bool matchAllCriteria)
         {
             var criteria = session.CreateCriteria<Constituent>();
-            criteria.CreateCriteria("Name")
-                .Add(AbstractCriterion(firstName, lastName, preferedName,matchAllCriteria));
+            var nameCriteria = criteria.CreateCriteria("Name");
+            criteria = CreateCriterion(firstName, lastName, preferedName, matchAllCriteria, nameCriteria);
             return criteria.List<Constituent>().ToList();
         }
 
-        private AbstractCriterion AbstractCriterion(string firstName, string lastName, string preferedName, bool matchAllCriteria)
+        private ICriteria CreateCriterion(string firstName, string lastName, string preferedName, bool matchAllCriteria, ICriteria nameCriteria)
         {
-            return matchAllCriteria ? (Restrictions.InsensitiveLike("FirstName", GetPropertyValue(firstName))
-                   && Restrictions.InsensitiveLike("LastName", GetPropertyValue(lastName))
-                   && Restrictions.InsensitiveLike("PreferedName", GetPropertyValue(preferedName))) 
-                   :
-                   (Restrictions.InsensitiveLike("FirstName", GetPropertyValue(firstName))
-                   || Restrictions.InsensitiveLike("LastName", GetPropertyValue(lastName))
-                   || Restrictions.InsensitiveLike("PreferedName", GetPropertyValue(preferedName)));
+            var firstNameCriterion = !string.IsNullOrEmpty(firstName) ? Restrictions.InsensitiveLike("FirstName", GetPropertyValue(firstName)) : null;
+            var lastNameCriterion = !string.IsNullOrEmpty(lastName) ?Restrictions.InsensitiveLike("LastName", GetPropertyValue(lastName)) : null;
+            var preferredNameCriterion = !string.IsNullOrEmpty(preferedName) ?Restrictions.InsensitiveLike("PreferedName", GetPropertyValue(preferedName)) : null;
+            return nHibernateCriteriaHelper.ConstructCriteria(matchAllCriteria, nameCriteria, firstNameCriterion, lastNameCriterion,preferredNameCriterion);
         }
+
+       
 
         public List<Constituent> SearchByConstituentBranch(string branchName)
         {

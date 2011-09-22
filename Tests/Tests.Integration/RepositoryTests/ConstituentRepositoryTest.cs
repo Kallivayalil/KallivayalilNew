@@ -126,7 +126,7 @@ namespace Tests.Integration.RepositoryTests
             var constituentName = ConstituentNameMother.AgnesAlba();
             var savedConst = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(constituentName));
 
-            IList<Constituent> result = constituentRepository.SearchByConstituentName(constituentName.FirstName, constituentName.LastName,constituentName.PreferedName, true);
+            IList<Constituent> result = constituentRepository.SearchByConstituentName(constituentName.FirstName, string.Empty,string.Empty, true);
 
             Assert.That(result.Count(), Is.EqualTo(1));
         }

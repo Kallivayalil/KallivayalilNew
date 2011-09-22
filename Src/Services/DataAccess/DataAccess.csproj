@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationFactory.cs" />
+    <Compile Include="Helper\NHibernateCriteriaHelper.cs" />
     <Compile Include="Mappings\AbstractEntityMap.cs" />
     <Compile Include="Mappings\AddressMap.cs" />
     <Compile Include="Mappings\AssociationMap.cs" />
