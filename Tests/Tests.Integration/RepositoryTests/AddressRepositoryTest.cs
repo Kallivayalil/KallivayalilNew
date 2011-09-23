@@ -101,9 +101,9 @@ namespace Tests.Integration.RepositoryTests
             testDataHelper.CreateAddress(address);
             testDataHelper.CreateAddress(address1);
 
-            var phones = addressRepository.SearchAddressBy("Montgomery", "London", "California", "USA", "ABCD", false);
+            var phones = addressRepository.SearchAddressBy(address.Line1, string.Empty, address.City, address.Country, address.PostCode, false);
 
-            Assert.That(phones.Count, Is.EqualTo(3));
+            Assert.That(phones.Count, Is.EqualTo(1));
         }  
         
         [Test]
@@ -116,6 +116,20 @@ namespace Tests.Integration.RepositoryTests
             testDataHelper.CreateAddress(address1);
 
             var phones = addressRepository.SearchAddressBy(address.Line1, address.State, address.City, address.Country, address.PostCode, true);
+
+            Assert.That(phones.Count, Is.EqualTo(1));
+        }
+        
+        [Test]
+        public void ShouldSearchForAddressLineMatchAllCriteria()
+        {
+            var address = AddressMother.London(savedConstituent);
+            var address1 = AddressMother.SanFrancisco((savedConstituent));
+            
+            testDataHelper.CreateAddress(address);
+            testDataHelper.CreateAddress(address1);
+
+            var phones = addressRepository.SearchAddressBy(address.Line1, string.Empty, string.Empty, string.Empty, string.Empty, true);
 
             Assert.That(phones.Count, Is.EqualTo(1));
         }

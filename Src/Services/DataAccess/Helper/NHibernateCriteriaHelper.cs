@@ -1,4 +1,5 @@
-﻿using NHibernate;
+﻿using System.Linq;
+using NHibernate;
 using NHibernate.Criterion;
 
 namespace Kallivayalil.DataAccess.Helper
@@ -9,22 +10,36 @@ namespace Kallivayalil.DataAccess.Helper
         {
             if (matchAllCriteria)
             {
-                foreach (AbstractCriterion t in criterias)
+            var conjunction = Restrictions.Conjunction();
+
+                foreach (var t in criterias.Where(t => t != null))
                 {
-                    if (t != null)
-                        criteria.Add(Restrictions.Conjunction().Add(t));
+                    conjunction.Add(t);
                 }
+                criteria.Add(conjunction);
             }
             else
             {
-                foreach (AbstractCriterion t in criterias)
-                {
-                    if (t != null)
-                        criteria.Add(Restrictions.Disjunction().Add(t));
-                }
+            var disjunction = Restrictions.Disjunction();
 
+                foreach (var t in criterias.Where(t => t != null))
+                {
+                    disjunction.Add(t);
+                }
+                criteria.Add(disjunction);
             }
             return criteria;
+        }
+
+
+        public AbstractCriterion GetCriterion(string propertyName, string propertyValue)
+        {
+            return !string.IsNullOrEmpty(propertyValue) ? Restrictions.InsensitiveLike(propertyName, GetPropertyValue(propertyValue)) : null;
+        }
+
+        public string GetPropertyValue(string propertyValue)
+        {
+            return string.IsNullOrEmpty(propertyValue) ? propertyValue : string.Format("%{0}%", propertyValue);
         }
     }
 }

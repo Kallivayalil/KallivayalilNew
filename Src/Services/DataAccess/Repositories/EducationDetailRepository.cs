@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Kallivayalil.DataAccess.Helper;
 using Kallivayalil.Domain;
 using NHibernate;
 using NHibernate.Criterion;
@@ -9,8 +10,18 @@ namespace Kallivayalil.DataAccess.Repositories
 {
     public class EducationDetailRepository : Repository
     {
-        public EducationDetailRepository(ISession session) : base(session) {}
-        public EducationDetailRepository() : base(SessionFactory.OpenSession()) {}
+        private readonly NHibernateCriteriaHelper nHibernateCriteriaHelper;
+
+        public EducationDetailRepository(ISession session) : base(session)
+        {
+            nHibernateCriteriaHelper = new NHibernateCriteriaHelper();
+            
+        }
+        public EducationDetailRepository() : base(SessionFactory.OpenSession())
+        {
+            nHibernateCriteriaHelper = new NHibernateCriteriaHelper();
+            
+        }
 
         public EducationDetail Save(EducationDetail educationDetail)
         {
@@ -60,31 +71,23 @@ namespace Kallivayalil.DataAccess.Repositories
         public List<Constituent> SearchEducationDetailBy(string instituteName, string instituteLocation, string qualification, string yearofGraduation, bool matchAllCriteria)
         {
             var criteria = session.CreateCriteria<EducationDetail>();
-            criteria.Add(AbstractCriterion(instituteName, instituteLocation, yearofGraduation, qualification,matchAllCriteria));
+            criteria = CreateCriterion(instituteName, instituteLocation, yearofGraduation, qualification,matchAllCriteria,criteria);
             var occupations = criteria.List<EducationDetail>();
 
             return occupations.Select(occupation => occupation.Constituent).ToList();
 
         }
 
-        private AbstractCriterion AbstractCriterion(string instituteName, string instituteLocation, string yearofGraduation, string qualification, bool matchAllCriteria)
+        private ICriteria CreateCriterion(string instituteName, string instituteLocation, string yearofGraduation, string qualification, bool matchAllCriteria, ICriteria criteria)
         {
-            return matchAllCriteria ?
-                (Restrictions.InsensitiveLike("InstituteName", GetPropertyValue(instituteName))
-                   && Restrictions.InsensitiveLike("InstituteLocation", GetPropertyValue(instituteLocation))
-                   && Restrictions.InsensitiveLike("YearOfGraduation", GetPropertyValue(yearofGraduation))
-                   && Restrictions.InsensitiveLike("Qualification", GetPropertyValue(qualification)))
-                   :
-                (Restrictions.InsensitiveLike("InstituteName", GetPropertyValue(instituteName))
-                   || Restrictions.InsensitiveLike("InstituteLocation", GetPropertyValue(instituteLocation))
-                   || Restrictions.InsensitiveLike("YearOfGraduation", GetPropertyValue(yearofGraduation))
-                   || Restrictions.InsensitiveLike("Qualification", GetPropertyValue(qualification)));
+            var instituteNameCriteria = nHibernateCriteriaHelper.GetCriterion("InstituteName", instituteName);
+            var instituteLocationCriteria = nHibernateCriteriaHelper.GetCriterion("InstituteLocation", instituteLocation);
+            var yearOfGraduationCriteria = nHibernateCriteriaHelper.GetCriterion("YearOfGraduation", yearofGraduation);
+            var qualificationCriteria = nHibernateCriteriaHelper.GetCriterion("Qualification", qualification);
+            return nHibernateCriteriaHelper.ConstructCriteria(matchAllCriteria, criteria, instituteNameCriteria, instituteLocationCriteria, yearOfGraduationCriteria, qualificationCriteria);
         }
 
-        private string GetPropertyValue(string propertyValue)
-        {
-            return string.IsNullOrEmpty(propertyValue) ? propertyValue : string.Format("%{0}%", propertyValue);
-        }
+       
 
     }
 }

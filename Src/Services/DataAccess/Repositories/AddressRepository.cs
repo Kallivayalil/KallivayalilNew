@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Kallivayalil.DataAccess.Helper;
 using Kallivayalil.Domain;
 using NHibernate;
 using NHibernate.Criterion;
@@ -8,8 +9,16 @@ namespace Kallivayalil.DataAccess.Repositories
 {
     public class AddressRepository : Repository, ISubEntityRepository<Address>
     {
-        public AddressRepository(ISession session) : base(session) {}
-        public AddressRepository() : base(SessionFactory.OpenSession()) {}
+        private NHibernateCriteriaHelper nHibernateCriteriaHelper;
+
+        public AddressRepository(ISession session) : base(session)
+        {
+            nHibernateCriteriaHelper = new NHibernateCriteriaHelper();
+        }
+        public AddressRepository() : base(SessionFactory.OpenSession())
+        {
+            nHibernateCriteriaHelper = new NHibernateCriteriaHelper();
+        }
 
         public Address Save(Address entity)
         {
@@ -66,24 +75,27 @@ namespace Kallivayalil.DataAccess.Repositories
 
         public List<Constituent> SearchAddressBy(string address, string state, string city, string country, string postcode, bool matchAllCriteria)
         {
-            var criteria = session.CreateCriteria<Address>();
-            criteria.Add(AbstractCriterion(address, city, state, postcode, country,matchAllCriteria));
-            var addresses = criteria.List<Address>();
+            var addressCriteria = session.CreateCriteria<Address>();
+           addressCriteria = CreateCriterion(address, city, state, postcode, country, matchAllCriteria,addressCriteria);
+            var addresses = addressCriteria.List<Address>();
             return addresses.Select(address1 => address1.Constituent).ToList();
         }
 
-        private AbstractCriterion AbstractCriterion(string address, string city, string state, string postcode, string country, bool matchAllCriteria)
+        private ICriteria CreateCriterion(string address, string city, string state, string postcode, string country, bool matchAllCriteria, ICriteria criteria)
         {
-            return matchAllCriteria ? ((Restrictions.InsensitiveLike("Line1", GetPropertyValue(address)) || Restrictions.InsensitiveLike("Line2", GetPropertyValue(address))) && Restrictions.InsensitiveLike("City", GetPropertyValue(city))
-                   && Restrictions.InsensitiveLike("State", GetPropertyValue(state)) && Restrictions.InsensitiveLike("PostCode", GetPropertyValue(postcode)) && Restrictions.InsensitiveLike("Country", GetPropertyValue(country)))
-                   :
-                    (Restrictions.InsensitiveLike("Line1", GetPropertyValue(address)) || Restrictions.InsensitiveLike("Line2", GetPropertyValue(address)) || Restrictions.InsensitiveLike("City", GetPropertyValue(city))
-                   || Restrictions.InsensitiveLike("State", GetPropertyValue(state)) || Restrictions.InsensitiveLike("PostCode", GetPropertyValue(postcode)) || Restrictions.InsensitiveLike("Country", GetPropertyValue(country)));
+            var line1Criterion = nHibernateCriteriaHelper.GetCriterion("Line1", address);
+            var line2Criterion = nHibernateCriteriaHelper.GetCriterion("Line2", address);
+            var addressCriterion = GetAddressCriterion(line1Criterion, line2Criterion);
+            var cityCriterion = nHibernateCriteriaHelper.GetCriterion("City", city);
+            var stateCriterion = nHibernateCriteriaHelper.GetCriterion("State", state);
+            var postCodeCriterion = nHibernateCriteriaHelper.GetCriterion("PostCode", postcode);
+            var countryCriterion = nHibernateCriteriaHelper.GetCriterion("Country", country);
+            return nHibernateCriteriaHelper.ConstructCriteria(matchAllCriteria, criteria, addressCriterion, cityCriterion, stateCriterion, postCodeCriterion, countryCriterion);
         }
 
-        private string GetPropertyValue(string propertyValue)
+        private Junction GetAddressCriterion(AbstractCriterion line1Criterion, AbstractCriterion line2Criterion)
         {
-            return string.IsNullOrEmpty(propertyValue) ? propertyValue : string.Format("%{0}%", propertyValue);
+            return line1Criterion!= null ? Restrictions.Disjunction().Add(line1Criterion).Add(line2Criterion) : null;
         }
     }
 }

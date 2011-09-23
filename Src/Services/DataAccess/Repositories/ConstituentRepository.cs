@@ -17,7 +17,10 @@ namespace Kallivayalil.DataAccess.Repositories
             nHibernateCriteriaHelper = new NHibernateCriteriaHelper();
         }
 
-        public ConstituentRepository() : this(SessionFactory.OpenSession()) {}
+        public ConstituentRepository() : this(SessionFactory.OpenSession())
+        {
+            nHibernateCriteriaHelper = new NHibernateCriteriaHelper();
+        }
 
         public Constituent Save(Constituent constituent)
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Kallivayalil.DataAccess.Helper;
 using Kallivayalil.Domain;
 using NHibernate;
 using NHibernate.Criterion;
@@ -9,8 +10,16 @@ namespace Kallivayalil.DataAccess.Repositories
 {
     public class OccupationRepository : Repository,ISubEntityRepository<Occupation>
     {
-        public OccupationRepository(ISession session) : base(session) {}
-        public OccupationRepository() : base(SessionFactory.OpenSession()) {}
+        private readonly NHibernateCriteriaHelper nHibernateCriteriaHelper;
+
+        public OccupationRepository(ISession session) : base(session)
+        {
+            nHibernateCriteriaHelper = new NHibernateCriteriaHelper();
+        }
+        public OccupationRepository() : base(SessionFactory.OpenSession())
+        {
+            nHibernateCriteriaHelper = new NHibernateCriteriaHelper();
+        }
 
         public Occupation Save(Occupation occupation)
         {
@@ -82,25 +91,17 @@ namespace Kallivayalil.DataAccess.Repositories
         public List<Constituent> SearchOccupationBy(string occupationName, string description, bool matchAllCriteria)
         {
             var criteria = session.CreateCriteria<Occupation>();
-            criteria.Add(AbstractCriterion(occupationName, description,matchAllCriteria));
+            criteria = CreateCriterion(occupationName, description,matchAllCriteria,criteria);
             var occupations = criteria.List<Occupation>();
 
             return occupations.Select(occupation => occupation.Constituent).ToList();
         }
 
-        private AbstractCriterion AbstractCriterion(string occupationName, string description, bool matchAllCriteria)
+        private ICriteria CreateCriterion(string occupationName, string description, bool matchAllCriteria, ICriteria criteria)
         {
-            return matchAllCriteria ?
-                   (Restrictions.InsensitiveLike("OccupationName", GetPropertyValue(occupationName)) 
-                   && Restrictions.InsensitiveLike("Description", GetPropertyValue(description)))
-                   :
-                   (Restrictions.InsensitiveLike("OccupationName", GetPropertyValue(occupationName)) 
-                   || Restrictions.InsensitiveLike("Description", GetPropertyValue(description)));
-        }
-
-        private string GetPropertyValue(string propertyValue)
-        {
-            return string.IsNullOrEmpty(propertyValue) ? propertyValue : string.Format("%{0}%", propertyValue);
+            var occupationNameCriteria = nHibernateCriteriaHelper.GetCriterion("OccupationName",occupationName);
+            var descriptionCriteria = nHibernateCriteriaHelper.GetCriterion("Description", description);
+            return nHibernateCriteriaHelper.ConstructCriteria(matchAllCriteria, criteria, occupationNameCriteria,descriptionCriteria);
         }
     }
 }
