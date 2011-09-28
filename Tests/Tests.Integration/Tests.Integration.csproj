@@ -57,6 +57,7 @@
     <Compile Include="Mothers\EventDataMother.cs" />
     <Compile Include="Mothers\OccupationDataMother.cs" />
     <Compile Include="Mothers\PhoneDataMother.cs" />
+    <Compile Include="Mothers\UploadDataMother.cs" />
     <Compile Include="RepositoryTests\AddressRepositoryTest.cs" />
     <Compile Include="RepositoryTests\AssociationRepositoryTest.cs" />
     <Compile Include="RepositoryTests\CommitteeRepositoryTest.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="ServiceTests\ReferenceDataTest.cs" />
     <Compile Include="ServiceTests\RegisterationTest.cs" />
     <Compile Include="ServiceTests\SearchTest.cs" />
+    <Compile Include="ServiceTests\UploadFileTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Src\Services\DataAccess\DataAccess.csproj">

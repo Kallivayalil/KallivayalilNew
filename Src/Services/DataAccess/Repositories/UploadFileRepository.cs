@@ -19,6 +19,17 @@ namespace Kallivayalil.DataAccess.Repositories
             }
         }
 
+
+        public Upload Update(Upload entity)
+        {
+            using (var txn = session.BeginTransaction())
+            {
+                var savedUpload = SaveOrUpdate(entity, txn);
+                txn.Commit();
+                return savedUpload;
+            }
+        }
+
         public Upload Load(int id)
         {
             return session.Get<Upload>(id);

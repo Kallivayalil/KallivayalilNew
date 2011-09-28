@@ -27,6 +27,8 @@ namespace Tests.Integration.RepositoryTests
         public void TearDown()
         {
             testDataHelper.HardDeleteUpload();
+            testDataHelper.HardDeleteConstituents();
+            testDataHelper.HardDeleteConstituentNames();
         }
 
         [Test]
@@ -43,6 +45,19 @@ namespace Tests.Integration.RepositoryTests
 
             Assert.IsNotNull(fileInfo);
             Assert.That(fileInfo.Id, Is.EqualTo(savedUpload.Id));
+        }
+
+
+        [Test]
+        public void ShouldUpdateTheSavedConstituentAddress()
+        {
+            var savedUpload = testDataHelper.CreateUpload(UploadMother.Test(constituent));
+            savedUpload.Name = "t";
+            savedUpload.Description = "t1";
+            Upload updatedUpload = uploadFileRepository.Update(savedUpload);
+
+            Assert.That(updatedUpload.Name, Is.EqualTo(savedUpload.Name));
+            Assert.That(updatedUpload.Description, Is.EqualTo(savedUpload.Description));
         }
   
         [Test]

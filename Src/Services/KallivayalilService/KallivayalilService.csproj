@@ -72,6 +72,7 @@
     <Compile Include="ReferenceDataServiceImpl.cs" />
     <Compile Include="RegistrationServiceImpl.cs" />
     <Compile Include="SearchServiceImpl.cs" />
+    <Compile Include="UploadServiceImpl.cs" />
     <Compile Include="Utility\Mail.cs" />
     <Compile Include="ValidationResultExtension.cs" />
   </ItemGroup>

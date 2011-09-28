@@ -66,6 +66,26 @@ namespace Kallivayalil
         [OperationContract]
         [WebInvoke(UriTemplate = "/Committees/{id}", Method = "DELETE")]
         void DeleteCommittee(string id);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/UploadFiles", Method = "POST")]
+        UploadData CreateUploadFile(UploadData uploadFileData);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/UploadFiles/{id}", Method = "PUT")]
+        UploadData UpdateUploadFile(string id, UploadData uploadFileData);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/UploadFiles/{id}")]
+        UploadData GetUploadFile(string id);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/UploadFiles?")]
+        UploadDatas GetUploadFiles();
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/UploadFiles/{id}", Method = "DELETE")]
+        void DeleteUploadFile(string id);
         
         [OperationContract]
         [WebInvoke(UriTemplate = "/Addresses/{id}", Method = "PUT")]

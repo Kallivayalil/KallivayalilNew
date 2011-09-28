@@ -70,6 +70,7 @@
     <Compile Include="SalutationTypeData.cs" />
     <Compile Include="ShortAddressData.cs" />
     <Compile Include="TreeData.cs" />
+    <Compile Include="UploadData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ReferenceData\" />

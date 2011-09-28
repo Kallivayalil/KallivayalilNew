@@ -23,6 +23,7 @@ namespace Kallivayalil
         private readonly AutoDataContractMapper mapper;
         private readonly AddressServiceImpl addressServiceImpl;
         private readonly CommitteeServiceImpl committeeServiceImpl;
+        private readonly UploadServiceImpl uploadServiceImpl;
         private readonly PhoneServiceImpl phoneServiceImpl;
         private readonly EmailServiceImpl emailServiceImpl;
         private readonly OccupationServiceImpl occupationServiceImpl;
@@ -47,9 +48,11 @@ namespace Kallivayalil
             var phoneRepository = new PhoneRepository();
             var occupationRepository = new OccupationRepository();
             var addressRepository = new AddressRepository();
+            var uploadFileRepository = new UploadFileRepository();
             var committeeRepository = new CommitteeRepository();
 
             committeeServiceImpl = new CommitteeServiceImpl(committeeRepository);
+            uploadServiceImpl = new UploadServiceImpl(uploadFileRepository);
             constituentServiceImpl = new ConstituentServiceImpl(constituentRepository);
             registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, new Mail(new SmtpClient()));
             contactUsServiceImpl = new ContactUsServiceImpl(contactUsRepository);
@@ -205,7 +208,7 @@ namespace Kallivayalil
             return committeeData;
         }
 
-        public CommitteesData GetCommittees()
+        public virtual CommitteesData GetCommittees()
         {
             var committees = committeeServiceImpl.FindCommittees();
 
@@ -218,6 +221,55 @@ namespace Kallivayalil
         public virtual  void DeleteCommittee(string id)
         {
             committeeServiceImpl.DeleteCommittee(id);
+        }
+
+        public virtual UploadData CreateUploadFile(UploadData uploadFileData)
+        {
+            var uploadFile = new Upload();
+            mapper.Map(uploadFileData, uploadFile);
+
+            var savedUpload = uploadServiceImpl.CreateUploadFile(uploadFile);
+            var saveduploadData = new UploadData();
+            mapper.Map(savedUpload, saveduploadData);
+            return saveduploadData;
+        }
+
+        public virtual UploadData UpdateUploadFile(string id, UploadData uploadFileData)
+        {
+            var upload = new Upload();
+            mapper.Map(uploadFileData, upload);
+
+            var savedUpload = uploadServiceImpl.UpdateUploadFile(upload);
+            var savedUploadData = new UploadData();
+            mapper.Map(savedUpload, savedUploadData);
+            return savedUploadData;
+        }
+
+        public virtual UploadData GetUploadFile(string id)
+        {
+            var uploadFile = uploadServiceImpl.FindUploadFile(id);
+            var uploadData = new UploadData();
+            if (uploadFile == null)
+            {
+                throw new NotFoundException(string.Format("Address with Id:{0} not found.", id));
+            }
+            mapper.Map(uploadFile, uploadData);
+            return uploadData;
+        }
+
+        public virtual UploadDatas GetUploadFiles()
+        {
+            var uploadFiles = uploadServiceImpl.FindUploadFiles();
+
+            var uploadDatas = new UploadDatas();
+            mapper.MapList(uploadFiles, uploadDatas, typeof(UploadData));
+
+            return uploadDatas;
+        }
+
+        public virtual void DeleteUploadFile(string id)
+        {
+            uploadServiceImpl.DeleteUpload(id);
         }
 
         public virtual AddressData UpdateAddress(string id, AddressData addressData)
