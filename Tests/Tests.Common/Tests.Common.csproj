@@ -65,6 +65,7 @@
     <Compile Include="Mothers\PhoneTypeMother.cs" />
     <Compile Include="Mothers\PositionTypeMother.cs" />
     <Compile Include="Mothers\SalutationTypeMother.cs" />
+    <Compile Include="Mothers\UploadMother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

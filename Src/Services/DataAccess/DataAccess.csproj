@@ -78,6 +78,7 @@
     <Compile Include="Mappings\ReferenceData\OccupationTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\PhoneTypeMap.cs" />
     <Compile Include="Mappings\ReferenceData\SalutationTypeMap.cs" />
+    <Compile Include="Mappings\UploadMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\AssociationRepository.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Repositories\ReferenceDataRepository.cs" />
     <Compile Include="Repositories\RegisterationRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\UploadFileRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KallivayalilService\Common\Common.csproj">

@@ -84,6 +84,14 @@ namespace Tests.Common.Helpers
             session.Flush();
         }
 
+        public void HardDeleteUpload()
+        {
+            var sqlCommand = session.Connection.CreateCommand();
+            sqlCommand.CommandText = "delete from uploadfiles where id >= 10";
+            sqlCommand.ExecuteNonQuery();
+            session.Flush();
+        }
+
 
         public void HardDeleteOccupations()
         {
@@ -189,6 +197,13 @@ namespace Tests.Common.Helpers
             var savedContactUs = session.SaveOrUpdateCopy(contactUs);
             session.Flush();
             return (ContactUs)savedContactUs; 
+        }
+        
+        public Upload CreateUpload(Upload upload)
+        {
+            var savedContactUs = session.SaveOrUpdateCopy(upload);
+            session.Flush();
+            return (Upload)savedContactUs; 
         }
     }
 }
