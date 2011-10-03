@@ -13,8 +13,8 @@ GO
 
 CREATE TABLE [dbo].[UploadFiles](
 	[Id] [int] NOT NULL,
-	[FileName] [varchar](4) NOT NULL,
-	[FileDescription] [varchar](4) NOT NULL,	
+	[FileName] [varchar](40) NOT NULL,
+	[FileDescription] [varchar](100) NOT NULL,	
 	[ConstituentId] [int] NOT NULL,
 	[CreatedDateTime] [datetime] NOT NULL,
 	[CreatedBy] [varchar](50) NOT NULL,

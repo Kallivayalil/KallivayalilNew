@@ -17,6 +17,7 @@ namespace Kallivayalil.Domain
         public virtual bool HasExpired { get; set; }
         public virtual int MaritialStatus { get; set; }
         public virtual bool IsRegistered { get; set; }
+        public virtual string ProfilePicture { get; set; }
         public virtual Phone PrimaryPhone { get; set; }
 
         public virtual ConstituentName Name { get; set; }

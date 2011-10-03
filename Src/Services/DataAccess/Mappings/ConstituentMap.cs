@@ -15,6 +15,7 @@ namespace Kallivayalil.DataAccess.Mappings
             Map(x => x.BornInto).Column("BornInto");
             Map(x => x.DiedOn).Column("DiedOn");
             Map(x => x.HasExpired).Column("HasExpired");
+            Map(x => x.ProfilePicture).Column("profilepicture");
             Map(x => x.MaritialStatus).Not.Nullable().Column("MaritialStatus");
             Map(x => x.IsRegistered).Not.Nullable().Column("IsRegistered");
              

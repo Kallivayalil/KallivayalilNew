@@ -79,9 +79,9 @@ namespace Kallivayalil.DataAccess.Repositories
 
         private ICriteria CreateCriterion(string firstName, string lastName, string preferedName, bool matchAllCriteria, ICriteria nameCriteria)
         {
-            var firstNameCriterion = !string.IsNullOrEmpty(firstName) ? Restrictions.InsensitiveLike("FirstName", GetPropertyValue(firstName)) : null;
-            var lastNameCriterion = !string.IsNullOrEmpty(lastName) ?Restrictions.InsensitiveLike("LastName", GetPropertyValue(lastName)) : null;
-            var preferredNameCriterion = !string.IsNullOrEmpty(preferedName) ?Restrictions.InsensitiveLike("PreferedName", GetPropertyValue(preferedName)) : null;
+            var firstNameCriterion = nHibernateCriteriaHelper.GetCriterion("FirstName", firstName);
+            var lastNameCriterion = nHibernateCriteriaHelper.GetCriterion("LastName", lastName);
+            var preferredNameCriterion = nHibernateCriteriaHelper.GetCriterion("PreferedName", preferedName);
             return nHibernateCriteriaHelper.ConstructCriteria(matchAllCriteria, nameCriteria, firstNameCriterion, lastNameCriterion,preferredNameCriterion);
         }
 
