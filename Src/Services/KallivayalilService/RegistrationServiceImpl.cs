@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Net.Mail;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
@@ -11,10 +12,12 @@ namespace Kallivayalil
     {
         private readonly RegisterationRepository repository;
         private readonly Mail mail;
+        private ConstituentRepository constituentRepository;
 
 
-        public RegistrationServiceImpl(RegisterationRepository repository, Mail mail)
+        public RegistrationServiceImpl(RegisterationRepository repository, Mail mail, ConstituentRepository constituentRepository)
         {
+            this.constituentRepository = constituentRepository;
             this.repository = repository;
             this.mail = mail;
         }
@@ -23,6 +26,7 @@ namespace Kallivayalil
         public RegisterationConstituent CreateRegistrationConstituent(RegisterationConstituent registerationConstituent)
         {
 
+            registerationConstituent.Constituent.IsRegistered = 'A';
             var registrationConstituent = repository.Save(registerationConstituent);
 
             //need to get all admin mail ids and sent the mail to all admins
@@ -57,5 +61,9 @@ namespace Kallivayalil
             public const string AESKey = "kalli";
         }
 
+        public IList<Constituent> GetConstituentsForRegistration()
+        {
+            return constituentRepository.ConstituentsForApproval();
+        }
     }
 }

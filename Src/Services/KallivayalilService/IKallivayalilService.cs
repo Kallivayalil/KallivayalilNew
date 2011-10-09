@@ -26,6 +26,10 @@ namespace Kallivayalil
         [OperationContract]
         [WebInvoke(UriTemplate = "/Registration", Method = "POST")]
         RegisterationData CreateRegistrationConstituent(RegisterationData registerationData);
+        
+        [OperationContract]
+        [WebGet(UriTemplate = "/Registrations")]
+        ConstituentsData GetConstituentsForRegistration();
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/Constituents/{id}", Method = "PUT")]
@@ -183,7 +187,6 @@ namespace Kallivayalil
         [OperationContract]
         [WebGet(UriTemplate = "/Occupations?constituentId={constituentId}")]
         OccupationsData GetOccupations(string constituentId);
-
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/Associations?constituentId={constituentId}", Method = "POST")]

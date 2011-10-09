@@ -105,5 +105,11 @@ namespace Kallivayalil.DataAccess.Repositories
             return string.IsNullOrEmpty(propertyValue) ? propertyValue : string.Format("%{0}%", propertyValue);
         }
 
+        public List<Constituent> ConstituentsForApproval()
+        {
+            var criteria = session.CreateCriteria<Constituent>();
+            criteria.Add(Restrictions.Eq("IsRegistered", 'A'));
+            return criteria.List<Constituent>().ToList();
+        }
     }
 }

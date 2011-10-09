@@ -54,7 +54,7 @@ namespace Kallivayalil
             committeeServiceImpl = new CommitteeServiceImpl(committeeRepository);
             uploadServiceImpl = new UploadServiceImpl(uploadFileRepository);
             constituentServiceImpl = new ConstituentServiceImpl(constituentRepository);
-            registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, new Mail(new SmtpClient()));
+            registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, new Mail(new SmtpClient()), constituentRepository);
             contactUsServiceImpl = new ContactUsServiceImpl(contactUsRepository);
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(addressRepository);
@@ -116,6 +116,16 @@ namespace Kallivayalil
             var savedData = new RegisterationData();
             mapper.Map(savedRegistrationConstituent, savedData);
             return savedData;
+        }
+
+        public virtual ConstituentsData GetConstituentsForRegistration()
+        {
+            var constituents = registrationServiceImpl.GetConstituentsForRegistration();
+
+            var constituentsData = new ConstituentsData();
+            mapper.MapList(constituents, constituentsData, typeof(ConstituentData));
+
+            return constituentsData;
         }
 
         public virtual ConstituentData UpdateConstituent(string id, ConstituentData constituentData)

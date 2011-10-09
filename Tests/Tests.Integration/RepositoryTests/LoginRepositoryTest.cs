@@ -68,7 +68,7 @@ namespace Tests.Integration.RepositoryTests
             var constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
             var email = testDataHelper.CreateEmail(EmailMother.Official(constituent));
 
-            var login = new Login(){Email = email,Password = "somepass", IsAdmin = true};
+            var login = new Login {Email = email,Password = "somepass", IsAdmin = true};
             var savedLogin = loginRepository.Save(login);
 
             Assert.That(savedLogin.Id,Is.GreaterThan(0));

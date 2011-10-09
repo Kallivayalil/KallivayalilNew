@@ -32,9 +32,6 @@ namespace Kallivayalil.Client
         public int MaritialStatus { get; set; }
 
         [DataMember]
-        public bool IsRegistered { get; set; }
-
-        [DataMember]
         public DateTime? CreatedDateTime { get; set; }
 
         [DataMember]

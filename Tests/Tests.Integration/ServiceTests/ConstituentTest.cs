@@ -22,7 +22,7 @@ namespace Tests.Integration.ServiceTests
             testDataHelper = new TestDataHelper();
             constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
             testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.AgnesAlba()));
-            constituentData = new ConstituentData { Gender = "F", BornOn = DateTime.Now, BranchName = new BranchTypeData { Id = 1, Description = "Kallivayalil" }, MaritialStatus = 1, IsRegistered = false };
+            constituentData = new ConstituentData { Gender = "F", BornOn = DateTime.Now, BranchName = new BranchTypeData { Id = 1, Description = "Kallivayalil" }, MaritialStatus = 1 };
             constituentData.Name = new ConstituentNameData {FirstName = "James", LastName = "Franklin", Salutation = new SalutationTypeData {Id = 1, Description = "Mr"}};
         }
 
@@ -61,14 +61,12 @@ namespace Tests.Integration.ServiceTests
 
             savedConstituent.Gender = "M";
             savedConstituent.BranchName = new BranchTypeData { Id = 3, Description = "Kondooparambil" };
-            savedConstituent.IsRegistered = true;
 
             var updatedConstituentData = HttpHelper.Put(string.Format("{0}/{1}", baseUri, savedConstituent.Id), savedConstituent);
             Assert.IsNotNull(updatedConstituentData);
             Assert.That(updatedConstituentData.Id, Is.EqualTo(savedConstituent.Id));
             Assert.That(updatedConstituentData.Gender, Is.EqualTo("M"));
             Assert.That(updatedConstituentData.BranchName.Id, Is.EqualTo(3));
-            Assert.That(updatedConstituentData.IsRegistered, Is.EqualTo(true));
         }
 
         [Test]

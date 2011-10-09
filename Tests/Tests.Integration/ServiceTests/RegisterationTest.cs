@@ -23,7 +23,7 @@ namespace Tests.Integration.ServiceTests
             testDataHelper = new TestDataHelper();
             constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
             testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.AgnesAlba()));
-            constituentData = new ConstituentData { Gender = "F", BornOn = DateTime.Now, BranchName = new BranchTypeData { Id = 1, Description = "Kallivayalil" }, MaritialStatus = 1, IsRegistered = false };
+            constituentData = new ConstituentData { Gender = "F", BornOn = DateTime.Now, BranchName = new BranchTypeData { Id = 1, Description = "Kallivayalil" }, MaritialStatus = 1 };
             constituentData.Name = new ConstituentNameData {FirstName = "James", LastName = "Franklin", Salutation = new SalutationTypeData {Id = 1, Description = "Mr"}};
         }
 
@@ -40,6 +40,17 @@ namespace Tests.Integration.ServiceTests
 
 
         [Test]
+        public void ShouldFetchConstituentsWhoHaveAppliedForRegistration()
+        {
+            testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(),'A'));
+            testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.AgnesAlba(),'A'));
+
+            var constituentsData = HttpHelper.Get<ConstituentsData>(baseUri + "s");
+
+            Assert.That(constituentsData.Count,Is.EqualTo(2));
+        }
+
+        [Test]
         public void ShouldCreateRegisterationConstituent()
         {
             var registerationData = new RegisterationData()
@@ -48,7 +59,7 @@ namespace Tests.Integration.ServiceTests
                                             Phone = PhoneDataMother.Mobile(),
                                             Email = EmailDataMother.Official().Address,
                                             Password = "Password",
-                                            Address = AddressDataMother.London()
+                                            Address = AddressDataMother.London(),
                                         };
 
             var savedRegisterationConstituent = HttpHelper.Post(baseUri, registerationData);

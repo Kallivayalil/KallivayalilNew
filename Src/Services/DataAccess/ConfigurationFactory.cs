@@ -54,7 +54,7 @@ namespace Kallivayalil.DataAccess
 
         private static bool ShouldShowSql
         {
-            get { return true; }
+            get { return false; }
         }
 
         private static void AddListeners(Configuration configuration)

@@ -23,7 +23,7 @@ namespace Tests.Integration.RepositoryTests
         {
             testDataHelper = new TestDataHelper();
 
-            constituent = new Constituent {Gender = "M", BornOn = DateTime.Today, BranchName = BranchTypeMother.Kallivayalil(), MaritialStatus = 1, IsRegistered = false};
+            constituent = new Constituent {Gender = "M", BornOn = DateTime.Today, BranchName = BranchTypeMother.Kallivayalil(), MaritialStatus = 1, IsRegistered = 'N'};
             constituent.Name = ConstituentNameMother.JamesFranklin();
             savedConstituent = testDataHelper.CreateConstituent(constituent);
 
@@ -159,5 +159,17 @@ namespace Tests.Integration.RepositoryTests
             Assert.That(result.Count(), Is.EqualTo(1));
         }
 
+        [Test]
+        public void ShouldGetAllConstituentsForApproval()
+        {
+            var constituents = constituentRepository.ConstituentsForApproval();
+            Assert.That(constituents.Count,Is.EqualTo(0));
+
+            var savedForApproval = constituentRepository.Save(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(), 'A'));
+
+            constituents = constituentRepository.ConstituentsForApproval();
+            Assert.That(constituents.Count, Is.EqualTo(1));
+            Assert.That(constituents.First().Id, Is.EqualTo(savedForApproval.Id));
+        }
     }
 }
