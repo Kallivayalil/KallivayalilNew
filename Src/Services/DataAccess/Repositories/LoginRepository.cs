@@ -59,5 +59,16 @@ namespace Kallivayalil.DataAccess.Repositories
         {
             return userLogin.Password.Equals(password);
         }
+
+        // todo :  manage transactions using windsor
+        public Login Save(Login login)
+        {
+            using (var txn = session.BeginTransaction())
+            {
+                var savedLogin = SaveOrUpdate(login, txn);
+                txn.Commit();
+                return savedLogin;
+            }
+        }
     }
 }

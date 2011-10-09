@@ -1,3 +1,4 @@
+using System;
 using Kallivayalil.Common;
 
 namespace Kallivayalil.Domain
@@ -6,5 +7,6 @@ namespace Kallivayalil.Domain
     {
         public virtual Email Email { get; set; }
         public virtual string Password { get; set; }
+        public virtual bool IsAdmin { get; set; }
     }
 }

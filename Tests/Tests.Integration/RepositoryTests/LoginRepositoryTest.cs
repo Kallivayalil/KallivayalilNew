@@ -2,6 +2,8 @@ using Kallivayalil.DataAccess;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
 using NUnit.Framework;
+using Tests.Common.Helpers;
+using Tests.Common.Mothers;
 
 namespace Tests.Integration.RepositoryTests
 {
@@ -10,12 +12,22 @@ namespace Tests.Integration.RepositoryTests
     {
         private Email savedEmail;
         private LoginRepository loginRepository;
+        private TestDataHelper testDataHelper;
 
         [SetUp]
         public void SetUp()
         {
             savedEmail = new Email {Id = 1};
             loginRepository = new LoginRepository(ConfigurationFactory.SessionFactory.OpenSession());
+            testDataHelper = new TestDataHelper();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            testDataHelper.HardDeleteLogins();
+            testDataHelper.HardDeleteEmails();
+            testDataHelper.HardDeleteConstituents();
         }
 
         [Test]
@@ -36,5 +48,32 @@ namespace Tests.Integration.RepositoryTests
             var authenticate = loginRepository.Authenticate(login, "Password");
             Assert.IsTrue(authenticate);
         }
+
+        [Test]
+        public void ShouldCreateALoginAsNonAdminByDefault()
+        {
+            var constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
+            var email = testDataHelper.CreateEmail(EmailMother.Official(constituent));
+
+            var login = new Login(){Email = email,Password = "somepass"};
+            var savedLogin = loginRepository.Save(login);
+
+            Assert.That(savedLogin.Id,Is.GreaterThan(0));
+            Assert.IsFalse(savedLogin.IsAdmin);
+        } 
+        
+        [Test]
+        public void ShouldCreateALoginAsAdmin()
+        {
+            var constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
+            var email = testDataHelper.CreateEmail(EmailMother.Official(constituent));
+
+            var login = new Login(){Email = email,Password = "somepass", IsAdmin = true};
+            var savedLogin = loginRepository.Save(login);
+
+            Assert.That(savedLogin.Id,Is.GreaterThan(0));
+            Assert.IsTrue(savedLogin.IsAdmin);
+        }
+
     }
 }
