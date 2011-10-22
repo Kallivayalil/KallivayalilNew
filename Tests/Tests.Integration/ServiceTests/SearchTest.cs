@@ -3,6 +3,7 @@ using Kallivayalil.Domain;
 using NUnit.Framework;
 using Tests.Common.Helpers;
 using Tests.Common.Mothers;
+using System.Linq;
 
 namespace Tests.Integration.ServiceTests
 {
@@ -26,8 +27,8 @@ namespace Tests.Integration.ServiceTests
         [TearDown]
         public void TearDown()
         {
-            testDataHelper.HardDeleteAddress();
             testDataHelper.HardDeletePhones();
+            testDataHelper.HardDeleteAddress();
             testDataHelper.HardDeleteEmails();
             testDataHelper.HardDeleteOccupations();
             testDataHelper.HardDeleteEducationDetails();
@@ -41,6 +42,23 @@ namespace Tests.Integration.ServiceTests
             var uriString = string.Format("{0}?emailId={1}", "http://localhost/kallivayalilService/KallivayalilService.svc/Find", "james@franklin.com");
             var constituentData = HttpHelper.Get<ConstituentData>(uriString);
 
+            Assert.IsNotNull(constituentData);
+            Assert.That(constituentData.Id,Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ShouldSearchForConstituentGivenId()
+        {
+            var registeredConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(), 'A'));
+            var address = testDataHelper.CreateAddress(AddressMother.London(registeredConstituent));
+            testDataHelper.CreatePhone(PhoneMother.Mobile(registeredConstituent, address));
+            testDataHelper.CreateEmail(EmailMother.Official(registeredConstituent));
+            testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(), 'R'));
+
+            var uriString = string.Format("{0}?constituentId={1}", "http://localhost/kallivayalilService/KallivayalilService.svc/SearchUnRegistered", registeredConstituent.Id);
+            var constituentsData = HttpHelper.Get<ConstituentsData>(uriString);
+
+            var constituentData = constituentsData.First();
             Assert.IsNotNull(constituentData);
             Assert.That(constituentData.Id,Is.EqualTo(1));
         }

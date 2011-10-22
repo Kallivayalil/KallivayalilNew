@@ -163,6 +163,22 @@ namespace Kallivayalil
             return constituentsData;
         }
 
+        public virtual ConstituentsData SearchUnRegistered(string constituentId)
+        {
+            var constituent = constituentServiceImpl.FindConstituent(constituentId);
+            var emails = emailServiceImpl.FindEmails(constituentId);
+            var phones = phoneServiceImpl.FindPhones(constituentId);
+            var address = addressServiceImpl.FindAddresses(constituentId).First();
+
+            var constituentName = constituent.Name;
+            return Search(constituentName.FirstName, constituentName.LastName, emails.First().Address,
+                          phones.First().Number, string.Empty, string.Empty, string.Empty
+                          , string.Empty, string.Empty, string.Empty, address.Line1, address.State, address.City,
+                          address.Country, address.PostCode
+                          , constituentName.PreferedName, constituent.HouseName, constituent.BranchName.Description,
+                          false);
+        }
+
         public virtual ConstituentData SearchByEmailId(string emailId)
         {
             var constituent = searchServiceImpl.SearchBy(emailId);

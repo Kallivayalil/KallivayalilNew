@@ -42,6 +42,10 @@ namespace Kallivayalil
         [OperationContract]
         [WebGet(UriTemplate = @"/Search?firstName={firstName}&lastName={lastName}&email={email}&phone={phone}&occupationName={occupationName}&occupationDescription={occupationDescription}&instituteName={instituteName}&instituteLocation={instituteLocation}&qualification={qualification}&yearOfGradutation={yearOfGradutation}&address={address}&state={state}&city={city}&country={country}&postcode={postcode}&preferedName={preferedName}&houseName={houseName}&branch={branch}&matchAllCriteria={matchAllCriteria}")]
         ConstituentsData Search(string firstName, string lastName, string email, string phone, string occupationName, string occupationDescription, string instituteName, string instituteLocation, string qualification, string yearOfGradutation, string address, string state, string city, string country, string postcode, string preferedName, string houseName, string branch, bool matchAllCriteria); 
+
+        [OperationContract]
+        [WebGet(UriTemplate = @"/SearchUnRegistered?constituentId={constituentId}")]
+        ConstituentsData SearchUnRegistered(string constituentId); 
         
         [OperationContract]
         [WebGet(UriTemplate = "/Find?emailId={emailId}")]
