@@ -26,6 +26,10 @@ namespace Kallivayalil
         [OperationContract]
         [WebInvoke(UriTemplate = "/Registration", Method = "POST")]
         RegisterationData CreateRegistrationConstituent(RegisterationData registerationData);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Registration/RegisterConstituent", Method = "POST")]
+        ConfirmRegisterationData RegisterConstituent(ConfirmRegisterationData confirmRegisterationData);
         
         [OperationContract]
         [WebGet(UriTemplate = "/Registrations")]

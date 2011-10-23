@@ -42,11 +42,27 @@ namespace Tests.Integration.RepositoryTests
         }
 
         [Test]
-        public void ShouldAuthenticateUser()
+        public void ShouldAuthenticateRegisteredUser()
         {
             var login = loginRepository.Load(savedEmail);
             var authenticate = loginRepository.Authenticate(login, "Password");
             Assert.IsTrue(authenticate);
+        }  
+        
+        [Test]
+        public void ShouldNotAuthenticateNonRegisteredUser()
+        {
+            var constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(),'A'));
+            var email = testDataHelper.CreateEmail(EmailMother.Official(constituent));
+            var login = new Login
+                            {
+                                Email = email,
+                                IsAdmin = false,
+                                Password = "Password"
+                            };
+            var savedLogin = loginRepository.Save(login);
+            var authenticate = loginRepository.Authenticate(savedLogin, "Password");
+            Assert.IsFalse(authenticate);
         }
 
         [Test]

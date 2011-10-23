@@ -47,6 +47,7 @@
     <Compile Include="AssociationTypeData.cs" />
     <Compile Include="BranchTypeData.cs" />
     <Compile Include="CommitteeData.cs" />
+    <Compile Include="ConfirmRegisterationData.cs" />
     <Compile Include="ConstituentData.cs" />
     <Compile Include="ConstituentNameData.cs" />
     <Compile Include="ContactUsData.cs" />

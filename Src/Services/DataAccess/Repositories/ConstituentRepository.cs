@@ -111,5 +111,26 @@ namespace Kallivayalil.DataAccess.Repositories
             criteria.Add(Restrictions.Eq("IsRegistered", 'A'));
             return criteria.List<Constituent>().ToList();
         }
+
+        public void CascadeDelete(int constituentId)
+        {
+            using (var txn = session.BeginTransaction())
+            {
+                var constituent = session.Load<Constituent>(constituentId);
+
+                if (constituent != null)
+                {
+                    var email = session.CreateCriteria<Email>().Add(Restrictions.Eq("Constituent", constituent)).Add(Restrictions.Eq("IsPrimary", true)).UniqueResult<Email>();
+
+                    session.CreateSQLQuery("delete from logins where email = " + email.Id).ExecuteUpdate();
+                    session.CreateSQLQuery("delete from emails where ConstituentId = " + constituentId).ExecuteUpdate();
+                    session.CreateSQLQuery("delete from phones where ConstituentId = " + constituentId).ExecuteUpdate();
+                    session.CreateSQLQuery("delete from addresses where ConstituentId = " + constituentId).ExecuteUpdate();
+
+                    session.Delete(constituent);
+                }
+                txn.Commit();
+            }
+        }
     }
 }

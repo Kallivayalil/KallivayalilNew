@@ -118,6 +118,13 @@ namespace Kallivayalil
             return savedData;
         }
 
+        public virtual ConfirmRegisterationData RegisterConstituent(ConfirmRegisterationData confirmRegisterationData)
+        {
+            registrationServiceImpl.RegisterConstituent(confirmRegisterationData.Constituent, confirmRegisterationData.ConstituentToRegister, confirmRegisterationData.IsAdmin, confirmRegisterationData.UpdateAndRegister);
+            return confirmRegisterationData;
+            
+        }
+
         public virtual ConstituentsData GetConstituentsForRegistration()
         {
             var constituents = registrationServiceImpl.GetConstituentsForRegistration();

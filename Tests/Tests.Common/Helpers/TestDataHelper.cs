@@ -2,6 +2,8 @@
 using Kallivayalil.DataAccess;
 using Kallivayalil.Domain;
 using NHibernate;
+using NHibernate.Criterion;
+using System.Linq;
 
 namespace Tests.Common.Helpers
 {
@@ -116,6 +118,15 @@ namespace Tests.Common.Helpers
             return (Phone) savedPhone;
         }
 
+
+        public Email LoadPrimaryEmail(int constituentId)
+        {
+            var constituent = session.Load<Constituent>(constituentId);
+            var criteria = session.CreateCriteria<Email>();
+            criteria.Add(Restrictions.Eq("Constituent", constituent)).Add(Restrictions.Eq("IsPrimary",true));
+            return criteria.UniqueResult<Email>();
+        }
+
         public Occupation CreateOccupation(Occupation occupation)
         {
             var savedOccupation = session.SaveOrUpdateCopy(occupation);
@@ -137,6 +148,7 @@ namespace Tests.Common.Helpers
             sqlCommand.ExecuteNonQuery();
             session.Flush();
         }
+
 
         public void HardDeleteCommittees()
         {
@@ -160,6 +172,13 @@ namespace Tests.Common.Helpers
             var savedEmail = session.SaveOrUpdateCopy(email);
             session.Flush();
             return (Email) savedEmail;
+        }
+
+        public Login CreateLogin(Login login)
+        {
+            var savedLogin = session.SaveOrUpdateCopy(login);
+            session.Flush();
+            return (Login) savedLogin;
         }
        
         public Committee CreateCommittee(Committee committee)
@@ -204,6 +223,13 @@ namespace Tests.Common.Helpers
             var savedContactUs = session.SaveOrUpdateCopy(upload);
             session.Flush();
             return (Upload)savedContactUs; 
+        }
+
+        public Login LoadLoginInfo(Email email)
+        {
+            var criteria = session.CreateCriteria<Login>();
+            criteria.Add(Restrictions.Eq("Email", email));
+            return (Login)criteria.UniqueResult();
         }
     }
 }

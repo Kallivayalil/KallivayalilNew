@@ -5,6 +5,7 @@ using System.Net.Mail;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
 using Kallivayalil.Utility;
+using System.Linq;
 
 namespace Kallivayalil
 {
@@ -12,7 +13,7 @@ namespace Kallivayalil
     {
         private readonly RegisterationRepository repository;
         private readonly Mail mail;
-        private ConstituentRepository constituentRepository;
+        private readonly ConstituentRepository constituentRepository;
 
 
         public RegistrationServiceImpl(RegisterationRepository repository, Mail mail, ConstituentRepository constituentRepository)
@@ -64,6 +65,18 @@ namespace Kallivayalil
         public IList<Constituent> GetConstituentsForRegistration()
         {
             return constituentRepository.ConstituentsForApproval();
+        }
+
+        public void RegisterConstituent(int constituent, int constituentToRegister, bool isAdmin, bool updateAndRegister)
+        {
+            var existingConstituent = constituentRepository.Load(constituent);
+            var newConstituent = constituentRepository.Load(constituentToRegister);
+
+            existingConstituent.IsRegistered = 'R';
+            constituentRepository.Update(existingConstituent);
+
+            constituentRepository.CascadeDelete(newConstituent.Id);
+          
         }
     }
 }

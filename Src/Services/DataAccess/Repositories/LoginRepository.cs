@@ -57,7 +57,7 @@ namespace Kallivayalil.DataAccess.Repositories
 
         public bool Authenticate(Login userLogin, string password)
         {
-            return userLogin.Password.Equals(password);
+            return string.Equals(userLogin.Email.Constituent.IsRegistered.ToString(),"R",StringComparison.InvariantCultureIgnoreCase) && userLogin.Password.Equals(password);
         }
 
         // todo :  manage transactions using windsor

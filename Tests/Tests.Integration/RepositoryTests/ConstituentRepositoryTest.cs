@@ -37,6 +37,7 @@ namespace Tests.Integration.RepositoryTests
             testDataHelper.session.Clear();
             testDataHelper.HardDeleteAddress();
             testDataHelper.HardDeletePhones();
+            testDataHelper.HardDeleteLogins();
             testDataHelper.HardDeleteEmails();
             testDataHelper.HardDeleteEducationDetails();
             testDataHelper.HardDeleteOccupations();
@@ -54,6 +55,7 @@ namespace Tests.Integration.RepositoryTests
             Assert.That(savedConst.Name.Id, Is.GreaterThan(0));
             constituentRepository.Delete(savedConst);
         }
+
 
         [Test]
         public void ShouldUpdateAnExistingConstituent()
@@ -83,6 +85,20 @@ namespace Tests.Integration.RepositoryTests
         public void ShouldDeleteAConstituent()
         {
             constituentRepository.Delete(savedConstituent.Id);
+
+            Assert.That(constituentRepository.Exists(savedConstituent), Is.False);
+        }
+
+        [Test]
+        public void ShouldDeleteCascadeAConstituent()
+        {
+            var official = EmailMother.Official(savedConstituent);
+            official.IsPrimary = true;
+            var email = testDataHelper.CreateEmail(official);
+            var phone = testDataHelper.CreatePhone(PhoneMother.Mobile((savedConstituent)));
+            var login = testDataHelper.CreateLogin(new Login {IsAdmin = false,Password = "Pass",Email =email });
+
+            constituentRepository.CascadeDelete(savedConstituent.Id);
 
             Assert.That(constituentRepository.Exists(savedConstituent), Is.False);
         }
