@@ -91,5 +91,25 @@ namespace Tests.Integration.RepositoryTests
             Assert.IsTrue(savedLogin.IsAdmin);
         }
 
+        [Test]
+        public void ShouldUpdateALoginAsAdmin()
+        {
+            var constituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin()));
+            var email = testDataHelper.CreateEmail(EmailMother.Official(constituent));
+
+            var login = new Login {Email = email,Password = "somepass", IsAdmin = false};
+            var savedLogin = loginRepository.Save(login);
+
+            Assert.That(savedLogin.Id,Is.GreaterThan(0));
+            Assert.IsFalse(savedLogin.IsAdmin);
+
+            savedLogin.IsAdmin = true;
+            var updatedLogin = loginRepository.Update(savedLogin);
+
+            Assert.IsTrue(updatedLogin.IsAdmin);
+        }
+
+
+
     }
 }

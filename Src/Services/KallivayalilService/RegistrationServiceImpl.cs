@@ -14,12 +14,16 @@ namespace Kallivayalil
         private readonly RegisterationRepository repository;
         private readonly Mail mail;
         private readonly ConstituentRepository constituentRepository;
+        private readonly LoginRepository loginRepository;
+        private readonly EmailRepository emailRepository;
 
 
-        public RegistrationServiceImpl(RegisterationRepository repository, Mail mail, ConstituentRepository constituentRepository)
+        public RegistrationServiceImpl(RegisterationRepository repository, Mail mail, ConstituentRepository constituentRepository, LoginRepository loginRepository, EmailRepository emailRepository)
         {
             this.constituentRepository = constituentRepository;
             this.repository = repository;
+            this.loginRepository = loginRepository;
+            this.emailRepository = emailRepository;
             this.mail = mail;
         }
 
@@ -73,10 +77,20 @@ namespace Kallivayalil
             var newConstituent = constituentRepository.Load(constituentToRegister);
 
             existingConstituent.IsRegistered = 'R';
-            constituentRepository.Update(existingConstituent);
+            var registeredConstituent = constituentRepository.Update(existingConstituent);
 
+            UpdateAsAdmin(isAdmin, registeredConstituent.Id);
+            
             constituentRepository.CascadeDelete(newConstituent.Id);
-          
+        }
+
+        private void UpdateAsAdmin(bool isAdmin, int registeredConstituentId)
+        {
+            var primaryEmail = emailRepository.GetPrimary(registeredConstituentId);
+
+            var login = loginRepository.Load(primaryEmail);
+            login.IsAdmin = isAdmin;
+            loginRepository.Update(login);
         }
     }
 }

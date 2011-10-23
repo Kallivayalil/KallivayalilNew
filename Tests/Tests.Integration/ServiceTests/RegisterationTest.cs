@@ -83,6 +83,44 @@ namespace Tests.Integration.ServiceTests
             var primaryEmail = testDataHelper.LoadPrimaryEmail(oldConstituent.Id);
             var login = testDataHelper.LoadLoginInfo(primaryEmail);
             Assert.IsNotNull(login);
+            Assert.IsFalse(login.IsAdmin);
+
+        }
+
+        [Test]
+        public void ShouldRegisterAConstituentAsAdmin()
+        {
+            var newConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(), 'A'));
+            var official = EmailMother.Official(newConstituent);
+            official.IsPrimary = true;
+            var emailForNew = testDataHelper.CreateEmail(official);
+
+            var oldConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(), 'R'));
+            var official1 = EmailMother.Official(oldConstituent);
+            official1.IsPrimary = true;
+            var email = testDataHelper.CreateEmail(official1);
+            testDataHelper.CreateLogin(new Login {Email = email, Password = "Password", IsAdmin = false});
+
+            var confirmRegisterationData = new ConfirmRegisterationData
+                                               {
+                                                   Constituent = oldConstituent.Id,
+                                                   ConstituentToRegister = newConstituent.Id,
+                                                   IsAdmin = true,
+                                                   UpdateAndRegister = false
+                                               };
+
+            HttpHelper.Post(baseUri + "/RegisterConstituent", confirmRegisterationData);
+
+            testDataHelper.session.Clear();
+            Assert.IsNull(testDataHelper.session.Get<Constituent>(newConstituent.Id));
+
+            var registeredConstituent = testDataHelper.session.Load<Constituent>(oldConstituent.Id);
+            Assert.IsTrue(registeredConstituent.IsRegistered.ToString().Equals("R"));
+            
+            var primaryEmail = testDataHelper.LoadPrimaryEmail(oldConstituent.Id);
+            var login = testDataHelper.LoadLoginInfo(primaryEmail);
+            Assert.IsNotNull(login);
+            Assert.IsTrue(login.IsAdmin);
 
         }
 

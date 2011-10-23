@@ -54,7 +54,7 @@ namespace Kallivayalil
             committeeServiceImpl = new CommitteeServiceImpl(committeeRepository);
             uploadServiceImpl = new UploadServiceImpl(uploadFileRepository);
             constituentServiceImpl = new ConstituentServiceImpl(constituentRepository);
-            registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, new Mail(new SmtpClient()), constituentRepository);
+            registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, new Mail(new SmtpClient()), constituentRepository, new LoginRepository(), new EmailRepository());
             contactUsServiceImpl = new ContactUsServiceImpl(contactUsRepository);
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(addressRepository);

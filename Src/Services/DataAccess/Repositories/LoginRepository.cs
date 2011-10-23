@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using Kallivayalil.Domain;
 using NHibernate;
+using NHibernate.Criterion;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
@@ -17,7 +18,7 @@ namespace Kallivayalil.DataAccess.Repositories
 
         public Login Load(Email email)
         {
-            var login = Load<Login>(email.Id);
+            var login = session.CreateCriteria<Login>().Add(Restrictions.Eq("Email", email)).UniqueResult<Login>();
             if (login != null && !string.IsNullOrEmpty(login.Password))
             {
                 var transaction = session.BeginTransaction();
@@ -25,7 +26,7 @@ namespace Kallivayalil.DataAccess.Repositories
 
                 var dbCommand = session.Connection.CreateCommand();
                 transaction.Enlist(dbCommand);
-                dbCommand.CommandText = string.Format(GetPassword, login.Id);
+                dbCommand.CommandText = string.Format(GetPassword, email.Id);
                 var result = dbCommand.ExecuteScalar();
                 login.Password = result as string;
                 CloseSymmetricKey(session.Connection, transaction);
@@ -66,6 +67,16 @@ namespace Kallivayalil.DataAccess.Repositories
             using (var txn = session.BeginTransaction())
             {
                 var savedLogin = SaveOrUpdate(login, txn);
+                txn.Commit();
+                return savedLogin;
+            }
+        }
+
+        public Login Update(Login loginToUpdate)
+        {
+            using (var txn = session.BeginTransaction())
+            {
+                var savedLogin = SaveOrUpdate(loginToUpdate, txn);
                 txn.Commit();
                 return savedLogin;
             }
