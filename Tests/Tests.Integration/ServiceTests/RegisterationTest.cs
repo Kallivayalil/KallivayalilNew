@@ -81,6 +81,34 @@ namespace Tests.Integration.ServiceTests
         }
 
         [Test]
+        public void ShouldRegisterAConstituentWhoIsNew()
+        {
+            Constituent newConstituent = GetNewConstituent(false);
+
+
+            var confirmRegisterationData = new ConfirmRegisterationData
+                                               {
+                                                   Constituent = 0,
+                                                   ConstituentToRegister = newConstituent.Id,
+                                                   IsAdmin = false,
+                                                   UpdateAndRegister = false
+                                               };
+
+            HttpHelper.Post(baseUri + "/RegisterConstituent", confirmRegisterationData);
+
+            testDataHelper.session.Clear();
+
+            var registeredConstituent = testDataHelper.session.Load<Constituent>(newConstituent.Id);
+            Assert.IsTrue(registeredConstituent.IsRegistered.ToString().Equals("R"));
+            
+            var primaryEmail = testDataHelper.LoadPrimaryEmail(newConstituent.Id);
+            var login = testDataHelper.LoadLoginInfo(primaryEmail);
+            Assert.IsNotNull(login);
+            Assert.IsFalse(login.IsAdmin);
+
+        }
+
+        [Test]
         public void ShouldRegisterAConstituentAsAdmin()
         {
             Constituent newConstituent = GetNewConstituent(true);

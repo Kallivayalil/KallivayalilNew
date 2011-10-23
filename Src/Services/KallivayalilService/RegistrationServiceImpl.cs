@@ -71,7 +71,7 @@ namespace Kallivayalil
 
         public void RegisterConstituent(int constituent, int constituentToRegister, bool isAdmin, bool updateAndRegister)
         {
-            Constituent existingConstituent = !string.IsNullOrEmpty(constituent.ToString())? constituentRepository.Load(constituent):null;
+            Constituent existingConstituent = constituent > 0 ? constituentRepository.Load(constituent):null;
             Constituent newConstituent = constituentRepository.Load(constituentToRegister);
             Constituent registeredConstituent = null;
             if (existingConstituent != null)
