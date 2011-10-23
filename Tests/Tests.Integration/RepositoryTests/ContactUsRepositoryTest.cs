@@ -10,7 +10,6 @@ namespace Tests.Integration.RepositoryTests
     public class ContactUsRepositoryTest
     {
         private TestDataHelper testDataHelper;
-        private Constituent savedConstituent;
         private ContactUsRepository contactUsRepository;
         private ContactUs savedContactUs;
 

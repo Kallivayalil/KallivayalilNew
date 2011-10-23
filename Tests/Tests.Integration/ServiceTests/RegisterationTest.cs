@@ -53,16 +53,9 @@ namespace Tests.Integration.ServiceTests
         [Test]
         public void ShouldRegisterAConstituent()
         {
-            var newConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(), 'A'));
-            var official = EmailMother.Official(newConstituent);
-            official.IsPrimary = true;
-            var emailForNew = testDataHelper.CreateEmail(official);
+            Constituent newConstituent = GetNewConstituent(false);
 
-            var oldConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(), 'R'));
-            var official1 = EmailMother.Official(oldConstituent);
-            official1.IsPrimary = true;
-            var email = testDataHelper.CreateEmail(official1);
-            testDataHelper.CreateLogin(new Login() {Email = email, Password = "Pass", IsAdmin = false});
+            Constituent oldConstituent = GetOldConstituent();
 
             var confirmRegisterationData = new ConfirmRegisterationData
                                                {
@@ -90,16 +83,9 @@ namespace Tests.Integration.ServiceTests
         [Test]
         public void ShouldRegisterAConstituentAsAdmin()
         {
-            var newConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(), 'A'));
-            var official = EmailMother.Official(newConstituent);
-            official.IsPrimary = true;
-            var emailForNew = testDataHelper.CreateEmail(official);
+            Constituent newConstituent = GetNewConstituent(true);
 
-            var oldConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(), 'R'));
-            var official1 = EmailMother.Official(oldConstituent);
-            official1.IsPrimary = true;
-            var email = testDataHelper.CreateEmail(official1);
-            testDataHelper.CreateLogin(new Login {Email = email, Password = "Password", IsAdmin = false});
+            Constituent oldConstituent = GetOldConstituent();
 
             var confirmRegisterationData = new ConfirmRegisterationData
                                                {
@@ -122,6 +108,67 @@ namespace Tests.Integration.ServiceTests
             Assert.IsNotNull(login);
             Assert.IsTrue(login.IsAdmin);
 
+        }
+        [Test]
+        public void ShouldUpdateAndRegisterAConstituent()
+        {
+            Constituent newConstituent = GetNewConstituent(false);
+
+            Constituent oldConstituent = GetOldConstituent();
+
+            var confirmRegisterationData = new ConfirmRegisterationData
+                                               {
+                                                   Constituent = oldConstituent.Id,
+                                                   ConstituentToRegister = newConstituent.Id,
+                                                   IsAdmin = true,
+                                                   UpdateAndRegister = true
+                                               };
+            HttpHelper.Post(baseUri + "/RegisterConstituent", confirmRegisterationData);
+
+            testDataHelper.session.Clear();
+            Assert.IsNull(testDataHelper.session.Get<Constituent>(newConstituent.Id));
+
+            var registeredConstituent = testDataHelper.session.Load<Constituent>(oldConstituent.Id);
+            Assert.IsTrue(registeredConstituent.IsRegistered.ToString().Equals("R"));
+            
+            var primaryEmail = testDataHelper.LoadPrimaryEmail(oldConstituent.Id);
+            var login = testDataHelper.LoadLoginInfo(primaryEmail);
+
+            Assert.IsNotNull(login);
+            Assert.IsTrue(login.IsAdmin);
+            Assert.That(login.Email.Type.Description,Is.EqualTo(EmailTypeMother.Personal().Description));
+            
+            var emails = testDataHelper.GetEmailsFor(registeredConstituent.Id);
+            Assert.That(emails.Count,Is.EqualTo(2));
+
+            var phones = testDataHelper.GetPhonesFor(registeredConstituent.Id);
+            Assert.That(phones.Count,Is.EqualTo(2));
+
+            var addresses = testDataHelper.GetAddressesFor(registeredConstituent.Id);
+            Assert.That(addresses.Count,Is.EqualTo(2));
+        }
+
+        private Constituent GetOldConstituent()
+        {
+            var oldConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(), 'R'));
+            var official = EmailMother.Official(oldConstituent);
+            official.IsPrimary = true;
+            var email = testDataHelper.CreateEmail(official);
+            var address2 = testDataHelper.CreateAddress(AddressMother.SanFrancisco(oldConstituent));
+            var phone2 = testDataHelper.CreatePhone(PhoneMother.Mobile(oldConstituent));
+            return oldConstituent;
+        }
+
+        private Constituent GetNewConstituent(bool isAdmin)
+        {
+            var newConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(), 'A'));
+            var personal = EmailMother.Personal(newConstituent);
+            personal.IsPrimary = true;
+            var emailForNew = testDataHelper.CreateEmail(personal);
+            var address1 = testDataHelper.CreateAddress(AddressMother.London(newConstituent));
+            var phone1 = testDataHelper.CreatePhone(PhoneMother.PrimaryMobile(newConstituent));
+            testDataHelper.CreateLogin(new Login { Email = emailForNew, Password = "Password", IsAdmin = isAdmin });
+            return newConstituent;
         }
 
         [Test]

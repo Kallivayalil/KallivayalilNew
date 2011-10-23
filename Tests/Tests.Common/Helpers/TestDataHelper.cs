@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Kallivayalil.DataAccess;
 using Kallivayalil.Domain;
 using NHibernate;
@@ -230,6 +232,30 @@ namespace Tests.Common.Helpers
             var criteria = session.CreateCriteria<Login>();
             criteria.Add(Restrictions.Eq("Email", email));
             return (Login)criteria.UniqueResult();
+        }
+
+        public IList<Email> GetEmailsFor(int constituentId)
+        {
+            var constituent = session.Load<Constituent>(constituentId);
+            var criteria = session.CreateCriteria<Email>();
+            criteria.Add(Restrictions.Eq("Constituent", constituent));
+            return criteria.List<Email>();
+        }
+
+        public IList<Phone> GetPhonesFor(int constituentId)
+        {
+            var constituent = session.Load<Constituent>(constituentId);
+            var criteria = session.CreateCriteria<Phone>();
+            criteria.Add(Restrictions.Eq("Constituent", constituent));
+            return criteria.List<Phone>();
+        }
+
+        public IList<Address> GetAddressesFor(int constituentId)
+        {
+            var constituent = session.Load<Constituent>(constituentId);
+            var criteria = session.CreateCriteria<Address>();
+            criteria.Add(Restrictions.Eq("Constituent", constituent));
+            return criteria.List<Address>();
         }
     }
 }

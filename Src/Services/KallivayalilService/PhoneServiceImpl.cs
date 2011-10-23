@@ -24,7 +24,8 @@ namespace Kallivayalil
 
         private void LoadAddress(Phone phone)
         {
-            phone.Address = repository.Load<Address>(phone.Address.Id);
+            if (phone.Address !=null)
+                phone.Address = repository.Load<Address>(phone.Address.Id);
         }
 
 
