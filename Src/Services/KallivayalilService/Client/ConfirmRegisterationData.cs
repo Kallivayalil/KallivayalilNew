@@ -14,8 +14,6 @@ namespace Kallivayalil.Client
         [DataMember]
         public bool IsAdmin { get; set; }
 
-        [DataMember]
-        public bool UpdateAndRegister { get; set; } 
         
     }
 }

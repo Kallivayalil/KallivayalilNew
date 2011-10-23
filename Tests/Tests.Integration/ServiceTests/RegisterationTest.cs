@@ -62,7 +62,6 @@ namespace Tests.Integration.ServiceTests
                                                    Constituent = oldConstituent.Id,
                                                    ConstituentToRegister = newConstituent.Id,
                                                    IsAdmin = false,
-                                                   UpdateAndRegister = false
                                                };
 
             HttpHelper.Post(baseUri + "/RegisterConstituent", confirmRegisterationData);
@@ -91,7 +90,6 @@ namespace Tests.Integration.ServiceTests
                                                    Constituent = 0,
                                                    ConstituentToRegister = newConstituent.Id,
                                                    IsAdmin = false,
-                                                   UpdateAndRegister = false
                                                };
 
             HttpHelper.Post(baseUri + "/RegisterConstituent", confirmRegisterationData);
@@ -120,7 +118,6 @@ namespace Tests.Integration.ServiceTests
                                                    Constituent = oldConstituent.Id,
                                                    ConstituentToRegister = newConstituent.Id,
                                                    IsAdmin = true,
-                                                   UpdateAndRegister = false
                                                };
 
             HttpHelper.Post(baseUri + "/RegisterConstituent", confirmRegisterationData);
@@ -149,7 +146,6 @@ namespace Tests.Integration.ServiceTests
                                                    Constituent = oldConstituent.Id,
                                                    ConstituentToRegister = newConstituent.Id,
                                                    IsAdmin = true,
-                                                   UpdateAndRegister = true
                                                };
             HttpHelper.Post(baseUri + "/RegisterConstituent", confirmRegisterationData);
 

@@ -69,7 +69,7 @@ namespace Kallivayalil
             return constituentRepository.ConstituentsForApproval();
         }
 
-        public void RegisterConstituent(int constituent, int constituentToRegister, bool isAdmin, bool updateAndRegister)
+        public void RegisterConstituent(int constituent, int constituentToRegister, bool isAdmin)
         {
             Constituent existingConstituent = constituent > 0 ? constituentRepository.Load(constituent):null;
             Constituent newConstituent = constituentRepository.Load(constituentToRegister);
