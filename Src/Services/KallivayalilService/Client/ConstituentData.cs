@@ -24,6 +24,9 @@ namespace Kallivayalil.Client
 
         [DataMember]
         public DateTime? DiedOn { get; set; }
+        
+        [DataMember]
+        public char IsRegistered { get; set; }
 
         [DataMember]
         public bool HasExpired { get; set; }
