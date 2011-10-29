@@ -927,7 +927,8 @@ namespace Kallivayalil
         {
             var login = new Login();
             mapper.Map(loginData, login);
-
+            var email = emailServiceImpl.FindEmailByAddress(login.Email.Address);
+            login.Email = email;
             var updatedLogin = loginServiceImpl.Update(login);
             var updatedLoginData = new LoginData();
             mapper.Map(updatedLogin, updatedLoginData);
