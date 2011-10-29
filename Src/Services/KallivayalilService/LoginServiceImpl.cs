@@ -1,4 +1,7 @@
+using System;
+using Kallivayalil.Client;
 using Kallivayalil.DataAccess.Repositories;
+using Kallivayalil.Domain;
 
 namespace Kallivayalil
 {
@@ -24,6 +27,11 @@ namespace Kallivayalil
 
             var login = repository.Load(email);
             return repository.Authenticate(login, password);
+        }
+
+        public Login Update(Login login)
+        {
+            return repository.Update(login);
         }
     }
 }

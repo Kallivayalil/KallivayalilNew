@@ -257,5 +257,12 @@ namespace Tests.Common.Helpers
             criteria.Add(Restrictions.Eq("Constituent", constituent));
             return criteria.List<Address>();
         }
+
+        public Login CreateUser(Login user)
+        {
+            var savedUser= session.SaveOrUpdateCopy(user);
+            session.Flush();
+            return (Login)savedUser; 
+        }
     }
 }

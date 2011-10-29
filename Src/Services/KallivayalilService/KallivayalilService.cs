@@ -922,5 +922,17 @@ namespace Kallivayalil
         {
             return loginServiceImpl.Authenticate(username, password);
         }
+
+        public LoginData Update(string id, LoginData loginData)
+        {
+            var login = new Login();
+            mapper.Map(loginData, login);
+
+            var updatedLogin = loginServiceImpl.Update(login);
+            var updatedLoginData = new LoginData();
+            mapper.Map(updatedLogin, updatedLoginData);
+
+            return updatedLoginData;
+        }
     }
 }

@@ -55,6 +55,7 @@
     <Compile Include="Mothers\EducationDetailDataMother.cs" />
     <Compile Include="Mothers\EmailDataMother.cs" />
     <Compile Include="Mothers\EventDataMother.cs" />
+    <Compile Include="Mothers\LoginDataMother.cs" />
     <Compile Include="Mothers\OccupationDataMother.cs" />
     <Compile Include="Mothers\PhoneDataMother.cs" />
     <Compile Include="Mothers\UploadDataMother.cs" />
