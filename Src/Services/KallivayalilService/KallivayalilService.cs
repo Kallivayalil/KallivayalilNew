@@ -923,7 +923,7 @@ namespace Kallivayalil
             return loginServiceImpl.Authenticate(username, password);
         }
 
-        public LoginData Update(string id, LoginData loginData)
+        public virtual LoginData Update(string id, LoginData loginData)
         {
             var login = new Login();
             mapper.Map(loginData, login);
@@ -933,6 +933,15 @@ namespace Kallivayalil
             mapper.Map(updatedLogin, updatedLoginData);
 
             return updatedLoginData;
+        }
+
+        public virtual LoginData Load(string username)
+        {
+            var email = emailServiceImpl.FindEmailByAddress(username);
+            var login = loginServiceImpl.Load(email);
+            var loginData = new LoginData();
+            mapper.Map(login,loginData);
+            return loginData;
         }
     }
 }

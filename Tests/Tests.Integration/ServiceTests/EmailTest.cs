@@ -62,6 +62,7 @@ namespace Tests.Integration.ServiceTests
 
             Assert.That(emailData.Id, Is.GreaterThan(0));
         }
+     
 
         [Test]
         public void ShouldLoadAllEmails()

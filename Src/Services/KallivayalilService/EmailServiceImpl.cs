@@ -46,6 +46,11 @@ namespace Kallivayalil
             return repository.Load(Convert.ToInt32(emailId));
         }
 
+        public Email FindEmailByAddress(string emailAddress)
+        {
+            return repository.Load(emailAddress);
+        }
+
         public void DeleteEmail(string emailId)
         {
             repository.Delete(Convert.ToInt32(emailId));

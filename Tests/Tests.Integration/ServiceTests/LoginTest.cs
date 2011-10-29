@@ -29,6 +29,22 @@ namespace Tests.Integration.ServiceTests
             Assert.IsTrue(isAuthenticated);
         }
 
+
+        [Test]
+        public void ShouldLoadExistingLogin()
+        {
+            testDataHelper = new TestDataHelper();
+            var constituent = ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin());
+
+            var savedConstituent = testDataHelper.CreateConstituent(constituent);
+            var email = testDataHelper.CreateEmail(EmailMother.Official(savedConstituent));
+            var login = testDataHelper.CreateUser(LoginMother.User(email, "Pass", false));
+
+            var emailData = HttpHelper.Get<LoginData>(string.Format("{0}?username={1}", "http://localhost/kallivayalilService/KallivayalilService.svc/Login", email.Address));
+
+            Assert.That(emailData.Id, Is.GreaterThan(0));
+        }
+
         [Test]
         public void ShouldUpdateExistingUser()
         {

@@ -291,5 +291,10 @@ namespace Kallivayalil
         [OperationContract]
         [WebInvoke(UriTemplate = "/Login/{id}", Method = "PUT")]
         LoginData Update(string id, LoginData loginData);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Login?username={username}")]
+        LoginData Load(string username);
+
     }
 }

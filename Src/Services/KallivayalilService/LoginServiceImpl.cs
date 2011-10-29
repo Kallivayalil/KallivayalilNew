@@ -33,5 +33,11 @@ namespace Kallivayalil
         {
             return repository.Update(login);
         }
+        
+        
+        public Login Load(Email email)
+        {
+            return repository.Load(email);
+        }
     }
 }
