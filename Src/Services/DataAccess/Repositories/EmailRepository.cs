@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
-    public class EmailRepository : Repository, ISubEntityRepository<Email>
+    public class EmailRepository : Repository, ISubEntityRepository<Email>, IEmailRepository
     {
         public EmailRepository(ISession session) : base(session) {}
         public EmailRepository() : base(SessionFactory.OpenSession()) {}

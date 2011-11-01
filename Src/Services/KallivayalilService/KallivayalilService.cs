@@ -51,12 +51,13 @@ namespace Kallivayalil
             var uploadFileRepository = new UploadFileRepository();
             var emailRepository = new EmailRepository();
             var loginRepository = new LoginRepository();
+            var mail = new Mail(new SmtpClient());
             var committeeRepository = new CommitteeRepository();
 
             committeeServiceImpl = new CommitteeServiceImpl(committeeRepository);
             uploadServiceImpl = new UploadServiceImpl(uploadFileRepository);
             constituentServiceImpl = new ConstituentServiceImpl(constituentRepository);
-            loginServiceImpl = new LoginServiceImpl(new LoginRepository(), new EmailRepository());
+            loginServiceImpl = new LoginServiceImpl(loginRepository, emailRepository, mail);
             contactUsServiceImpl = new ContactUsServiceImpl(contactUsRepository);
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(addressRepository);
@@ -69,7 +70,7 @@ namespace Kallivayalil
             eventServiceImpl = new EventServiceImpl(eventRepository, constituentRepository, referenceDataRepository);
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl(referenceDataRepository);
-            registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, constituentRepository, new Mail(new SmtpClient()), emailServiceImpl, phoneServiceImpl, addressServiceImpl, loginServiceImpl);
+            registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, constituentRepository, mail, emailServiceImpl, phoneServiceImpl, addressServiceImpl, loginServiceImpl);
         }
 
         public virtual ConstituentData GetConstituent(string id)
@@ -944,6 +945,14 @@ namespace Kallivayalil
             var loginData = new LoginData();
             mapper.Map(login,loginData);
             return loginData;
+        }
+
+        public virtual string ForgotPassword(string email)
+        {
+            var emailResponse = loginServiceImpl.ForgotPassword(email);
+            if(emailResponse==null)
+                throw new BadRequestException("The UserName provided is not valid.Kindly verify and retry / contact the Admin Team.");
+            return emailResponse;
         }
     }
 }

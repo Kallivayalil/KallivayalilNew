@@ -9,9 +9,9 @@ namespace Tests.Common.Mothers
             return new Email {Constituent = constituent, Address = "james.franklin@kallivayalil.com", Type = EmailTypeMother.Official()};
         }
 
-        public static Email Personal(Constituent constituent)
+        public static Email Personal(Constituent constituent, bool isPrimary)
         {
-            return new Email {Constituent = constituent, Address = "james.franklin@gmail.com", Type = EmailTypeMother.Personal()};
+            return new Email {Constituent = constituent, Address = "james.franklin@gmail.com", Type = EmailTypeMother.Personal(),IsPrimary = isPrimary};
         }
 
         public static Email Official()

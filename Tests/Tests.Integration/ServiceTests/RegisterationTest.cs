@@ -201,7 +201,7 @@ namespace Tests.Integration.ServiceTests
         private Constituent GetNewConstituent(bool isAdmin)
         {
             var newConstituent = testDataHelper.CreateConstituent(ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin(), 'A'));
-            var personal = EmailMother.Personal(newConstituent);
+            var personal = EmailMother.Personal(newConstituent, false);
             personal.IsPrimary = true;
             var emailForNew = testDataHelper.CreateEmail(personal);
             var address1 = testDataHelper.CreateAddress(AddressMother.London(newConstituent));

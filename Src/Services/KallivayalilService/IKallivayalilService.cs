@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.IO;
+using System.ServiceModel;
 using System.ServiceModel.Web;
 using Kallivayalil.Client;
 
@@ -295,6 +296,11 @@ namespace Kallivayalil
         [OperationContract]
         [WebGet(UriTemplate = "/Login?username={username}")]
         LoginData Load(string username);
+
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Login/ForgotPassword?email={email}")]
+        string ForgotPassword(string email);
 
     }
 }
