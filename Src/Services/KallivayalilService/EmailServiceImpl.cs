@@ -57,7 +57,7 @@ namespace Kallivayalil
             repository.Delete(Convert.ToInt32(emailId));
         }
 
-        public IList<Email> FindEmails(string constituentId)
+        public virtual IList<Email> FindEmails(string constituentId)
         {
             return repository.LoadAll(Convert.ToInt32(constituentId));
         }

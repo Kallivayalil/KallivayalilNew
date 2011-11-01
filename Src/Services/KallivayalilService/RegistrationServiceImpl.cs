@@ -77,18 +77,18 @@ namespace Kallivayalil
                 registeredConstituent = UpdateAsRegistered(existingConstituent);
 
                 constituentRepository.Delete(newConstituent.Id);
-
             }
             else
             {
-               registeredConstituent = UpdateAsRegistered(newConstituent);
+                registeredConstituent = UpdateAsRegistered(newConstituent);
             }
 
             loginServiceImpl.UpdateAsAdmin(isAdmin, registeredConstituent.Id);
 
-            //Send mail to constituent 
+            var email = emailServiceImpl.FindEmails(registeredConstituent.Id.ToString()).First();
+            mail.Send(email.Address, "Kallivayalil Account Activated",Constants.UserMailTextAfterRegistration);
 
-            //Send mail to Admin who approved
+            mail.Send(adminEmail, "Kallivayalil Account Activated", string.Format(Constants.AdminMailTextAfterRegistration, email.Address));
 
         }
 
@@ -116,9 +116,14 @@ namespace Kallivayalil
         {
             public const string AdminMailText =
                 @"New user has registered at kallivayalil.com. Please verify the below details and activate the account.";
+            
+            public const string AdminMailTextAfterRegistration =
+                @"Account-{0} has been activated.";
 
             public const string UserMailText =
                 @"Thank you for registering at kallivayalil.com. We will verify your information provided below and activate your account.You will be notified via Email once your account is activated.";
+ 
+            public const string UserMailTextAfterRegistration = @"Your Account has been activated.";
 
             public const string AESKey = "kalli";
         }
