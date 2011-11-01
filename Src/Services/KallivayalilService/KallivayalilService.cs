@@ -732,11 +732,11 @@ namespace Kallivayalil
             if (member1.BornInto)
             {
                 data.familyMemberId = member1.Id.ToString();
-                data.familyMemberUrl = "http://localhost/Kallivayalil/Profile/Index/" + member1.Id;
+                data.familyMemberUrl = "http://localhost/Kallivayalil/Profile/Profile/" + member1.Id;
 
                 data.spouse = member2.Name;
                 data.spouseId =  member2.Id.ToString();
-                data.spouseUrl = "http://localhost/Kallivayalil/Profile/Index/" + member2.Id;
+                data.spouseUrl = "http://localhost/Kallivayalil/Profile/Profile/" + member2.Id;
                 data.spouseParents = member2.Parents;
                 data.marriageDate = marriageDate;
 
@@ -759,7 +759,7 @@ namespace Kallivayalil
             data.familyMemberId = familyMember.Id.ToString();
             data.spouse = string.Empty;
             data.spouseId = string.Empty;
-            data.familyMemberUrl = "http://localhost/Kallivayalil/Profile/Index" + familyMember.Id;
+            data.familyMemberUrl = "http://localhost/Kallivayalil/Profile/Profile/" + familyMember.Id;
             data.spouseUrl = string.Empty;
             if (orientation != null)
             {
