@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
@@ -8,7 +9,7 @@ using Kallivayalil.Domain.Validators;
 
 namespace Kallivayalil
 {
-    public class AddressServiceImpl : BaseServiceImpl<Address>
+    public class AddressServiceImpl : BaseServiceImpl<Address>, IAddressServiceImpl
     {
         private readonly AddressRepository repository;
         private readonly AddressValidator validator;
@@ -57,6 +58,13 @@ namespace Kallivayalil
         public IList<Address> FindAddresses(string constituentId)
         {
             return repository.LoadAll(Convert.ToInt32(constituentId));
+        }
+
+        public void SetConstituentAndUpdateAddress(string id, Constituent existingConstituent)
+        {
+            var address = FindAddresses(id).First();
+            address.Constituent = existingConstituent;
+            UpdateAddress(address);
         }
     }
 }

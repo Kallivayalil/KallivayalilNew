@@ -4,8 +4,9 @@ using NHibernate;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
-    public class RegisterationRepository : Repository
+    public class RegisterationRepository : Repository, IRegisterationRepository
     {
+
         public RegisterationRepository(ISession session) : base(session)
         {
         }

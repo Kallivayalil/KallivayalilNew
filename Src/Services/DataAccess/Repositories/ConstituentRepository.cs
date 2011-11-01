@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
-    public class ConstituentRepository : Repository
+    public class ConstituentRepository : Repository, IConstituentRepository
     {
         private readonly NHibernateCriteriaHelper nHibernateCriteriaHelper;
 
@@ -32,7 +32,7 @@ namespace Kallivayalil.DataAccess.Repositories
             }
         }
 
-        public Constituent Update(Constituent constituent)
+        public virtual Constituent Update(Constituent constituent)
         {
             using (var txn = session.BeginTransaction())
             {
@@ -42,7 +42,7 @@ namespace Kallivayalil.DataAccess.Repositories
             }
         }
 
-        public void Delete(int constituentId)
+        public virtual void Delete(int constituentId)
         {
             using (var txn = session.BeginTransaction())
             {
@@ -55,7 +55,7 @@ namespace Kallivayalil.DataAccess.Repositories
             }
         }
 
-        public Constituent Load(int constituentId)
+        public virtual Constituent Load(int constituentId)
         {
             return session.Get<Constituent>(constituentId);
         }

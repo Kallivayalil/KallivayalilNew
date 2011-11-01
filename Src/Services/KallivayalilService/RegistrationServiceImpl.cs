@@ -9,27 +9,23 @@ namespace Kallivayalil
 {
     public class RegistrationServiceImpl
     {
-        private readonly AddressServiceImpl addressServiceImpl;
-        private readonly ConstituentRepository constituentRepository;
-        private readonly EmailRepository emailRepository;
-        private readonly EmailServiceImpl emailServiceImpl;
-        private readonly LoginRepository loginRepository;
-        private readonly Mail mail;
-        private readonly PhoneServiceImpl phoneServiceImpl;
-        private readonly RegisterationRepository repository;
+        private readonly IAddressServiceImpl addressServiceImpl;
+        private readonly IConstituentRepository constituentRepository;
+        private readonly IEmailServiceImpl emailServiceImpl;
+        private readonly IMail mail;
+        private readonly IPhoneServiceImpl phoneServiceImpl;
+        private readonly IRegisterationRepository repository;
+        private readonly ILoginServiceImpl loginServiceImpl;
 
 
-        public RegistrationServiceImpl(RegisterationRepository repository, Mail mail,
-                                       ConstituentRepository constituentRepository, LoginRepository loginRepository,
-                                       EmailRepository emailRepository)
+        public RegistrationServiceImpl(IRegisterationRepository repository, IConstituentRepository constituentRepository, IMail mail, IEmailServiceImpl emailServiceImpl, IPhoneServiceImpl phoneServiceImpl, IAddressServiceImpl addressServiceImpl, ILoginServiceImpl loginServiceImpl)
         {
             this.constituentRepository = constituentRepository;
             this.repository = repository;
-            this.loginRepository = loginRepository;
-            this.emailRepository = emailRepository;
-            emailServiceImpl = new EmailServiceImpl(emailRepository);
-            phoneServiceImpl = new PhoneServiceImpl(new PhoneRepository(), constituentRepository);
-            addressServiceImpl = new AddressServiceImpl(new AddressRepository());
+            this.emailServiceImpl = emailServiceImpl;
+            this.phoneServiceImpl = phoneServiceImpl;
+            this.addressServiceImpl = addressServiceImpl;
+            this.loginServiceImpl = loginServiceImpl;
             this.mail = mail;
         }
 
@@ -69,7 +65,7 @@ namespace Kallivayalil
             return constituentRepository.ConstituentsForApproval();
         }
 
-        public void RegisterConstituent(int constituent, int constituentToRegister, bool isAdmin)
+        public void RegisterConstituent(int constituent, int constituentToRegister, bool isAdmin, string adminEmail)
         {
             Constituent existingConstituent = constituent > 0 ? constituentRepository.Load(constituent):null;
             Constituent newConstituent = constituentRepository.Load(constituentToRegister);
@@ -88,24 +84,22 @@ namespace Kallivayalil
                registeredConstituent = UpdateAsRegistered(newConstituent);
             }
 
-            UpdateAsAdmin(isAdmin, registeredConstituent.Id);
+            loginServiceImpl.UpdateAsAdmin(isAdmin, registeredConstituent.Id);
+
+            //Send mail to constituent 
+
+            //Send mail to Admin who approved
 
         }
 
         private void AddPhoneAddressAndEmailToExistingConstituent(Constituent newConstituent,
                                                                   Constituent existingConstituent)
         {
-            Email email = emailServiceImpl.FindEmails(newConstituent.Id.ToString()).First();
-            email.Constituent = existingConstituent;
-            emailServiceImpl.UpdateEmail(email);
+            emailServiceImpl.SetConstituentAndUpdateEmail(newConstituent.Id.ToString(), existingConstituent);
 
-            Phone phone = phoneServiceImpl.FindPhones(newConstituent.Id.ToString()).First();
-            phone.Constituent = existingConstituent;
-            phoneServiceImpl.UpdatePhone(phone);
+            phoneServiceImpl.SetConstituentAndUpdatePhone(newConstituent.Id.ToString(), existingConstituent);
 
-            Address address = addressServiceImpl.FindAddresses(newConstituent.Id.ToString()).First();
-            address.Constituent = existingConstituent;
-            addressServiceImpl.UpdateAddress(address);
+            addressServiceImpl.SetConstituentAndUpdateAddress(newConstituent.Id.ToString(), existingConstituent);
         }
 
         private Constituent UpdateAsRegistered(Constituent existingConstituent)
@@ -114,15 +108,7 @@ namespace Kallivayalil
             return constituentRepository.Update(existingConstituent);
         }
 
-        private void UpdateAsAdmin(bool isAdmin, int registeredConstituentId)
-        {
-            if (!isAdmin) return;
-            Email primaryEmail = emailRepository.GetPrimary(registeredConstituentId);
-
-            Login login = loginRepository.Load(primaryEmail);
-            login.IsAdmin = true;
-            loginRepository.Update(login);
-        }
+       
 
         #region Nested type: Constants
 

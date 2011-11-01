@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
@@ -7,7 +8,7 @@ using Kallivayalil.Domain.ReferenceData;
 
 namespace Kallivayalil
 {
-    public class EmailServiceImpl : BaseServiceImpl<Email>
+    public class EmailServiceImpl : BaseServiceImpl<Email>, IEmailServiceImpl
     {
         private readonly EmailRepository repository;
 
@@ -59,6 +60,13 @@ namespace Kallivayalil
         public IList<Email> FindEmails(string constituentId)
         {
             return repository.LoadAll(Convert.ToInt32(constituentId));
+        }
+
+        public void SetConstituentAndUpdateEmail(string id, Constituent existingConstituent)
+        {
+            var email = FindEmails(id).First();
+            email.Constituent = existingConstituent;
+            UpdateEmail(email);
         }
     }
 }

@@ -37,6 +37,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\Lib\Nunit\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\..\..\Lib\Rhino.Mocks\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceImpl\RegistrationServiceImplTests.cs" />
     <Compile Include="Validators\AddressValidatorTest.cs" />
     <Compile Include="Validators\ConstituentNameValidatorTest.cs" />
     <Compile Include="Validators\EmailValidatorTest.cs" />
@@ -58,6 +62,10 @@
       <Project>{54B5ABAC-EF45-44C9-907A-071EC3F3370A}</Project>
       <Name>Tests.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{7A2E87B1-DD9F-4B07-A7F6-40D0FB9A9720}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KallivayalilService\Common\Common.csproj">
       <Project>{357DEC60-B18A-40AE-8AAF-FDBA6C1C02F2}</Project>
       <Name>Common</Name>
@@ -65,6 +73,10 @@
     <ProjectReference Include="..\KallivayalilService\Domain\Domain.csproj">
       <Project>{3134AEAD-2CA2-4D6D-BB6D-9EE071CE4BE5}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KallivayalilService\KallivayalilService.csproj">
+      <Project>{403D14DB-C90E-410B-8A6B-C379FCD2B1AA}</Project>
+      <Name>KallivayalilService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
