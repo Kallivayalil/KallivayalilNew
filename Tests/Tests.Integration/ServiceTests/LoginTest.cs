@@ -1,5 +1,6 @@
 using System.Net;
 using Kallivayalil.Client;
+using Kallivayalil.Common;
 using Kallivayalil.Domain;
 using NUnit.Framework;
 using Tests.Common.Helpers;
@@ -76,6 +77,14 @@ namespace Tests.Integration.ServiceTests
 
             var response = HttpHelper.DoHttpGet(string.Format("{0}?email={1}", "http://localhost/kallivayalilService/KallivayalilService.svc/Login/ForgotPassword",email.Address));
             Assert.That(response.StatusCode,Is.EqualTo(HttpStatusCode.OK));
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenMailIsInvalid()
+        {
+            testDataHelper = new TestDataHelper();
+            var response = HttpHelper.DoHttpGet(string.Format("{0}?email={1}", "http://localhost/kallivayalilService/KallivayalilService.svc/Login/ForgotPassword","t@t.com"));
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
         }
     }
 }
