@@ -57,11 +57,12 @@ namespace Kallivayalil.DataAccess.Repositories
         
         private Email GetSavedEmail(RegisterationConstituent registerationConstituent, ITransaction txn, Constituent savedConstituent)
         {
-            var email = new Email()
+            var email = new Email
                             {
-                                Constituent =savedConstituent,
+                                Constituent = savedConstituent,
                                 Address = registerationConstituent.Email,
-                                Type = new EmailType() { Id = 1}
+                                Type = new EmailType {Id = 1},
+                                IsPrimary = true,
                             };
             return SaveOrUpdate(email,txn);
         }
