@@ -65,11 +65,21 @@ namespace Kallivayalil
             return constituentRepository.ConstituentsForApproval();
         }
 
-        public void RegisterConstituent(int constituent, int constituentToRegister, bool isAdmin, string adminEmail)
+        public void RegisterConstituent(int constituent, int constituentToRegister, bool isAdmin, string adminEmail, bool isApproved, string rejectReason)
         {
             Constituent existingConstituent = constituent > 0 ? constituentRepository.Load(constituent):null;
             Constituent newConstituent = constituentRepository.Load(constituentToRegister);
             Constituent registeredConstituent = null;
+            if(!isApproved)
+            {
+                var emailAddress = emailServiceImpl.FindEmails(newConstituent.Id.ToString()).First().Address;
+                mail.Send(emailAddress, "Kallivayalil Account Activation Failed.", String.Format(Constants.RegistrationRejectMailForUser, "\n", rejectReason));
+                constituentRepository.Delete(newConstituent.Id);
+
+                mail.Send(adminEmail, "Kallivayalil Account Registration Rejected.", string.Format(Constants.RegistrationRejectMailForAdmin, emailAddress,rejectReason));
+                return;
+            }
+
             if (existingConstituent != null)
             {
                 AddPhoneAddressAndEmailToExistingConstituent(newConstituent, existingConstituent);
@@ -124,6 +134,14 @@ namespace Kallivayalil
                 @"Thank you for registering at kallivayalil.com. We will verify your information provided below and activate your account.You will be notified via Email once your account is activated.";
  
             public const string UserMailTextAfterRegistration = @"Your Account has been activated.";
+
+            public const string RegistrationRejectMailForUser = @"Dear Ma'am/Sir , {0} The request you placed to activate 
+                                        your Kallivayalil account has been reject by the admn team.
+                                        {0} The reason is as follows : {1}{0} For any further queries 
+                                        contact the admin team.{0} Reagards,{0} Admin Team";
+
+            public const string RegistrationRejectMailForAdmin =
+                @"Account-{0} has been rejected. Reason : {1}";
 
             public const string AESKey = "kalli";
         }

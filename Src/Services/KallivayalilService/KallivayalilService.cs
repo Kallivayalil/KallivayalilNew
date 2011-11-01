@@ -121,7 +121,7 @@ namespace Kallivayalil
 
         public virtual ConfirmRegisterationData RegisterConstituent(ConfirmRegisterationData confirmRegisterationData)
         {
-            registrationServiceImpl.RegisterConstituent(confirmRegisterationData.Constituent, confirmRegisterationData.ConstituentToRegister, confirmRegisterationData.IsAdmin,confirmRegisterationData.AdminEmail);
+            registrationServiceImpl.RegisterConstituent(confirmRegisterationData.Constituent, confirmRegisterationData.ConstituentToRegister, confirmRegisterationData.IsAdmin,confirmRegisterationData.AdminEmail,confirmRegisterationData.IsApproved,confirmRegisterationData.RejectReason);
             return confirmRegisterationData;
             
         }
