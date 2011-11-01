@@ -74,7 +74,7 @@ namespace Kallivayalil
             {
                 var emailAddress = emailServiceImpl.FindEmails(newConstituent.Id.ToString()).First().Address;
                 mail.Send(emailAddress, "Kallivayalil Account Activation Failed.", String.Format(Constants.RegistrationRejectMailForUser, "\n", rejectReason));
-                constituentRepository.Delete(newConstituent.Id);
+                constituentRepository.CascadeDelete(newConstituent.Id);
 
                 mail.Send(adminEmail, "Kallivayalil Account Registration Rejected.", string.Format(Constants.RegistrationRejectMailForAdmin, emailAddress,rejectReason));
                 return;

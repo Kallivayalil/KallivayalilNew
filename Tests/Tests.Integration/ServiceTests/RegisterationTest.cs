@@ -185,6 +185,28 @@ namespace Tests.Integration.ServiceTests
 
             var addresses = testDataHelper.GetAddressesFor(registeredConstituent.Id);
             Assert.That(addresses.Count,Is.EqualTo(2));
+        } 
+        
+        [Test]
+        public void ShouldRejectAConstituent()
+        {
+            Constituent newConstituent = GetNewConstituent(false);
+
+            Constituent oldConstituent = GetOldConstituent();
+
+            var confirmRegisterationData = new ConfirmRegisterationData
+                                               {
+                                                   Constituent = oldConstituent.Id,
+                                                   ConstituentToRegister = newConstituent.Id,
+                                                   IsAdmin = true,
+                                                   IsApproved = false,
+                                                   AdminEmail = "a@b.com",
+                                                   RejectReason = "some reason"
+
+                                               };
+            var response = HttpHelper.DoHttpPost(baseUri + "/RegisterConstituent", new DataContractHelper().Serialize(confirmRegisterationData));
+
+            Assert.That(response.StatusCode,Is.EqualTo(HttpStatusCode.OK));
         }
 
         private Constituent GetOldConstituent()
