@@ -22,6 +22,7 @@ AS
 	
 	close symmetric key encryptionkey
 Return
+Go
 
 CREATE TRIGGER [dbo].[T_UPDATE_PASSWORD_ENCRYPTION] 
    ON  [dbo].[LOGINS] 

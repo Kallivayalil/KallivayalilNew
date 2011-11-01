@@ -25,6 +25,7 @@ namespace Tests.Integration.ServiceTests
         [Test]
         public void ShouldAuthenticateUser()
         {
+            testDataHelper = new TestDataHelper();
             var isAuthenticated = HttpHelper.Get<bool>(string.Format("{0}?userName={1}&password={2}", baseUri, "james@franklin.com", "Password"));
             Assert.IsTrue(isAuthenticated);
         }
