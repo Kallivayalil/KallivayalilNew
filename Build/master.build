@@ -19,7 +19,7 @@
   <property name="services.dir" value="${build.dir}/src/services"/>
   <property name="build.output.dir" value="${build.dir}\Build\BuildOutput"/>
   <property name="kall.service.dir" value="${build.dir}/src/services/KallivayalilService"/>
-  <property name="kall.client.dir" value="${build.dir}/../KallivayalilWebsite"/>
+  <property name="kall.client.dir" value="${build.dir}/../${website.dir}"/>
   
   <target name="all">
   	<call target="dbdeploy"/>

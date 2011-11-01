@@ -19,7 +19,6 @@ namespace Kallivayalil.Client
 
         [DataMember]
         public string AdminEmail { get; set; }
-
         
     }
 }
