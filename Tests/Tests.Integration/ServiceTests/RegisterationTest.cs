@@ -62,6 +62,9 @@ namespace Tests.Integration.ServiceTests
                                                    Constituent = oldConstituent.Id,
                                                    ConstituentToRegister = newConstituent.Id,
                                                    IsAdmin = false,
+                                                   IsApproved = true,
+                                                   AdminEmail = "a@b.com",
+                                                   RejectReason = ""
                                                };
 
             HttpHelper.Post(baseUri + "/RegisterConstituent", confirmRegisterationData);
@@ -90,6 +93,10 @@ namespace Tests.Integration.ServiceTests
                                                    Constituent = 0,
                                                    ConstituentToRegister = newConstituent.Id,
                                                    IsAdmin = false,
+                                                   IsApproved = true,
+                                                   AdminEmail = "a@b.com",
+                                                   RejectReason = ""
+
                                                };
 
             HttpHelper.Post(baseUri + "/RegisterConstituent", confirmRegisterationData);
@@ -118,6 +125,10 @@ namespace Tests.Integration.ServiceTests
                                                    Constituent = oldConstituent.Id,
                                                    ConstituentToRegister = newConstituent.Id,
                                                    IsAdmin = true,
+                                                   IsApproved = true,
+                                                   AdminEmail = "a@b.com",
+                                                   RejectReason = ""
+
                                                };
 
             HttpHelper.Post(baseUri + "/RegisterConstituent", confirmRegisterationData);
@@ -146,6 +157,10 @@ namespace Tests.Integration.ServiceTests
                                                    Constituent = oldConstituent.Id,
                                                    ConstituentToRegister = newConstituent.Id,
                                                    IsAdmin = true,
+                                                   IsApproved = true,
+                                                   AdminEmail = "a@b.com",
+                                                   RejectReason = ""
+
                                                };
             HttpHelper.Post(baseUri + "/RegisterConstituent", confirmRegisterationData);
 

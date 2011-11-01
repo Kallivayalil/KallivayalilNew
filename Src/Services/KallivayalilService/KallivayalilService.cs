@@ -57,7 +57,6 @@ namespace Kallivayalil
             uploadServiceImpl = new UploadServiceImpl(uploadFileRepository);
             constituentServiceImpl = new ConstituentServiceImpl(constituentRepository);
             loginServiceImpl = new LoginServiceImpl(new LoginRepository(), new EmailRepository());
-            registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, constituentRepository, new Mail(new SmtpClient()), emailServiceImpl, phoneServiceImpl, addressServiceImpl, loginServiceImpl);
             contactUsServiceImpl = new ContactUsServiceImpl(contactUsRepository);
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(addressRepository);
@@ -70,6 +69,7 @@ namespace Kallivayalil
             eventServiceImpl = new EventServiceImpl(eventRepository, constituentRepository, referenceDataRepository);
             mapper = new AutoDataContractMapper();
             referenceDataServiceImpl = new ReferenceDataServiceImpl(referenceDataRepository);
+            registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, constituentRepository, new Mail(new SmtpClient()), emailServiceImpl, phoneServiceImpl, addressServiceImpl, loginServiceImpl);
         }
 
         public virtual ConstituentData GetConstituent(string id)
@@ -121,7 +121,7 @@ namespace Kallivayalil
 
         public virtual ConfirmRegisterationData RegisterConstituent(ConfirmRegisterationData confirmRegisterationData)
         {
-            registrationServiceImpl.RegisterConstituent(confirmRegisterationData.Constituent, confirmRegisterationData.ConstituentToRegister, confirmRegisterationData.IsAdmin,confirmRegisterationData.AdminEmail);
+            registrationServiceImpl.RegisterConstituent(confirmRegisterationData.Constituent, confirmRegisterationData.ConstituentToRegister, confirmRegisterationData.IsAdmin,confirmRegisterationData.AdminEmail,confirmRegisterationData.IsApproved,confirmRegisterationData.RejectReason);
             return confirmRegisterationData;
             
         }

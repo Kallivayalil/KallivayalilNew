@@ -19,6 +19,9 @@ namespace Kallivayalil.Client
 
         [DataMember]
         public string AdminEmail { get; set; }
+        [DataMember]
+        public string RejectReason { get; set; }
+
         
     }
 }
