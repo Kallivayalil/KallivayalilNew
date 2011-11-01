@@ -1,4 +1,6 @@
+using System.Net;
 using Kallivayalil.Client;
+using Kallivayalil.Common;
 using Kallivayalil.Domain;
 using NUnit.Framework;
 using Tests.Common.Helpers;
@@ -52,7 +54,7 @@ namespace Tests.Integration.ServiceTests
             testDataHelper = new TestDataHelper();
             var constituent = ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin());
             var savedConstituent = testDataHelper.CreateConstituent(constituent);
-            var email = testDataHelper.CreateEmail(EmailMother.Personal(savedConstituent));
+            var email = testDataHelper.CreateEmail(EmailMother.Personal(savedConstituent, false));
             var login = testDataHelper.CreateUser(LoginMother.User(email,"Pass",false));
 
             var loginData = LoginDataMother.User(email,"Pass1",true);
@@ -63,5 +65,26 @@ namespace Tests.Integration.ServiceTests
             Assert.That(updatedData.IsAdmin, Is.EqualTo(true));
         }
 
+
+        [Test]
+        public void ShouldSendMailForForgotPassword()
+        {
+            testDataHelper = new TestDataHelper();
+            var constituent = ConstituentMother.ConstituentWithName(ConstituentNameMother.JamesFranklin());
+            var savedConstituent = testDataHelper.CreateConstituent(constituent);
+            var email = testDataHelper.CreateEmail(EmailMother.Personal(savedConstituent, true));
+            var login = testDataHelper.CreateUser(LoginMother.User(email, "Pass", false));
+
+            var response = HttpHelper.DoHttpGet(string.Format("{0}?email={1}", "http://localhost/kallivayalilService/KallivayalilService.svc/Login/ForgotPassword",email.Address));
+            Assert.That(response.StatusCode,Is.EqualTo(HttpStatusCode.OK));
+        }
+
+        [Test]
+        public void ShouldThrowExceptionWhenMailIsInvalid()
+        {
+            testDataHelper = new TestDataHelper();
+            var response = HttpHelper.DoHttpGet(string.Format("{0}?email={1}", "http://localhost/kallivayalilService/KallivayalilService.svc/Login/ForgotPassword","t@t.com"));
+            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
+        }
     }
 }

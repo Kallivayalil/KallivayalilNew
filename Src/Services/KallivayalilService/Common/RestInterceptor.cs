@@ -2,6 +2,7 @@
 using System.Net;
 using System.ServiceModel.Web;
 using Castle.DynamicProxy;
+using Kallivayalil.Client;
 
 namespace Kallivayalil.Common
 {
@@ -30,7 +31,12 @@ namespace Kallivayalil.Common
 
         private void HandleException(Exception ex, HttpStatusCode responseStatusCode)
         {
-            throw new WebFaultException(responseStatusCode);
+            var errorMessageData = new ErrorMessageData
+                                       {
+                                           Description = ex.Message,
+                                       };
+            var errorMessagesData = new ErrorMessagesData {errorMessageData};
+            throw new WebFaultException<ErrorMessagesData>(errorMessagesData,responseStatusCode);
         }
 
         private static void AddCacheControlHeader()

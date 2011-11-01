@@ -41,6 +41,7 @@ namespace Tests.Integration.RepositoryTests
             Assert.That(login.Password, Is.EqualTo("Password"));
         }
 
+
         [Test]
         public void ShouldAuthenticateRegisteredUser()
         {

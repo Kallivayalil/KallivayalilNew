@@ -6,7 +6,7 @@ using NHibernate.Criterion;
 
 namespace Kallivayalil.DataAccess.Repositories
 {
-    public class LoginRepository : Repository
+    public class LoginRepository : Repository, ILoginRepository
     {
         public static string openSymmetricKey = @"OPEN SYMMETRIC KEY encryptionkey  DECRYPTION BY PASSWORD = '{0}';";
         public static string GetPassword = @"select convert(varchar,decryptbykey(password)) from Logins where email ={0};";
