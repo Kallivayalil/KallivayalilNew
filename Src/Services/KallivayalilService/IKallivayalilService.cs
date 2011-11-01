@@ -297,7 +297,6 @@ namespace Kallivayalil
         [WebGet(UriTemplate = "/Login?username={username}")]
         LoginData Load(string username);
 
-
         [OperationContract]
         [WebGet(UriTemplate = "/Login/ForgotPassword?email={email}")]
         string ForgotPassword(string email);
