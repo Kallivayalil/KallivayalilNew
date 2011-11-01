@@ -60,6 +60,7 @@
     <Compile Include="EventTypeData.cs" />
     <Compile Include="HttpHelper.cs" />
     <Compile Include="LinkData.cs" />
+    <Compile Include="LoginData.cs" />
     <Compile Include="OccupationData.cs" />
     <Compile Include="OccupationTypeData.cs" />
     <Compile Include="PhoneData.cs" />

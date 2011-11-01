@@ -41,6 +41,9 @@
     <Reference Include="NHibernate">
       <HintPath>..\..\..\Lib\NHibernate\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\..\..\Lib\Rhino.Mocks\Rhino.Mocks.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -63,7 +66,11 @@
     <Compile Include="EducationDetailServiceImpl.cs" />
     <Compile Include="EmailServiceImpl.cs" />
     <Compile Include="EventServiceImpl.cs" />
+    <Compile Include="IAddressServiceImpl.cs" />
+    <Compile Include="IEmailServiceImpl.cs" />
     <Compile Include="IKallivayalilService.cs" />
+    <Compile Include="ILoginServiceImpl.cs" />
+    <Compile Include="IPhoneServiceImpl.cs" />
     <Compile Include="LoginServiceImpl.cs" />
     <Compile Include="OccupationServiceImpl.cs" />
     <Compile Include="PhoneServiceImpl.cs" />
@@ -73,6 +80,7 @@
     <Compile Include="RegistrationServiceImpl.cs" />
     <Compile Include="SearchServiceImpl.cs" />
     <Compile Include="UploadServiceImpl.cs" />
+    <Compile Include="Utility\IMail.cs" />
     <Compile Include="Utility\Mail.cs" />
     <Compile Include="ValidationResultExtension.cs" />
   </ItemGroup>

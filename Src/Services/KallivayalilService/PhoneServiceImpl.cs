@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Kallivayalil.Common;
 using Kallivayalil.DataAccess.Repositories;
 using Kallivayalil.Domain;
@@ -7,7 +8,7 @@ using Kallivayalil.Domain.ReferenceData;
 
 namespace Kallivayalil
 {
-    public class PhoneServiceImpl : BaseServiceImpl<Phone>
+    public class PhoneServiceImpl : BaseServiceImpl<Phone>, IPhoneServiceImpl
     {
         private readonly PhoneRepository repository;
         private readonly ConstituentRepository constituentRepository;
@@ -65,6 +66,13 @@ namespace Kallivayalil
         {
             var constituent = constituentRepository.Load(Convert.ToInt32(constituentId));
             return repository.LoadAll(constituent);
+        }
+
+        public void SetConstituentAndUpdatePhone(string id, Constituent existingConstituent)
+        {
+            var phone = FindPhones(id).First();
+            phone.Constituent = existingConstituent;
+            UpdatePhone(phone);
         }
     }
 }

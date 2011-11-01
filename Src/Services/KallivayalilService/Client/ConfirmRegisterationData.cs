@@ -13,6 +13,12 @@ namespace Kallivayalil.Client
 
         [DataMember]
         public bool IsAdmin { get; set; }
+        
+        [DataMember]
+        public bool IsApproved { get; set; }
+
+        [DataMember]
+        public string AdminEmail { get; set; }
 
         
     }

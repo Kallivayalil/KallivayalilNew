@@ -49,19 +49,20 @@ namespace Kallivayalil
             var occupationRepository = new OccupationRepository();
             var addressRepository = new AddressRepository();
             var uploadFileRepository = new UploadFileRepository();
+            var emailRepository = new EmailRepository();
+            var loginRepository = new LoginRepository();
             var committeeRepository = new CommitteeRepository();
 
             committeeServiceImpl = new CommitteeServiceImpl(committeeRepository);
             uploadServiceImpl = new UploadServiceImpl(uploadFileRepository);
             constituentServiceImpl = new ConstituentServiceImpl(constituentRepository);
-            registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, new Mail(new SmtpClient()), constituentRepository, new LoginRepository(), new EmailRepository());
+            loginServiceImpl = new LoginServiceImpl(new LoginRepository(), new EmailRepository());
+            registrationServiceImpl = new RegistrationServiceImpl(registerationRepository, constituentRepository, new Mail(new SmtpClient()), emailServiceImpl, phoneServiceImpl, addressServiceImpl, loginServiceImpl);
             contactUsServiceImpl = new ContactUsServiceImpl(contactUsRepository);
             nameServiceImpl = new ConstituentNameServiceImpl(constituentNameRepository);
             addressServiceImpl = new AddressServiceImpl(addressRepository);
             phoneServiceImpl = new PhoneServiceImpl(phoneRepository, constituentRepository);
-            var emailRepository = new EmailRepository();
             emailServiceImpl = new EmailServiceImpl(emailRepository);
-            loginServiceImpl = new LoginServiceImpl();
             occupationServiceImpl = new OccupationServiceImpl(occupationRepository, constituentRepository);
             educationalDetailServiceImpl = new EducationDetailServiceImpl(educationDetailRepository, constituentRepository);
             associationServiceImpl = new AssociationServiceImpl(new AssociationRepository());
@@ -120,7 +121,7 @@ namespace Kallivayalil
 
         public virtual ConfirmRegisterationData RegisterConstituent(ConfirmRegisterationData confirmRegisterationData)
         {
-            registrationServiceImpl.RegisterConstituent(confirmRegisterationData.Constituent, confirmRegisterationData.ConstituentToRegister, confirmRegisterationData.IsAdmin);
+            registrationServiceImpl.RegisterConstituent(confirmRegisterationData.Constituent, confirmRegisterationData.ConstituentToRegister, confirmRegisterationData.IsAdmin,confirmRegisterationData.AdminEmail);
             return confirmRegisterationData;
             
         }
@@ -921,6 +922,28 @@ namespace Kallivayalil
         public virtual bool Authenticate(string username, string password)
         {
             return loginServiceImpl.Authenticate(username, password);
+        }
+
+        public virtual LoginData Update(string id, LoginData loginData)
+        {
+            var login = new Login();
+            mapper.Map(loginData, login);
+            var email = emailServiceImpl.FindEmailByAddress(login.Email.Address);
+            login.Email = email;
+            var updatedLogin = loginServiceImpl.Update(login);
+            var updatedLoginData = new LoginData();
+            mapper.Map(updatedLogin, updatedLoginData);
+
+            return updatedLoginData;
+        }
+
+        public virtual LoginData Load(string username)
+        {
+            var email = emailServiceImpl.FindEmailByAddress(username);
+            var login = loginServiceImpl.Load(email);
+            var loginData = new LoginData();
+            mapper.Map(login,loginData);
+            return loginData;
         }
     }
 }

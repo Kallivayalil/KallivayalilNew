@@ -287,5 +287,14 @@ namespace Kallivayalil
         [OperationContract]
         [WebGet(UriTemplate = "/Authenticate?username={username}&password={password}")]
         bool Authenticate(string username, string password);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/Login/{id}", Method = "PUT")]
+        LoginData Update(string id, LoginData loginData);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/Login?username={username}")]
+        LoginData Load(string username);
+
     }
 }

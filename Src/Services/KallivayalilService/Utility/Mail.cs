@@ -4,7 +4,7 @@ using System.Net.Mail;
 
 namespace Kallivayalil.Utility
 {
-    public class Mail
+    public class Mail : IMail
     {
         private readonly SmtpClient smtpClient;
         private readonly NameValueCollection appSettings;

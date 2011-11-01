@@ -89,6 +89,8 @@
     <Compile Include="Repositories\EducationDetailRepository.cs" />
     <Compile Include="Repositories\EmailRepository.cs" />
     <Compile Include="Repositories\EventRepository.cs" />
+    <Compile Include="Repositories\IConstituentRepository.cs" />
+    <Compile Include="Repositories\IRegisterationRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\ISubEntityRepository.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
