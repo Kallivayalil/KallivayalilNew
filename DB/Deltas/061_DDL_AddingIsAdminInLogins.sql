@@ -1,4 +1,4 @@
-USE [Kallivayalil]
+
 GO
 
 ALTER TABLE LOGINS 

@@ -1,4 +1,4 @@
-USE [Kallivayalil]
+
 GO
 
 /****** Object:  Table [dbo].[Events]    Script Date: 01/29/2011 14:40:31 ******/

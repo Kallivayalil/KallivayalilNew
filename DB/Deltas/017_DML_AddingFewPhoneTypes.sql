@@ -1,4 +1,4 @@
-INSERT INTO [Kallivayalil].[dbo].[PhoneType]
+INSERT INTO [dbo].[PhoneType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -8,7 +8,7 @@ INSERT INTO [Kallivayalil].[dbo].[PhoneType]
            ('Mobile',GETDATE(),'Admin',GETDATE(),'Admin')
 GO
 
-INSERT INTO [Kallivayalil].[dbo].[PhoneType]
+INSERT INTO [dbo].[PhoneType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]

@@ -1,4 +1,4 @@
-INSERT INTO [Kallivayalil].[dbo].[OccupationType]
+INSERT INTO [dbo].[OccupationType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -8,7 +8,7 @@ INSERT INTO [Kallivayalil].[dbo].[OccupationType]
            ('Primary',GETDATE(),'Admin',GETDATE(),'Admin')
 GO
 
-INSERT INTO [Kallivayalil].[dbo].[OccupationType]
+INSERT INTO [dbo].[OccupationType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]

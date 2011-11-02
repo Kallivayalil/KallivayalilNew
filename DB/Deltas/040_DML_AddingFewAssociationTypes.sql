@@ -1,4 +1,4 @@
-INSERT INTO [Kallivayalil].[dbo].[AssociationType]
+INSERT INTO [dbo].[AssociationType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -9,11 +9,11 @@ INSERT INTO [Kallivayalil].[dbo].[AssociationType]
 GO
 
 
-UPDATE [Kallivayalil].[dbo].[AssociationType]
-SET [ReciprocalType] = (SELECT [ID] FROM  [Kallivayalil].[dbo].[AssociationType] WHERE [Description]='Spouse') where [Description] ='Spouse'
+UPDATE [dbo].[AssociationType]
+SET [ReciprocalType] = (SELECT [ID] FROM  [dbo].[AssociationType] WHERE [Description]='Spouse') where [Description] ='Spouse'
 GO
 
-INSERT INTO [Kallivayalil].[dbo].[AssociationType]
+INSERT INTO [dbo].[AssociationType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -24,7 +24,7 @@ INSERT INTO [Kallivayalil].[dbo].[AssociationType]
 GO
 
 
-INSERT INTO [Kallivayalil].[dbo].[AssociationType]
+INSERT INTO [dbo].[AssociationType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -35,13 +35,13 @@ INSERT INTO [Kallivayalil].[dbo].[AssociationType]
 GO
 
 
-UPDATE [Kallivayalil].[dbo].[AssociationType]
-SET [ReciprocalType] = (SELECT [ID] FROM  [Kallivayalil].[dbo].[AssociationType] WHERE [Description]='Child')
+UPDATE [dbo].[AssociationType]
+SET [ReciprocalType] = (SELECT [ID] FROM  [dbo].[AssociationType] WHERE [Description]='Child')
 WHERE [Description] = 'Parent'
 GO
 
 
-UPDATE [Kallivayalil].[dbo].[AssociationType]
-SET [ReciprocalType] = (SELECT [ID] FROM  [Kallivayalil].[dbo].[AssociationType] WHERE [Description]='Parent')
+UPDATE [dbo].[AssociationType]
+SET [ReciprocalType] = (SELECT [ID] FROM  [dbo].[AssociationType] WHERE [Description]='Parent')
 WHERE [Description] = 'Child'
 GO

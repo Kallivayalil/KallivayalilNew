@@ -1,4 +1,4 @@
-INSERT INTO [Kallivayalil].[dbo].[PositionType]
+INSERT INTO [dbo].[PositionType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -8,7 +8,7 @@ INSERT INTO [Kallivayalil].[dbo].[PositionType]
            ('President',GETDATE(),'Admin',GETDATE(),'Admin')
 GO
 
-INSERT INTO [Kallivayalil].[dbo].[PositionType]
+INSERT INTO [dbo].[PositionType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -18,7 +18,7 @@ INSERT INTO [Kallivayalil].[dbo].[PositionType]
            ('Vice President',GETDATE(),'Admin',GETDATE(),'Admin')
 GO
 
-INSERT INTO [Kallivayalil].[dbo].[PositionType]
+INSERT INTO [dbo].[PositionType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -28,7 +28,7 @@ INSERT INTO [Kallivayalil].[dbo].[PositionType]
            ('Secretary',GETDATE(),'Admin',GETDATE(),'Admin')
 GO
 
-INSERT INTO [Kallivayalil].[dbo].[PositionType]
+INSERT INTO [dbo].[PositionType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -38,7 +38,7 @@ INSERT INTO [Kallivayalil].[dbo].[PositionType]
            ('Committe Member - Kondooparambil branch',GETDATE(),'Admin',GETDATE(),'Admin')
 GO
 
-INSERT INTO [Kallivayalil].[dbo].[PositionType]
+INSERT INTO [dbo].[PositionType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -48,7 +48,7 @@ INSERT INTO [Kallivayalil].[dbo].[PositionType]
            ('Committe Member - Kallivayalil branch',GETDATE(),'Admin',GETDATE(),'Admin')
 GO
 
-INSERT INTO [Kallivayalil].[dbo].[PositionType]
+INSERT INTO [dbo].[PositionType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]

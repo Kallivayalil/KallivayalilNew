@@ -1,4 +1,4 @@
-INSERT INTO [Kallivayalil].[dbo].[AddressType]
+INSERT INTO [dbo].[AddressType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -8,7 +8,7 @@ INSERT INTO [Kallivayalil].[dbo].[AddressType]
            ('Home',GETDATE(),'Admin',GETDATE(),'Admin')
 GO
 
-INSERT INTO [Kallivayalil].[dbo].[AddressType]
+INSERT INTO [dbo].[AddressType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]

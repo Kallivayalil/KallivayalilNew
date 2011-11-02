@@ -1,4 +1,4 @@
-INSERT INTO [Kallivayalil].[dbo].[EventType]
+INSERT INTO [dbo].[EventType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -9,7 +9,7 @@ INSERT INTO [Kallivayalil].[dbo].[EventType]
 GO
 
 
-INSERT INTO [Kallivayalil].[dbo].[EventType]
+INSERT INTO [dbo].[EventType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]

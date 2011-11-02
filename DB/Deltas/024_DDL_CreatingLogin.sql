@@ -1,4 +1,4 @@
-USE [Kallivayalil]
+
 GO
 /****** Object:  Table [dbo].[Logins]    Script Date: 05/14/2011 13:48:12 ******/
 SET ANSI_NULLS ON
@@ -30,7 +30,7 @@ GO
 ALTER TABLE [dbo].[Logins] CHECK CONSTRAINT [FK_Logins_Emails]
 
 
-if( (select COUNT(*) from Kallivayalil.dbo.NextIds a where a.type = 'LGN' )= 0)
+if( (select COUNT(*) from dbo.NextIds a where a.type = 'LGN' )= 0)
 INSERT INTO [NextIds]
            ([Type]
            ,[Description]

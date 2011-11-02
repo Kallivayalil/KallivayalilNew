@@ -1,4 +1,4 @@
-USE [Kallivayalil]
+
 GO
 
 /****** Object:  Table [dbo].[SalutationType]    Script Date: 01/29/2011 15:57:43 ******/

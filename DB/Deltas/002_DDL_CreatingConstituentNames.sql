@@ -1,4 +1,4 @@
-USE [Kallivayalil]
+
 GO
 
 /****** Object:  Table [dbo].[ConstituentNames]    Script Date: 10/16/2010 16:27:15 ******/

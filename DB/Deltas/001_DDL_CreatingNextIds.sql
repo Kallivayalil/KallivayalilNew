@@ -1,4 +1,4 @@
-USE [Kallivayalil]
+
 GO
 
 /****** Object:  Table [dbo].[NextIds]    Script Date: 10/09/2010 14:04:36 ******/

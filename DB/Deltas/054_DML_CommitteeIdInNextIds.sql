@@ -1,6 +1,6 @@
-USE Kallivayalil;
 
-if( (select COUNT(*) from Kallivayalil.dbo.NextIds a where a.type = 'COM' )= 0)
+
+if( (select COUNT(*) from dbo.NextIds a where a.type = 'COM' )= 0)
 INSERT INTO [NextIds]
            ([Type]
            ,[Description]

@@ -1,4 +1,4 @@
-INSERT INTO [Kallivayalil].[dbo].[SalutationType]
+INSERT INTO [dbo].[SalutationType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -8,7 +8,7 @@ INSERT INTO [Kallivayalil].[dbo].[SalutationType]
            ('Mr',GETDATE(),'Admin',GETDATE(),'Admin')
 GO
 
-INSERT INTO [Kallivayalil].[dbo].[SalutationType]
+INSERT INTO [dbo].[SalutationType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -18,7 +18,7 @@ INSERT INTO [Kallivayalil].[dbo].[SalutationType]
            ('Ms',GETDATE(),'Admin',GETDATE(),'Admin')
 GO
 
-INSERT INTO [Kallivayalil].[dbo].[SalutationType]
+INSERT INTO [dbo].[SalutationType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]

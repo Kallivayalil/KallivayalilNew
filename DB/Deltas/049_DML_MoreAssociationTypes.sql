@@ -1,4 +1,4 @@
-INSERT INTO [Kallivayalil].[dbo].[AssociationType]
+INSERT INTO [dbo].[AssociationType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -9,6 +9,6 @@ INSERT INTO [Kallivayalil].[dbo].[AssociationType]
 GO
 
 
-UPDATE [Kallivayalil].[dbo].[AssociationType]
-SET [ReciprocalType] = (SELECT [ID] FROM  [Kallivayalil].[dbo].[AssociationType] WHERE [Description]='Sibiling') where [Description] ='Sibiling'
+UPDATE [dbo].[AssociationType]
+SET [ReciprocalType] = (SELECT [ID] FROM  [dbo].[AssociationType] WHERE [Description]='Sibiling') where [Description] ='Sibiling'
 GO

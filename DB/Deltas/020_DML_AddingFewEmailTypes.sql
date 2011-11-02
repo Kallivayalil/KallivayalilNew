@@ -1,4 +1,4 @@
-INSERT INTO [Kallivayalil].[dbo].[EmailType]
+INSERT INTO [dbo].[EmailType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]
@@ -8,7 +8,7 @@ INSERT INTO [Kallivayalil].[dbo].[EmailType]
            ('Official',GETDATE(),'Admin',GETDATE(),'Admin')
 GO
 
-INSERT INTO [Kallivayalil].[dbo].[EmailType]
+INSERT INTO [dbo].[EmailType]
            ([Description]
            ,[CreatedDateTime]
            ,[CreatedBy]

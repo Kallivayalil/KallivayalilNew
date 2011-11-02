@@ -1,4 +1,4 @@
-USE [Kallivayalil]
+
 GO
 
 alter table Constituents

@@ -1,4 +1,4 @@
-USE [Kallivayalil]
+
 GO
 
 /****** Object:  Table [dbo].[Emails]    Script Date: 11/13/2010 17:14:10 ******/

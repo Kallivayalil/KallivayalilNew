@@ -1,4 +1,4 @@
-USE [Kallivayalil]
+
 GO
 
 /****** Object:  Table [dbo].[PhoneType]    Script Date: 01/29/2011 14:37:30 ******/
